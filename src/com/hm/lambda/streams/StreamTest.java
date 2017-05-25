@@ -215,7 +215,7 @@ public class StreamTest {
         System.out.println(IntStream.empty().noneMatch(i -> i > 0));*/
 
         /**
-         * find
+         * search
          */
        /* Optional<Integer> optional = Stream.of(1, 2, 3, 4, 5)
                 .findAny();
