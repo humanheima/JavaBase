@@ -15,6 +15,7 @@ public class FastSort {
     }
 
     private static void quickSort(int[] a, int left, int right) {
+        System.out.println("left="+left+",right="+right);
         if (left < right) {
             int i = left;
             int j = right;
