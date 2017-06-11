@@ -16,12 +16,12 @@ public class ArrayListTest {
         arrayList.add("string4");
         arrayList.add("string4");
         System.out.println(arrayList);
-       /* arrayList.add(0, new String("string1"));
+        arrayList.add(0, new String("string1"));
         arrayList.get(0);
         arrayList.set(0, "easy");
         arrayList.contains("easy");
         arrayList.remove(0);
-        arrayList.remove("easy");*/
+        arrayList.remove("easy");
        // arrayList.subList(1, 3).clear();
        // System.out.println(arrayList);
         arrayList.trimToSize();

@@ -20,7 +20,7 @@ public class MapTest {
       /*  System.out.println(map.put("ios", 99));
         System.out.println(map.containsKey("ios"));
         System.out.println(map.containsValue(99));*/
-       /* for (String key : map.keySet()) {
+        /*for (String key : map.keySet()) {
             System.out.println(key+",value:"+map.get(key));
         }
         map.forEach(new BiConsumer<String, Integer>() {
@@ -30,8 +30,8 @@ public class MapTest {
             }
         });
         map.remove("java");
-        System.out.println(map);*/
-        System.out.println(3|3);
+        System.out.println(map);
+        System.out.println(3|3);*/
        // System.out.println(tableSizeFor(20));
     }
 
