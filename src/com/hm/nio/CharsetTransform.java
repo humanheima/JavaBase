@@ -22,6 +22,7 @@ public class CharsetTransform {
         charBuffer.put('悟');
         charBuffer.put('空');
         charBuffer.flip();
+
         try {
             ByteBuffer byteBuffer=encoder.encode(charBuffer);
             for (int i = 0; i < byteBuffer.capacity(); i++) {
