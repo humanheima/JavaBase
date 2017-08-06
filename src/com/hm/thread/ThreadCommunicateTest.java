@@ -22,7 +22,8 @@ public class ThreadCommunicateTest {
         /**
          * wait notify 方式
          */
-        Thread1 thread1 = new Thread1();
+
+      /*  Thread1 thread1 = new Thread1();
         Thread2 thread2 = new Thread2();
         thread1.start();
         try {
@@ -30,12 +31,12 @@ public class ThreadCommunicateTest {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        thread2.start();
-      /*  ThreadCommunicateTest test = new ThreadCommunicateTest();
+        thread2.start();*/
+        ThreadCommunicateTest test = new ThreadCommunicateTest();
         Producer producter = test.new Producer();
         Consumer consumer = test.new Consumer();
         producter.start();
-        consumer.start();*/
+        consumer.start();
 
     }
 

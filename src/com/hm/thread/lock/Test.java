@@ -1,8 +1,6 @@
 package com.hm.thread.lock;
 
-import java.util.ArrayList;
 import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
@@ -10,21 +8,25 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 public class Test {
 
-    private ArrayList<Integer> list = new ArrayList<>();
     private Lock lock = new ReentrantLock();
-    private ReadWriteLock readWriteLock;
+
     public static void main(String[] args) {
         Test test = new Test();
         MyThread thread1 = new MyThread(test);
         MyThread thread2 = new MyThread(test);
         thread1.start();
-        thread2.start();
         try {
             Thread.sleep(2000);
+            thread2.start();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        thread2.interrupt();
+        try {
+            Thread.sleep(2000);
+            thread2.interrupt();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public void insert(Thread thread) throws InterruptedException {
@@ -40,31 +42,11 @@ public class Test {
         } catch (Exception e) {
 
         } finally {
-            System.out.println(Thread.currentThread().getName()+"执行finally");
+            System.out.println(Thread.currentThread().getName() + "执行finally");
             lock.unlock();
             System.out.println(thread.getName() + "释放了锁");
         }
     }
-
-    /* public void tryInsert(Thread thread) {
-         if (lock.tryLock()) {
-             try {
-                 System.out.println(thread.getName() + "获得了锁");
-                 for (int i = 0; i < 5; i++) {
-                     list.add(i);
-                 }
-             } catch (Exception e) {
-
-             } finally {
-                 lock.unlock();
-                 System.out.println(thread.getName() + "释放了锁");
-             }
-         } else {
-             System.out.println(thread.getName() + "获取锁失败");
-         }
-     }
- }
- */
 }
 
 class MyThread extends Thread {

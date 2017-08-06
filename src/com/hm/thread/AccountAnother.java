@@ -1,6 +1,5 @@
 package com.hm.thread;
 
-import java.util.Locale;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;

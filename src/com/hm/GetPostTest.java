@@ -12,6 +12,7 @@ import java.util.Map;
 
 /**
  * Created by dumingwei on 2017/6/11.
+ * UrlConnection的get和post方法
  */
 public class GetPostTest {
 
@@ -54,7 +55,7 @@ public class GetPostTest {
             conn.setRequestProperty("connection", "Keep-Alive");
             conn.setDoOutput(true);
             conn.setDoInput(true);
-            PrintWriter out=new PrintWriter(conn.getOutputStream());
+            PrintWriter out = new PrintWriter(conn.getOutputStream());
             //发送请求参数
             out.print(params);
             out.flush();
