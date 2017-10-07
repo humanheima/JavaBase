@@ -22,7 +22,7 @@ public class YieldTest extends Thread {
 
     public static void main(String[] args) {
         YieldTest yt1 = new YieldTest("高级");
-        yt1.setPriority(MIN_PRIORITY);
+        yt1.setPriority(MAX_PRIORITY);
         yt1.start();
         YieldTest yt2 = new YieldTest("低级");
          yt2.setPriority(MAX_PRIORITY);

@@ -1,8 +1,5 @@
 package com.hm.algorithm;
 
-import java.util.Arrays;
-import java.util.Collections;
-
 /**
  * Created by dumingwei on 2017/6/18.
  */

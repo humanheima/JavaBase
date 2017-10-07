@@ -14,11 +14,14 @@ public class HashTableTest {
     public static void main(String[] args) {
         hashtable = new Hashtable<>();
         hashtable.put("String1", "string1");
-        hashtable.put("String1", "string1");
+        hashtable.put("String1", "string2");
         hashtable.get("String1");
-        hashtable.contains("");
-        hashtable.clear();
-
         System.out.println(hashtable.toString());
+
+        hashMap = new HashMap<>();
+        hashMap.put("String1", "string1");
+        hashMap.put("String1", "string2");
+        System.out.println(hashMap.toString());
+
     }
 }

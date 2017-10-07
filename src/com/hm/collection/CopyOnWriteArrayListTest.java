@@ -15,6 +15,7 @@ public class CopyOnWriteArrayListTest {
         list.add("one");
         list.add("two");
         list.add("three");
+        list.get(0);
 
     }
 }

@@ -1,5 +1,7 @@
 package com.hm.algorithm.search;
 
+import java.util.Comparator;
+
 /**
  * Created by dumingwei on 2017/5/25.
  * 二分查找是一种在有序数组中查找某一特定元素的搜索算法。
@@ -10,8 +12,10 @@ package com.hm.algorithm.search;
 public class BinarySearch {
 
     public static void main(String args[]) {
-        int[] arr = new int[]{1, 2, 5, 7, 8, 9,22};
-        int result=search(arr, 0, arr.length - 1, 22);
+        //Integer[] arr = new Integer[]{1, 2, 5, 7, 8, 9, 22};
+        Integer[] arr = new Integer[]{1, 3, 22};
+        //int result = search(arr, 0, arr.length - 1, 22);
+        int result = binarySearch(arr, 0, arr.length - 1, 22);
         System.out.println(result);
     }
 
@@ -27,4 +31,57 @@ public class BinarySearch {
         }
         return -1;
     }
+
+    /**
+     * 循环实现二分查找
+     *
+     * @param arr
+     * @param key
+     * @param comparator
+     * @param <T>
+     * @return
+     */
+    public static <T> int binarySearch(T[] arr, T key, Comparator<T> comparator) {
+        int low = 0;
+        int high = arr.length - 1;
+        while (low <= high) {
+            int mid = low + ((high - low) >> 1);
+            int cmp = comparator.compare(arr[mid], key);
+            if (cmp < 0) {
+                low = mid + 1;
+            } else if (cmp > 0) {
+                high = mid - 1;
+            } else {
+                return mid;
+            }
+        }
+        return -1;
+    }
+
+
+    /**
+     * 使用循环的方式实现二分查找
+     *
+     * @param arr
+     * @param low
+     * @param high
+     * @param key
+     * @param <T>
+     * @return
+     */
+    public static <T extends Comparable<T>> int binarySearch(T[] arr, int low, int high, T key) {
+
+        if (low <= high) {
+            int mid = low + (high - low) / 2;
+            if (key.compareTo(arr[mid]) == 0) {
+                return mid;
+            } else if (key.compareTo(arr[mid]) > 0) {
+                return binarySearch(arr, mid + 1, high, key);
+            } else if (key.compareTo(arr[mid]) < 0) {
+                return binarySearch(arr, low, mid - 1, key);
+            }
+        }
+        return -1;
+    }
+
 }

@@ -10,7 +10,7 @@ package com.hm.pattern.singleton;
  */
 public class Singleton {
 
-    /*//懒汉式单例类写法2 双重锁定
+    //懒汉式单例类写法2 双重锁定
     private volatile static Singleton INSTANCE;
 
     private Singleton() {
@@ -26,10 +26,10 @@ public class Singleton {
             }
         }
         return INSTANCE;
-    }*/
+    }
 
     //懒汉式单例类写法1 静态内部类写法
-    private Singleton() {
+   /* private Singleton() {
 
     }
 
@@ -39,7 +39,7 @@ public class Singleton {
 
     public static Singleton getInstance() {
         return LazyLoader.INSTANCE;
-    }
+    }*/
 
    /* //饿汉式单例类写法
 

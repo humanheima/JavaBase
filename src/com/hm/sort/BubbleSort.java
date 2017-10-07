@@ -13,7 +13,7 @@ package com.hm.sort;
  */
 public class BubbleSort {
 
-    private static int[] array = new int[]{1, 2, 3, 5, 4, 0};
+    private static int[] array = new int[]{1, 2, 3, 4};
 
     public static void main(String args[]) {
         sort(array);
@@ -24,6 +24,7 @@ public class BubbleSort {
         int len = arr.length;
         int temp;
         for (int i = 0; i < len - 1; i++) {
+            System.out.println("i==" + i);
             boolean isOver = true;
             for (int j = 0; j < len - 1 - i; j++) {
                 if (arr[j] > arr[j + 1]) {
@@ -32,9 +33,9 @@ public class BubbleSort {
                     arr[j + 1] = temp;
                     isOver = false;
                 }
-                if (isOver)
-                    break;
             }
+            if (isOver)
+                break;
         }
         for (int i : arr) {
             System.out.print(i + ",");

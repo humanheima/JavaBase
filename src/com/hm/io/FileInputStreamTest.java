@@ -13,11 +13,13 @@ public class FileInputStreamTest {
         //testRead();
         //testPrintStream();
         //testStringReader();
-        //testKeyIn();
+        testKeyIn();
         //testPushBack();
         //testRedirect();
         //testRandomAccess();
-        testSerializable();
+        //testSerializable();
+        //copy();
+        //test();
     }
 
     private static void testSerializable() {
@@ -77,26 +79,28 @@ public class FileInputStreamTest {
         }
     }
 
+    /**
+     * 拷贝文件
+     */
     private static void test() {
-        FileInputStream fis = null;
-        FileOutputStream fos = null;
+        BufferedInputStream bis = null;
+        BufferedOutputStream bos = null;
         try {
-            fis = new FileInputStream("D:\\FileInputStreamTest.java");
-            fos = new FileOutputStream("D:\\io.java");
-            byte[] buf = new byte[1024];
+            bis = new BufferedInputStream(new FileInputStream("D:\\image.png"));
+            bos = new BufferedOutputStream(new FileOutputStream("D:\\imageCopy.png"));
             int hasRead;
-            while ((hasRead = fis.read(buf)) != -1) {
-                fos.write(buf, 0, hasRead);
+            while ((hasRead = bis.read()) != -1) {
+                bos.write(hasRead);
             }
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
             try {
-                if (fis != null) {
-                    fis.close();
+                if (bis != null) {
+                    bis.close();
                 }
-                if (fos != null) {
-                    fos.close();
+                if (bos != null) {
+                    bos.close();
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -166,15 +170,21 @@ public class FileInputStreamTest {
     }
 
     private static void testKeyIn() {
-        InputStreamReader reader = new InputStreamReader(System.in);
-        BufferedReader br = new BufferedReader(reader);
-        String line = null;
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        //构建一个BufferedWriter
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        String line;
         try {
             while ((line = br.readLine()) != null) {
-                if (line.equals("exit"))
-                    System.exit(1);
-                System.out.println("输入内容为:" + line);
+                if ("over".equals(line)) {
+                    break;
+                }
+                bw.write(line);
+                bw.newLine();//换行
+                bw.flush();
             }
+            br.close();
+            bw.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -207,5 +217,54 @@ public class FileInputStreamTest {
         }
     }
 
+    private static void copy() {
+        BufferedReader bfr = null;
+        BufferedWriter bfw = null;
+        try {
+            bfr = new BufferedReader(new FileReader("D:/FileInputStreamTest.java"));
+            bfw = new BufferedWriter(new FileWriter("D:/FileInputStreamTestCopy.java"));
+            String line;
+            while ((line = bfr.readLine()) != null) {
+                bfw.write(line);
+                bfw.newLine();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (bfw != null) {
+                try {
+                    bfw.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (bfr != null) {
+                try {
+                    bfr.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
 
+    private static void closeInputStream(InputStream in) {
+        if (in != null) {
+            try {
+                in.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private static void closeOutputStream(OutputStream out) {
+        if (out != null) {
+            try {
+                out.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }
