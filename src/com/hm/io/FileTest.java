@@ -10,7 +10,7 @@ public class FileTest {
 
     public static void main(String args[]) {
         File file = new File("D:\\test");
-        //listFile(file);
+        listFile(file);
         //listRoot();
         FilenameFilter filter = new FilenameFilter() {
             @Override
@@ -18,7 +18,7 @@ public class FileTest {
                 return name.endsWith(".txt");
             }
         };
-        listFileFilter(filter);
+        //listFileFilter(filter);
     }
 
     private static void listFile(File file) {
@@ -27,7 +27,6 @@ public class FileTest {
             System.out.println(file1.getAbsoluteFile());
             if (file1.isDirectory())
                 listFile(file1);
-
         }
     }
 

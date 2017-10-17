@@ -9,7 +9,7 @@ import java.nio.file.Paths;
 public class PathTest {
 
     public static void main(String[] args) {
-        Path path = Paths.get("D:\\IdeaProjects\\JavaBase\\PathTest.java");
+        Path path = Paths.get("D:\\IdeaProjects\\JavaBase\\nio\\PathTest.java");
         System.out.println("path里包含的路径数量：" + path.getNameCount());
         System.out.println("path的根路径：" + path.getRoot());
         Path absolutePath = path.toAbsolutePath();

@@ -7,9 +7,9 @@ public class binary_tree {
 
     public static void main(String[] args) {
         Node head = createTree();
-        //recurseFront(head);
+        recurseFront(head);
         //recurseMid(head);
-        recurseEnd(head);
+        //recurseEnd(head);
     }
 
     /**

@@ -5,29 +5,44 @@ package com.hm.inner_class;
  */
 public class Test {
 
-    private Test() {
-        System.out.println("初始化");
+    Person person = new Person("Test");
+
+    static {
+        System.out.println("test static");
     }
 
-    public static Test getInstance() {
-        return Inner.test;
-    }
-
-    private static class Inner {
-
-        static {
-            System.out.println("静态内部类初始化");
-        }
-
-        private final static Test test = new Test();
-
+    public Test() {
+        System.out.println("test constructor");
     }
 
     public static void main(String[] args) {
-
-Test test=new Test();
-        //TestAnnotation.getInstance();
+        StringBuffer buffer = new StringBuffer();
+        buffer.append("a");
+        new MyClass();
     }
 
+}
 
+class Person {
+    static {
+        System.out.println("person static");
+    }
+
+    public Person(String str) {
+        System.out.println("person " + str);
+    }
+}
+
+class MyClass extends Test {
+
+
+    Person person = new Person("MyClass");
+
+    static {
+        System.out.println("myclass static");
+    }
+
+    public MyClass() {
+        System.out.println("myclass constructor");
+    }
 }

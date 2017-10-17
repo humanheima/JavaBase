@@ -13,13 +13,14 @@ public class FileInputStreamTest {
         //testRead();
         //testPrintStream();
         //testStringReader();
-        testKeyIn();
+        //testKeyIn();
         //testPushBack();
         //testRedirect();
         //testRandomAccess();
         //testSerializable();
         //copy();
         //test();
+        testReaderWriterCopy();
     }
 
     private static void testSerializable() {
@@ -80,7 +81,7 @@ public class FileInputStreamTest {
     }
 
     /**
-     * 拷贝文件
+     * 使用字节流拷贝文件
      */
     private static void test() {
         BufferedInputStream bis = null;
@@ -217,7 +218,10 @@ public class FileInputStreamTest {
         }
     }
 
-    private static void copy() {
+    /**
+     * 使用字符流拷贝文本文件
+     */
+    private static void testReaderWriterCopy() {
         BufferedReader bfr = null;
         BufferedWriter bfw = null;
         try {
@@ -244,6 +248,27 @@ public class FileInputStreamTest {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+            }
+        }
+    }
+
+
+    private static void closeWriter(Writer out) {
+        if (out != null) {
+            try {
+                out.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private static void closeReader(Reader in) {
+        if (in != null) {
+            try {
+                in.close();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
     }

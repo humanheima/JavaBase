@@ -4,6 +4,7 @@ import java.io.*;
 
 /**
  * Created by dumingwei on 2017/10/5.
+ * 递归拷贝一个文件夹下的所有文件
  */
 public class CopyDirectoryTest {
 

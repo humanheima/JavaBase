@@ -12,16 +12,12 @@ import java.util.SortedMap;
 
 /**
  * Created by dumingwei on 2017/6/2.
+ * 循环读取文件
  */
 public class ReadFile {
 
     public static void main(String args[]) {
         try {
-            //jdk支持的所有字符集
-            SortedMap<String, Charset> map = Charset.availableCharsets();
-            for (String name : map.keySet()) {
-                System.out.println("name=" + name + ",value=" + map.get(name));
-            }
             System.out.println();
             FileInputStream fis = new FileInputStream("D:\\a.txt");
             FileChannel channel = fis.getChannel();

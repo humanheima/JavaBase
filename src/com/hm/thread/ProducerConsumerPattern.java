@@ -5,6 +5,7 @@ import java.util.concurrent.LinkedBlockingDeque;
 
 /**
  * Created by dumingwei on 2017/10/3.
+ * 使用BlockingQueue 实现生产者和消费者模式
  */
 public class ProducerConsumerPattern {
 

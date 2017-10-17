@@ -18,8 +18,10 @@ public class MapTest {
         map.put("ios", 10);
         map.put("ajax", 79);
         map.put("java ee", 79);
-        Map<String, Integer> map1=Collections.synchronizedMap(new HashMap<>());
-        map1.put("haha",33);
+        map.put("java", 79);
+        System.out.println(map);
+        //Map<String, Integer> map1=Collections.synchronizedMap(new HashMap<>());
+       // map1.put("haha",33);
       /*  System.out.println(map.put("ios", 99));
         System.out.println(map.containsKey("ios"));
         System.out.println(map.containsValue(99));*/
@@ -36,10 +38,10 @@ public class MapTest {
         System.out.println(map);
         System.out.println(3|3);*/
        // System.out.println(tableSizeFor(20));
-        int a=2;
+       /* int a=2;
         int c=a<<1;
         System.out.println(a);
-        System.out.println(c);
+        System.out.println(c);*/
     }
 
     private static final int tableSizeFor(int cap) {

@@ -60,7 +60,7 @@ public class BinarySearch {
 
 
     /**
-     * 使用循环的方式实现二分查找
+     * 使用递归的方式实现二分查找
      *
      * @param arr
      * @param low

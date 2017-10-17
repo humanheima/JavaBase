@@ -4,6 +4,7 @@ import java.io.*;
 
 /**
  * Created by dumingwei on 2017/10/4.
+ * 测试文件描述符
  */
 public class FileDescriptorTest {
 

@@ -14,7 +14,7 @@ public class FileChannelTest {
 
     public static void main(String args[]) {
 
-        File f = new File("D:\\io_fw.java");
+        File f = new File("D:\\FileInputStreamTest.java");
         try {
             FileChannel inChannel = new FileInputStream(f).getChannel();
             FileChannel outChannel = new FileOutputStream("D:\\a.txt").getChannel();
