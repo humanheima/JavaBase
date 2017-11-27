@@ -26,7 +26,7 @@ public class Student implements Cloneable {
         System.out.println("学生2：" + stu2.getNumber() + ",地址：" + stu2.getAdd().getAddress()+",name"+stu2.getName());
         stu2.setNumber(54321);
         address.setAddress("北京");
-        stu1.setName("洪敏");
+        stu1.setName("别了");
         System.out.println("学生1：" + stu1.getNumber() + ",地址：" + stu1.getAdd().getAddress()+",name"+stu1.getName());
         System.out.println("学生2：" + stu2.getNumber() + ",地址：" + stu2.getAdd().getAddress()+",name"+stu2.getName());
     }
