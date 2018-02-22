@@ -8,8 +8,8 @@ public class Purchasing implements IShop {
 
     private IShop mShop;
 
-    public Purchasing(IShop mShop) {
-        this.mShop = mShop;
+    public Purchasing(IShop iShop) {
+        this.mShop = iShop;
     }
 
     @Override
