@@ -1,6 +1,10 @@
-package com.hm.binary_tree;
+package com.hm.structure;
 
+/**
+ * 二叉树节点
+ */
 class Node {
+
     public int value;
     public Node left;
     public Node right;
@@ -34,5 +38,10 @@ class Node {
 
     public Node(int value) {
         this.value = value;
+    }
+
+    @Override
+    public String toString() {
+        return "value:" + value;
     }
 }

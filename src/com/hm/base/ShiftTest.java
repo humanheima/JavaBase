@@ -24,5 +24,8 @@ public class ShiftTest {
         // System.out.println(3 + ((9 - 3) >> 1));
         System.out.println(0);
         System.out.println(~-5);
+        System.out.println("---------------");
+        System.out.println(0&7);
+
     }
 }

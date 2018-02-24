@@ -18,6 +18,7 @@ public class ThreadPoolTest {
     public static void main(String[] args) {
         //ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(3);
         //ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newSingleThreadExecutor();
+        System.out.println(Thread.currentThread().getName());
         ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newCachedThreadPool();
         for (int i = 0; i < 15; i++) {
             MyTask myTask = new MyTask(i);
@@ -40,13 +41,13 @@ class MyTask implements Runnable {
 
     @Override
     public void run() {
-        System.out.println("正在执行task" + taskNum);
+        System.out.println(Thread.currentThread().getName() + " 正在执行task" + taskNum);
         try {
             Thread.currentThread().sleep(4000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.println("task" + taskNum + "执行完毕");
+        System.out.println(Thread.currentThread().getName() + " task" + taskNum + "执行完毕");
     }
 }
 
