@@ -2,10 +2,10 @@ package com.hm.pattern.observe;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observer;
 
 /**
  * Created by dumingwei on 2017/7/2.
+ * 具体被观察者
  */
 public class WeixinSubject implements Subject {
 
@@ -24,6 +24,7 @@ public class WeixinSubject implements Subject {
     @Override
     public void notifyObservers(String message) {
         for (Observer observer : observerList) {
+            observer.update(message);
         }
     }
 }
