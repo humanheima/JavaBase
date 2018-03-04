@@ -1,13 +1,5 @@
 package com.hm.thread;
 
-import com.hm.anno.MyTest;
-
-import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadFactory;
-
 /**
  * Created by dumingwei on 2017/6/8.
  */

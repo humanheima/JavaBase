@@ -7,7 +7,7 @@ public class JoinTest {
 
     public static void main(String[] args) throws InterruptedException {
 
-      /*  System.out.println(Thread.currentThread().getName() + " is started");
+        System.out.println(Thread.currentThread().getName() + " is started");
 
         Thread exampleThread = new Thread(new Runnable() {
             @Override
@@ -24,9 +24,9 @@ public class JoinTest {
 
         exampleThread.start();
         exampleThread.join();
-        System.out.println(Thread.currentThread().getName() + " is completed");*/
+        System.out.println(Thread.currentThread().getName() + " is completed");
 
-        Thread exampleThread = new Thread(new Runnable() {
+        /*Thread exampleThread = new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
@@ -41,7 +41,7 @@ public class JoinTest {
 
         Thread1 thread1 = new Thread1(exampleThread);
         Thread1 thread2 = new Thread1(thread1);
-        thread2.start();
+        thread2.start();*/
     }
 
     static class Thread1 extends Thread {
