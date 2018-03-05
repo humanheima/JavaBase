@@ -13,15 +13,22 @@ public class ReentrantReadWriteLockTest {
 
     public static void main(String[] args) {
         ReentrantReadWriteLockTest test = new ReentrantReadWriteLockTest();
-        new Thread() {
-            public void run() {
-                test.get(Thread.currentThread());
-            }
-        }.start();
 
         new Thread() {
             public void run() {
                 test.write(Thread.currentThread());
+            }
+        }.start();
+
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        new Thread() {
+            public void run() {
+                test.get(Thread.currentThread());
             }
         }.start();
     }
@@ -29,9 +36,8 @@ public class ReentrantReadWriteLockTest {
     private void get(Thread thread) {
         rwl.readLock().lock();
         try {
-            long start = System.currentTimeMillis();
-            while (System.currentTimeMillis() - start < 100) {
-                System.out.println(thread.getName() + "正在进行读操作");
+            for (int i = 0; i < 100; i++) {
+                System.out.println(thread.getName() + "正在进行读操作" + i);
             }
             System.out.println(thread.getName() + "读操作完毕");
         } catch (Exception e) {
@@ -44,9 +50,8 @@ public class ReentrantReadWriteLockTest {
     private void write(Thread thread) {
         rwl.writeLock().lock();
         try {
-            long start = System.currentTimeMillis();
-            while (System.currentTimeMillis() - start < 100) {
-                System.out.println(thread.getName() + "正在进行写操作");
+            for (int i = 0; i < 100; i++) {
+                System.out.println(thread.getName() + "正在进行写操作" + i);
             }
             System.out.println(thread.getName() + "写操作完毕");
         } catch (Exception e) {

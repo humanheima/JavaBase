@@ -1,27 +1,28 @@
-package com.hm.base.interview.volatiletest;
+package com.hm.base.interview;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Created by dumingwei on 2017/9/28.
  */
-public class Test {
+public class VolatileTest {
 
-    private volatile AtomicInteger inc = new AtomicInteger(0);
+    //private volatile AtomicInteger inc = new AtomicInteger(0);
+    private int inc;
 
     private void increase() {
-        inc.getAndIncrement();
+        //inc.getAndIncrement();
+        inc++;
     }
 
     public static void main(String[] args) {
-
-        final Test test = new Test();
+        final VolatileTest volatileTest = new VolatileTest();
         for (int i = 0; i < 10; i++) {
             new Thread() {
                 @Override
                 public void run() {
                     for (int j = 0; j < 1000; j++) {
-                        test.increase();
+                        volatileTest.increase();
                     }
                 }
             }.start();
@@ -30,8 +31,7 @@ public class Test {
         //保证前面的线程都执行完
         while (Thread.activeCount() > 1) {
             Thread.yield();
-            System.out.println(test.inc);
+            System.out.println(volatileTest.inc);
         }
-
     }
 }

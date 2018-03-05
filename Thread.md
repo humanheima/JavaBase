@@ -146,8 +146,7 @@ sleep相当于让线程睡眠，交出CPU，让CPU去执行其他的任务。但
 ```java
 public static native void yield();
 ```
-5. join方法：实际上调用join方法是调用了Object的wait方法,wait方法会让线程进入阻塞状态，并且会释放线程占有的锁，并交出CPU执行权限.。由于wait方法会
-让线程释放对象锁，所以join方法同样会让线程释放对一个对象持有的锁。
+5. join方法：实际上调用join方法以后，只有调用者生命周期结束以后，才执行下面的代码。
 ```java
 public final void join() throws InterruptedException {
         join(0);
@@ -261,8 +260,8 @@ private native void interrupt0();
 public class Test {
      
     public static void main(String[] args) throws IOException  {
-        Test test = new Test();
-        MyThread thread = test.new MyThread();
+        Test volatileTest = new Test();
+        MyThread thread = volatileTest.new MyThread();
         thread.start();
         try {
             Thread.currentThread().sleep(2000);
@@ -292,8 +291,8 @@ public class Test {
 public class Test {
 
     public static void main(String[] args) throws IOException  {
-        Test test = new Test();
-        MyThread thread = test.new MyThread();
+        Test volatileTest = new Test();
+        MyThread thread = volatileTest.new MyThread();
         thread.start();
         try {
             Thread.currentThread().sleep(2000);
@@ -330,8 +329,8 @@ private native boolean isInterrupted(boolean ClearInterrupted);
 public class Test {
 
     public static void main(String[] args) throws IOException  {
-        Test test = new Test();
-        MyThread thread = test.new MyThread();
+        Test volatileTest = new Test();
+        MyThread thread = volatileTest.new MyThread();
         thread.start();
         try {
             Thread.currentThread().sleep(2000);
@@ -362,8 +361,8 @@ public class Test {
 public class Test {
 
     public static void main(String[] args) throws IOException {
-        Test test = new Test();
-        MyThread thread = test.new MyThread();
+        Test volatileTest = new Test();
+        MyThread thread = volatileTest.new MyThread();
         thread.start();
         try {
             Thread.currentThread().sleep(2000);
@@ -477,6 +476,167 @@ class InsertData {
 ```
 
 如果能用同步代码块就优先使用，因为一个方法可能只有部分代码需要同步,这样可以提高效率。
+
+## volatile 
+* volatile 关键字的作用 一旦一个共享变量（类的成员变量、类的静态成员变量）被volatile修饰之后，那么就具备了两层语义
+
+1. 保证了不同线程对这个变量进行操作时的可见性，即一个线程修改了某个变量的值，这新值对其他线程来说是立即可见的。
+2. 禁止进行指令重排序。
+
+## 线程池
+线程池的作用：复用线程。
+
+参考链接：[Java并发编程：线程池的使用](http://www.cnblogs.com/dolphin0520/p/3932921.html)
+
+相关的类
+* ThreadPoolExecutor
+
+构造函数
+```java
+public ThreadPoolExecutor(int corePoolSize,
+                              int maximumPoolSize,
+                              long keepAliveTime,
+                              TimeUnit unit,
+                              BlockingQueue<Runnable> workQueue) {
+        this(corePoolSize, maximumPoolSize, keepAliveTime, unit, workQueue,
+             Executors.defaultThreadFactory(), defaultHandler);
+    }
+    
+ public ThreadPoolExecutor(int corePoolSize,
+                              int maximumPoolSize,
+                              long keepAliveTime,
+                              TimeUnit unit,
+                              BlockingQueue<Runnable> workQueue,
+                              ThreadFactory threadFactory) {
+        this(corePoolSize, maximumPoolSize, keepAliveTime, unit, workQueue,
+             threadFactory, defaultHandler);
+    }
+    
+public ThreadPoolExecutor(int corePoolSize,
+                              int maximumPoolSize,
+                              long keepAliveTime,
+                              TimeUnit unit,
+                              BlockingQueue<Runnable> workQueue,
+                              RejectedExecutionHandler handler) {
+        this(corePoolSize, maximumPoolSize, keepAliveTime, unit, workQueue,
+             Executors.defaultThreadFactory(), handler);
+    }
+    
+ public ThreadPoolExecutor(int corePoolSize,
+                              int maximumPoolSize,
+                              long keepAliveTime,
+                              TimeUnit unit,
+                              BlockingQueue<Runnable> workQueue,
+                              ThreadFactory threadFactory,
+                              RejectedExecutionHandler handler) {
+        if (corePoolSize < 0 ||
+            maximumPoolSize <= 0 ||
+            maximumPoolSize < corePoolSize ||
+            keepAliveTime < 0)
+            throw new IllegalArgumentException();
+        if (workQueue == null || threadFactory == null || handler == null)
+            throw new NullPointerException();
+        this.acc = System.getSecurityManager() == null ?
+                null :
+                AccessController.getContext();
+        this.corePoolSize = corePoolSize;
+        this.maximumPoolSize = maximumPoolSize;
+        this.workQueue = workQueue;
+        this.keepAliveTime = unit.toNanos(keepAliveTime);
+        this.threadFactory = threadFactory;
+        this.handler = handler;
+    }
+    
+```
+相关参数说明
+1. corePoolSize：核心线程池大小,即使核心线程是空闲状态也不会被销毁。除非设置allowCoreThreadTimeOut为true。创建一个线程池以后并不会创建任何新的线程，
+而是等待有任务到来才去创建线程执行任务。可以调用`prestartAllCoreThreads()`方法或者`prestartCoreThread()`方法预先创建corePoolSize个或者1个线程，
+等待任务的到来。
+2. maximumPoolSize：线程池最大线程数，这个参数也是一个非常重要的参数，它表示在线程池中最多能创建多少个线程。
+3. keepAliveTime：表示显示保持空闲多长时间会终止。默认情况下，只有当线程池中的线程数大于corePoolSize时，keepAliveTime才会起作用，直到线程池中的线
+程数不大于corePoolSize，即当线程池中的线程数大于corePoolSize时，如果一个线程空闲的时间达到keepAliveTime，则会终止，直到线程池中的线程数不超过
+corePoolSize。但是如果调用了allowCoreThreadTimeOut(boolean)方法，在线程池中的线程数不大于corePoolSize时，keepAliveTime参数也会起作用，直到线程池
+中的线程数为0。
+4. unit：keepAliveTime的单位。
+5. workQueue：个阻塞队列，用来存储等待执行的任务，这个参数的选择也很重要，会对线程池的运行过程产生重大影响，一般来说，这里的阻塞队列有以下几种选择
+```java
+ArrayBlockingQueue;
+LinkedBlockingQueue;
+SynchronousQueue;
+```
+6. threadFactory：线程工厂，主要用来创建线程；
+7. handler：表示当拒绝处理任务时的策略，有以下四种取值：
+```java
+ThreadPoolExecutor.AbortPolicy:丢弃任务并抛出RejectedExecutionException异常。 
+ThreadPoolExecutor.DiscardPolicy：也是丢弃任务，但是不抛出异常。 
+ThreadPoolExecutor.DiscardOldestPolicy：丢弃队列最前面的任务，然后重新尝试执行任务（重复此过程）
+ThreadPoolExecutor.CallerRunsPolicy：由调用线程处理该任务 
+```
+ThreadPool的继承结构图
+
+![ThreadPool的继承结构图](ThreadPool.png)
+
+ThreadPool类中部分方法
+```java
+execute()
+submit()
+shutdown()
+shutdownNow()
+```
+* execute()方法实际上是Executor中声明的方法，在ThreadPoolExecutor进行了具体的实现，这个方法是ThreadPoolExecutor的核心方法，通过这个方法可以向线程
+池提交一个任务，交由线程池去执行。
+* submit()方法是在ExecutorService中声明的方法，在AbstractExecutorService就已经有了具体的实现，在ThreadPoolExecutor中并没有对其进行重写，这个方法
+也是用来向线程池提交任务的，但是它和execute()方法不同，它能够返回任务执行的结果，去看submit()方法的实现，会发现它实际上还是调用的execute()方法，
+只不过它利用了Future来获取任务执行结果。
+* shutdown()和shutdownNow()是用来关闭线程池的。
+
+### 线程池的实现原理
+1. 线程池的状态
+```java
+private static final int RUNNING    = -1 << COUNT_BITS;
+private static final int SHUTDOWN   =  0 << COUNT_BITS;
+private static final int STOP       =  1 << COUNT_BITS;
+private static final int TIDYING    =  2 << COUNT_BITS;
+private static final int TERMINATED =  3 << COUNT_BITS;
+```
+* 当线程池处于RUNNING状态：线程池可以接受新的任务，执行缓存的任务
+* 当线程池处于SHUTDOWN状态：不再接受新的任务，但是会执行缓存的任务
+* 当线程池处于STOP状态：不再接受新的任务，也不会执行缓存的任务，并且会中断正在执行的任务
+* 当线程池处于TIDYING状态：所有的任务已经结束，没有线程在工作。线程池转换到TIDYING状态会执行terminated()方法
+* 当线程池处于TERMINATED状态：表示terminated()方法执行完毕
+
+状态的转换
+
+UNNING -> SHUTDOWN：调用shutdown()方法
+
+RUNNING or SHUTDOWN) -> STOP：调用shutdownNow()方法
+
+SHUTDOWN -> TIDYING： 缓存队列为空，线程池中没有存活的线程
+
+STOP -> TIDYING：线程池中没有存活的线程
+
+TIDYING -> TERMINATED：terminated()调用完毕
+
+2. 任务的执行
+在了解将任务提交给线程池到任务执行完毕整个过程之前，我们先来看一下ThreadPoolExecutor类中一些比较重要成员变量：
+```java
+private final BlockingQueue<Runnable> workQueue;//任务缓存队列，用来存放等待执行的任务
+private final ReentrantLock mainLock = new ReentrantLock();//操作许多变量都需要这个锁
+private final HashSet<Worker> workers = new HashSet<Worker>();//存放工作集，需要获取mainLock才可以操作这个变量
+private volatile boolean allowCoreThreadTimeOut;//是否允许为核心线程设置存活时间
+private int largestPoolSize;//用来记录线程池中曾经出现过的最大线程数
+private long completedTaskCount;//用来记录已经执行完毕的任务个数
+```
+
+
+
+
+
+
+
+
+
+
 
 
 

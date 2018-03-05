@@ -5,7 +5,7 @@ package com.hm.inner_class;
  */
 public class Test {
 
-    Person person = new Person("Test");
+    Person person = new Person("VolatileTest");
 
     static {
         System.out.println("test static");
