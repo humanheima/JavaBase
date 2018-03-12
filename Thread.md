@@ -620,6 +620,9 @@ TIDYING -> TERMINATED：terminated()调用完毕
 2. 任务的执行
 在了解将任务提交给线程池到任务执行完毕整个过程之前，我们先来看一下ThreadPoolExecutor类中一些比较重要成员变量：
 ```java
+private final AtomicInteger ctl = new AtomicInteger(ctlOf(RUNNING, 0));//标志当前线程池的状态
+private static final int COUNT_BITS = Integer.SIZE - 3;//等于29
+private static final int CAPACITY   = (1 << COUNT_BITS) - 1;
 private final BlockingQueue<Runnable> workQueue;//任务缓存队列，用来存放等待执行的任务
 private final ReentrantLock mainLock = new ReentrantLock();//操作许多变量都需要这个锁
 private final HashSet<Worker> workers = new HashSet<Worker>();//存放工作集，需要获取mainLock才可以操作这个变量
@@ -627,6 +630,43 @@ private volatile boolean allowCoreThreadTimeOut;//是否允许为核心线程设
 private int largestPoolSize;//用来记录线程池中曾经出现过的最大线程数
 private long completedTaskCount;//用来记录已经执行完毕的任务个数
 ```
+在ThreadPoolExecutor类中，可以使用如下方法执行任务
+
+```
+<T> Future<T> submit(Callable<T> task);
+<T> Future<T> submit(Runnable task, T result);
+Future<?> submit(Runnable task);
+void execute(Runnable command);
+```
+实际上submit方法内部也是调用了execute()方法。
+```java
+public void execute(Runnable command) {
+        if (command == null)
+            throw new NullPointerException();
+        int c = ctl.get();
+        if (workerCountOf(c) < corePoolSize) {
+            if (addWorker(command, true))
+                return;
+            c = ctl.get();
+        }
+        if (isRunning(c) && workQueue.offer(command)) {
+            int recheck = ctl.get();
+            if (! isRunning(recheck) && remove(command))
+                reject(command);
+            else if (workerCountOf(recheck) == 0)
+                addWorker(null, false);
+        }
+        else if (!addWorker(command, false))
+            reject(command);
+    }
+```
+分三步进行
+
+1. 如果当前正在运行的线程小于corePoolSize，那么就调用addWorker添加一个线程。添加成功就直接返回。
+2. 如果一个任务能成功添加到队列，我们仍需要进行再次检查是否需要添加一个线程。
+3. 如果一个任务不能被加入到队列，我们就尝试添加一个新线程，如果添加失败，就拒绝这个任务。
+
+
 
 
 
