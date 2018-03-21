@@ -17,10 +17,10 @@ public class ArrayDequeStack {
         deque.addLast(11);
 
        /* int a[] = {1, 2, 3, 4};
-        int b[] = new int[8];
-        System.arraycopy(a,0,b,0,4);
-        System.arraycopy(a,0,b,4,0);
-        for (int i : b) {
+        int B[] = new int[8];
+        System.arraycopy(a,0,B,0,4);
+        System.arraycopy(a,0,B,4,0);
+        for (int i : B) {
             System.out.print(i);
         }*/
 

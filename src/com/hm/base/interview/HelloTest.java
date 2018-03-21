@@ -34,6 +34,6 @@ class B extends A {
     }
 
     public B() {
-        System.out.println("b");
+        System.out.println("B");
     }
 }

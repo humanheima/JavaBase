@@ -1,4 +1,4 @@
-package com.hm.effective.cp_three;
+package com.hm.effective_java.chapter_three;
 
 import java.awt.*;
 

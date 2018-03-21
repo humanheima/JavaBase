@@ -7,7 +7,7 @@ import java.lang.annotation.Annotation;
  */
 public class MyClass {
 
-    @TestAnnotation(name = "dumingwei", age = 25, height = 183)
+    @TestAnnotation(name = "dumingwei", age = 25, height = 163)
     public void info() {
 
     }

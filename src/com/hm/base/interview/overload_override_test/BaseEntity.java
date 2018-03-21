@@ -12,6 +12,6 @@ public class BaseEntity {
     }
 
     void test(byte b) {
-        System.out.println(TAG + "test(byte b)" + b);
+        System.out.println(TAG + "test(byte B)" + b);
     }
 }

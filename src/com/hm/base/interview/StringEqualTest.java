@@ -36,7 +36,7 @@ public class StringEqualTest {
         System.out.println(s2 == s2.intern());//false
 
         final String s7 = "a";
-        final String s8 = "b";
+        final String s8 = "B";
         String s9 = s7 + s8;
         String s10 = "ab";
         /**

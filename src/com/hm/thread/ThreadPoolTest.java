@@ -17,15 +17,10 @@ public class ThreadPoolTest {
 
     public static void main(String[] args) {
         //ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(3);
-        //ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newSingleThreadExecutor();
-        System.out.println(Thread.currentThread().getName());
-        ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newCachedThreadPool();
-        for (int i = 0; i < 15; i++) {
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        for (int i = 0; i < 10; i++) {
             MyTask myTask = new MyTask(i);
             executor.execute(myTask);
-            System.out.println("线程池中线程数目：" + executor.getPoolSize() +
-                    "队列中等待的任务数目：" + executor.getQueue().size() + ",已经执行完的任务数目：" +
-                    executor.getCompletedTaskCount());
         }
         executor.shutdown();
     }

@@ -182,7 +182,7 @@ public class StreamTest {
         /**
          * peek 使用一个Consumer消费流中的元素，但是返回的流还是包含原来的流中的元素。
          */
-       /* String[] arr = new String[]{"a", "b", "c", "d"};
+       /* String[] arr = new String[]{"a", "B", "c", "d"};
         long count = Arrays.stream(arr)
                 .peek(System.out::println)
                 .count();
@@ -191,7 +191,7 @@ public class StreamTest {
         /**
          * skip 返回丢弃了前n个元素的流，如果流中的元素小于或者等于n，则返回空的流。
          */
-        /*String[] arr = new String[]{"a", "b", "c", "d"};
+        /*String[] arr = new String[]{"a", "B", "c", "d"};
         long num = Arrays.stream(arr)
                 .skip(2)
                 .count();

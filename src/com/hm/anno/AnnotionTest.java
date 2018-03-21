@@ -24,7 +24,7 @@ public class AnnotionTest {
         jp.add(ok);
         jp.add(cancel);
         mainWin.add(jp);
-        ActionListenerInstaller.processAnnotions(this);
+        ActionListenerInstaller.processAnnotations(this);
         mainWin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainWin.pack();
         mainWin.setVisible(true);

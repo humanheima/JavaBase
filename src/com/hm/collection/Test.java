@@ -17,7 +17,7 @@ public class Test {
     }
 
     private static void sort() {
-        String[] arr = {"a", "b", "a", "b", "c", "a", "b", "c", "b"};
+        String[] arr = {"a", "B", "a", "B", "c", "a", "B", "c", "B"};
         Map<String, Integer> map = new HashMap<>();
         for (int i = 0; i < arr.length; i++) {
             if (!map.containsKey(arr[i])) {

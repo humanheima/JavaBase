@@ -1,7 +1,10 @@
 package com.hm.anno;
 
+import java.lang.annotation.Target;
+
 /**
  * Created by dumingwei on 2017/8/2.
+ * 函数式接口
  */
 @FunctionalInterface
 public interface FunInterface {

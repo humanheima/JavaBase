@@ -22,10 +22,11 @@ public class ShiftTest {
 
     public static void main(String[] args) {
         // System.out.println(3 + ((9 - 3) >> 1));
-        System.out.println(0);
+        /*System.out.println(0);
         System.out.println(~-5);
         System.out.println("---------------");
         System.out.println(0&7);
-
+*/
+        System.out.println(-1<<29);
     }
 }

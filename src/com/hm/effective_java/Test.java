@@ -1,6 +1,4 @@
-package com.hm.effective;
-
-import java.util.HashMap;
+package com.hm.effective_java;
 
 /**
  * Created by dumingwei on 2017/9/5.

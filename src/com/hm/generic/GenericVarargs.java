@@ -19,7 +19,7 @@ public class GenericVarargs {
     public static void main(String[] args) {
         List<String> ls = makeList("A");
         System.out.println(ls);
-        ls=makeList("a","b","c");
+        ls=makeList("a","B","c");
         System.out.println(ls);
         ls=makeList("ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(""));
         System.out.println(ls);

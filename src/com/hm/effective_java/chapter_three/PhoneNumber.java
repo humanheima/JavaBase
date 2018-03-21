@@ -1,4 +1,4 @@
-package com.hm.effective.cp_three;
+package com.hm.effective_java.chapter_three;
 
 /**
  * Created by dumingwei on 2017/9/18.

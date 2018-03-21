@@ -8,13 +8,6 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Target;
 import java.util.List;
 
-/**
- * Created by dumingwei on 2017/8/6.
- */
-@Target(ElementType.TYPE_USE)
-@interface NotNull {
-}
-
 //定义类时使用Type Annotation
 @NotNull
 public class TypeAnnotationTest implements/*implements时使用Type Annotation*/ @NotNull Serializable {

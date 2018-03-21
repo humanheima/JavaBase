@@ -2,11 +2,16 @@ package com.hm.base;
 
 /**
  * Created by dumingwei on 2017/10/11.
+ * 测试break标签
  */
 public class BreakTest {
 
     public static void main(String[] args) {
+        //test0();
+        test();
+    }
 
+    private static void test0() {
         first:
         {
             second:
@@ -27,5 +32,19 @@ public class BreakTest {
             }
             System.out.println("This is after second block.");
         }
+    }
+
+    private static void test() {
+        outer:
+        for (int i = 0; i < 3; i++) {
+            System.out.print("Pass " + i + ":");
+            for (int j = 0; j < 100; j++) {
+                if (j == 10)
+                    break outer;
+                System.out.print(j + " ");
+            }
+            System.out.println("This will not print");
+        }
+        System.out.println("loops complete.");
     }
 }

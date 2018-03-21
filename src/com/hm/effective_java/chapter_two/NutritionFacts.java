@@ -1,4 +1,4 @@
-package com.hm.effective;
+package com.hm.effective_java.chapter_two;
 
 /**
  * Created by dumingwei on 2017/9/5.

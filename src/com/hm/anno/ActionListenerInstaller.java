@@ -9,7 +9,7 @@ import java.lang.reflect.Field;
  */
 public class ActionListenerInstaller {
 
-    public static void processAnnotions(Object obj) {
+    public static void processAnnotations(Object obj) {
 
         Class cl = obj.getClass();
         for (Field f : cl.getDeclaredFields()) {
