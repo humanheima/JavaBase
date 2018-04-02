@@ -2,12 +2,12 @@
 package com.hm.effective_java.chapter_four;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 
 public final class Complex {
 
     private final double re;
     private final double im;
-    BigInteger
 
     private Complex(double re, double im) {
         this.re = re;
