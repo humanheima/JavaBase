@@ -19,11 +19,12 @@ public class RegularUtil {
     private static String gif = "http://pudong.xun-ao.com/d/file/daohangguanli/jietou/2016-10-24/6535ef8619484dfb1d2da185bcf58df7.gif";
 
     public static void main(String args[]) {
-       // System.out.println(getId(PC_ACTIVITY_URL));
-        System.out.println(isImage(jpg));
+        // System.out.println(getId(PC_ACTIVITY_URL));
+        /*System.out.println(isImage(jpg));
         System.out.println(isImage(jpeg));
         System.out.println(isImage(jpg));
-        System.out.println(isImage(gif));
+        System.out.println(isImage(gif));*/
+        System.out.println(stringFilter("*33333##"));
     }
 
     private static boolean isImage(String url) {
@@ -40,6 +41,14 @@ public class RegularUtil {
             return id.replace("id=", "");
         }
         return null;
+    }
+
+    public static String stringFilter(String str) {
+        // 只允许字母、数字和泰文
+        String regEx = "[^a-zA-Z0-9\u0E00-\u0E7F\\s*,：:。.?？@＃％＄《》<>-_...]";//正则表达
+        Pattern p = Pattern.compile(regEx);
+        Matcher m = p.matcher(str);
+        return m.replaceAll("");
     }
 
 
