@@ -1,6 +1,9 @@
 package com.hm.anno;
 
+import com.google.auto.service.AutoService;
+
 import javax.annotation.processing.AbstractProcessor;
+import javax.annotation.processing.Processor;
 import javax.annotation.processing.RoundEnvironment;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
@@ -14,6 +17,7 @@ import java.util.Set;
 /**
  * Created by dumingwei on 2017/8/6.
  */
+@AutoService(Processor.class)
 public class HibernateAnnotationProcessor extends AbstractProcessor {
 
     @Override
@@ -21,7 +25,9 @@ public class HibernateAnnotationProcessor extends AbstractProcessor {
         PrintStream ps = null;
         try {
             for (Element element : roundEnv.getElementsAnnotatedWith(Persistent.class)) {
+                //获取正在处理的类名
                 Name clazzName = element.getSimpleName();
+                //获取类定义前的 @Persistent Annotation
                 Persistent per = element.getAnnotation(Persistent.class);
                 ps = new PrintStream(new FileOutputStream(clazzName + "hbm.xml"));
                 ps.println("class name=" + element);

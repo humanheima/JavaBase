@@ -3,6 +3,7 @@ package com.hm.anno;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Locale;
 
 /**
  * Created by dumingwei on 2017/8/6.
@@ -27,6 +28,8 @@ public class AnnotionTest {
         ActionListenerInstaller.processAnnotations(this);
         mainWin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainWin.pack();
+        mainWin.setSize(400, 400);
+        mainWin.setLocation(800, 200);
         mainWin.setVisible(true);
     }
 
