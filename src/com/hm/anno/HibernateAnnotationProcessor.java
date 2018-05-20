@@ -1,9 +1,6 @@
 package com.hm.anno;
 
-import com.google.auto.service.AutoService;
-
 import javax.annotation.processing.AbstractProcessor;
-import javax.annotation.processing.Processor;
 import javax.annotation.processing.RoundEnvironment;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
@@ -17,7 +14,6 @@ import java.util.Set;
 /**
  * Created by dumingwei on 2017/8/6.
  */
-@AutoService(Processor.class)
 public class HibernateAnnotationProcessor extends AbstractProcessor {
 
     @Override
