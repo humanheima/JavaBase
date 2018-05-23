@@ -1,53 +1,80 @@
 package com.hm.anno;
 
-import javax.annotation.processing.AbstractProcessor;
-import javax.annotation.processing.RoundEnvironment;
-import javax.lang.model.element.Element;
-import javax.lang.model.element.ElementKind;
-import javax.lang.model.element.Name;
-import javax.lang.model.element.TypeElement;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.PrintStream;
-import java.util.Set;
+import javax.annotation.processing.*;
+import javax.lang.model.element.*;
+import javax.lang.model.*;
 
-/**
- * Created by dumingwei on 2017/8/6.
- */
+import java.io.*;
+import java.util.*;
+
+@SupportedSourceVersion(SourceVersion.RELEASE_8)
+// 指定可处理@Persistent、@Id、@Property三个注解
+@SupportedAnnotationTypes({"Persistent", "Id", "Property"})
 public class HibernateAnnotationProcessor extends AbstractProcessor {
 
-    @Override
+    // 循环处理每个需要处理的程序对象
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
+        // 定义一个文件输出流，用于生成额外的文件
         PrintStream ps = null;
         try {
-            for (Element element : roundEnv.getElementsAnnotatedWith(Persistent.class)) {
-                //获取正在处理的类名
-                Name clazzName = element.getSimpleName();
-                //获取类定义前的 @Persistent Annotation
-                Persistent per = element.getAnnotation(Persistent.class);
-                ps = new PrintStream(new FileOutputStream(clazzName + "hbm.xml"));
-                ps.println("class name=" + element);
-                ps.println("table=" + per.table());
-                for (Element f : element.getEnclosedElements()) {
-                    //只处理成员变量上的Annotation
-                    if (f.getKind() == ElementKind.FIELD) {
-                        Id id = f.getAnnotation(Id.class);
+            // 遍历每个被@Persistent修饰的class文件
+            for (Element t : roundEnv.getElementsAnnotatedWith(Persistent.class)) {
+                // 获取正在处理的类名
+                Name clazzName = t.getSimpleName();
+                // 获取类定义前的@Persistent注解
+                Persistent per = t.getAnnotation(Persistent.class);
+                // 创建文件输出流
+                ps = new PrintStream(new FileOutputStream(clazzName + ".hbm.xml"));
+                // 执行输出
+                ps.println("<?xml version=\"1.0\"?>");
+                ps.println("<!DOCTYPE hibernate-mapping PUBLIC");
+                ps.println("	\"-//Hibernate/Hibernate " + "Mapping DTD 3.0//EN\"");
+                ps.println("	\"http://www.hibernate.org/dtd/" + "hibernate-mapping-3.0.dtd\">");
+                ps.println("<hibernate-mapping>");
+                ps.print("	<class name=\"" + t);
+                // 输出per的table()的值
+                ps.println("\" table=\"" + per.table() + "\">");
+                for (Element f : t.getEnclosedElements()) {
+                    // 只处理成员变量上的注解
+                    if (f.getKind() == ElementKind.FIELD)   // ①
+                    {
+                        // 获取成员变量定义前的@Id注解
+                        Id id = f.getAnnotation(Id.class);      // ②
+                        // 当@Id注解存在时输出<id.../>元素
                         if (id != null) {
-                            ps.println(f.getSimpleName() + "column=" + id.column() + ",type=" + id.type() + ",generator=" + id.generator());
+                            ps.println("		<id name=\""
+                                    + f.getSimpleName()
+                                    + "\" column=\"" + id.column()
+                                    + "\" type=\"" + id.type()
+                                    + "\">");
+                            ps.println("		<generator class=\""
+                                    + id.generator() + "\"/>");
+                            ps.println("		</id>");
                         }
-                        Property p = f.getAnnotation(Property.class);
+                        // 获取成员变量定义前的@Property注解
+                        Property p = f.getAnnotation(Property.class);  // ③
+                        // 当@Property注解存在时输出<property.../>元素
                         if (p != null) {
-                            ps.println(f.getSimpleName() + "column=" + p.column() + ",type=" + p.type());
+                            ps.println("		<property name=\""
+                                    + f.getSimpleName()
+                                    + "\" column=\"" + p.column()
+                                    + "\" type=\"" + p.type()
+                                    + "\"/>");
                         }
                     }
                 }
+                ps.println("	</class>");
+                ps.println("</hibernate-mapping>");
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            System.out.println(e.getMessage());
+        } catch (Exception ex) {
+            ex.printStackTrace();
         } finally {
             if (ps != null) {
-                ps.close();
+                try {
+                    ps.close();
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
             }
         }
         return true;

@@ -1,9 +1,5 @@
 package com.hm.base.interview;
 
-import com.sun.deploy.util.ArrayUtil;
-
-import java.util.Arrays;
-
 /**
  * Created by dumingwei on 2017/10/1.
  */
