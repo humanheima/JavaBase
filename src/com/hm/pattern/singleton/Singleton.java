@@ -8,47 +8,12 @@ package com.hm.pattern.singleton;
  * <p>
  * 懒汉式单例类.在第一次调用的时候实例化自己
  */
-public class Singleton {
+public enum Singleton {
 
-    //懒汉式单例类写法2 双重锁定
-    private volatile static Singleton INSTANCE;
+    INSTANCE;
 
-    private Singleton() {
-
+    public void method(){
+        System.out.println(" I am singleton");
     }
 
-    public static Singleton getInstance() {
-        if (INSTANCE == null) {
-            synchronized (Singleton.class) {
-                if (INSTANCE == null) {
-                    INSTANCE = new Singleton();
-                }
-            }
-        }
-        return INSTANCE;
-    }
-
-    //懒汉式单例类写法1 静态内部类写法
-   /* private Singleton() {
-
-    }
-
-    private static class LazyLoader {
-        private static final Singleton INSTANCE = new Singleton();
-    }
-
-    public static Singleton getInstance() {
-        return LazyLoader.INSTANCE;
-    }*/
-
-   /* //饿汉式单例类写法
-
-    private static final Singleton instance = new Singleton();
-
-    private Singleton() {
-
-    }
-    public static Singleton getInstance() {
-        return instance;
-    }*/
 }

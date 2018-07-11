@@ -76,7 +76,9 @@ public class ThreeWayUseThread {
 Thread类实现了Runnable接口，在Thread类中，有一些比较关键的属性，比如name是表示Thread的名字，可以通过Thread类的构造器中的参数来指定线程名字，
 priority表示线程的优先级（最大值为10，最小值为1，默认值为5），daemon表示线程是否是守护线程，target表示要执行的任务。
 
-1. start方法：用来启动一个线程，当调用start方法后，系统才会开启一个新的线程来执行用户定义的子任务，在这个过程中，会为相应的线程分配需要的资源。
+1. start方法：用来启动一个线程，当调用start方法后，jvm会调用当前线程的run()方法，
+2. 尝试多次调用start()方法会抛出`java.lang.IllegalThreadStateException`
+3. 线程执行完毕以后再次调用start()方法也会抛出`java.lang.IllegalThreadStateException`
 ```java
 public synchronized void start() {
         /**
@@ -485,6 +487,7 @@ class InsertData {
 
 ## 线程池
 线程池的作用：复用线程。
+[ThreadPoolExecutor的集成结构](ThreadPoolExecutor.uml)
 
 参考链接：[Java并发编程：线程池的使用](http://www.cnblogs.com/dolphin0520/p/3932921.html)
 
@@ -665,6 +668,42 @@ public void execute(Runnable command) {
 1. 如果当前正在运行的线程小于corePoolSize，那么就调用addWorker添加一个线程。添加成功就直接返回。
 2. 如果一个任务能成功添加到队列，我们仍需要进行再次检查是否需要添加一个线程。
 3. 如果一个任务不能被加入到队列，我们就尝试添加一个新线程，如果添加失败，就拒绝这个任务。
+
+如何让5个线程先输出hello，再输出world
+```java
+public static void main(String[] args) {
+
+        int N = 5;
+        CyclicBarrier barrier = new CyclicBarrier(N);
+        for (int i = 0; i < N; i++) {
+            new Writer(barrier).start();
+        }
+
+    }
+
+    static class Writer extends Thread {
+
+        private CyclicBarrier cyclicBarrier;
+
+        public Writer(CyclicBarrier cyclicBarrier) {
+            this.cyclicBarrier = cyclicBarrier;
+        }
+
+        @Override
+        public void run() {
+            System.out.println("线程" + Thread.currentThread().getName() + "hello");
+            try {
+                cyclicBarrier.await();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (BrokenBarrierException e) {
+                e.printStackTrace();
+            }
+            //互相等待，然后同时执行这行代码
+            System.out.println("线程" + Thread.currentThread().getName() + "world");
+        }
+    }
+```
 
 
 

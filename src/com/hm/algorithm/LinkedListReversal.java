@@ -2,7 +2,7 @@ package com.hm.algorithm;
 
 /**
  * Created by dumingwei on 2017/6/18.
- * 测试单链表翻转
+ * 测试翻转
  */
 public class LinkedListReversal {
 
@@ -36,8 +36,9 @@ public class LinkedListReversal {
     }
 
     private static Node reverseHead(Node head) {
-        if (head == null)
+        if (head == null) {
             return null;
+        }
         Node pre = head;
         Node cur = head.next;
         Node next;
