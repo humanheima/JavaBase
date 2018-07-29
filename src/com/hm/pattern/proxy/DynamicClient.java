@@ -8,13 +8,22 @@ import java.lang.reflect.Proxy;
 public class DynamicClient {
 
     public static void main(String[] args) {
-        IShop liuwangshu = new LiuWangshu();
-        //创建动态代理
-        DynamicPurchasing dynamicPurchasing = new DynamicPurchasing(liuwangshu);
-        //创建LiuWangShu的ClassLoader
-        ClassLoader loader = liuwangshu.getClass().getClassLoader();
-        //动态创建代理类
-        IShop purchasing = (IShop) Proxy.newProxyInstance(loader, new Class[]{IShop.class}, dynamicPurchasing);
+        BuyTicket xiaochilao = new MyselfBuyTicket();
+        /**
+         *创建调用处理者
+         */
+        CtripInvocationHandler invocationHandler = new CtripInvocationHandler(xiaochilao);
+        /**
+         * 动态代理者
+         */
+        BuyTicket purchasing = (BuyTicket) Proxy.newProxyInstance(
+                xiaochilao.getClass().getClassLoader(),
+                xiaochilao.getClass().getInterfaces(),
+                invocationHandler);
+        /**
+         *调用代理实例的buy()方法，该方法会转发到CtripInvocationHandler的invoke方法中，
+         * 最终会调用被代理者xiaochilao的buy方法，实现真正的买票逻辑
+         */
         purchasing.buy();
     }
 }

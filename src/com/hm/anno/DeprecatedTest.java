@@ -1,5 +1,6 @@
 package com.hm.anno;
 
+/*
 class AppleAnother {
 
     // 定义info方法已过时
@@ -17,3 +18,4 @@ public class DeprecatedTest {
     }
 }
 
+*/
