@@ -9,7 +9,7 @@ import java.io.FilenameFilter;
 public class FileTest {
 
     public static void main(String args[]) {
-        File file = new File("D:\\test");
+        File file = new File("E:\\apks");
         listFile(file);
         //listRoot();
         FilenameFilter filter = new FilenameFilter() {
