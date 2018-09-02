@@ -12,12 +12,12 @@ public class FileVisitor {
     public static void main(String[] args) {
 
         try {
-            Files.walkFileTree(Paths.get("D:\\test"), new SimpleFileVisitor<Path>() {
+            Files.walkFileTree(Paths.get("E:\\apks"), new SimpleFileVisitor<Path>() {
 
                 //访问文件时触发该方法
                 @Override
                 public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
-                    System.out.println("正在访问" + file + "文件");
+                    System.out.println("正在访问" + file.getFileName());
                     if (file.endsWith("target.java")) {
                         System.out.println("已经找到目标文件");
                         return FileVisitResult.TERMINATE;
