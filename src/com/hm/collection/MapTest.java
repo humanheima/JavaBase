@@ -1,9 +1,7 @@
 package com.hm.collection;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.function.BiConsumer;
 
 /**
  * Created by dumingwei on 2017/6/6.
@@ -18,10 +16,12 @@ public class MapTest {
         map.put("ios", 10);
         map.put("ajax", 79);
         map.put("java ee", 79);
-        map.put("java", 79);
+        for (Map.Entry<String, Integer> entry : map.entrySet()) {
+            System.out.println("key:" + entry.getKey() + ",value" + entry.getValue());
+        }
         System.out.println(map);
         //Map<String, Integer> map1=Collections.synchronizedMap(new HashMap<>());
-       // map1.put("haha",33);
+        // map1.put("haha",33);
       /*  System.out.println(map.put("ios", 99));
         System.out.println(map.containsKey("ios"));
         System.out.println(map.containsValue(99));*/
@@ -37,7 +37,7 @@ public class MapTest {
         map.remove("java");
         System.out.println(map);
         System.out.println(3|3);*/
-       // System.out.println(tableSizeFor(20));
+        // System.out.println(tableSizeFor(20));
        /* int a=2;
         int c=a<<1;
         System.out.println(a);
