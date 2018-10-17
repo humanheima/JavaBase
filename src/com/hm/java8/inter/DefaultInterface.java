@@ -1,4 +1,4 @@
-package com.hm.java8interface.inter;
+package com.hm.java8.inter;
 
 /**
  * Created by dumingwei on 2017/3/13.
@@ -11,4 +11,8 @@ public interface DefaultInterface {
     }
 
     void sayGood();
+    static void doNothing(){
+        System.out.println("do nothing");
+    }
+
 }

@@ -1,6 +1,6 @@
-package com.hm.java8interface;
+package com.hm.java8;
 
-import com.hm.java8interface.inter.DefaultInterface;
+import com.hm.java8.inter.DefaultInterface;
 
 import java.util.function.Supplier;
 

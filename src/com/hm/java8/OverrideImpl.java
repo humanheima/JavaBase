@@ -1,6 +1,6 @@
-package com.hm.java8interface;
+package com.hm.java8;
 
-import com.hm.java8interface.inter.DefaultInterface;
+import com.hm.java8.inter.DefaultInterface;
 
 /**
  * Created by dumingwei on 2017/3/13.
