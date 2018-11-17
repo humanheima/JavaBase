@@ -26,3 +26,26 @@ hs_err_pid*
 /.idea
 out/
 
+output/production/JavaBase/META-INF/
+output/production/JavaBase/com/hm/algorithm/algs4_data/
+output/production/JavaBase/com/hm/algorithm/search/gitf/
+output/production/JavaBase/com/hm/collection/ArrayDeque.md
+output/production/JavaBase/com/hm/pattern/chainofresponsibility/desc.png
+output/production/JavaBase/com/hm/pattern/chainofresponsibility/description.md
+output/production/JavaBase/com/hm/pattern/combining/observer/.QuackDecorator.java.swp
+output/production/JavaBase/com/hm/pattern/decorator/desc.png
+output/production/JavaBase/com/hm/pattern/decorator/description.md
+output/production/JavaBase/com/hm/pattern/decorator/io/test.txt
+output/production/JavaBase/com/hm/pattern/flyweight/desc.png
+output/production/JavaBase/com/hm/pattern/flyweight/description.md
+output/production/JavaBase/com/hm/pattern/proxy/desc.png
+output/production/JavaBase/com/hm/pattern/proxy/description.md
+output/production/JavaBase/com/hm/pattern/proxy/gumball/README.md
+output/production/JavaBase/com/hm/pattern/state/description.md
+output/production/JavaBase/com/hm/pattern/state/state.png
+output/production/JavaBase/com/hm/pattern/state/state1.png
+output/production/JavaBase/com/hm/pattern/strategy/description.md
+output/production/JavaBase/com/hm/pattern/strategy/strategy.png
+output/production/JavaBase/com/hm/reflect/extObj.txt
+output/production/JavaBase/com/hm/reflect/obj.txt
+output/production/JavaBase/com/hm/sort/gif/
