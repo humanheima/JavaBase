@@ -12,8 +12,30 @@ public enum Singleton {
 
     INSTANCE;
 
-    public void method(){
+    public void method() {
         System.out.println(" I am singleton");
+    }
+
+}
+
+class Singleton4 {
+    private static Singleton4 instance = null;
+
+    static {
+        System.out.println("static block");
+        instance = new Singleton4();
+    }
+
+    private Singleton4() {
+        System.out.println("Singleton4");
+    }
+
+    public static void main(String[] args) {
+
+    }
+
+    public static Singleton4 getInstance() {
+        return instance;
     }
 
 }
