@@ -8,18 +8,20 @@ import java.util.*;
 public class LinkedListTest {
 
     public static void main(String[] args) {
+        int i=1;
+        System.out.println(i-->0);
         LinkedList<String> books = new LinkedList<>();
         books.offer("疯狂java讲义");
         books.offer("java ee");
         books.offer("android");
         books.remove();
-        books.remove(1);
-        books.remove("android");
+        //books.remove(1);
+        //books.remove("android");
         ListIterator<String> it = books.listIterator(0);
         while (it.hasNext()){
             System.out.println(it.next());
         }
-        List<String> strings = new ArrayList<>();
+        /*List<String> strings = new ArrayList<>();
         strings.add("新元素1");
         strings.add("新元素2");
         books.addAll(strings);
@@ -33,6 +35,6 @@ public class LinkedListTest {
         System.out.println(books);
         System.out.println(books.pollLast());
         books.clear();
-        System.out.println(books);
+        System.out.println(books);*/
     }
 }
