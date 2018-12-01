@@ -2,84 +2,193 @@ package com.hm.structure;
 
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Stack;
 
 /**
  * Created by dumingwei on 2017/10/7.
+ * <p>
+ * 遍历的树以项目根目录下的BinaryTree.png为例
+ * 先序遍历：1，2，4，6，7，8，3，5
+ * 中序遍历：4，7，6，8，2，1，3，5
+ * 后续遍历：7，8，6，4，2，5，3，1
+ * Desc:二叉树遍历 递归，非递归。
+ * 参考链接：<a href="https://www.jianshu.com/p/456af5480cee></a>
  */
 public class BinaryTree {
 
     public static void main(String[] args) {
-        Node head = createTree();
-        //recurseFront(head);
-        //recurseMid(head);
-        //recurseEnd(head);
-        //reverseBinaryTree(head);
-        //recurseMid(head);
-        //printTree(head);
-        //System.out.println(maxDepth(head));
-        System.out.println(getMinDepth(head));
+        Node root = createTree();
+        /*recurseFront(root);
+        System.out.println();
+        recurseEnd(root);
+        reverseBinaryTree(root);
+        recurseMid(root);
+        printTree(root);
+        System.out.println(maxDepth(root));
+        System.out.println(getMinDepth(root));
+        System.out.println();
+
+        preOrderTraversal(root);
+        System.out.println();
+
+        recurseMid(root);
+        System.out.println();
+
+        middleOrderTraversal(root);
+        System.out.println();*/
+
+        recurseEnd(root);
+        System.out.println();
+        postOrderTraversal(root);
+        System.out.println();
+
+
     }
 
     /**
      * 递归实现的先序遍历
      *
-     * @param head
+     * @param root
      */
-    public static void recurseFront(Node head) {
-        if (head == null) {
+    public static void recurseFront(Node root) {
+        if (root == null) {
             return;
         }
-        System.out.println("当前节点值：" + head.getValue());
-        recurseFront(head.left);
-        recurseFront(head.right);
+        System.out.print(root.value + " ");
+        recurseFront(root.left);
+        recurseFront(root.right);
     }
+
+    /**
+     * 非递归先序遍历
+     *
+     * @param root
+     */
+    public static void preOrderTraversal(Node root) {
+        Stack<Node> treeNodeStack = new Stack<>();
+        Node node = root;
+        while (node != null || !treeNodeStack.isEmpty()) {
+            while (node != null) {
+                System.out.print(node.value + " ");
+                //为了之后能找到该节点的右子树，暂存该节点
+                treeNodeStack.push(node);
+                node = node.left;
+            }
+            //一直到当前节点的左子树为null，开始考虑当前节点的右子树
+            if (!treeNodeStack.isEmpty()) {
+                node = treeNodeStack.pop();
+                node = node.right;
+            }
+        }
+
+    }
+
 
     /**
      * 递归实现的中序遍历
      *
-     * @param head
+     * @param root
      */
-    public static void recurseMid(Node head) {
-        if (head == null)
+    public static void recurseMid(Node root) {
+        if (root == null)
             return;
-        recurseMid(head.getLeft());
-        System.out.println("当前节点的值：" + head.getValue());
-        recurseMid(head.getRight());
+        recurseMid(root.getLeft());
+        System.out.print(root.value + " ");
+        recurseMid(root.getRight());
     }
+
+    /**
+     * 非递归中序遍历
+     *
+     * @param root
+     */
+    public static void middleOrderTraversal(Node root) {
+        Stack<Node> treeNodeStack = new Stack<>();
+        Node node = root;
+        while (node != null || !treeNodeStack.isEmpty()) {
+            while (node != null) {
+                treeNodeStack.push(node);
+                node = node.left;
+            }
+            //一直到当前节点的左子树为null，开始考虑当前节点的右子树
+            if (!treeNodeStack.isEmpty()) {
+                node = treeNodeStack.pop();
+                System.out.print(node.value + " ");
+                node = node.right;
+            }
+        }
+
+    }
+
 
     /**
      * 递归实现的后序遍历递归实现
      *
-     * @param head
+     * @param root
      */
-    public static void recurseEnd(Node head) {
-        if (head == null)
+    public static void recurseEnd(Node root) {
+        if (root == null)
             return;
-        recurseEnd(head.getLeft());
-        recurseEnd(head.getRight());
-        System.out.println("当前节点的值为：" + head.getValue());
+        recurseEnd(root.getLeft());
+        recurseEnd(root.getRight());
+        System.out.print(root.value + " ");
     }
+
+    /**
+     * 非递归后序遍历
+     *
+     * @param root
+     */
+    public static void postOrderTraversal(Node root) {
+        Stack<Node> treeNodeStack = new Stack<>();
+        Node node = root;
+        Node lastVisit = root;
+        while (node != null || !treeNodeStack.isEmpty()) {
+            while (node != null) {
+                treeNodeStack.push(node);
+                node = node.left;
+            }
+            //查看当前栈顶元素
+            node = treeNodeStack.peek();
+            /**
+             * 如果其右子树也为空，或者右子树已经访问，则可以直接输出当前节点的值
+             */
+            if (node.right == null || node.right == lastVisit) {
+                System.out.print(node.value + " ");
+                treeNodeStack.pop();
+                lastVisit = node;
+                node = null;
+            } else {
+                //继续遍历右子树
+                node = node.right;
+            }
+        }
+
+    }
+
 
     public static Node createTree() {
         // 初始化节点
-        Node head = new Node(1);
-        Node headLeft = new Node(2);
-        Node headRight = new Node(3);
-        Node headLeftLeft = new Node(4);
-        Node headLeftRigth = new Node(5);
-        Node headRightLeft = new Node(6);
-        Node headRightRight = new Node(7);
-        // 为head节点 赋予左右值
-        head.setLeft(headLeft);
-        head.setRight(headRight);
+        Node root = new Node(1);
+        Node rootLeft = new Node(2);
+        Node rootRight = new Node(3);
+        Node rootLeftLeft = new Node(4);
+        Node rootLeftLeftRight = new Node(6);
+        Node rootLeftLeftRightLeft = new Node(7);
+        Node rootLeftLeftRightRight = new Node(8);
+        Node rootRightRight = new Node(5);
+        // 为root节点 赋予左右值
+        root.left = rootLeft;
+        root.right = rootRight;
+        root.left.left = rootLeftLeft;
+        root.left.left.right = rootLeftLeftRight;
+        root.left.left.right.left = rootLeftLeftRightLeft;
+        root.left.left.right.right = rootLeftLeftRightRight;
 
-        headLeft.setLeft(headLeftLeft);
-        headLeft.setRight(headLeftRigth);
-        //headRight.setLeft(headRightLeft);
-        //headRight.setRight(headRightRight);
+        root.right.right = rootRightRight;
 
         // 返回树根节点
-        return head;
+        return root;
     }
 
     private static Node reverseBinaryTree(Node root) {

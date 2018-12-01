@@ -6,12 +6,20 @@ package com.hm.base;
 public class Test {
 
     public static void main(String[] args) {
-        Shape shape = new Circle();
+        /*Shape shape = new Circle();
         System.out.println("shape.name=" + shape.name);
         shape.printType();
         shape.printName();
-        System.out.println(Integer.valueOf("1.0"));
+        System.out.println(Integer.valueOf("1.0"));*/
+        System.out.println(sum(10000));
+
     }
+
+    public static long sum(int n) {
+        if (n <= 0) return 0;
+        return n + sum(n - 1);
+    }
+
 }
 
 class Shape {
