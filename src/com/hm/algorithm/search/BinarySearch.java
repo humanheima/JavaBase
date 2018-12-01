@@ -27,7 +27,9 @@ public class BinarySearch {
                 start = mid + 1;
             } else if (arr[mid] > key) {
                 end = mid - 1;
-            } else return mid;
+            } else {
+                return mid;
+            }
         }
         return -1;
     }
