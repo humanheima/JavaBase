@@ -40,5 +40,6 @@ public class BigDecimalTest {
         System.out.println(decimal.setScale(1, BigDecimal.ROUND_CEILING));
         System.out.println(decimal.setScale(1, BigDecimal.ROUND_FLOOR));
         System.out.println(decimal.setScale(1, BigDecimal.ROUND_HALF_EVEN));
+
     }
 }
