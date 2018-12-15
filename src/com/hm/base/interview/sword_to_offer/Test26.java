@@ -15,11 +15,6 @@ package com.hm.base.interview.sword_to_offer;
  */
 public class Test26 {
 
-    private static class BinaryTreeNode {
-        int value;
-        BinaryTreeNode left;
-        BinaryTreeNode right;
-    }
 
     /**
      * 递归实现的先序遍历

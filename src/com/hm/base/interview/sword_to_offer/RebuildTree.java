@@ -180,10 +180,4 @@ public class RebuildTree {
     }
 
 
-    public static class BinaryTreeNode {
-        int value;
-        BinaryTreeNode left;
-        BinaryTreeNode right;
-    }
-
 }
