@@ -1,6 +1,7 @@
 package com.hm.thread;
 
-import java.util.concurrent.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * Created by dumingwei on 2017/6/8.
@@ -17,12 +18,13 @@ public class ThreadPoolTest {
 
     public static void main(String[] args) {
         //ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(3);
-        ExecutorService executor = Executors.newSingleThreadExecutor();
+        /*ExecutorService executor = Executors.newSingleThreadExecutor();
         for (int i = 0; i < 10; i++) {
             MyTask myTask = new MyTask(i);
-            executor.execute(myTask);
+            executor.submit(myTask);
         }
-        executor.shutdown();
+        executor.shutdown();*/
+        System.out.println(3&~2);
     }
 }
 
@@ -30,19 +32,19 @@ class MyTask implements Runnable {
 
     private int taskNum;
 
-    public MyTask(int taskNum) {
+    MyTask(int taskNum) {
         this.taskNum = taskNum;
     }
 
     @Override
     public void run() {
-        System.out.println(Thread.currentThread().getName() + " 正在执行task" + taskNum);
+        System.out.println(Thread.currentThread().getName() + " task" + taskNum + " 正在执行");
         try {
-            Thread.currentThread().sleep(4000);
+            Thread.sleep(400);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.println(Thread.currentThread().getName() + " task" + taskNum + "执行完毕");
+        System.out.println(Thread.currentThread().getName() + " task" + taskNum + " 执行完毕\n");
     }
 }
 

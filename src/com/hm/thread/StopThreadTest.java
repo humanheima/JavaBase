@@ -7,13 +7,12 @@ package com.hm.thread;
 public class StopThreadTest {
 
     public static void main(String[] args) {
-       /* Runner runner = new Runner(false);
-        runner.start();
+      /*  TestMyThread thread = new TestMyThread(false);
+        thread.start();
         try {
             Thread.sleep(1000);
-            runner.setbExit(true);
-            runner.join();
-            System.out.println("线程退出");
+            thread.setShouldStop(true);
+            System.out.println("setShouldStop true");
         } catch (InterruptedException e) {
             e.printStackTrace();
         }*/
@@ -32,28 +31,30 @@ public class StopThreadTest {
 /**
  * 使用一个变量标志线程是否应该退出
  */
-class Runner extends Thread {
+class TestMyThread extends Thread {
 
-    private volatile boolean bExit = false;
+    private volatile boolean shouldStop;
 
-    public Runner(boolean bExit) {
-        this.bExit = bExit;
+    public TestMyThread(boolean shouldStop) {
+        this.shouldStop = shouldStop;
     }
 
-    public void setbExit(boolean bExit) {
-        this.bExit = bExit;
+    public void setShouldStop(boolean shouldStop) {
+        this.shouldStop = shouldStop;
     }
 
     @Override
     public void run() {
-        while (!bExit) {
-            System.out.println("Thread is running");
+        while (!shouldStop) {
+            System.out.println(getName() + "Thread is running");
             try {
-                Thread.sleep(500);
+                //让线程睡眠
+                sleep(100000000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
+        System.out.println(getName() + "线程退出");
     }
 }
 
@@ -61,14 +62,14 @@ class MyInterruptedThread extends Thread {
 
     @Override
     public void run() {
-        while (!this.isInterrupted()) {
+        while (!Thread.currentThread().isInterrupted()) {
             try {
                 System.out.println("running");
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
                 System.out.println("InterruptedException occurred");
                 //抛出InterruptedException后中断标志被清除，标准做法是再次调用interrupt恢复中断
-                this.interrupt();
+                Thread.currentThread().interrupt();
             }
         }
         System.out.println("stop");

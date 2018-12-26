@@ -1,10 +1,9 @@
 package com.hm.collection;
 
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.Arrays;
 import java.util.List;
 import java.util.ListIterator;
-import java.util.function.Consumer;
 
 /**
  * Created by dumingwei on 2017/6/5.
@@ -16,6 +15,13 @@ public class ListTest2 {
         books.add("轻量级");
         books.add("java");
         books.add("Android");
+        /**
+         * 使用集合转数组的方法，必须使用集合的 toArray(T[] array) ，传入的是类型完全
+         *  一样的数组，大小就是 list . size() 。
+         */
+        String arr[] = new String[books.size()];
+        books.toArray(arr);
+
        /* System.out.println(books);
         books.remove(new A());
         System.out.println(books);
@@ -29,13 +35,13 @@ public class ListTest2 {
         }
         System.out.println(books);*/
 
-       ListIterator<String> listIterator=books.listIterator();
-       while (listIterator.hasNext()){
-           System.out.println(listIterator.next());
-       }
-       while (listIterator.hasPrevious()){
-           System.out.println(listIterator.previous());
-       }
+        ListIterator<String> listIterator = books.listIterator();
+        while (listIterator.hasNext()) {
+            System.out.println(listIterator.next());
+        }
+        while (listIterator.hasPrevious()) {
+            System.out.println(listIterator.previous());
+        }
     }
 
     static class A {

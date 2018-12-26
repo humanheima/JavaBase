@@ -1,7 +1,6 @@
 package com.hm.thread;
 
 import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
 
 /**
@@ -20,6 +19,7 @@ public class ThirdThread {
                 return i;
             }
         });
+
         new Thread(task, "有返回值的线程").start();
 
         try {

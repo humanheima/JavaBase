@@ -236,6 +236,11 @@ main is completed
 
 ```
 可以看到main线程会等待Thread-0线程执行完毕以后，再继续执行。
+#### 如何停止一个线程
+
+####### 线程正常执行完毕，正常结束。
+1. 停止正在运行的线程
+
 6. interrupt方法：interrupt，即中断的意思。interrupt方法可以中断处于阻塞状态的线程。单独调用interrupt方法可以使得处于阻塞状态的线程抛出一个异常，
 也就说。
  ```java
@@ -355,9 +360,9 @@ public class Test {
 }
 
 ```
-运行会发现，打印若干个值之后，while循环就停止打印了。
+运行会发现，打印若干个值之后，while循环就停止打印了。但是一般情况下不建议通过这种方式来中断线程。
 
-但是一般情况下不建议通过这种方式来中断线程，一般会在MyThread类中增加一个属性 isStop来标志是否结束while循环，然后再在while循环中判断isStop的值。
+一般会在MyThread类中增加一个属性 isStop来标志是否结束while循环，然后再在while循环中判断isStop的值。
 
 ```java
 public class Test {

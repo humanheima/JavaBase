@@ -11,25 +11,26 @@ import java.util.List;
 public class ArrayListTest {
 
     public static void main(String[] args) {
-        ArrayList<String> arrayList = new ArrayList();
+        /*ArrayList<String> arrayList = new ArrayList();
         arrayList.add("string1");
         arrayList.add("string2");
         arrayList.add("string3");
         arrayList.add("string4");
         arrayList.add("string4");
-        //System.out.println(arrayList);
+        System.out.println(arrayList);
         arrayList.add(0, new String("string1"));
         arrayList.get(0);
         arrayList.set(0, "easy");
         arrayList.contains("easy");
         arrayList.remove(0);
         arrayList.remove("easy");
-        // arrayList.subList(1, 3).clear();
-        // System.out.println(arrayList);
+         arrayList.subList(1, 3).clear();
+         System.out.println(arrayList);
         arrayList.trimToSize();
         arrayList.iterator();
-        //arrayList.clear();
-        //testSubList();
+        arrayList.clear();
+        testSubList();
+        testRemoveInForEach();*/
         testRemoveInForEach();
     }
 
@@ -57,11 +58,18 @@ public class ArrayListTest {
         arrayList.add("1");
         arrayList.add("2");
         Iterator<String> it = arrayList.iterator();
-        int i=0;
+        int i = 0;
+        /**
+         * arrayList 返回的迭代器的hasNext()方法
+         *  public boolean hasNext() {
+         *             return cursor != size;
+         *         }
+         */
         while (it.hasNext()) {
+            System.out.println("size=" + arrayList.size());
             System.out.println(i++);
             String temp = it.next();
-            if ("2".equals(temp)){
+            if ("2".equals(temp)) {
                 arrayList.remove(temp);
             }
         }
