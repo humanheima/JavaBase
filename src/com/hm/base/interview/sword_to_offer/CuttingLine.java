@@ -3,7 +3,7 @@ package com.hm.base.interview.sword_to_offer;
 /**
  * Created by dumingwei on 2018/11/30
  * <p>
- * Desc:剪绳子。感觉这道题目树上描述并不准确，有的地方有错误。
+ * Desc:剪绳子。感觉这道题目书上描述并不准确，有的地方有错误。
  * <p>
  * 注意：
  * 1. 初始化的时候为什么f[3]=3？

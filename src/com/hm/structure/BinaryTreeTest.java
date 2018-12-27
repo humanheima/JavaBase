@@ -14,10 +14,10 @@ import java.util.Stack;
  * Desc:二叉树遍历 递归，非递归。
  * 参考链接：<a href="https://www.jianshu.com/p/456af5480cee></a>
  */
-public class BinaryTree {
+public class BinaryTreeTest {
 
     public static void main(String[] args) {
-        Node root = createTree();
+        BinaryTreeNode root = createTree();
         /*recurseFront(root);
         System.out.println();
         recurseEnd(root);
@@ -50,7 +50,7 @@ public class BinaryTree {
      *
      * @param root
      */
-    public static void recurseFront(Node root) {
+    public static void recurseFront(BinaryTreeNode root) {
         if (root == null) {
             return;
         }
@@ -64,9 +64,9 @@ public class BinaryTree {
      *
      * @param root
      */
-    public static void preOrderTraversal(Node root) {
-        Stack<Node> treeNodeStack = new Stack<>();
-        Node node = root;
+    public static void preOrderTraversal(BinaryTreeNode root) {
+        Stack<BinaryTreeNode> treeNodeStack = new Stack<>();
+        BinaryTreeNode node = root;
         while (node != null || !treeNodeStack.isEmpty()) {
             while (node != null) {
                 System.out.print(node.value + " ");
@@ -89,7 +89,7 @@ public class BinaryTree {
      *
      * @param root
      */
-    public static void recurseMid(Node root) {
+    public static void recurseMid(BinaryTreeNode root) {
         if (root == null)
             return;
         recurseMid(root.getLeft());
@@ -102,9 +102,9 @@ public class BinaryTree {
      *
      * @param root
      */
-    public static void middleOrderTraversal(Node root) {
-        Stack<Node> treeNodeStack = new Stack<>();
-        Node node = root;
+    public static void middleOrderTraversal(BinaryTreeNode root) {
+        Stack<BinaryTreeNode> treeNodeStack = new Stack<>();
+        BinaryTreeNode node = root;
         while (node != null || !treeNodeStack.isEmpty()) {
             while (node != null) {
                 treeNodeStack.push(node);
@@ -126,7 +126,7 @@ public class BinaryTree {
      *
      * @param root
      */
-    public static void recurseEnd(Node root) {
+    public static void recurseEnd(BinaryTreeNode root) {
         if (root == null)
             return;
         recurseEnd(root.getLeft());
@@ -139,10 +139,10 @@ public class BinaryTree {
      *
      * @param root
      */
-    public static void postOrderTraversal(Node root) {
-        Stack<Node> treeNodeStack = new Stack<>();
-        Node node = root;
-        Node lastVisit = root;
+    public static void postOrderTraversal(BinaryTreeNode root) {
+        Stack<BinaryTreeNode> treeNodeStack = new Stack<>();
+        BinaryTreeNode node = root;
+        BinaryTreeNode lastVisit = root;
         while (node != null || !treeNodeStack.isEmpty()) {
             while (node != null) {
                 treeNodeStack.push(node);
@@ -167,16 +167,16 @@ public class BinaryTree {
     }
 
 
-    public static Node createTree() {
+    public static BinaryTreeNode createTree() {
         // 初始化节点
-        Node root = new Node(1);
-        Node rootLeft = new Node(2);
-        Node rootRight = new Node(3);
-        Node rootLeftLeft = new Node(4);
-        Node rootLeftLeftRight = new Node(6);
-        Node rootLeftLeftRightLeft = new Node(7);
-        Node rootLeftLeftRightRight = new Node(8);
-        Node rootRightRight = new Node(5);
+        BinaryTreeNode root = new BinaryTreeNode(1);
+        BinaryTreeNode rootLeft = new BinaryTreeNode(2);
+        BinaryTreeNode rootRight = new BinaryTreeNode(3);
+        BinaryTreeNode rootLeftLeft = new BinaryTreeNode(4);
+        BinaryTreeNode rootLeftLeftRight = new BinaryTreeNode(6);
+        BinaryTreeNode rootLeftLeftRightLeft = new BinaryTreeNode(7);
+        BinaryTreeNode rootLeftLeftRightRight = new BinaryTreeNode(8);
+        BinaryTreeNode rootRightRight = new BinaryTreeNode(5);
         // 为root节点 赋予左右值
         root.left = rootLeft;
         root.right = rootRight;
@@ -191,12 +191,12 @@ public class BinaryTree {
         return root;
     }
 
-    private static Node reverseBinaryTree(Node root) {
+    private static BinaryTreeNode reverseBinaryTree(BinaryTreeNode root) {
         if (root == null) {
             return null;
         } else {
-            Node left = reverseBinaryTree(root.getLeft());
-            Node right = reverseBinaryTree(root.getRight());
+            BinaryTreeNode left = reverseBinaryTree(root.getLeft());
+            BinaryTreeNode right = reverseBinaryTree(root.getRight());
             root.left = right;
             root.right = left;
             return root;
@@ -204,13 +204,13 @@ public class BinaryTree {
 
     }
 
-    private static void printTree(Node root) {
+    private static void printTree(BinaryTreeNode root) {
         if (root == null)
             return;
-        Queue<Node> queue = new LinkedList<>();
+        Queue<BinaryTreeNode> queue = new LinkedList<>();
         queue.add(root);
         while (!queue.isEmpty()) {
-            Node current = queue.poll();
+            BinaryTreeNode current = queue.poll();
             System.out.println("current = " + current.value);
             if (current.left != null) {
                 queue.add(current.left);
@@ -222,7 +222,7 @@ public class BinaryTree {
     }
 
     //获取最大深度
-    private static int maxDepth(Node node) {
+    private static int maxDepth(BinaryTreeNode node) {
         if (node == null)
             return 0;
         int leftDepth = maxDepth(node.left);
@@ -231,14 +231,14 @@ public class BinaryTree {
     }
 
     //获取最小深度
-    private static int getMinDepth(Node root) {
+    private static int getMinDepth(BinaryTreeNode root) {
         if (root == null) {
             return 0;
         }
         return getMin(root);
     }
 
-    private static int getMin(Node root) {
+    private static int getMin(BinaryTreeNode root) {
         if (root == null) {
             return Integer.MAX_VALUE;
         }
