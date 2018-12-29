@@ -1,11 +1,18 @@
 package com.hm.structure.eson;
 
-public class RBTree<T extends Comparable<T>> {
+/**
+ * @param <T>
+ * @author eson_15
+ * @description implementation of Red-Black Tree by Java
+ * @date 2016-4-18 19:27:28
+ */
+public class TempRBTree<T extends Comparable<T>> {
+
     private static final boolean RED = false; //定义红黑树标志
     private static final boolean BLACK = true;
     private RBNode<T> root; //根节点
 
-    public RBTree() {
+    public TempRBTree() {
         root = null;
     }
 
@@ -188,80 +195,165 @@ public class RBTree<T extends Comparable<T>> {
      * 左旋示意图：对节点x进行左旋
      *     p                       p
      *    /                       /
-     *   x                       y
+     *  parent                   y
      *  / \                     / \
-     * lx  y      ----->       x  ry
+     * lx  y      ----->   parent  ry
      *    / \                 / \
      *   ly ry               lx ly
-     * 左旋做了三件事：
+     * 左旋做了三件事：y是当前节点，x是父节点
      * 1. 将y的左子节点赋给x的右子节点,并将x赋给y左子节点的父节点(y左子节点非空时)
      * 2. 将x的父节点p(非空时)赋给y的父节点，同时更新p的子节点为y(左或右)
      * 3. 将y的左子节点设为x，将x的父节点设为y
      */
-    private void leftRotate(RBNode<T> x) {
-        //1. 将y的左子节点赋给x的右子节点，并将x赋给y左子节点的父节点(y左子节点非空时)
-        RBNode<T> y = x.right;
-        x.right = y.left;
+    private void leftRotate(RBNode<T> parent) {
+        //1. 将currentNode的左子节点赋给parent的右子节点，并将parent赋给currentNode左子节点的父节点(currentNode左子节点非空时)
+        RBNode<T> currentNode = parent.right;
+        parent.right = currentNode.left;
 
-        if (y.left != null)
-            y.left.parent = x;
-
-        //2. 将x的父节点p(非空时)赋给y的父节点，同时更新p的子节点为y(左或右)
-        y.parent = x.parent;
-
-        if (x.parent == null) {
-            this.root = y; //如果x的父节点为空，则将y设为父节点
-        } else {
-            if (x == x.parent.left) //如果x是左子节点
-                x.parent.left = y; //则也将y设为左子节点
-            else
-                x.parent.right = y;//否则将y设为右子节点
+        if (currentNode.left != null) {
+            currentNode.left.parent = parent;
         }
 
-        //3. 将y的左子节点设为x，将x的父节点设为y
-        y.left = x;
-        x.parent = y;
+        //2. 将parent的父节点p(非空时)赋给currentNode的父节点，同时更新p的子节点为currentNode(左或右)
+        currentNode.parent = parent.parent;
+
+        if (parent.parent == null) {
+            this.root = currentNode; //如果parent的父节点为空，则将currentNode设为父节点
+        } else {
+            if (parent == parent.parent.left) //如果parent是左子节点
+                parent.parent.left = currentNode; //则也将currentNode设为左子节点
+            else
+                parent.parent.right = currentNode;//否则将currentNode设为右子节点
+        }
+
+        //3. 将currentNode的左子节点设为parent，将parent的父节点设为currentNode
+        currentNode.left = parent;
+        parent.parent = currentNode;
     }
+
+    /**
+     * 将当前节点左旋，节点从右面上升到父节点的位置叫做左旋
+     *
+     * @param currentNode 当前节点
+     *                    1. 将currentNode的左子节点赋给parent的右子节点，并将parent赋给currentNode左子节点的父节点(currentNode左子节点非空时)
+     *                    2. 将parent的父节点grandParent(非空时)赋给currentNode的父节点，同时更新grandParent的子节点为currentNode(左或右)
+     *                    3. 将currentNode的左子节点设为parent，将parent的父节点设为currentNode
+     */
+    private void mLeftRotate(RBNode<T> currentNode) {
+        RBNode<T> parent = currentNode.parent;
+        //祖父节点
+        RBNode<T> grandParent = parent.parent;
+
+        //1. 将currentNode的左子节点赋给parent的右子节点，并将parent赋给currentNode左子节点的父节点(currentNode左子节点非空时)
+        parent.right = currentNode.left;
+        if (currentNode.left != null) {
+            currentNode.left.parent = parent;
+        }
+
+        //2. 将parent的父节点grandParent(非空时)赋给currentNode的父节点，同时更新grandParent的子节点为currentNode(左或右)
+        currentNode.parent = grandParent;
+        if (grandParent == null) {
+            //this.root 表示根节点
+            this.root = currentNode;
+        } else {
+            if (parent == grandParent.left) {//如果parent是祖父节点的左子节点
+                grandParent.left = currentNode;
+            } else {
+                grandParent.right = currentNode;
+            }
+        }
+
+        //3. 将currentNode的左子节点设为parent，将parent的父节点设为currentNode
+        currentNode.left = parent;
+        parent.parent = currentNode;
+
+    }
+
 
     /*************对红黑树节点y进行右旋操作 ******************/
     /*
      * 左旋示意图：对节点y进行右旋
      *        p                   p
      *       /                   /
-     *      y                   x
+     *      grandParent                   x
      *     / \                 / \
-     *    x  ry   ----->      lx  y
+     *    x  ry   ----->      lx  grandParent
      *   / \                     / \
      * lx  rx                   rx ry
-     * 右旋做了三件事：
-     * 1. 将x的右子节点赋给y的左子节点,并将y赋给x右子节点的父节点(x右子节点非空时)
-     * 2. 将y的父节点p(非空时)赋给x的父节点，同时更新p的子节点为x(左或右)
-     * 3. 将x的右子节点设为y，将y的父节点设为x
+     * 右旋做了三件事： x parent ，y grandParent
+     * 1. 将parent的右子节点赋给grandParent的左子节点,并将grandParent赋给parent右子节点的父节点(parent右子节点非空时)
+     * 2. 将grandParent的父节点p(非空时)赋给parent的父节点，同时更新p的子节点为parent(左或右)
+     * 3. 将parent的右子节点设为grandParent，将grandParent的父节点设为parent
      */
-    private void rightRotate(RBNode<T> y) {
-        //1. 将y的左子节点赋给x的右子节点，并将x赋给y左子节点的父节点(y左子节点非空时)
-        RBNode<T> x = y.left;
-        y.left = x.right;
+    private void rightRotate(RBNode<T> grandParent) {
+        RBNode<T> parent = grandParent.left;
+        grandParent.left = parent.right;
 
-        if (x.right != null)
-            x.right.parent = y;
+        if (parent.right != null)
+            parent.right.parent = grandParent;
 
-        //2. 将x的父节点p(非空时)赋给y的父节点，同时更新p的子节点为y(左或右)
-        x.parent = y.parent;
 
-        if (y.parent == null) {
-            this.root = x; //如果x的父节点为空，则将y设为父节点
+        parent.parent = grandParent.parent;
+
+        if (grandParent.parent == null) {
+            this.root = parent; //如果parent的父节点为空，则将y设为父节点
         } else {
-            if (y == y.parent.right) //如果x是左子节点
-                y.parent.right = x; //则也将y设为左子节点
+            if (grandParent == grandParent.parent.right) //如果parent是左子节点
+                grandParent.parent.right = parent; //则也将y设为左子节点
             else
-                y.parent.left = x;//否则将y设为右子节点
+                grandParent.parent.left = parent;//否则将y设为右子节点
         }
 
-        //3. 将y的左子节点设为x，将x的父节点设为y
-        x.right = y;
-        y.parent = x;
+        //3. 将y的左子节点设为parent，将parent的父节点设为y
+        parent.right = grandParent;
+        grandParent.parent = parent;
     }
+
+
+    /**
+     * @param parent 父节点
+     *
+     * 步骤如下
+     * 1. 将parent的右子节点赋给grandParent的左子节点,
+     *    并将grandParent赋给parent右子节点的父节点(parent右子节点非空时)
+     *
+     * 2. 将grandParent的父节点grandParentParent(非空时)赋给parent的父节点，
+     *    同时更新grandParentParent的子节点为parent(左或右)
+     *
+     * 3. 将parent的右子节点设为grandParent，将grandParent的父节点设为parent
+     */
+    private void mRightRotate(RBNode<T> parent) {
+
+        //祖父节点
+        RBNode<T> grandParent = parent.parent;
+        RBNode<T> grandParentParent = grandParent.parent;
+
+        //1. 将parent的右子节点赋给grandParent的左子节点,
+        // 并将grandParent赋给parent右子节点的父节点(parent右子节点非空时)
+        grandParent.left = parent.right;
+        if (parent.right != null) {
+            parent.right.parent = grandParent;
+        }
+
+        //2. 将grandParent的父节点grandParentParent(非空时)赋给parent的父节点，
+        // 同时更新grandParentParent的子节点为parent(左或右)
+        parent.parent = grandParentParent;
+        if (grandParentParent == null) {
+            this.root = parent;
+        } else {
+            if (grandParent == grandParentParent.left) {
+                grandParentParent.left = parent;
+            } else {
+                grandParentParent.right = parent;
+            }
+        }
+
+        //3. 将parent的右子节点设为grandParent，将grandParent的父节点设为parent
+        parent.right = grandParent;
+        grandParent.parent = parent;
+
+    }
+
 
     /*********************** 向红黑树中插入节点 **********************/
     public void insert(T key) {
@@ -367,8 +459,9 @@ public class RBTree<T extends Comparable<T>> {
     /*********************** 删除红黑树中的节点 **********************/
     public void remove(T key) {
         RBNode<T> node;
-        if ((node = search(root, key)) != null)
+        if ((node = search(root, key)) != null){
             remove(node);
+        }
     }
 
     private void remove(RBNode<T> node) {
@@ -381,17 +474,15 @@ public class RBTree<T extends Comparable<T>> {
             RBNode<T> replace = node;
             //  1). 获取后继节点
             replace = replace.right;
-            while (replace.left != null) {
+            while (replace.left != null)
                 replace = replace.left;
-            }
 
             //  2). 处理“后继节点”和“被删除节点的父节点”之间的关系
             if (parentOf(node) != null) { //要删除的节点不是根节点
-                if (node == parentOf(node).left) {
+                if (node == parentOf(node).left)
                     parentOf(node).left = replace;
-                } else {
+                else
                     parentOf(node).right = replace;
-                }
             } else { //否则
                 this.root = replace;
             }
@@ -403,9 +494,8 @@ public class RBTree<T extends Comparable<T>> {
             if (parent == node) { //后继节点是被删除节点的子节点
                 parent = replace;
             } else { //否则
-                if (child != null) {
+                if (child != null)
                     setParent(child, parent);
-                }
                 parent.left = child;
                 replace.right = node.right;
                 setParent(node.right, replace);
@@ -416,82 +506,13 @@ public class RBTree<T extends Comparable<T>> {
             node.left.parent = replace;
 
             if (color == BLACK) { //4. 如果移走的后继节点颜色是黑色，重新修整红黑树
-                //将后继节点的child和parent传进去
-                removeFixUp(child, parent);
+                removeFixUp(child, parent);//将后继节点的child和parent传进去
             }
             node = null;
             return;
         }
     }
 
-    /**
-     * @param node 要删除的节点
-     */
-    private void mRemove(RBNode<T> node) {
-
-        //后继节点的右子节点
-        RBNode<T> child;
-        //后继节点的父节点
-        RBNode<T> parent;
-        //后继节点的颜色
-        boolean color;
-
-        //1. 被删除的节点“左右子节点都不为空”的情况
-        if ((node.left != null) && (node.right != null)) {
-            //先找到被删除节点的后继节点，用它来取代被删除节点的位置
-            RBNode<T> replace = node;
-            // 1. 获取后继节点
-            replace = replace.right;
-            while (replace.left != null) {
-                replace = replace.left;
-            }
-
-            //2. 处理“后继节点的子节点”和“被删除节点的子节点”之间的关系
-            child = replace.right; //后继节点肯定不存在左子节点！
-            parent = parentOf(replace);
-            color = colorOf(replace);
-            if (parent == node) { //后继节点是被删除节点的子节点
-                parent = replace;
-            } else { //否则
-                if (child != null) {
-                    setParent(child, parent);
-                }
-                parent.left = child;
-                replace.right = node.right;
-                setParent(node.right, replace);
-            }
-
-            //3. 处理“后继节点”和“被删除节点的父节点”之间的关系
-            if (parentOf(node) != null) { //要删除的节点不是根节点
-                if (node == parentOf(node).left) {
-                    parentOf(node).left = replace;
-                } else {
-                    parentOf(node).right = replace;
-                }
-            } else { //否则
-                this.root = replace;
-            }
-            replace.parent = node.parent;
-
-            //保持原来位置的颜色
-            replace.color = node.color;
-
-            replace.left = node.left;
-            node.left.parent = replace;
-
-            if (color == BLACK) { //4. 如果移走的后继节点颜色是黑色，重新修整红黑树
-                //将后继节点的child和parent传进去
-                removeFixUp(child, parent);
-            }
-            node = null;
-            return;
-        }
-    }
-
-    /**
-     * @param node   后继节点的子节点
-     * @param parent 后继节点的父节点
-     */
     //node表示待修正的节点，即后继节点的子节点（因为后继节点被挪到删除节点的位置去了）
     private void removeFixUp(RBNode<T> node, RBNode<T> parent) {
         RBNode<T> other;

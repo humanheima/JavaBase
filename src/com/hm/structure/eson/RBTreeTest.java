@@ -8,7 +8,7 @@ public class RBTreeTest {
 
     public static void main(String[] args) {
         int i, ilen = a.length;
-        RBTree<Integer> tree = new RBTree<>();
+        TempRBTree<Integer> tree = new TempRBTree<>();
 
         System.out.printf("== 原始数据: ");
         for (i = 0; i < ilen; i++)
