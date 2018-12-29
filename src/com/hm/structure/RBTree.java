@@ -30,6 +30,26 @@ public class RBTree<T extends Comparable<T>> {
         this.overrideMode = overrideMode;
     }
 
+    public static void main(String[] args) {
+        RBTree<String> bst = new RBTree<>();
+        bst.addNode("d");
+        bst.addNode("d");
+        bst.addNode("c");
+        bst.addNode("c");
+        bst.addNode("b");
+        bst.addNode("f");
+
+        bst.addNode("a");
+        bst.addNode("e");
+
+        bst.addNode("g");
+        bst.addNode("h");
+
+
+        bst.remove("c");
+
+        bst.printTree(bst.getRoot());
+    }
 
     public boolean isOverrideMode() {
         return overrideMode;
@@ -287,10 +307,10 @@ public class RBTree<T extends Comparable<T>> {
         return node;
     }
 
-
     private T addNode(RBTreeNode<T> node) {
         node.setLeft(null);
         node.setRight(null);
+        //新插入的节点是红色的
         node.setRed(true);
         setParent(node, null);
         if (root.getLeft() == null) {
@@ -476,10 +496,14 @@ public class RBTree<T extends Comparable<T>> {
         }
     }
 
-
     private void setParent(RBTreeNode<T> node, RBTreeNode<T> parent) {
         if (node != null) {
             node.setParent(parent);
+            //怎么感觉应该是这样写
+            /*if (node == root) {
+                node.setParent(null);
+            }*/
+            //为什么parent == root，就把node的parent赋值为null呢？
             if (parent == root) {
                 node.setParent(null);
             }
@@ -523,27 +547,5 @@ public class RBTree<T extends Comparable<T>> {
                 firstQueue = !firstQueue;
             }
         }
-    }
-
-
-    public static void main(String[] args) {
-        RBTree<String> bst = new RBTree<>();
-        bst.addNode("d");
-        bst.addNode("d");
-        bst.addNode("c");
-        bst.addNode("c");
-        bst.addNode("b");
-        bst.addNode("f");
-
-        bst.addNode("a");
-        bst.addNode("e");
-
-        bst.addNode("g");
-        bst.addNode("h");
-
-
-        bst.remove("c");
-
-        bst.printTree(bst.getRoot());
     }
 }
