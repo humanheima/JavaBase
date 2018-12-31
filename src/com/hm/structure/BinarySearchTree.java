@@ -1,5 +1,7 @@
 package com.hm.structure;
 
+import com.hm.collection.TreeSetTest;
+
 /**
  * Created by dmw on 2018/12/27.
  * Desc: 二叉查找树
@@ -163,16 +165,21 @@ public class BinarySearchTree {
         //BinaryTreeNode root = new BinaryTreeNode(8);
         //BinaryTreeNode root = new BinaryTreeNode();
         BinarySearchTree treeTest = new BinarySearchTree();
-        treeTest.insert(8);
-        treeTest.insert(6);
-        treeTest.insert(10);
-        treeTest.insert(5);
-        treeTest.insert(7);
-        treeTest.insert(9);
-        treeTest.insert(20);
-        treeTest.insert(12);
+        treeTest.insert(11);
+        treeTest.insert(2);
         treeTest.insert(14);
-        treeTest.insert(13);
+        treeTest.insert(1);
+        treeTest.insert(7);
+        treeTest.insert(15);
+        treeTest.insert(5);
+        treeTest.insert(8);
+
+        treeTest.printTree(treeTest.root);
+
+        //treeTest.delete(4);
+
+        System.out.println();
+
         treeTest.printTree(treeTest.root);
         /*BinaryTreeNode deletedNode = treeTest.delete(10);
         System.out.println(deletedNode.value);*/
