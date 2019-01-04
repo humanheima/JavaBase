@@ -9,6 +9,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Executors;
 
 /**
  * Created by dumingwei on 2017/6/11.
@@ -16,8 +17,8 @@ import java.util.Map;
  */
 public class GetPostTest {
 
-    public static void main(String[] args) {
 
+    public static void main(String[] args) {
     }
 
     public static String sendGet(String url, String params) {

@@ -44,6 +44,9 @@ public class BinarySearch {
      * @return
      */
     public static <T> int binarySearch(T[] arr, T key, Comparator<T> comparator) {
+        if (arr==null){
+            return -1;
+        }
         int low = 0;
         int high = arr.length - 1;
         while (low <= high) {

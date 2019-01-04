@@ -12,7 +12,7 @@ package com.hm.sort;
  */
 public class FastSort {
 
-    private static int a[] = {4, 8, 9, 1, 10, 4};
+    private static int a[] = {8, 4, 9, 1, 10, 6};
 
     public static void main(String args[]) {
         quickSort(a, 0, a.length - 1);
@@ -21,6 +21,12 @@ public class FastSort {
         }
     }
 
+    /**
+     * 调用者请确保传入正确的参数
+     * @param a
+     * @param left
+     * @param right
+     */
     private static void quickSort(int[] a, int left, int right) {
         System.out.println("left=" + left + ",right=" + right);
         if (left < right) {

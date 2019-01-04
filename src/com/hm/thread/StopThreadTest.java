@@ -1,5 +1,7 @@
 package com.hm.thread;
 
+import java.util.concurrent.*;
+
 /**
  * Created by dumingwei on 2017/10/3.
  * How to stop a thread.
@@ -17,13 +19,33 @@ public class StopThreadTest {
             e.printStackTrace();
         }*/
 
-        MyInterruptedThread thread = new MyInterruptedThread();
+        /*MyInterruptedThread thread = new MyInterruptedThread();
         thread.start();
         try {
             Thread.sleep(2000);
-            thread.cancel();
+            thread.interrupt();
         } catch (InterruptedException e) {
             e.printStackTrace();
+        }*/
+
+        MyInterruptedThread thread = new MyInterruptedThread();
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+        Future<?> future = executorService.submit(thread);
+
+        try {
+            future.get(3, TimeUnit.SECONDS);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            System.out.println("InterruptedException");
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (TimeoutException e) {
+            e.printStackTrace();
+            System.out.println("thread over time");
+        } finally {
+            //取消
+            System.out.println("cancel");
+            future.cancel(true);
         }
     }
 }
@@ -73,10 +95,6 @@ class MyInterruptedThread extends Thread {
             }
         }
         System.out.println("stop");
-    }
-
-    public void cancel() {
-        interrupt();
     }
 
 }

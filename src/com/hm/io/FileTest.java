@@ -1,7 +1,6 @@
 package com.hm.io;
 
-import java.io.File;
-import java.io.FilenameFilter;
+import java.io.*;
 
 /**
  * Created by dumingwei on 2017/5/31.
@@ -9,6 +8,8 @@ import java.io.FilenameFilter;
 public class FileTest {
 
     public static void main(String args[]) {
+
+
         File file = new File("E:\\apks");
         listFile(file);
         //listRoot();
@@ -50,4 +51,54 @@ public class FileTest {
             System.out.println(file1);
         }
     }
+
+    /**
+     * 传统操作文件的try catch
+     *
+     * @throws FileNotFoundException
+     */
+    public void readFile() throws FileNotFoundException {
+        FileReader fr = null;
+        BufferedReader br = null;
+        try {
+            fr = new FileReader("d:/input.txt");
+            br = new BufferedReader(fr);
+            String s = "";
+            while ((s = br.readLine()) != null) {
+                System.out.println(s);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                br.close();
+                fr.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * try with resource 方法
+     *
+     * @throws FileNotFoundException
+     */
+    public void readFileNew() {
+
+        try (
+                FileReader fr = new FileReader("");
+                BufferedReader br = new BufferedReader(fr);
+        ) {
+            String s = "";
+            while ((s = br.readLine()) != null) {
+                System.out.println(s);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
 }
