@@ -20,6 +20,23 @@ public class FileTest {
             }
         };
         //listFileFilter(filter);
+
+        //testRenameTo();
+    }
+
+    private static void testRenameTo() {
+        /*File file1=new File("/Users/dumingwei/IdeaProjects/JavaBase/file1.java");
+        file1.mkdir();
+        File file2=new File("/Users/dumingwei/IdeaProjects/JavaBase/file2.java");
+        file2.mkdir();*/
+
+        File file1 = new File("/Users/dumingwei/IdeaProjects/JavaBase/file1.java");
+        File file2 = new File("/Users/dumingwei/IdeaProjects/JavaBase/file2.java");
+        if (file1.exists()) {
+            file1.delete();
+        }
+        //直接将file2重命名为file1
+        file2.renameTo(file1);
     }
 
     private static void listFile(File file) {
