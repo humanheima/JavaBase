@@ -31,7 +31,10 @@ public class ThreadPoolTest {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        executor.remove(myTask);
+        /**
+         * executor.remove(myTask)方法不能成功移除一个已经运行的线程。
+         */
+        System.out.println(executor.remove(myTask));
         //executor.shutdown();
     }
 }
@@ -54,7 +57,7 @@ class MyTask implements Runnable {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            System.out.println(Thread.currentThread().getName() + " task" + taskNum + " 执行完毕\n");
+            System.out.println(System.currentTimeMillis() + Thread.currentThread().getName() + " task" + taskNum + " 执行完毕\n");
 
         }
 
