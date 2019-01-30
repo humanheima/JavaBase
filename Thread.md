@@ -68,7 +68,7 @@ public class ThreeWayUseThread {
 }
 ```
 
-![线程状态图](thread_lifecycle.jpg)
+![线程状态图](ThreadStatus.jpg)
 
 也可以将blocked、waiting、time waiting统称为阻塞状态
 
@@ -236,13 +236,85 @@ main is completed
 
 ```
 可以看到main线程会等待Thread-0线程执行完毕以后，再继续执行。
+
+### Join 实现原理
+
+在上面的例子中，我们在主线程调用了`exampleThread.join();`,方法内部调用一个参数的重载方法。
+```java
+public final void join() throws InterruptedException {
+        join(0);
+    }
+
+    
+public final synchronized void join(long millis)
+    throws InterruptedException {
+        long base = System.currentTimeMillis();
+        long now = 0;
+
+        if (millis < 0) {
+            throw new IllegalArgumentException("timeout value is negative");
+        }
+
+        if (millis == 0) {
+            //注释1处，只要主线程存活，就一直等待
+            while (isAlive()) {
+                wait(0);
+            }
+        } else {
+            while (isAlive()) {
+                long delay = millis - now;
+                if (delay <= 0) {
+                    break;
+                }
+                wait(delay);
+                now = System.currentTimeMillis() - base;
+            }
+        }
+    }
+
+```
+我们注意到`synchronized void join(long millis)`方法是同步方法，所以，我们的主线程获取了exampleThread对象锁，
+此时我们的等待时间是0，所以在注释1处，主线程会一直等待，直到被唤醒。
+那么主线程是什么时候被唤醒的呢？
+
+下面是一段jvm的源码（我下载的源码是http://hg.openjdk.java.net/jdk8/hotspot）
+路径是/src/share/vm/runtime/thread.cpp
+```
+void JavaThread::exit(bool destroy_vm, ExitType exit_type) {
+    //...
+    ensure_join(this);
+}
+```
+```cpp
+
+static void ensure_join(JavaThread* thread) {
+  // We do not need to grap the Threads_lock, since we are operating on ourself.
+  Handle threadObj(thread, thread->threadObj());
+  assert(threadObj.not_null(), "java thread object must exist");
+  ObjectLocker lock(threadObj, thread);
+  // Ignore pending exception (ThreadDeath), since we are exiting anyway
+  thread->clear_pending_exception();
+  // Thread is exiting. So set thread_status field in  java.lang.Thread class to TERMINATED.
+  java_lang_Thread::set_thread_status(threadObj(), java_lang_Thread::TERMINATED);
+  // Clear the native thread instance - this makes isAlive return false and allows the join()
+  // to complete once we've done the notify_all below
+  java_lang_Thread::set_thread(threadObj(), NULL);
+   //唤醒所有线程
+   lock.notify_all(thread);
+  // Ignore pending exception (ThreadDeath), since we are exiting anyway
+  thread->clear_pending_exception();
+}
+
+```
+在线程执行完毕以后，会唤醒所有线程，这时候主线程就会继续往下执行了。
+
 #### 如何停止一个线程
 
 ####### 线程正常执行完毕，正常结束。
 1. 停止正在运行的线程
 
 6. interrupt方法：interrupt，即中断的意思。interrupt方法可以中断处于阻塞状态的线程。单独调用interrupt方法可以使得处于阻塞状态的线程抛出一个异常，
-也就说。
+也就说它可以用来中断一个正处于阻塞状态的线程；
  ```java
 public void interrupt() {
         if (this != Thread.currentThread())

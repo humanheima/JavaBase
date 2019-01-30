@@ -23,6 +23,9 @@ public class JoinTest {
         });
 
         exampleThread.start();
+        /**
+         * main线程等待exampleThread结束以后才会往下执行
+         */
         exampleThread.join();
         System.out.println(Thread.currentThread().getName() + " is completed");
 
