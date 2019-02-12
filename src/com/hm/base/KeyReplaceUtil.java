@@ -2,7 +2,7 @@ package com.hm.base;
 
 /**
  * Created by dmw on 2018/11/26.
- * Desc:
+ * Desc:密钥大写字母替换成小写字母
  */
 public class KeyReplaceUtil {
 

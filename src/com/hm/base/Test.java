@@ -5,13 +5,17 @@ package com.hm.base;
  */
 public class Test {
 
+
     public static void main(String[] args) {
         /*Shape shape = new Circle();
         System.out.println("shape.name=" + shape.name);
         shape.printType();
         shape.printName();
         System.out.println(Integer.valueOf("1.0"));*/
-        System.out.println(sum(10000));
+        //System.out.println(sum(10000));
+         Shape shape=new Shape();
+         shape=new Shape();
+
 
     }
 
@@ -23,6 +27,10 @@ public class Test {
 }
 
 class Shape {
+
+    static {
+        System.out.println("Shape static block");
+    }
     public String name = "shape";
 
     public Shape() {
