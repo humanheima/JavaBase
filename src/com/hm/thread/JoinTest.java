@@ -42,8 +42,8 @@ public class JoinTest {
             }
         });
 
-        Thread1 thread1 = new Thread1(exampleThread);
-        Thread1 thread2 = new Thread1(thread1);
+        ProducerThread thread1 = new ProducerThread(exampleThread);
+        ProducerThread thread2 = new ProducerThread(thread1);
         thread2.start();*/
     }
 

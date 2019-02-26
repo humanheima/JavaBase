@@ -6,8 +6,6 @@ import java.util.Queue;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
-import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
 
 /**
  * Created by dumingwei on 2017/7/4.
@@ -23,26 +21,40 @@ public class ThreadCommunicateTest {
     private Condition notEmpty = lock.newCondition();
 
     public static void main(String[] args) {
-        /**
-         * wait notify 方式
-         */
-        final Queue sharedQ = new LinkedList();
-        Thread1 thread1 = new Thread1(sharedQ);
-        Thread2 thread2 = new Thread2(sharedQ);
-        thread1.start();
-        thread2.start();
-        /*ThreadCommunicateTest test = new ThreadCommunicateTest();
+
+        //wayOfWaitAndNotify();
+
+        wayOfCondition();
+    }
+
+    /**
+     * 使用Condition的方式
+     */
+    private static void wayOfCondition() {
+        ThreadCommunicateTest test = new ThreadCommunicateTest();
         Producer producter = test.new Producer();
         Consumer consumer = test.new Consumer();
         producter.start();
-        consumer.start();*/
+        consumer.start();
     }
 
-    static class Thread1 extends Thread {
+    /**
+     * wait notify 方式
+     */
+    private static void wayOfWaitAndNotify() {
+        final Queue sharedQ = new LinkedList();
+        ProducerThread producerThread = new ProducerThread(sharedQ);
+        ConsumerThread consumerThread = new ConsumerThread(sharedQ);
+        producerThread.start();
+        consumerThread.start();
+    }
+
+    static class ProducerThread extends Thread {
+
 
         private final Queue<Integer> sharedQ;
 
-        public Thread1(Queue<Integer> sharedQ) {
+        public ProducerThread(Queue<Integer> sharedQ) {
             super("Producer");
             this.sharedQ = sharedQ;
         }
@@ -74,11 +86,11 @@ public class ThreadCommunicateTest {
         }
     }
 
-    static class Thread2 extends Thread {
+    static class ConsumerThread extends Thread {
 
         private final Queue<Integer> sharedQ;
 
-        public Thread2(Queue<Integer> sharedQ) {
+        public ConsumerThread(Queue<Integer> sharedQ) {
             super("Consumer:");
             this.sharedQ = sharedQ;
         }
@@ -100,8 +112,9 @@ public class ThreadCommunicateTest {
                     System.out.println("consuming:" + number);
                     sharedQ.notify();
                     //termination condition
-                    if (number == 3)
+                    if (number == 3){
                         break;
+                    }
                 }
             }
         }

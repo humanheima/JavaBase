@@ -5,20 +5,29 @@ package com.hm.thread;
  */
 public class ThreadLocalTest {
 
+    private static ThreadLocal<String> name = new ThreadLocal<String>(){
+
+        @Override
+        protected String initialValue() {
+            return "hello world";
+        }
+    };
+
     public static void main(String[] args) {
-        ThreadLocalAccount account = new ThreadLocalAccount("初始名");
-        new TestThread("线程甲", account).start();
-        new TestThread("线程乙", account).start();
+        name.set("初始名称");
+        System.out.println(Thread.currentThread().getName() + " ," + name.get());
+        new TestThread("线程甲", name).start();
+        new TestThread("线程乙", name).start();
     }
 }
 
 class TestThread extends Thread {
 
-    private ThreadLocalAccount account;
+    private ThreadLocal<String> threadLocal;
 
-    public TestThread(String name, ThreadLocalAccount account) {
+    public TestThread(String name, ThreadLocal<String> threadLocal) {
         super(name);
-        this.account = account;
+        this.threadLocal = threadLocal;
     }
 
     @Override
@@ -26,28 +35,11 @@ class TestThread extends Thread {
         for (int i = 0; i < 10; i++) {
             if (i == 6) {
                 //当i==6的时候替换成当前线程名
-                account.setName(getName());
+                threadLocal.set(getName());
             }
-            System.out.println(account.getName() + "账户的i值：" + i);
+            //获取
+            System.out.println(Thread.currentThread().getName() + " ," + threadLocal.get() + "，i= " + i);
         }
-    }
-}
-
-class ThreadLocalAccount {
-
-    private ThreadLocal<String> name = new ThreadLocal<>();
-
-    public ThreadLocalAccount(String name) {
-        this.name.set(name);
-        System.out.println(this.name.get());
-    }
-
-    public String getName() {
-        return name.get();
-    }
-
-    public void setName(String str) {
-        this.name.set(str);
     }
 }
 

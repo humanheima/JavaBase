@@ -11,6 +11,6 @@ public class Client {
         Goods goods2 = GoodsFactory.getGoods("iphonex");
         goods2.showGoodsPrice("32GB");
         Goods goods3 = GoodsFactory.getGoods("iphonex");
-        goods1.showGoodsPrice("128GB");
+        goods3.showGoodsPrice("128GB");
     }
 }

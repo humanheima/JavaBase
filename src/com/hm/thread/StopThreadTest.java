@@ -1,6 +1,8 @@
 package com.hm.thread;
 
 import java.util.concurrent.*;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * Created by dumingwei on 2017/10/3.
@@ -9,6 +11,8 @@ import java.util.concurrent.*;
 public class StopThreadTest {
 
     public static void main(String[] args) {
+        ReentrantLock reentrantLock=new ReentrantLock();
+       Condition condition= reentrantLock.newCondition();
       /*  TestMyThread thread = new TestMyThread(false);
         thread.start();
         try {
