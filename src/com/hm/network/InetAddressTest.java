@@ -11,7 +11,7 @@ public class InetAddressTest {
 
     public static void main(String[] args) {
         try {
-            InetAddress ip=InetAddress.getByName("www.crazyit.org");
+            InetAddress ip=InetAddress.getByName("www.jianshu.com/u/3c9c20cce3d0");
             System.out.println("crazyit是否可达："+ip.isReachable(2000));
             System.out.println(ip.getHostAddress());
             InetAddress local=InetAddress.getByAddress(new byte[]{127,0,0,1});

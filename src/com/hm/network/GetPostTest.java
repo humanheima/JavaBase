@@ -1,4 +1,4 @@
-package com.hm;
+package com.hm.network;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -7,6 +7,7 @@ import java.io.PrintWriter;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Executors;
@@ -34,7 +35,7 @@ public class GetPostTest {
             for (String key : map.keySet()) {
                 System.out.println("key" + "--->" + map.get(key));
             }
-            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8));
             String line = null;
             while ((line = br.readLine()) != null) {
                 result.append("\n" + line);
