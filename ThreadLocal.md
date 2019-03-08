@@ -1,6 +1,6 @@
 ## ThreadLocal 源码学习
 1. 实际的通过ThreadLocal创建的副本是存储在每个线程自己的threadLocals中的；
-2. 个线程中可有多个threadLocal变量 存储在threadLocals中;
+2. 一个线程中可有多个threadLocal变量 存储在threadLocals中;
 3. 在进行get之前，必须先set，否则会报空指针异常；如果想在get之前不需要调用set就能正常访问的话，必须重写initialValue()方法。
 
 线程本地变量，每个线程持有线程本地变量的副本。
@@ -128,14 +128,14 @@ static class ThreadLocalMap {
     //...
     //key的类型是弱引用
     static class Entry extends WeakReference<ThreadLocal<?>> {
-                /** The value associated with this ThreadLocal. */
-                Object value;
+        /** The value associated with this ThreadLocal. */
+        Object value;
     
-                Entry(ThreadLocal<?> k, Object v) {
-                    super(k);
-                    value = v;
-                }
-            }
+        Entry(ThreadLocal<?> k, Object v) {
+            super(k);
+            value = v;
+        }
+    }
 }
 ```
 在`set(T value)`方法的注释2处，如果获取到的map对象不为null，则调用ThreadLocalMap的`set(ThreadLocal<?> key, Object value)`方法。
@@ -149,7 +149,7 @@ void createMap(Thread t, T firstValue) {
 }
 ```
 
-ThreadLocal的`get()`方法
+ThreadLocal的`get()`方法,返回当前线程的线程本地变量的副本。如果当前线程的线程本地变量没有值，会调用initialValue方法来初始化线程本地变量的值。
 ```java
 public T get() {
         //获取当前线程
@@ -187,7 +187,7 @@ protected T initialValue() {
         return null;
 }
 ```
-initialValue方法默认返回null。我们可以复写这个方法来提供一个默认值，就像这样。
+initialValue方法默认返回null。我们可以重写这个方法来提供一个默认值，就像这样。
 ```java
 private static ThreadLocal<String> name = new ThreadLocal<String>(){
 
@@ -199,30 +199,23 @@ private static ThreadLocal<String> name = new ThreadLocal<String>(){
 ```
 
 
-则调用ThreadLocalMap的`set(ThreadLocal<?> key, Object value)`方法，用来创建新的或者替换已存在的Entry。
+接下来看一下ThreadLocalMap的`set(ThreadLocal<?> key, Object value)`方法，该方法可以用来创建新的Entry，或者替换已存在的Entry。
 ```java
 private void set(ThreadLocal<?> key, Object value) {
-
-            // We don't use a fast path as with get() because it is at
-            // least as common to use set() to create new entries as
-            // it is to replace existing ones, in which case, a fast
-            // path would fail more often than not.
 
             Entry[] tab = table;
             int len = tab.length;
             //找到
             int i = key.threadLocalHashCode & (len-1);
-            //为什么要遍历呢？
-            for (Entry e = tab[i];
-                 e != null;
-                 e = tab[i = nextIndex(i, len)]) {
+            //为什么要遍历呢？因为如果存在无效的Entry的话，我们直接用新的Entry替换旧的Entry，节省内存
+            for (Entry e = tab[i]; e != null; e = tab[i = nextIndex(i, len)]) {
                 ThreadLocal<?> k = e.get();
                 //如果存在对应的Entry，则替换值
                 if (k == key) {
                     e.value = value;
                     return;
                 }
-                //注释1处，如果存在对应的Entry，但是Entry的键为null，则替换Entry
+                //注释1处，如果存在无效的Entry，则替换Entry
                 if (k == null) {
                     replaceStaleEntry(key, value, i);
                     return;
@@ -236,70 +229,6 @@ private void set(ThreadLocal<?> key, Object value) {
                 rehash();
         }
 
-```
-先看一下ThreadLocalMap的`set(ThreadLocal<?> key, Object value)`方法的注释1处
-```java
-/**
-         *将set操作期间遇到的陈旧entry替换为指定键的entry
-         *  
-         *
-         * @param  key 键
-         * @param  value 键关联的值
-         * @param  staleSlot 搜索键的时候遇到的第一个陈旧的entry
-         */
-        private void replaceStaleEntry(ThreadLocal<?> key, Object value,
-                                       int staleSlot) {
-            Entry[] tab = table;
-            int len = tab.length;
-            Entry e;
-
-          
-            int slotToExpunge = staleSlot;
-            for (int i = prevIndex(staleSlot, len);(e = tab[i]) != null; i = prevIndex(i, len))
-                //如果entry的键为null
-                if (e.get() == null)
-                    slotToExpunge = i;
-
-            // Find either the key or trailing null slot of run, whichever
-            // occurs first
-            for (int i = nextIndex(staleSlot, len);
-                 (e = tab[i]) != null;
-                 i = nextIndex(i, len)) {
-                ThreadLocal<?> k = e.get();
-
-                // If we find key, then we need to swap it
-                // with the stale entry to maintain hash table order.
-                // The newly stale slot, or any other stale slot
-                // encountered above it, can then be sent to expungeStaleEntry
-                // to remove or rehash all of the other entries in run.
-                if (k == key) {
-                    e.value = value;
-
-                    tab[i] = tab[staleSlot];
-                    tab[staleSlot] = e;
-
-                    // Start expunge at preceding stale entry if it exists
-                    if (slotToExpunge == staleSlot)
-                        slotToExpunge = i;
-                    cleanSomeSlots(expungeStaleEntry(slotToExpunge), len);
-                    return;
-                }
-
-                // If we didn't find stale entry on backward scan, the
-                // first stale entry seen while scanning for key is the
-                // first still present in the run.
-                if (k == null && slotToExpunge == staleSlot)
-                    slotToExpunge = i;
-            }
-
-            // If key not found, put new entry in stale slot
-            tab[staleSlot].value = null;
-            tab[staleSlot] = new Entry(key, value);
-
-            // If there are any other stale entries in run, expunge them
-            if (slotToExpunge != staleSlot)
-                cleanSomeSlots(expungeStaleEntry(slotToExpunge), len);
-        }
 ```
 
 
