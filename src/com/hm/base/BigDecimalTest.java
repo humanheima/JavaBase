@@ -11,6 +11,8 @@ public class BigDecimalTest {
 
         //useDouble();
 
+        System.out.println(new BigDecimal(0.1).toString());
+        System.out.println(new BigDecimal("0.1").toString());
         useBigDecimal();
     }
 
