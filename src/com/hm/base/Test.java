@@ -13,8 +13,19 @@ public class Test {
         shape.printName();
         System.out.println(Integer.valueOf("1.0"));*/
         //System.out.println(sum(10000));
-         Shape shape=new Shape();
-         shape=new Shape();
+        Shape shape = new Shape();
+        shape = new Shape();
+
+        int len = 4;
+        for (int i = 0; i < len; i++) {
+            System.out.println(i);
+
+        }
+
+        System.out.println("------------------------");
+        for (int i = len-1; i > -1; i--) {
+            System.out.println(i);
+        }
 
 
     }
@@ -31,6 +42,7 @@ class Shape {
     static {
         System.out.println("Shape static block");
     }
+
     public String name = "shape";
 
     public Shape() {
