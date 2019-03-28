@@ -24,6 +24,11 @@ public class Person extends Animal implements RunInterface, LiveInterface {
         return super.getEyes();
     }
 
+    @Override
+    public String getInfo() {
+        return null;
+    }
+
     public int getAge() {
         return age;
     }
@@ -57,6 +62,16 @@ public class Person extends Animal implements RunInterface, LiveInterface {
 
     @Override
     public void sleep() {
+
+    }
+
+    @Override
+    public void eatInLiveParentInterface() {
+
+    }
+
+    @Override
+    public void sleepInLiveParentInterface() {
 
     }
 }

@@ -1,21 +1,20 @@
 package com.hm.base.interview;
 
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * Created by dumingwei on 2017/9/28.
- * 参考链接：{@see <a href="https://www.cnblogs.com/dolphin0520/p/3920373.html">Java并发编程：volatile关键字解析</a>}
- * 可见性只能保证每次读取的是最新的值
- * volatile 不能保证原子性
- * <p>
  * Desc：期待结果输出10000
  */
 public class VolatileTest {
 
     //private volatile AtomicInteger inc = new AtomicInteger(0);
     private volatile int inc;
+
+    private CountDownLatch countDownLatch = new CountDownLatch(10);
 
     /**
      * 无法实现
@@ -69,17 +68,21 @@ public class VolatileTest {
                 @Override
                 public void run() {
                     for (int j = 0; j < 1000; j++) {
-                        //volatileTest.increase();
-                        volatileTest.increaseWithLock();
+                        volatileTest.increase();
+                        //volatileTest.increaseWithLock();
                     }
+                    volatileTest.countDownLatch.countDown();
                 }
             }.start();
         }
 
         //保证前面的线程都执行完
-        while (Thread.activeCount() > 1) {
-            Thread.yield();
-            System.out.println(volatileTest.inc);
+        try {
+            volatileTest.countDownLatch.await();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
+
+        System.out.println(volatileTest.inc);
     }
 }

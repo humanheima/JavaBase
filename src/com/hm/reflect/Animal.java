@@ -1,6 +1,6 @@
 package com.hm.reflect;
 
-public class Animal {
+abstract public class Animal {
 
     private int eyes;
     protected String name;
@@ -44,6 +44,7 @@ public class Animal {
     public float getHeight() {
         return height;
     }
+    public abstract String getInfo();
 
     public void setHeight(float height) {
         this.height = height;

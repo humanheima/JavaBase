@@ -1,6 +1,6 @@
 package com.hm.reflect;
 
-public interface LiveInterface {
+public interface LiveInterface extends LiveParentInterface {
 
     int FieldInLiveInterface = 1;
     void eat();
