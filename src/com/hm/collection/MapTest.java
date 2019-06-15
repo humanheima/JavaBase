@@ -1,5 +1,7 @@
 package com.hm.collection;
 
+import com.hm.base.interview.Student;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,15 +13,23 @@ public class MapTest {
     static final int MAXIMUM_CAPACITY = 1 << 30;
 
     public static void main(String[] args) {
-        Map<String, Integer> map = new HashMap<>();
-        map.put("java", 109);
-        map.put("ios", 10);
-        map.put("ajax", 79);
-        map.put("java ee", 79);
-        for (Map.Entry<String, Integer> entry : map.entrySet()) {
+        Map<String, Student> map = new HashMap<>();
+        map.put("java", new Student("dmw", 18));
+        map.put("android", new Student("hm", 18));
+       /* for (Map.Entry<String, Student> entry : map.entrySet()) {
             System.out.println("key:" + entry.getKey() + ",value" + entry.getValue());
-        }
+        }*/
         System.out.println(map);
+
+        Student student = map.get("java");
+        System.out.println(student);
+        student.setAge(19);
+
+        System.out.println(student);
+
+
+        System.out.println(map);
+
         //Map<String, Integer> map1=Collections.synchronizedMap(new HashMap<>());
         // map1.put("haha",33);
       /*  System.out.println(map.put("ios", 99));

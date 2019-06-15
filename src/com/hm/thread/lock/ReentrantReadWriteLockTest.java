@@ -9,6 +9,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  */
 public class ReentrantReadWriteLockTest {
 
+
     private ReadWriteLock rwl = new ReentrantReadWriteLock();
 
     public static void main(String[] args) {
@@ -20,12 +21,12 @@ public class ReentrantReadWriteLockTest {
             }
         }.start();
 
-        try {
+       /* try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
+*/
         new Thread() {
             public void run() {
                 test.get(Thread.currentThread());
@@ -36,7 +37,7 @@ public class ReentrantReadWriteLockTest {
     private void get(Thread thread) {
         rwl.readLock().lock();
         try {
-            for (int i = 0; i < 100; i++) {
+            for (int i = 0; i < 1000; i++) {
                 System.out.println(thread.getName() + "正在进行读操作" + i);
             }
             System.out.println(thread.getName() + "读操作完毕");

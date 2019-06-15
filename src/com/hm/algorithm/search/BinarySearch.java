@@ -22,7 +22,7 @@ public class BinarySearch {
     private static int search(int arr[], int start, int end, int key) {
         int mid;
         while (start <= end) {
-            mid = start + (end - start) / 2;//直接平均可能會溢位，所以用此算法
+            mid = start + (end - start) / 2;//直接平均可能会溢出，所以用此算法
             if (arr[mid] < key) {
                 start = mid + 1;
             } else if (arr[mid] > key) {
