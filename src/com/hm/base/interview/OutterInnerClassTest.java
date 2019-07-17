@@ -5,18 +5,9 @@ package com.hm.base.interview;
  */
 public class OutterInnerClassTest {
 
-    class Inner {
-    }
-
-    public static void food() {
-        // new Inner();
-    }
-
-    public void bar() {
-        new Inner();
-    }
-
     public static void main(String [] args) {
-     //new Inner();
+    Outter outter= new Outter();
     }
 }
+
+
