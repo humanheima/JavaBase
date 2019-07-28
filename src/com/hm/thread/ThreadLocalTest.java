@@ -5,19 +5,19 @@ package com.hm.thread;
  */
 public class ThreadLocalTest {
 
-    private static ThreadLocal<String> name = new ThreadLocal<String>(){
+    private static ThreadLocal<String> threadLocal = new ThreadLocal<String>(){
 
-        @Override
+       /* @Override
         protected String initialValue() {
             return "hello world";
-        }
+        }*/
     };
 
     public static void main(String[] args) {
-        name.set("初始名称");
-        System.out.println(Thread.currentThread().getName() + " ," + name.get());
-        new TestThread("线程甲", name).start();
-        new TestThread("线程乙", name).start();
+        threadLocal.set("初始名称");
+        System.out.println(Thread.currentThread().getName() + " ," + threadLocal.get());
+        new TestThread("线程甲", threadLocal).start();
+        new TestThread("线程乙", threadLocal).start();
     }
 }
 
