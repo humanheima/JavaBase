@@ -6,7 +6,7 @@ package com.hm.thread;
 public class Test {
 
     public static void main(String[] args) {
-       /* final InsertData insertData = new InsertData();
+        final InsertData insertData = new InsertData();
         new Thread() {
             @Override
             public void run() {
@@ -16,10 +16,9 @@ public class Test {
         new Thread() {
             @Override
             public void run() {
-                insertData.insert1();
+                InsertData.insert1();
             }
-        }.start();*/
-        System.out.println((-1<<29)&((1 << 29) - 1));
+        }.start();
     }
 }
 

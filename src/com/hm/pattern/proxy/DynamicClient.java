@@ -4,6 +4,7 @@ import java.lang.reflect.Proxy;
 
 /**
  * Created by dumingwei on 2017/7/6.
+ * 测试动态代理
  */
 public class DynamicClient {
 

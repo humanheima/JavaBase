@@ -28,6 +28,7 @@ public class BinarySearchTree {
     public BinaryTreeNode insert(int key) {
         BinaryTreeNode newNode = new BinaryTreeNode(key);
         BinaryTreeNode current = root;
+        //标记要插入节点的父节点
         BinaryTreeNode parent;
         //如果根节点为空
         if (current == null) {
@@ -65,6 +66,7 @@ public class BinarySearchTree {
     }
 
     public BinaryTreeNode delete(int key) {
+        //标记要删除节点的父节点
         BinaryTreeNode parent = root;
         BinaryTreeNode current = root;
         //标记当前节点是父节点的左节点还是右节点
@@ -84,7 +86,7 @@ public class BinarySearchTree {
                 return current;
             }
         }
-
+        //到这里找到了要删除的节点current，以及current的parent也确定了。
         // 如果删除节点左节点为空 , 右节点也为空
         if (current.left == null && current.right == null) {
             if (current == root) {

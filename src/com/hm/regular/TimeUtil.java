@@ -1,10 +1,11 @@
 package com.hm.regular;
 
+import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * Created by dumingwei on 2017/6/20.
@@ -14,9 +15,16 @@ public class TimeUtil {
     public static SimpleDateFormat format;
     public static SimpleDateFormat format2;
 
+    private static DateFormat weekDateFormat;
+    private static DateFormat hourDateFormat;
+
     public static void main(String[] args) {
         format = new SimpleDateFormat("yyyy年M月d日");
         format2 = new SimpleDateFormat("yyyy-M-d");
+
+        weekDateFormat = new SimpleDateFormat("M月d日E", Locale.getDefault());
+        hourDateFormat = new SimpleDateFormat("HH", Locale.getDefault());
+
         try {
             Date date = format.parse("2017年6月20日");
             System.out.println(format2.format(date));
@@ -27,7 +35,35 @@ public class TimeUtil {
         Calendar calendar = Calendar.getInstance();
         System.out.println(calendar.get(Calendar.YEAR));
         System.out.println(calendar.get(Calendar.MONTH) + 1);
+
         System.out.println(calendar.get(Calendar.DAY_OF_MONTH));
+
+        for (int i = 1; i <= 10; i++) {
+            calendar.add(Calendar.DAY_OF_MONTH,1);
+            System.out.println(format.format(calendar.getTime()));
+
+        }
+
+        System.out.println("-------------");
+
+
+
+        System.out.println(format.format(new Date()));
+        System.out.println("---------------");
+        System.out.println(weekDateFormat.format(new Date()));
+        int currentHour = Integer.parseInt(hourDateFormat.format(new Date()));
+
+        System.out.println(currentHour);
+
+        int endHour = 22;
+        for (; currentHour + 2 < endHour; currentHour += 2) {
+
+            System.out.println(String.format("%1$d:00-%2$d:00", currentHour, currentHour + 2));
+        }
+
+        if (currentHour < endHour) {
+            System.out.println(String.format("%1$d:00-%2$d:00", currentHour, endHour));
+        }
     }
 
 

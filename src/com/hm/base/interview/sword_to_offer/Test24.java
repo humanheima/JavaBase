@@ -57,9 +57,9 @@ public class Test24 {
     }
 
     public static void main(String[] args) {
-        test0();
+        //test0();
         //test1();
-        //test2();
+        test2();
 
     }
 

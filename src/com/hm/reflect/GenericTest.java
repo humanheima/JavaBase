@@ -1,8 +1,9 @@
 package com.hm.reflect;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
+import com.hm.pattern.bridge.Shape;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -13,7 +14,7 @@ public class GenericTest {
     private Map<String, Integer> score;
 
     public static void main(String[] args) throws NoSuchFieldException {
-        Class<GenericTest> clazz = GenericTest.class;
+        /*Class<GenericTest> clazz = GenericTest.class;
         Field f = clazz.getDeclaredField("score");
         Class<?> a = f.getType();
         System.out.println("score的类型是:" + a);
@@ -29,6 +30,39 @@ public class GenericTest {
             }
         } else {
             System.out.println("获取泛型类型出错!");
+        }*/
+
+        List<String> stringList = new ArrayList<>();
+        List<String> stringList1 = new ArrayList<>();
+        stringList.add("1");
+        //test(stringList);//编译不通过
+    }
+
+
+    public static void test0(List<Object> objectList) {
+        for (Object o : objectList) {
+            System.out.println(o);
         }
+    }
+
+    public static void test1(List<?> objectList) {
+        for (Object o : objectList) {
+            System.out.println(o);
+        }
+
+        //无法添加元素
+        //objectList.add(new Object());
+    }
+
+    /**
+     * 只能取数据
+     *
+     * @param objectList
+     */
+    public static void test(List<? extends Shape> objectList) {
+        for (Object o : objectList) {
+            System.out.println(o);
+        }
+        Shape shape = objectList.get(0);
     }
 }

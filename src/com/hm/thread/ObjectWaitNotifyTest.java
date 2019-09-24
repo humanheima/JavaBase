@@ -8,6 +8,9 @@ public class ObjectWaitNotifyTest {
     private static Object object = new Object();
 
     public static void main(String[] args) {
+
+        object.notify();
+
         Thread1 thread1 = new Thread1();
         Thread2 thread2 = new Thread2();
         thread1.start();

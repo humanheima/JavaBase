@@ -1,18 +1,13 @@
 package com.hm.classloader;
 
-import java.io.*;
-import java.lang.reflect.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.lang.reflect.Method;
 
 /**
- * Description:
- * 网站: <a href="http://www.crazyit.org">疯狂Java联盟</a><br>
- * Copyright (C), 2001-2018, Yeeku.H.Lee<br>
- * This program is protected by copyright laws.<br>
- * Program Name:<br>
- * Date:<br>
- *
- * @author Yeeku.H.Lee kongyeeku@163.com
- * @version 1.0
+ * Crete by dumingwei on 2019-08-03
+ * Desc:
  */
 public class CompileClassLoader extends ClassLoader {
 

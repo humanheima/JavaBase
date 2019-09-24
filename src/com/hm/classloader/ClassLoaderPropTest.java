@@ -10,7 +10,7 @@ import java.util.Enumeration;
 public class ClassLoaderPropTest {
 
     public static void main(String[] args) {
-        //获取类加载器
+        //获取系统类加载器
         ClassLoader systemClassLoader = ClassLoader.getSystemClassLoader();
         System.out.println("系统类加载器：" + systemClassLoader);
         try {

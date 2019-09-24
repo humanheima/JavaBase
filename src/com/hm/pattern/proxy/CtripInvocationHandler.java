@@ -17,10 +17,6 @@ public class CtripInvocationHandler implements InvocationHandler {
         this.obj = obj;
     }
 
-    public void buy() {
-        System.out.println("亲，已抢到第一车厢3号座位");
-    }
-
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         System.out.println("30块钱到手，哈哈");

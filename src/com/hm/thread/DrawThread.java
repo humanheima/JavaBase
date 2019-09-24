@@ -15,10 +15,10 @@ public class DrawThread extends Thread {
         this.drawAmount = drawAmount;
     }
 
-    @Override
+    /*@Override
     public void run() {
         for (int i = 0; i < 20; i++) {
             account.draw(drawAmount);
         }
-    }
+    }*/
 }

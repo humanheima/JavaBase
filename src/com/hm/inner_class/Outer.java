@@ -8,7 +8,7 @@ public class Outer {
     private int outProp = 9;
 
     public static void main(String[] args) {
-        //test();
+        test();
     }
 
     public static void test() {
@@ -18,7 +18,9 @@ public class Outer {
 
     public void accessInnerVariable() {
         //如果需要访问内部类的成员变量，必须显式创建内部类对象
-        System.out.println(new Inner().innerProp);
+        Inner inner = new Inner();
+        System.out.println(inner.innerProp);
+        inner.accessOutVariable();
     }
 
     private class Inner {

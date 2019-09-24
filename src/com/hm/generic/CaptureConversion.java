@@ -1,7 +1,5 @@
 package com.hm.generic;
 
-import java.util.ArrayList;
-
 /**
  * Created by dumingwei on 2017/12/13 0013.
  */

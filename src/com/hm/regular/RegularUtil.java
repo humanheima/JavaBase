@@ -2,6 +2,7 @@ package com.hm.regular;
 
 
 import java.lang.reflect.Method;
+import java.math.BigDecimal;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.regex.Matcher;
@@ -29,7 +30,17 @@ public class RegularUtil {
         System.out.println(isImage(jpg));
         System.out.println(isImage(gif));*/
         //System.out.println(stringFilter("*33333##"));
-        System.out.println(parsePathParameters(REPOSITORY_URL));
+        //System.out.println(parsePathParameters(REPOSITORY_URL));
+
+        System.out.println(isNumber("0"));
+        System.out.println(isNumber("10"));
+        System.out.println(isNumber("0.0"));
+        System.out.println(isNumber("0.00"));
+        System.out.println(isNumber("0.01"));
+        System.out.println(isNumber("10.00"));
+        System.out.println(isNumber("100.000"));
+
+        System.out.println(new BigDecimal("1.00").toString());
     }
 
     private static Set<String> parsePathParameters(String path) {
@@ -44,6 +55,17 @@ public class RegularUtil {
     private static boolean isImage(String url) {
         String pattern = "\\.(jpe?g|png|gif)$";
         Matcher matcher = Pattern.compile(pattern).matcher(url);
+        return matcher.find();
+    }
+
+    /**
+     * ? 问号代表前面的字符最多只可以出现一次（0次、或1次）。
+     * @param number
+     * @return
+     */
+    private static boolean isNumber(String number) {
+        String pattern = "^(\\d+)(\\.\\d+)?$";
+        Matcher matcher = Pattern.compile(pattern).matcher(number);
         return matcher.find();
     }
 
@@ -64,8 +86,6 @@ public class RegularUtil {
         Matcher m = p.matcher(str);
         return m.replaceAll("");
     }
-
-
 
 
 }
