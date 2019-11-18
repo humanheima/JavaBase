@@ -15,11 +15,13 @@ public class ReentrantReadWriteLockTest {
     public static void main(String[] args) {
         ReentrantReadWriteLockTest test = new ReentrantReadWriteLockTest();
 
-        new Thread() {
+        test.testLockDowngrade();
+
+        /*new Thread() {
             public void run() {
                 test.write(Thread.currentThread());
             }
-        }.start();
+        }.start();*/
 
        /* try {
             Thread.sleep(2000);
@@ -27,14 +29,16 @@ public class ReentrantReadWriteLockTest {
             e.printStackTrace();
         }
 */
-        new Thread() {
+        /*new Thread() {
             public void run() {
-                test.get(Thread.currentThread());
+                test.read(Thread.currentThread());
             }
-        }.start();
+        }.start();*/
+
+
     }
 
-    private void get(Thread thread) {
+    private void read(Thread thread) {
         rwl.readLock().lock();
         try {
             for (int i = 0; i < 1000; i++) {
@@ -61,4 +65,49 @@ public class ReentrantReadWriteLockTest {
             rwl.writeLock().unlock();
         }
     }
+
+    private void testLockDowngrade() {
+        CachedData cachedData = new CachedData();
+        cachedData.processCachedData();
+    }
+
+
+    class CachedData {
+
+        String data;
+        volatile boolean cacheValid;
+
+        final ReentrantReadWriteLock rwl = new ReentrantReadWriteLock();
+
+        void processCachedData() {
+            rwl.readLock().lock();
+            if (!cacheValid) {
+                // 在获取写锁之前必须释放读锁
+                rwl.readLock().unlock();
+                rwl.writeLock().lock();
+                try {
+                    // 重新检查状态，因为另一个线程可能在执行此操作之前已获得写锁定并更改了状态。
+                    if (!cacheValid) {
+                        //修改数据
+                        System.out.println("修改数据");
+                        data = "Hello world";
+                        cacheValid = true;
+                    }
+                    // 通过在释放写锁之前获取读锁来实现降级
+                    rwl.readLock().lock();
+                } finally {
+                    rwl.writeLock().unlock(); // 释放写锁但仍持有读锁
+                }
+            }
+
+            try {
+                //读数据
+                System.out.println("读取数据");
+                System.out.println(data);
+            } finally {
+                rwl.readLock().unlock();
+            }
+        }
+    }
+
 }

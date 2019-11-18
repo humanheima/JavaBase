@@ -86,6 +86,7 @@ public class OldEvenTest {
                         if (count <= 100) {
                             evenCondition.await();
                         }
+                        //线程恢复后，一定是已经重新获取了锁的
 
                     } catch (Exception e) {
                         e.printStackTrace();

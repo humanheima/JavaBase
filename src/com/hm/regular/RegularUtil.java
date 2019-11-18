@@ -32,6 +32,8 @@ public class RegularUtil {
         //System.out.println(stringFilter("*33333##"));
         //System.out.println(parsePathParameters(REPOSITORY_URL));
 
+        System.out.println(isNumber(null));
+        System.out.println(isNumber(""));
         System.out.println(isNumber("0"));
         System.out.println(isNumber("10"));
         System.out.println(isNumber("0.0"));
@@ -60,10 +62,14 @@ public class RegularUtil {
 
     /**
      * ? 问号代表前面的字符最多只可以出现一次（0次、或1次）。
+     *
      * @param number
      * @return
      */
     private static boolean isNumber(String number) {
+        if (number == null) {
+            return false;
+        }
         String pattern = "^(\\d+)(\\.\\d+)?$";
         Matcher matcher = Pattern.compile(pattern).matcher(number);
         return matcher.find();

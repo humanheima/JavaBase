@@ -43,6 +43,7 @@ public class ThreadCommunicateTestUseLock {
                     while (queue.size() == 0) {
                         try {
                             System.out.println("队列空，等待数据");
+                            //队列已空
                             notEmpty.await();
                         } catch (InterruptedException e) {
                             e.printStackTrace();
@@ -50,6 +51,7 @@ public class ThreadCommunicateTestUseLock {
                     }
                     sleep(100);
                     queue.poll();                //每次移走队首元素
+                    //通知生产者生产数据
                     notFull.signal();
                     System.out.println("从队列取走一个元素，队列剩余" + queue.size() + "个元素");
                 } catch (InterruptedException e) {
@@ -75,6 +77,7 @@ public class ThreadCommunicateTestUseLock {
                     while (queue.size() == queueSize) {
                         try {
                             System.out.println("队列满，等待有空余空间");
+                            //队列已满
                             notFull.await();
                         } catch (InterruptedException e) {
                             e.printStackTrace();
@@ -82,6 +85,7 @@ public class ThreadCommunicateTestUseLock {
                     }
                     sleep(100);
                     queue.offer(1);       //每次插入一个元素
+                    //通知消费者消费数据
                     notEmpty.signal();
                     System.out.println("向队列取中插入一个元素，队列剩余空间：" + (queueSize - queue.size()));
                 } catch (InterruptedException e) {

@@ -55,7 +55,7 @@ public class GenericTest {
     }
 
     /**
-     * 只能取数据
+     * 只能取数据，不能加数据
      *
      * @param objectList
      */
