@@ -38,10 +38,11 @@ public class CountDownLatchTest {
         try {
             System.out.println("等待两个子线程执行完毕");
             countDownLatch.await();
+            //countDownLatch.await(1, TimeUnit.SECONDS);
             System.out.println("两个子线程已经执行完毕");
             System.out.println("继续执行主线程");
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
     }
 }

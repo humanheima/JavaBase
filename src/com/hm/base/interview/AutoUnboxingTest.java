@@ -12,7 +12,8 @@ public class AutoUnboxingTest {
         System.out.println(a == b);// false 两个引用没有引用同一对象
         System.out.println(a == c);// true a自动拆箱成int类型再和c比较
         System.out.println("----------------------------------");
-        test();
+        //test();
+        test1();
     }
 
     /**
@@ -28,5 +29,24 @@ public class AutoUnboxingTest {
         System.out.println(s1.intern() == s1);
         String s2 = new StringBuilder("ja").append("va").toString();
         System.out.println(s2.intern() == s2);
+    }
+
+    private static void test1() {
+        Integer a = 1;
+        Integer b = 2;
+        Integer c = 3;
+        Integer d = 3;
+        Integer e = 321;
+        Integer f = 321;
+        Long g = 3L;
+        Long h = 2L;
+
+        System.out.println(c == d);//true
+        System.out.println(e == f);//false
+        System.out.println(c == (a + b));//true
+        System.out.println(c.equals(a + b));//true a+b 先拆箱计算数值后再装箱成Integer类型，equals方法比较的是数值
+        System.out.println(g == (a + b));//true 比较的是拆箱后的数值
+        System.out.println(g.equals(a + b));//false 没有疑问 a+b 先拆箱计算数值后再装箱成Integer类型，不是Long类型，Long类型的equals方法
+        System.out.println(g.equals(a + h));//a+h 先拆箱计算处数值然后在装箱成Long类型
     }
 }
