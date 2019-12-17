@@ -20,7 +20,8 @@ public class FileInputStreamTest {
         //testSerializable();
         //copy();
         //test();
-        testReaderWriterCopy();
+        //testReaderWriterCopy();
+        testSerializable();
     }
 
     private static void testSerializable() {

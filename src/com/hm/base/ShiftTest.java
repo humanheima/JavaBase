@@ -40,7 +40,15 @@ public class ShiftTest {
 */
         //System.out.println(-1 << 29);
 
-        System.out.println(-4&4);
+        System.out.println(-4 & 4);
+
+        /**
+         * -1 原码 1000 0000 0000 0000 0000 0000 0000 0001
+         *    反码 1111 1111 1111 1111 1111 1111 1111 1110
+         *    补码 1111 1111 1111 1111 1111 1111 1111 1111
+         *    左移29位 符号为不变 1111 1111 1111 1111 1111 1111 1111 1111
+         *
+         */
 
         /**
          * 例如5 转化为2进制 0000 0000 0000 0000 0000 0000 0000 0101
@@ -60,9 +68,10 @@ public class ShiftTest {
          */
         System.out.println(-5 >> 4);
 
-        System.out.println(1<<33);
-        System.out.println(1<<1);
+        System.out.println(1 << 33);
+        System.out.println(1 << 1);
 
+        printInfo(-1 << 29);
         //printInfo(-5<<2);
 
     }

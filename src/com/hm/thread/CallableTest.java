@@ -12,10 +12,10 @@ public class CallableTest {
         FutureTask<Integer> result = new FutureTask<>(task);
         Thread thread = new Thread(result);
         thread.start();
-      /*  ExecutorService executor = Executors.newCachedThreadPool();
-        Task task = new Task();
-        Future<Integer> result=  executor.submit(task);;
-        executor.shutdown();*/
+        ExecutorService executor = Executors.newCachedThreadPool();
+        StringTask stringTask = new StringTask();
+        Future<String> stringResult = executor.submit(stringTask);
+        executor.shutdown();
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
@@ -24,6 +24,7 @@ public class CallableTest {
         System.out.println("主线程在执行任务");
         try {
             System.out.println("task运行结果" + result.get());
+            System.out.println("stringTask运行结果" + stringResult.get());
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
@@ -44,5 +45,26 @@ class Task implements Callable<Integer> {
             sum += i;
         }
         return sum;
+    }
+}
+
+class StringTask implements Callable<String> {
+
+    @Override
+    public String call() throws Exception {
+        String result = null;
+        try {
+            //noinspection unchecked
+            result = Integer.toString(3);
+        } catch (Throwable tr) {
+            throw tr;
+        } finally {
+            postResult();
+        }
+        return result;
+    }
+
+    private String postResult() {
+        return "hello world";
     }
 }

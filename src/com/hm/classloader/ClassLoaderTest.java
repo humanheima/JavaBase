@@ -8,6 +8,7 @@ public class ClassLoaderTest {
     public static void main(String[] args) {
         ClassLoader cl = ClassLoader.getSystemClassLoader();
         try {
+            System.out.println(cl.getClass().getName());
             cl.loadClass("com.hm.classloader.Tester");
             System.out.println("系统加载Tester类");
             Class.forName("com.hm.classloader.Tester");
