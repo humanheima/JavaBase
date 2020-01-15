@@ -53,12 +53,10 @@ public class TreeTraversing {
      * @param root
      */
     public static void recursion(TreeNode root) {
-
         System.out.println(root.getName());
         for (TreeNode child : root.getChildren()) {
             recursion(child);
         }
-
     }
 
     /**
@@ -73,6 +71,7 @@ public class TreeTraversing {
         while (!nodeDeque.isEmpty()) {
             node = nodeDeque.pop();
             System.out.println(node.getName());
+            // 从尾部插入
             nodeDeque.addAll(node.getChildren());
         }
 
@@ -92,6 +91,7 @@ public class TreeTraversing {
             System.out.println(node.getName());
             List<TreeNode> children = node.getChildren();
             for (int i = children.size() - 1; i >= 0; i--) {
+                //从头压入
                 nodeDeque.push(children.get(i));
             }
         }

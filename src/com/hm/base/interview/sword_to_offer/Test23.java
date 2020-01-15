@@ -114,10 +114,19 @@ public class Test23 {
     }
 
     public static ListNode loopNode(ListNode head) {
+        //如果meetingNode不为null，说明链表有环
+        // 1->2->3->4->5->6
+        //       ^        |
+        //       |        |
+        //       +--------+
+        //比如这个链表，meetingNode可以是3，4，5，6中的任意一个节点
         ListNode meetingNode = meetingNode1(head);
         if (meetingNode == null) {
             return null;
         }
+        /**
+         * 环中节点的个数
+         */
         int nodesInLoop = 1;
         ListNode node1 = meetingNode;
         while (node1.next != meetingNode) {

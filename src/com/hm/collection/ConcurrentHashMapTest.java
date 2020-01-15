@@ -1,8 +1,5 @@
 package com.hm.collection;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -16,7 +13,6 @@ public class ConcurrentHashMapTest {
     private static ConcurrentHashMap<Integer, Integer> hashMap;
 
     public static void main(String[] args) {
-        Map<Integer, Integer> map = Collections.synchronizedMap(new HashMap<>());
         hashMap = new ConcurrentHashMap<>();
         hashMap.put(0, 0);
         hashMap.get(0);

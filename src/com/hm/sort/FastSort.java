@@ -23,17 +23,22 @@ public class FastSort {
 
     /**
      * 调用者请确保传入正确的参数
+     *
      * @param a
      * @param left
      * @param right
      */
     private static void quickSort(int[] a, int left, int right) {
-        System.out.println("left=" + left + ",right=" + right);
         if (left < right) {
             int i = left;
             int j = right;
             int pivot = a[left];
             while (i < j) {
+                //{8, 4, 9, 1, 10, 6}
+                //{6, 4, 9, 1, 10, 6}
+                //{6, 4, 9, 1, 10, 9}
+                //{6, 4, 1, 1, 10, 9}
+                //{6, 4, 1, 8, 10, 9}
                 while (i < j && a[j] >= pivot) {
                     j--;
                 }
@@ -50,6 +55,12 @@ public class FastSort {
                 }
             }
             a[i] = pivot;
+
+            //打印每次排序后的结果，存在重复排序的情况
+            for (int k = 0; k < a.length; k++) {
+                System.out.print(a[k] + ",");
+            }
+            System.out.println();
             quickSort(a, left, i - 1);
             quickSort(a, i + 1, right);
         }

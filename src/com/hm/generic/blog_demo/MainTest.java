@@ -1,5 +1,7 @@
 package com.hm.generic.blog_demo;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -9,30 +11,103 @@ import java.util.List;
  */
 public class MainTest {
 
+    static class Erasure<T> {
+        T object;
+
+        public Erasure(T object) {
+            this.object = object;
+        }
+
+        public void add(T object){
+
+        }
+
+    }
+
+    static class Erasure1<T extends String> {
+        //	public class Erasure <T>{
+        T object;
+
+        public Erasure1(T object) {
+            this.object = object;
+        }
+    }
+
     public static void main(String[] args) {
 
 
         //加入圆形
-//        List<Circle> shapeCircles = new ArrayList<>();
-//        shapeCircles.add(new Circle());
-//        test2(shapeCircles);
-//        //加入长方形
-//        List<Rectangle> shapeRectangle = new ArrayList<>();
-//        shapeRectangle.add(new Rectangle());
-//        test2(shapeRectangle);
+        //List<Circle> shapeCircles = new ArrayList<>();
+        //shapeCircles.add(new Circle());
+        //test2(shapeCircles);
+        //加入长方形
+        //List<Rectangle> shapeRectangle = new ArrayList<>();
+        //shapeRectangle.add(new Rectangle());
+        //test2(shapeRectangle);
 
         /*Collection<Integer> src = new ArrayList<>();
         Collection<String> dest = new ArrayList<>();
         fromArrayToCollection(src, dest);*/
 
-        List<Circle> src = new ArrayList<>();
+        /*List<Circle> src = new ArrayList<>();
 
         src.add(new Circle());
 
         List<Shape> dest = new ArrayList<>();
 
         fromArrayToCollection2(src, dest);
-        fromArrayToCollection3(src, dest);
+        fromArrayToCollection3(src, dest);*/
+
+        genericRease0();
+        genericRease1();
+
+        genericRease2();
+    }
+
+
+    /**
+     * 测试泛型擦除
+     */
+    public static void genericRease0() {
+        Class class1 = new ArrayList<String>().getClass();
+        Class class2 = new ArrayList<Integer>().getClass();
+        System.out.println(class1);
+        System.out.println(class2);
+    }
+
+    /**
+     * 测试泛型擦除
+     */
+    public static void genericRease1() {
+        Erasure<String> erasure = new Erasure<String>("hello");
+        Class eclz = erasure.getClass();
+        System.out.println("erasure class is:" + eclz.getName());
+
+        Field[] fs = eclz.getDeclaredFields();
+        for (Field f : fs) {
+            System.out.println("Field name " + f.getName() + " type:" + f.getType().getName());
+        }
+
+        Method[] methods = eclz.getDeclaredMethods();
+        for ( Method m:methods ){
+            System.out.println(" method:"+m.toString());
+        }
+
+    }
+
+    /**
+     * 测试泛型擦除
+     */
+    public static void genericRease2() {
+        Erasure1<String> erasure = new Erasure1<String>("hello");
+        Class eclz = erasure.getClass();
+        System.out.println("erasure class is:" + eclz.getName());
+
+        Field[] fs = eclz.getDeclaredFields();
+        for (Field f : fs) {
+            System.out.println("Field name " + f.getName() + " type:" + f.getType().getName());
+        }
+
     }
 
     public static void test0(List<Object> objectList) {

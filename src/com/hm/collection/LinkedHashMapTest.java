@@ -13,10 +13,11 @@ public class LinkedHashMapTest {
     static final int MAXIMUM_CAPACITY = 1 << 30;
 
     public static void main(String[] args) {
-        Map<String, Student> map = new LinkedHashMap<>(16, 0.75f, true);
+        LinkedHashMap<String, Student> map = new LinkedHashMap<>(16, 0.75f, true);
         map.put("java", new Student("dmw", 18));
         map.put("android", new Student("hm", 18));
         map.put("kotlin", new Student("hello", 18));
+        //map.put("java", new Student("dmw", 18));
         for (Map.Entry<String, Student> entry : map.entrySet()) {
             System.out.println("key:" + entry.getKey() + ",value" + entry.getValue());
         }

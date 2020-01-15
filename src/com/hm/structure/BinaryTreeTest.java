@@ -8,7 +8,7 @@ import java.util.Stack;
  * Created by dumingwei on 2017/10/7.
  * <p>
  * 遍历的树以项目根目录下的BinaryTree.png为例
- * 先序遍历：1，2，4，6，7，8，3，5
+ * 前序遍历：1，2，4，6，7，8，3，5
  * 中序遍历：4，7，6，8，2，1，3，5
  * 后续遍历：7，8，6，4，2，5，3，1
  * Desc:二叉树遍历 递归，非递归。
@@ -46,7 +46,7 @@ public class BinaryTreeTest {
     }
 
     /**
-     * 递归实现的先序遍历
+     * 递归实现的前序遍历
      *
      * @param root
      */
@@ -60,7 +60,7 @@ public class BinaryTreeTest {
     }
 
     /**
-     * 非递归先序遍历
+     * 非递归前序遍历
      *
      * @param root
      */

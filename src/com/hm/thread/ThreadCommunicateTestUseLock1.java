@@ -10,6 +10,8 @@ import java.util.concurrent.locks.ReentrantLock;
 /**
  * Created by dumingwei on 2017/7/4.
  * 生产者消费者模式 生产两个消费一个
+ * 关于虚假唤醒：https://blog.csdn.net/qq_39455116/article/details/87101633
+ *
  */
 public class ThreadCommunicateTestUseLock1 {
 

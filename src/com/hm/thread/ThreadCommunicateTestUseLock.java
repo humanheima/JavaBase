@@ -14,7 +14,7 @@ import java.util.concurrent.locks.ReentrantLock;
 public class ThreadCommunicateTestUseLock {
 
 
-    private int queueSize = 100;
+    private int queueSize = 10;
     private Queue<Integer> queue = new ArrayDeque<>(queueSize);
     private Lock lock = new ReentrantLock();
     private Condition notFull = lock.newCondition();
@@ -45,6 +45,7 @@ public class ThreadCommunicateTestUseLock {
                             System.out.println("队列空，等待数据");
                             //队列已空
                             notEmpty.await();
+                            System.out.println("Consumer after await");
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
@@ -79,6 +80,7 @@ public class ThreadCommunicateTestUseLock {
                             System.out.println("队列满，等待有空余空间");
                             //队列已满
                             notFull.await();
+                            System.out.println("Producer after await");
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }

@@ -2,7 +2,6 @@ package com.hm.thread;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadPoolExecutor;
 
 /**
  * Created by dumingwei on 2017/6/8.
@@ -18,12 +17,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 public class ThreadPoolTest {
 
     public static void main(String[] args) {
-        ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(3);
-        //ExecutorService executor = Executors.newSingleThreadExecutor();
-        /*for (int i = 0; i < 10; i++) {
-            MyTask myTask = new MyTask(i);
-            executor.execute(myTask);
-        }*/
+       /* ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(3);
         MyTask myTask = new MyTask(1);
         executor.execute(myTask);
         try {
@@ -31,11 +25,21 @@ public class ThreadPoolTest {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        /**
+        *//**
          * executor.remove(myTask)方法不能成功移除一个已经运行的线程。
-         */
-        System.out.println(executor.remove(myTask));
-        //executor.shutdown();
+         *//*
+        System.out.println(executor.remove(myTask));*/
+
+        testSingleThreadExecutor();
+    }
+
+    private static void testSingleThreadExecutor() {
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        for (int i = 0; i < 10; i++) {
+            MyTask myTask = new MyTask(i);
+            executor.execute(myTask);
+        }
+        executor.shutdown();
     }
 }
 
@@ -50,16 +54,13 @@ class MyTask implements Runnable {
     @Override
     public void run() {
 
-        while (true) {
-            System.out.println(Thread.currentThread().getName() + " task" + taskNum + " 正在执行");
-            try {
-                Thread.sleep(400);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            System.out.println(System.currentTimeMillis() + Thread.currentThread().getName() + " task" + taskNum + " 执行完毕\n");
-
+        System.out.println(Thread.currentThread().getName() + " task" + taskNum + " 正在执行");
+        try {
+            Thread.sleep(400);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
+        System.out.println(System.currentTimeMillis() + Thread.currentThread().getName() + " task" + taskNum + " 执行完毕\n");
 
     }
 }

@@ -9,8 +9,14 @@ public class StaticInnerClassTest {
     private static int prop2 = 9;
 
 
+    public static void accessInnerStaticField() {
+        int age = StaticInnerClass.age;
+    }
+
     public static void main(String[] args) {
 
+        StaticInnerClass innerClass = new StaticInnerClass();
+        innerClass.accessOutProp();
     }
 
     static class StaticInnerClass {
@@ -20,6 +26,14 @@ public class StaticInnerClassTest {
         public void accessOutProp() {
             //静态内部类无法访问外部类的非静态成员变量
             //System.out.println(prop1);
+            System.out.println(prop2);
+        }
+    }
+
+    class InnerClass {
+
+        public void accessOutProp() {
+            System.out.println(prop1);
             System.out.println(prop2);
         }
     }

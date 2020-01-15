@@ -3,6 +3,7 @@ package com.hm.pattern.iterator;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Set;
 
 /**
  * Created by dumingwei on 2017/6/30.
@@ -19,6 +20,7 @@ public class Test {
         }
         System.out.println(list);
         HashMap<String, String> hashMap = new HashMap<>();
+        Set set = hashMap.entrySet();
         Iterator<String> iterator1 = hashMap.keySet().iterator();
         while (iterator1.hasNext()) {
             String key = iterator1.next();

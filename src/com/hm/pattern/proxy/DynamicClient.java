@@ -14,6 +14,7 @@ public class DynamicClient {
          *创建调用处理者
          */
         CtripInvocationHandler invocationHandler = new CtripInvocationHandler(xiaochilao);
+
         /**
          * 动态代理者
          */
@@ -26,5 +27,7 @@ public class DynamicClient {
          * 最终会调用被代理者xiaochilao的buy方法，实现真正的买票逻辑
          */
         purchasing.buy();
+
+        ProxyUtils.generateClassFile(xiaochilao.getClass(), "XiaochilaoProxy");
     }
 }
