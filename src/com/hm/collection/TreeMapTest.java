@@ -29,6 +29,12 @@ public class TreeMapTest {
             System.out.print(entry.getValue() + " ");
         }
         map.put(4, 4);
+
+        System.out.println(map.firstEntry());
+        System.out.println(map.firstKey());
+
+        System.out.println(map.lastEntry());
+        System.out.println(map.lastKey());
     }
 
     private static void test0() {

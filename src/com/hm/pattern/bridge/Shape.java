@@ -9,4 +9,11 @@ public abstract class Shape {
     }
 
     protected abstract void draw();
+
+    @Override
+    public String toString() {
+        return "Shape{" +
+                "color=" + color +
+                '}';
+    }
 }

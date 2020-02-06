@@ -84,13 +84,24 @@ public class VolatileTest {
 
 ### volatile使用场景
 
-1. 对变量的写不依赖当前值
-2. 该变量没有包含在具有其他变量的不变式中
+1. 对变量的写操作不依赖于当前值。
+2. 该变量没有包含在具有其他变量的不变式中。
 
 实际上，这些条件表明，可以被写入 volatile 变量的这些有效值独立于任何程序的状态，包括变量的当前状态。
 
 事实上，我的理解就是上面的2个条件需要保证操作是原子性操作，才能保证使用volatile关键字的程序在并发时能够正确执行。
 
+
+### Synchronized与volatile区别 
+
+1.volatile只能修饰变量，而synchronized可以修饰方法以及代码块
+ 
+2.volatile在多线程中不会存在阻塞问题，synchronized会存在阻塞问题
+ 
+3.volatile能保证数据的可见性，但不能完全保证数据的原子性，synchronized即保证了数据的可见性也保证了原子性
+ 
+4.volatile解决的是变量在多个线程之间的可见性，而synchronized解决的是多个线程之间访问资源的同步性
+ 
 参考链接
 
 [Java并发编程：volatile关键字解析](https://www.cnblogs.com/dolphin0520/p/3920373.html)

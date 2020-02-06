@@ -18,7 +18,7 @@ public class MainTest {
             this.object = object;
         }
 
-        public void add(T object){
+        public void add(T object) {
 
         }
 
@@ -58,10 +58,21 @@ public class MainTest {
         fromArrayToCollection2(src, dest);
         fromArrayToCollection3(src, dest);*/
 
+        new Circle();
+
         genericRease0();
         genericRease1();
 
         genericRease2();
+
+        Shape shape = new Shape() {
+
+            @Override
+            public void draw() {
+                System.out.println("draw");
+            }
+        };
+        shape.draw();
     }
 
 
@@ -89,8 +100,8 @@ public class MainTest {
         }
 
         Method[] methods = eclz.getDeclaredMethods();
-        for ( Method m:methods ){
-            System.out.println(" method:"+m.toString());
+        for (Method m : methods) {
+            System.out.println(" method:" + m.toString());
         }
 
     }
@@ -147,6 +158,7 @@ public class MainTest {
      * @param shapeList
      */
     public static void test3(List<? super Shape> shapeList) {
+
         shapeList.add(new Rectangle());
     }
 

@@ -7,6 +7,26 @@ package com.hm.generic.blog_demo;
 
 public class Circle extends Shape {
 
+    static {
+        System.out.println("静态代码块1");
+    }
+
+    {
+        System.out.println("代码块1");
+    }
+
+    public Circle() {
+        System.out.println("构造函数");
+    }
+
+    {
+        System.out.println("代码块2");
+    }
+
+    static {
+        System.out.println("静态代码块2");
+    }
+
     @Override
     public void draw() {
         System.out.println("画一个圆形");

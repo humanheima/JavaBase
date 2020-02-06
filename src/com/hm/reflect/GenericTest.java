@@ -1,41 +1,26 @@
 package com.hm.reflect;
 
+import com.hm.pattern.bridge.Blue;
+import com.hm.pattern.bridge.Color;
+import com.hm.pattern.bridge.Rectangle;
 import com.hm.pattern.bridge.Shape;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by dumingwei on 2017/6/25.
  */
 public class GenericTest {
 
-    private Map<String, Integer> score;
+    public static void main(String[] args) {
 
-    public static void main(String[] args) throws NoSuchFieldException {
-        /*Class<GenericTest> clazz = GenericTest.class;
-        Field f = clazz.getDeclaredField("score");
-        Class<?> a = f.getType();
-        System.out.println("score的类型是:" + a);
-        Type gType = f.getGenericType();
-        if (gType instanceof ParameterizedType) {
-            ParameterizedType pType = (ParameterizedType) gType;
-            Type rType = pType.getRawType();
-            System.out.println("原始类型是：" + rType);
-            Type[] aType = pType.getActualTypeArguments();
-            System.out.println("泛型信息是：");
-            for (int i = 0; i < aType.length; i++) {
-                System.out.println("第" + i + "个泛型类型是：" + aType[i]);
-            }
-        } else {
-            System.out.println("获取泛型类型出错!");
-        }*/
+        List<Shape> des = new ArrayList<>();
+        List<Shape> src = new ArrayList<>();
 
-        List<String> stringList = new ArrayList<>();
-        List<String> stringList1 = new ArrayList<>();
-        stringList.add("1");
-        //test(stringList);//编译不通过
+        src.add(new Rectangle(new Blue()));
+
+        copy(des, src);
     }
 
 
@@ -55,7 +40,7 @@ public class GenericTest {
     }
 
     /**
-     * 只能取数据，不能加数据
+     * 只能取数据，不能加数据，因为你不知道
      *
      * @param objectList
      */
@@ -63,6 +48,23 @@ public class GenericTest {
         for (Object o : objectList) {
             System.out.println(o);
         }
-        Shape shape = objectList.get(0);
+    }
+
+
+    /**
+     * @param des
+     * @param src
+     * @param <T>
+     * @return
+     */
+    public static <T> T copy(List<? super T> des, List<T> src) {
+        T last = null;
+        for (T t : src) {
+            last = t;
+            des.add(t);
+        }
+        T t = (T) des.get(0);
+        System.out.println(t);
+        return last;
     }
 }
