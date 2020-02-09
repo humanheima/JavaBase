@@ -13,6 +13,8 @@ import java.util.Stack;
  * 后续遍历：7，8，6，4，2，5，3，1
  * Desc:二叉树遍历 递归，非递归。
  * 参考链接：<a href="https://www.jianshu.com/p/456af5480cee></a>
+ * <p>
+ * https://blog.csdn.net/snow_7/article/details/51818580
  */
 public class BinaryTreeTest {
 
@@ -37,11 +39,12 @@ public class BinaryTreeTest {
         middleOrderTraversal(root);
         System.out.println();*/
 
-        recurseEnd(root);
-        System.out.println();
-        postOrderTraversal(root);
-        System.out.println();
+        //recurseEnd(root);
+        //System.out.println();
+        //postOrderTraversal(root);
+        //System.out.println();
 
+        System.out.println(findDeep(root));
 
     }
 
@@ -172,6 +175,7 @@ public class BinaryTreeTest {
         BinaryTreeNode root = new BinaryTreeNode(1);
         BinaryTreeNode rootLeft = new BinaryTreeNode(2);
         BinaryTreeNode rootRight = new BinaryTreeNode(3);
+
         BinaryTreeNode rootLeftLeft = new BinaryTreeNode(4);
         BinaryTreeNode rootLeftLeftRight = new BinaryTreeNode(6);
         BinaryTreeNode rootLeftLeftRightLeft = new BinaryTreeNode(7);
@@ -246,6 +250,40 @@ public class BinaryTreeTest {
             return 1;
         }
         return Math.min(getMin(root.left), getMin(root.right)) + 1;
+    }
+
+    /**
+     * 非递归获取树的最大深度
+     *
+     * @param root
+     * @return
+     */
+    public static int findDeep(BinaryTreeNode root) {
+        if (root == null)
+            return 0;
+        BinaryTreeNode current = null;
+        LinkedList<BinaryTreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        int cur, last;
+        int level = 0;
+        while (!queue.isEmpty()) {
+            cur = 0;//记录本层已经遍历的节点个数
+            last = queue.size();//当遍历完当前层以后，队列里元素全是下一层的元素，队列的长度是这一层的节点的个数
+            while (cur < last)//当还没有遍历到本层最后一个节点时循环
+            {
+                current = queue.poll();//出队一个元素
+                cur++;
+                //把当前节点的左右节点入队（如果存在的话）
+                if (current.left != null) {
+                    queue.offer(current.left);
+                }
+                if (current.right != null) {
+                    queue.offer(current.right);
+                }
+            }
+            level++;//每遍历完一层level+1
+        }
+        return level;
     }
 
 }

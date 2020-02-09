@@ -11,7 +11,6 @@ import java.util.List;
  */
 public class TreeTraversing {
 
-
     public static TreeNode makeTree() {
         TreeNode root = new TreeNode("A", null);
 
@@ -68,12 +67,13 @@ public class TreeTraversing {
         Deque<TreeNode> nodeDeque = new LinkedList<>();
         TreeNode node = root;
         nodeDeque.add(node);
+        int depth = 0;
         while (!nodeDeque.isEmpty()) {
             node = nodeDeque.pop();
             System.out.println(node.getName());
-            // 从尾部插入
             nodeDeque.addAll(node.getChildren());
         }
+        System.out.println(depth);
 
     }
 
@@ -90,19 +90,19 @@ public class TreeTraversing {
             node = nodeDeque.pop();
             System.out.println(node.getName());
             List<TreeNode> children = node.getChildren();
+            //注意这里要从后向前遍历
             for (int i = children.size() - 1; i >= 0; i--) {
                 //从头压入
                 nodeDeque.push(children.get(i));
             }
         }
-
     }
 
     public static void main(String[] args) {
         TreeNode root = makeTree();
         //recursion(root);
-        //breadthFirst(root);
-        depthFirst(root);
+        breadthFirst(root);
+        //depthFirst(root);
     }
 
 

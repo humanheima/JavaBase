@@ -31,7 +31,7 @@ class OrdArray {
             if (a[curIn] == searchKey)
                 return curIn;              // found it
             else if (lowerBound > upperBound)
-                return nElems;             // can't find it
+                return nElems;             // can't findTwo it
             else                          // divide range
             {
                 if (a[curIn] < searchKey)
@@ -40,13 +40,13 @@ class OrdArray {
                     upperBound = curIn - 1; // it's in lower half
             }  // end else divide range
         }  // end while
-    }  // end find()
+    }  // end findTwo()
 
     //-----------------------------------------------------------
     public void insert(long value)    // put element into array
     {
         int j;
-        for (j = 0; j < nElems; j++)        // find where it goes
+        for (j = 0; j < nElems; j++)        // findTwo where it goes
             if (a[j] > value)            // (linear search)
                 break;
         for (int k = nElems; k > j; k--)    // move bigger ones up
@@ -58,7 +58,7 @@ class OrdArray {
     //-----------------------------------------------------------
     public boolean delete(long value) {
         int j = find(value);
-        if (j == nElems)                  // can't find it
+        if (j == nElems)                  // can't findTwo it
             return false;
         else                           // found it
         {
@@ -101,7 +101,7 @@ class OrderedApp {
         if (arr.find(searchKey) != arr.size())
             System.out.println("Found " + searchKey);
         else
-            System.out.println("Can't find " + searchKey);
+            System.out.println("Can't findTwo " + searchKey);
 
         arr.display();                 // display items
 

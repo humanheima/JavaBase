@@ -41,7 +41,7 @@ class DArray {
     private void recMergeSort(long[] workSpace, int lowerBound, int upperBound) {
         if (lowerBound == upperBound)            // if range is 1,
             return;                              // no use sorting
-        else {                                    // find midpoint
+        else {                                    // findTwo midpoint
             int mid = (lowerBound + upperBound) / 2;
             // sort low half
             recMergeSort(workSpace, lowerBound, mid);

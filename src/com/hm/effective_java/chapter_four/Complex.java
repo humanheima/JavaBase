@@ -60,7 +60,7 @@ public final class Complex {
             return false;
         Complex c = (Complex) o;
 
-        // See page 43 to find out why we use compare instead of ==
+        // See page 43 to findTwo out why we use compare instead of ==
         return Double.compare(re, c.re) == 0 && Double.compare(im, c.im) == 0;
     }
 

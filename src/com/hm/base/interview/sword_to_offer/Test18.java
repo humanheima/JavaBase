@@ -59,8 +59,8 @@ public class Test18 {
 
     public static class ListNode {
 
-        int value;
-        ListNode next;
+        public int value;
+        public ListNode next;
     }
 
     /**

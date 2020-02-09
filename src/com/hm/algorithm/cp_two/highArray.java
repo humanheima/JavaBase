@@ -16,16 +16,16 @@ class HighArray {
     }
 
     //-----------------------------------------------------------
-    public boolean find(long searchKey) {                              // find specified value
+    public boolean find(long searchKey) {                              // findTwo specified value
         int j;
         for (j = 0; j < nElems; j++)            // for each element,
             if (a[j] == searchKey)           // found item?
                 break;                       // exit loop before end
         if (j == nElems)                    // gone to end?
-            return false;                   // yes, can't find it
+            return false;                   // yes, can't findTwo it
         else
             return true;                    // no, found it
-    }  // end find()
+    }  // end findTwo()
 
     //-----------------------------------------------------------
     public void insert(long value)    // put element into array
@@ -40,7 +40,7 @@ class HighArray {
         for (j = 0; j < nElems; j++)        // look for it
             if (value == a[j])
                 break;
-        if (j == nElems)                  // can't find it
+        if (j == nElems)                  // can't findTwo it
             return false;
         else                           // found it
         {
@@ -85,7 +85,7 @@ class HighArrayApp {
         if (arr.find(searchKey))
             System.out.println("Found " + searchKey);
         else
-            System.out.println("Can't find " + searchKey);
+            System.out.println("Can't findTwo " + searchKey);
 
         arr.delete(00);               // delete 3 items
         arr.delete(55);

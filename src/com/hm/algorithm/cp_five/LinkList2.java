@@ -21,13 +21,13 @@ class LinkList2 {
     }
 
     // -------------------------------------------------------------
-    public Link find(int key)      // find link with given key
+    public Link find(int key)      // findTwo link with given key
     {                           // (assumes non-empty list)
         Link current = first;              // start at 'first'
         while (current.iData != key)        // while no match,
         {
             if (current.next == null)        // if end of list,
-                return null;                 // didn't find it
+                return null;                 // didn't findTwo it
             else                            // not end of list,
                 current = current.next;      // go to next link
         }
@@ -41,7 +41,7 @@ class LinkList2 {
         Link previous = first;
         while (current.iData != key) {
             if (current.next == null)
-                return null;                 // didn't find it
+                return null;                 // didn't findTwo it
             else {
                 previous = current;          // go to next link
                 current = current.next;
@@ -81,11 +81,11 @@ class LinkList2App {
 
         theList.displayList();              // display list
 
-        Link f = theList.find(44);          // find item
+        Link f = theList.find(44);          // findTwo item
         if (f != null)
             System.out.println("Found link with key " + f.iData);
         else
-            System.out.println("Can't find link");
+            System.out.println("Can't findTwo link");
 
         Link d = theList.delete(66);        // delete item
         if (d != null)

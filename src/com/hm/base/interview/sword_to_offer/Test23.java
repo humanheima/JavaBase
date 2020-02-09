@@ -7,16 +7,16 @@ package com.hm.base.interview.sword_to_offer;
  * <p>
  * 解题思路：
  * 1. 首先确定链表中是否包含环。我们可以用两个指针来解决这个问题。定义两个指针，同时从链表的头节点出发，一个指针一次走一步，
- * 一个指针一次走两步，如果走的快的指针追上了走得慢的指针，那么链表就包含环。入如果走得快的指针走到了链表的末尾都没有追上走的慢的指针，那么
+ * 一个指针一次走两步，如果走的快的指针追上了走得慢的指针，那么链表就包含环。如果走得快的指针走到了链表的末尾都没有追上走的慢的指针，那么
  * 链表就不包含环。
  * <p>
- * 2. 找到环的入口。我们还是用两个指针来解决这个问题。先定义两个指针P1和P2指向链表的头结点。如果链表中环有n个结点，
- * 指针P1在链表上向前移动n步，然后两个指针以相同的速度向前移动。当第二个指针指向环的入口结点时，
- * 第一个指针已经围绕着环走了一圈又回到了入口结点。
+ * 2. 找到环的入口。我们还是用两个指针来解决这个问题。先定义两个指针P1和P2指向链表的头节点。如果链表中环有n个节点，
+ * 指针P1在链表上向前移动n步，然后两个指针以相同的速度向前移动。当第二个指针指向环的入口节点时，
+ * 第一个指针已经围绕着环走了一圈又回到了入口节点。
  * <p>
- * 3. 剩下的问题就是如何得到环中结点的数目。我们在前面判断一个链表里是否有环的时候用到了一快一慢的两个指针。如果两个指针相遇，
- * 表明链表中存在环。两个指针相遇的结点一定是在环中。可以从这个结点出发，一边继续向前移动一边计数，
- * 当再次回到这个结点时就可以得到环中结点数了。
+ * 3. 剩下的问题就是如何得到环中节点的数目。我们在前面判断一个链表里是否有环的时候用到了一快一慢的两个指针。如果两个指针相遇，
+ * 表明链表中存在环。两个指针相遇的节点一定是在环中。可以从这个节点出发，一边继续向前移动一边计数，
+ * 当再次回到这个节点时就可以得到环中节点数了。
  * <p>
  * <p>
  * 关于快指针一次走两步，慢指针一次走一步一定相遇的问题：
@@ -25,7 +25,10 @@ package com.hm.base.interview.sword_to_offer;
  * 1：快指针与慢指针之间差一步。此时继续往后走，慢指针前进一步，快指针前进两步，两者相遇。
  * 2：快指针与慢指针之间差两步。此时继续往后走，慢指针前进一步，快指针前进两步，两者之间相差一步，转化为第一种情况。
  * 3：快指针与慢指针之间差N步。此时继续往后走，慢指针前进一步，快指针前进两步，两者之间相差(N+1-2)-> N-1步。
- * 因此，此题得证。所以快指针必然与慢指针相遇。又因为快指针速度是慢指针的两倍，所以相遇时必然只绕了一圈。
+ * <p>
+ * 从上面三点可以得出：如果环的长度为N，那么当慢指针进入到环的入口的时候快指针已经在环中了，慢指针和快指针之间的步数之差最大是（N-1）。
+ * 所以当慢指针绕环不到一圈的时候一定会和快指针相遇。
+ *
  * <p>
  * 作者：冯昱尧
  * 链接：https://www.zhihu.com/question/23208893/answer/117115415
@@ -36,8 +39,9 @@ package com.hm.base.interview.sword_to_offer;
 public class Test23 {
 
     private static class ListNode {
+
         private int val;
-        private ListNode next;
+        public ListNode next;
 
         public ListNode() {
         }
@@ -48,7 +52,7 @@ public class Test23 {
 
         @Override
         public String toString() {
-            return val + "";
+            return "Node val is " + val + "\n";
         }
     }
 
@@ -56,29 +60,8 @@ public class Test23 {
         test01();
         test02();
         test03();
-    }
-
-    public static ListNode meetingNode(ListNode head) {
-        ListNode fast = head;
-        ListNode slow = head;
-        while (fast != null && fast.next != null) {
-            fast = fast.next.next;
-            slow = slow.next;
-            if (fast == slow) {
-                break;
-            }
-        }
-        //链表中没有环
-        if (fast == null || fast.next == null) {
-            return null;
-        }
-        //fast重新指向第一个节点
-        fast = head;
-        while (fast != slow) {
-            fast = fast.next;
-            slow = slow.next;
-        }
-        return fast;
+        test04();
+        test05();
     }
 
     /**
@@ -93,17 +76,21 @@ public class Test23 {
         }
 
         ListNode slow = head.next;
+        //注释1，只有一个节点，没有环，返回null
         if (slow == null) {
             return null;
         }
 
+        //注释2，fast指针比slow指针快一步，也就是head.next.next
         ListNode fast = slow.next;
 
         while (fast != null && slow != null) {
+            //注释3，快慢指针相遇，存在环
             if (fast == slow) {
                 return fast;
             }
             slow = slow.next;
+            //注释4，fast每次走两步 "没病，走两步" -- 赵本山
             fast = fast.next;
             if (fast != null) {
                 fast = fast.next;
@@ -113,6 +100,10 @@ public class Test23 {
         return fast;
     }
 
+    /**
+     * @param head
+     * @return 返回环的入口节点
+     */
     public static ListNode loopNode(ListNode head) {
         //如果meetingNode不为null，说明链表有环
         // 1->2->3->4->5->6
@@ -133,8 +124,9 @@ public class Test23 {
             node1 = node1.next;
             nodesInLoop++;
         }
+        System.out.println("环的长度是：" + nodesInLoop);
+        //将node1赋值为head，然后向前走的长度就是环的长度
         node1 = head;
-        //先移动node1，次数为环中节点的数目nodesInLoop
         for (int i = 0; i < nodesInLoop; i++) {
             node1 = node1.next;
         }
@@ -162,7 +154,6 @@ public class Test23 {
         n4.next = n5;
         n5.next = n6;
 
-        //System.out.println(meetingNode(n1));
         System.out.println(loopNode(n1));
     }
 
@@ -185,7 +176,6 @@ public class Test23 {
         n5.next = n6;
         n6.next = n3;
 
-        //System.out.println(meetingNode(n1));
         System.out.println(loopNode(n1));
     }
 
@@ -207,8 +197,56 @@ public class Test23 {
         n5.next = n6;
         n6.next = n6;
 
-        //System.out.println(meetingNode(n1));
         System.out.println(loopNode(n1));
     }
+
+    // 1->2->3->4->5->6->7
+    //       ^          |
+    //       |          |
+    //       +----------+
+    private static void test04() {
+        ListNode n1 = new ListNode(1);
+        ListNode n2 = new ListNode(2);
+        ListNode n3 = new ListNode(3);
+        ListNode n4 = new ListNode(4);
+        ListNode n5 = new ListNode(5);
+        ListNode n6 = new ListNode(6);
+        ListNode n7 = new ListNode(7);
+
+        n1.next = n2;
+        n2.next = n3;
+        n3.next = n4;
+        n4.next = n5;
+        n5.next = n6;
+        n6.next = n7;
+        n7.next = n3;
+
+        System.out.println(loopNode(n1));
+    }
+
+    // 1->2->3->4->5->6->7
+    //          ^       |
+    //          |       |
+    //          +-------+
+    private static void test05() {
+        ListNode n1 = new ListNode(1);
+        ListNode n2 = new ListNode(2);
+        ListNode n3 = new ListNode(3);
+        ListNode n4 = new ListNode(4);
+        ListNode n5 = new ListNode(5);
+        ListNode n6 = new ListNode(6);
+        ListNode n7 = new ListNode(7);
+
+        n1.next = n2;
+        n2.next = n3;
+        n3.next = n4;
+        n4.next = n5;
+        n5.next = n6;
+        n6.next = n7;
+        n7.next = n4;
+
+        System.out.println(loopNode(n1));
+    }
+
 
 }

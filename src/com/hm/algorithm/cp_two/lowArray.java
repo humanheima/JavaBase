@@ -48,7 +48,7 @@ class LowArrayApp {
                 break;
         }
         if (j == nElems)
-            System.out.println("Can't find " + searchKey);
+            System.out.println("Can't findTwo " + searchKey);
         else
             System.out.println("Found " + searchKey);
 

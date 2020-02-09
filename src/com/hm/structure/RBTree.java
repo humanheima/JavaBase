@@ -92,7 +92,7 @@ public class RBTree<T extends Comparable<T>> {
     }
 
     /**
-     * find the value by give value(include key,key used for search,
+     * findTwo the value by give value(include key,key used for search,
      * other field is not used,@see compare method).if this value not exist return null
      *
      * @param value
@@ -282,13 +282,13 @@ public class RBTree<T extends Comparable<T>> {
     }
 
     /**
-     * find the successor node
+     * findTwo the successor node
      *
      * @param node current node's right node
      * @return
      */
     private RBTreeNode<T> removeMin(RBTreeNode<T> node) {
-        //find the min node
+        //findTwo the min node
         RBTreeNode<T> parent = node;
         while (node != null && node.getLeft() != null) {
             parent = node;
@@ -346,7 +346,7 @@ public class RBTree<T extends Comparable<T>> {
     }
 
     /**
-     * find the parent node to hold node x,if parent value equals x.value return parent.
+     * findTwo the parent node to hold node x,if parent value equals x.value return parent.
      *
      * @param x
      * @return

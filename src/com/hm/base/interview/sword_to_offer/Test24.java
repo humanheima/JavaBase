@@ -1,11 +1,9 @@
 package com.hm.base.interview.sword_to_offer;
 
-import com.hm.base.interview.sword_to_offer.Test18.ListNode;
-
 /**
  * Created by dumingwei on 2018/12/10
  * <p>
- * Desc:定义一个函数，输入一个链表的头结点，反转该链表并输出反转后链表的头结点。
+ * Desc:定义一个函数，输入一个链表的头节点，反转该链表并输出反转后链表的头节点。
  * <p>
  * 测试用例
  * 1. head 为null
@@ -19,19 +17,25 @@ import com.hm.base.interview.sword_to_offer.Test18.ListNode;
 public class Test24 {
 
 
-    public static Test18.ListNode reverseList(ListNode head) {
+    public static class ListNode {
+
+        public int value;
+        public ListNode next;
+    }
+
+    public static ListNode reverseList(ListNode head) {
 
         //用于记录反转后的链表的头节点
-        Test18.ListNode reverseHead = null;
+        ListNode reverseHead = null;
         //用于记录当前处理的节点
-        Test18.ListNode curr = head;
+        ListNode curr = head;
         //用于记录当前节点的前驱节点
-        Test18.ListNode prev = null;
-        //当前节点的下一个节点
-        Test18.ListNode next;
+        ListNode prev = null;
+        //用于记录当前节点的下一个节点
+        ListNode next = null;
 
         while (curr != null) {
-            // 记录当前处理的结点，最后一个记录的结点就是反转后的头结点
+            //记录当前处理的节点，最后一个记录的节点就是反转后的头节点
             reverseHead = curr;
             next = curr.next;
             curr.next = prev;
@@ -46,7 +50,7 @@ public class Test24 {
     /**
      * 输出链表的元素值
      *
-     * @param head 链表的头结点
+     * @param head 链表的头节点
      */
     public static void printList(ListNode head) {
         while (head != null) {
@@ -64,7 +68,7 @@ public class Test24 {
     }
 
     private static void test0() {
-        Test18.ListNode head = reverseList(null);
+        ListNode head = reverseList(null);
         printList(head);
     }
 
