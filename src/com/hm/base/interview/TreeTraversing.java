@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  * Crete by dumingwei on 2019-07-23
- * Desc: 树的遍历
+ * Desc: 多叉树的遍历
  */
 public class TreeTraversing {
 
@@ -67,14 +67,11 @@ public class TreeTraversing {
         Deque<TreeNode> nodeDeque = new LinkedList<>();
         TreeNode node = root;
         nodeDeque.add(node);
-        int depth = 0;
         while (!nodeDeque.isEmpty()) {
             node = nodeDeque.pop();
             System.out.println(node.getName());
             nodeDeque.addAll(node.getChildren());
         }
-        System.out.println(depth);
-
     }
 
     /**

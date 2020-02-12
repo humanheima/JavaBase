@@ -1,8 +1,6 @@
 package com.hm.structure;
 
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Stack;
+import java.util.*;
 
 /**
  * Created by dumingwei on 2017/10/7.
@@ -68,18 +66,18 @@ public class BinaryTreeTest {
      * @param root
      */
     public static void preOrderTraversal(BinaryTreeNode root) {
-        Stack<BinaryTreeNode> treeNodeStack = new Stack<>();
+        Deque<BinaryTreeNode> stack = new ArrayDeque<>();
         BinaryTreeNode node = root;
-        while (node != null || !treeNodeStack.isEmpty()) {
+        while (node != null || !stack.isEmpty()) {
             while (node != null) {
                 System.out.print(node.value + " ");
                 //为了之后能找到该节点的右子树，暂存该节点
-                treeNodeStack.push(node);
+                stack.push(node);
                 node = node.left;
             }
             //一直到当前节点的左子树为null，开始考虑当前节点的右子树
-            if (!treeNodeStack.isEmpty()) {
-                node = treeNodeStack.pop();
+            if (!stack.isEmpty()) {
+                node = stack.pop();
                 node = node.right;
             }
         }
@@ -106,23 +104,21 @@ public class BinaryTreeTest {
      * @param root
      */
     public static void middleOrderTraversal(BinaryTreeNode root) {
-        Stack<BinaryTreeNode> treeNodeStack = new Stack<>();
+        Deque<BinaryTreeNode> stack = new ArrayDeque<>();
         BinaryTreeNode node = root;
-        while (node != null || !treeNodeStack.isEmpty()) {
+        while (node != null || !stack.isEmpty()) {
             while (node != null) {
-                treeNodeStack.push(node);
+                stack.push(node);
                 node = node.left;
             }
             //一直到当前节点的左子树为null，开始考虑当前节点的右子树
-            if (!treeNodeStack.isEmpty()) {
-                node = treeNodeStack.pop();
+            if (!stack.isEmpty()) {
+                node = stack.pop();
                 System.out.print(node.value + " ");
                 node = node.right;
             }
         }
-
     }
-
 
     /**
      * 递归实现的后序遍历递归实现
@@ -231,7 +227,7 @@ public class BinaryTreeTest {
             return 0;
         int leftDepth = maxDepth(node.left);
         int rightDepth = maxDepth(node.right);
-        return Math.max(leftDepth, rightDepth) + 1;
+        return 1 + Math.max(leftDepth, rightDepth);
     }
 
     //获取最小深度
@@ -262,15 +258,15 @@ public class BinaryTreeTest {
         if (root == null)
             return 0;
         BinaryTreeNode current = null;
-        LinkedList<BinaryTreeNode> queue = new LinkedList<>();
+        Deque<BinaryTreeNode> queue = new ArrayDeque<>();
         queue.offer(root);
         int cur, last;
         int level = 0;
         while (!queue.isEmpty()) {
             cur = 0;//记录本层已经遍历的节点个数
             last = queue.size();//当遍历完当前层以后，队列里元素全是下一层的元素，队列的长度是这一层的节点的个数
-            while (cur < last)//当还没有遍历到本层最后一个节点时循环
-            {
+            while (cur < last) {
+                //当还没有遍历到本层最后一个节点时循环
                 current = queue.poll();//出队一个元素
                 cur++;
                 //把当前节点的左右节点入队（如果存在的话）

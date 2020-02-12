@@ -2,7 +2,9 @@ package com.hm.base.interview.sword_to_offer;
 
 /**
  * Crete by dumingwei on 2020-02-09
- * Desc:从数组中找出只出现一次的两个数，数组中其他数都出现两次
+ * <p>
+ * Desc:从数组汇总找出一个只出现一次的数，
+ * 从数组中找出只出现一次的两个数，数组中其他数都出现两次
  */
 public class FindTwoNumberOnce {
 

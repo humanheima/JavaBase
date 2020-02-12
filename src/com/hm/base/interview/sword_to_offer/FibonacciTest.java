@@ -14,15 +14,14 @@ package com.hm.base.interview.sword_to_offer;
 public class FibonacciTest {
 
     public static void main(String[] args) {
-        System.out.println(fibonacci(0));
-        System.out.println(fibonacci(1));
-        System.out.println(fibonacci(2));
-        System.out.println(fibonacci(3));
-        System.out.println(fibonacci(4));
-        System.out.println(fibonacci(5));
-        System.out.println(fibonacci(6));
-        System.out.println(fibonacci(7));
-        System.out.println(fibonacci(8));
+        for (int counter = 0; counter <= 10; counter++) {
+            System.out.printf("Fibonacci of %d is: %d\n",
+                    counter, fibonacci(counter));
+        }
+        for (int counter = 0; counter <= 10; counter++) {
+            System.out.printf("fibonacciRecursively of %d is: %d\n",
+                    counter, fibonacci(counter));
+        }
     }
 
     public static long fibonacci(int n) {
@@ -47,5 +46,11 @@ public class FibonacciTest {
         return current;
     }
 
+    public static long fibonacciRecursively(long number) {
+        if ((number == 0) || (number == 1))
+            return number;
+        else
+            return fibonacciRecursively(number - 1) + fibonacciRecursively(number - 2);
+    }
 
 }

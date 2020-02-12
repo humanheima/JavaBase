@@ -66,6 +66,11 @@ public class ReverseLinkEveryKNode {
         return newHead;
     }
 
+    /**
+     * 反转
+     * @param head
+     * @return
+     */
     public static ListNode reverseList1(ListNode head) {
 
         //用于记录反转后的链表的头节点
