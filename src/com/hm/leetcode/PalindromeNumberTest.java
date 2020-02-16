@@ -4,7 +4,7 @@ package com.hm.leetcode;
  * Crete by dumingwei on 2020-02-12
  * Desc: 回文数
  */
-public class MainTest {
+public class PalindromeNumberTest {
 
     public static void main(String[] args) {
 
@@ -24,12 +24,12 @@ public class MainTest {
      * 12321  2 12
      * 123321 3 123 543
      *
-     * @param var
+     * @param number
      * @return
      */
-    public static boolean isPalindrome(int var) {
-        String number = String.valueOf(var);
-        int length = number.length();
+    public static boolean isPalindrome(int number) {
+        String numberStr = String.valueOf(number);
+        int length = numberStr.length();
         if (length == 1) {
             return true;
         }
@@ -38,16 +38,14 @@ public class MainTest {
         int middle = length / 2;
 
         for (int i = 0; i < middle; i++) {
-            char left = number.charAt(i);
-            char right = number.charAt(length - 1 - i);
+            char left = numberStr.charAt(i);
+            char right = numberStr.charAt(length - 1 - i);
             if (left != right) {
                 result = false;
                 break;
             }
-
         }
         return result;
-
     }
 
 }

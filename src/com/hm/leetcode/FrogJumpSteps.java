@@ -2,7 +2,7 @@ package com.hm.leetcode;
 
 /**
  * Crete by dumingwei on 2020-02-12
- * Desc: 一只青蛙一次可以跳上 1 级台阶，也可以跳上2 级。求该青蛙跳上一个n 级的台阶总共有多少种跳法。
+ * Desc: 一只青蛙一次可以跳1级台阶，也可以跳2级台阶。求该青蛙跳上一个级的台阶总共有多少种跳法。
  * <p>
  * f(1)=1
  * f(2)=2
@@ -44,24 +44,26 @@ public class FrogJumpSteps {
     }
 
     /**
-     * @param steps 台阶数
+     * 动态规划解法
+     *
+     * @param n 台阶数 n>=3
      * @return
      */
-    static int frogJump(int steps) {
-        if (steps <= 0) {
+    static int frogJump(int n) {
+        if (n <= 0) {
             return 0;
         }
-        if (steps == 1) {
+        if (n == 1) {
             return 1;
         }
-        if (steps == 2) {
+        if (n == 2) {
             return 2;
         }
 
         int preTwo = 1;
         int prepOne = 2;
         int jumpN = 0;
-        for (int i = 3; i <= steps; i++) {
+        for (int i = 3; i <= n; i++) {
             jumpN = preTwo + prepOne;
             preTwo = prepOne;
             prepOne = jumpN;
@@ -69,10 +71,13 @@ public class FrogJumpSteps {
         return jumpN;
     }
 
+    /**
+     * 递归解法
+     *
+     * @param n 台阶数
+     * @return
+     */
     static int frogJumpRecursively(int n) {
-        if (n <= 0) {
-            return 0;
-        }
         if (n == 1) {
             return 1;
         } else if (n == 2) {

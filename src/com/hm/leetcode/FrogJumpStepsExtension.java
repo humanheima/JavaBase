@@ -3,7 +3,7 @@ package com.hm.leetcode;
 
 /**
  * Crete by dumingwei on 2020-02-12
- * Desc: 一只青蛙一次可以跳上1级台阶，也可以跳上2 级……它也可以跳上n 级，此时该青蛙跳上一个n级的台阶总共有多少种跳法？（拓展问题）
+ * Desc: 一只青蛙一次可以跳上1级台阶，也可以跳上2级，也可以跳上3级台阶，……也可以跳上n级，那么青蛙跳上一个n级的台阶总共有多少种跳法？
  * <p>
  * 感觉这个扩展问题并不好，关于f(0)的问题
  *
@@ -20,35 +20,45 @@ public class FrogJumpStepsExtension {
 
 
     public static void main(String[] args) {
-        System.out.println(jumpFloorII(5));
-        System.out.println(frogJumpFloorII(5));
-        System.out.println(frogJumpFloor(5));
-        System.out.println(JumpFloorIIAnother(5));
+        System.out.println(frogJumpRecursively(0));
+        System.out.println(frogJumpRecursively(1));
+        System.out.println(frogJumpRecursively(2));
+        System.out.println(frogJumpRecursively(3));
+        System.out.println(frogJumpRecursively(4));
+        System.out.println(frogJumpRecursively(5));
 
-        System.out.println(jumpFloorII(0));
-        System.out.println(frogJumpFloorII(0));
-        System.out.println(frogJumpFloor(0));
-        System.out.println(JumpFloorIIAnother(0));
+        System.out.println(JumpFloorII(0));
+        System.out.println(JumpFloorII(1));
+        System.out.println(JumpFloorII(2));
+        System.out.println(JumpFloorII(3));
+        System.out.println(JumpFloorII(4));
+        System.out.println(JumpFloorII(5));
 
     }
 
-    public static int jumpFloorII(int n) {//递归方法
-        if (n == 0 || n == 1) {
-            return 1;
-        } else {
-            return 2 * jumpFloorII(n - 1);
-        }
-    }
-
-    static int frogJumpFloorII(int n) {//递归方法
+    /**
+     * 递归实现
+     *
+     * @param n
+     * @return
+     */
+    static int frogJumpRecursively(int n) {
         if (n == 0 || n == 1) return 1;
-        return 2 * frogJumpFloorII(n - 1);
+        return 2 * frogJumpRecursively(n - 1);
     }
 
-    public int JumpFloorII(int n) {//迭代方法
+    /**
+     * 循环实现
+     *
+     * @param n
+     * @return
+     */
+    public static int JumpFloorII(int n) {
+        if (n == 0 || n == 1) return 1;
         int result = 1;
-        while (--n != 0) {
+        while (n > 1) {
             result *= 2;
+            n--;
         }
         return result;
     }
