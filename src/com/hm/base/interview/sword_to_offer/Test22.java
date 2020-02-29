@@ -5,15 +5,17 @@ import com.hm.base.interview.sword_to_offer.Test18.ListNode;
 /**
  * Created by dumingwei on 2018/12/6
  * <p>
- * Desc:输入一个链表，输出该链表中倒数第k 个结点．为了符合大多数人的习惯，本题从1 开始计数，即链表的尾结点是倒数第1 个结点．
- * 例如一个链表有6 个结点，从头结点开始它们的值依次是1 、2、3、4、5 、6。这个个链表的倒数第3 个结点是值为4 的结点．
+ * Desc:输入一个链表，输出该链表中倒数第k 个节点．为了符合大多数人的习惯，本题从1 开始计数，即链表的尾节点是倒数第1 个节点．
+ * 例如一个链表有6 个节点，从头节点开始它们的值依次是1 、2、3、4、5 、6。这个个链表的倒数第3 个节点是值为4 的节点．
  * <p>
  * <p>
- * 解题思路：为了实现只遍历链表一次就能找到倒数第k 个结点，我们可以定义两个指针。第一个指针从链表的头指针开始遍历向前走k-1步，
+ * 解题思路：为了实现只遍历链表一次就能找到倒数第k 个节点，我们可以定义两个指针。第一个指针从链表的头指针开始遍历向前走k-1步，
  * 第二个指针保持不动；从第k 步开始，第二个指针也开始从链表的头指针开始遍历。由于两个指针的距离保持在k-1 ，
- * 当第一个（走在前面的）指针到达链表的尾结点时，第二个指针（走在后面的）指针正好是倒数第k 个结点。
+ * 当第一个（走在前面的）指针到达链表的尾节点时，第二个指针（走在后面的）指针正好是倒数第k 个节点。
  * <p>
- * 参考链接：https://blog.csdn.net/derrantcm/article/details/46669025
+ * 参考链接：
+ * https://blog.csdn.net/derrantcm/article/details/46669025
+ * [链表算法面试问题？看我就够了！](https://www.cxyxiaowu.com/1400.html)
  */
 public class Test22 {
 
@@ -57,13 +59,13 @@ public class Test22 {
     }
 
     /**
-     * 输入一个键表，输出该链表中倒数第k 个结点．为了符合大多数人的习惯，
-     * 本题从1开始计数，即链表的尾结点是倒数第1个结点．例如一个链表有6个结点，
-     * 从头结点开始它们的值依次是1、2、3、4、5 6。这个链表的倒数第3个结点是值为4的结点．
+     * 输入一个键表，输出该链表中倒数第k 个节点．为了符合大多数人的习惯，
+     * 本题从1开始计数，即链表的尾节点是倒数第1个节点．例如一个链表有6个节点，
+     * 从头节点开始它们的值依次是1、2、3、4、5 6。这个链表的倒数第3个节点是值为4的节点．
      *
-     * @param head 链表的头结点
-     * @param k    倒数第k个结点
-     * @return 倒数第k个结点
+     * @param head 链表的头节点
+     * @param k    倒数第k个节点
+     * @return 倒数第k个节点
      */
     public static ListNode findKthToTail(ListNode head, int k) {
 
@@ -71,7 +73,7 @@ public class Test22 {
             return null;
         }
         ListNode pointer = head;
-        // 倒数第k个结点与倒数第一个结点相隔k-1个位置
+        // 倒数第k个节点与倒数第一个节点相隔k-1个位置
         // pointer先走k-1个位置
         for (int i = 1; i < k; i++) {
             if (pointer.next != null) {
@@ -82,7 +84,7 @@ public class Test22 {
             }
         }
         // pointer还没有走到链表的末尾，那么pointer和head一起走，
-        // 当pointer走到最后一个结点即，pointer.next=null时，head就是倒数第k个结点
+        // 当pointer走到最后一个节点即，pointer.next=null时，head就是倒数第k个节点
         while (pointer.next != null) {
             head = head.next;
             pointer = pointer.next;

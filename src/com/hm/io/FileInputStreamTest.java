@@ -20,8 +20,8 @@ public class FileInputStreamTest {
         //testSerializable();
         //copy();
         //test();
-        //testReaderWriterCopy();
-        testSerializable();
+        testReaderWriterCopy();
+        //testSerializable();
     }
 
     private static void testSerializable() {
@@ -226,8 +226,8 @@ public class FileInputStreamTest {
         BufferedReader bfr = null;
         BufferedWriter bfw = null;
         try {
-            bfr = new BufferedReader(new FileReader("D:/FileInputStreamTest.java"));
-            bfw = new BufferedWriter(new FileWriter("D:/FileInputStreamTestCopy.java"));
+            bfr = new BufferedReader(new FileReader("FileWriterDemo.txt"));
+            bfw = new BufferedWriter(new FileWriter("FileWriterDemoCopy.txt"));
             String line;
             while ((line = bfr.readLine()) != null) {
                 bfw.write(line);

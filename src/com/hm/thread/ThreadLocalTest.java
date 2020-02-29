@@ -1,5 +1,7 @@
 package com.hm.thread;
 
+import sun.jvm.hotspot.oops.Metadata;
+
 /**
  * Created by dumingwei on 2017/6/8.
  */

@@ -1,6 +1,7 @@
 package com.hm.lock;
 
 import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
@@ -8,7 +9,6 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  * 测试读写锁
  */
 public class ReentrantReadWriteLockTest {
-
 
     private ReadWriteLock rwl = new ReentrantReadWriteLock();
 
