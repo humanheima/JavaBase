@@ -20,5 +20,9 @@ public class BuildInClient {
         wexinObservable.addObserver(observer3);
         wexinObservable.setChanged();
         wexinObservable.notifyObservers("公众号更新了");
+
+        System.out.println(5);
+        System.out.println(~-5);
+
     }
 }
