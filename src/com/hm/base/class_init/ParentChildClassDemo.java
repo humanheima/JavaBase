@@ -16,10 +16,12 @@ public class ParentChildClassDemo {
     public static void main(String[] args) {
 
 
-        Child child = new Child();
+        Parent parentchild = new Child();
 
         System.out.println("--------------");
-        //Parent parentchild = new Child();
+
+        Child child = new Child();
+
         //child.test();
     }
 

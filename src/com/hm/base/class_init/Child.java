@@ -16,6 +16,7 @@ public class Child extends Parent {
         //test();
         System.out.println("child c= " + c);
         System.out.println("child d= " + d);
+
         test();
     }
 
