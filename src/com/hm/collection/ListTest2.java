@@ -11,6 +11,10 @@ import java.util.ListIterator;
 public class ListTest2 {
 
     public static void main(String[] args) {
+
+        List<String> booksX = new ArrayList<>();
+        booksX.add(null);
+
         List<String> books = new ArrayList<>();
         books.add("轻量级");
         books.add("java");

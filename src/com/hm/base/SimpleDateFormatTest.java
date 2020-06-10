@@ -4,10 +4,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.*;
 
 /**
@@ -33,9 +30,9 @@ public class SimpleDateFormatTest {
         //unsafeInvoke();
         //safeInvokeFirst();
         //safeInvokeSecond();
-        safeInvokeThird();
+        //safeInvokeThird();
         //useDateTimeFormatter();
-
+        parseTime();
     }
 
     /**
@@ -187,6 +184,31 @@ public class SimpleDateFormatTest {
         DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy年MM月dd日 hh:mm a");
         String nowStr = nowTime.format(formatter1);
         System.out.println(nowStr);
+
+    }
+
+    public static void parseTime() {
+        //SimpleDateFormat simpleDateFormat = new SimpleDateFormat("H", Locale.getDefault());
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd:H", Locale.getDefault());
+        //String time = simpleDateFormat.format(new Date(System.currentTimeMillis() - 3600L * 8 * 1000));
+        String time = simpleDateFormat.format(new Date(System.currentTimeMillis()));
+        System.out.println(time);
+        System.out.println("15".compareTo("9"));
+
+
+        System.out.println(Integer.parseInt("09"));
+
+        /*System.out.println(Long.MAX_VALUE);
+        long x = 3600L * 24 * 28 * 1000;
+        System.out.println(x);*/
+
+        Calendar calendar = Calendar.getInstance();
+        for (int i = 0; i < 300; i++) {
+            int day = calendar.get(Calendar.DAY_OF_YEAR);
+            System.out.println(simpleDateFormat.format(calendar.getTime()));
+            calendar.set(Calendar.DAY_OF_YEAR, day + 1);
+        }
+
 
     }
 }
