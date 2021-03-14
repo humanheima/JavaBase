@@ -3,7 +3,7 @@ package com.hm.structure;
 /**
  * 二叉树节点
  */
-class BinaryTreeNode {
+public class BinaryTreeNode {
 
     public int value;
     public BinaryTreeNode left;

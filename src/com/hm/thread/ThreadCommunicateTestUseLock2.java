@@ -17,8 +17,8 @@ public class ThreadCommunicateTestUseLock2 {
     private int queueSize = 2;
     private Queue<Integer> queue = new ArrayDeque<>(queueSize);
     private Lock lock = new ReentrantLock();
-    private Condition notFull = lock.newCondition();
-    private Condition notEmpty = lock.newCondition();
+    private Condition canProduce = lock.newCondition();
+    private Condition canResume = lock.newCondition();
 
     public static void main(String[] args) {
         ThreadCommunicateTestUseLock2 test = new ThreadCommunicateTestUseLock2();
@@ -45,14 +45,14 @@ public class ThreadCommunicateTestUseLock2 {
                     while (queue.size() == 0) {
                         try {
                             System.out.println("队列空，等待数据");
-                            notEmpty.await();
+                            canResume.await();
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
                     }
                     sleep(100);
                     queue.poll();                //每次移走队首元素
-                    notFull.signal();
+                    canProduce.signal();
                     System.out.println("从队列取走一个元素，队列剩余" + queue.size() + "个元素");
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -77,7 +77,7 @@ public class ThreadCommunicateTestUseLock2 {
                     while (queue.size() == queueSize) {
                         try {
                             System.out.println("队列满，等待有空余空间");
-                            notFull.await();
+                            canProduce.await();
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
@@ -85,7 +85,7 @@ public class ThreadCommunicateTestUseLock2 {
                     sleep(100);
                     queue.offer(1);       //每次插入一个元素
                     System.out.println("向队列取中插入一个元素，队列剩余空间：" + (queueSize - queue.size()));
-                    notEmpty.signal();
+                    canResume.signal();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } finally {
