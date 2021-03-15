@@ -14,9 +14,9 @@ public class OldEvenTest {
     public static void main(String[] args) {
 
         //method1();
-        //method2();
+        method2();
 
-        method3();
+        //method3();
     }
 
 
@@ -97,6 +97,11 @@ public class OldEvenTest {
             }
         }, "偶数").start();
 
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         //奇数线程
         new Thread(new Runnable() {
             @Override

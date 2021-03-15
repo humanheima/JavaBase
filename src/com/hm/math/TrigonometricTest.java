@@ -7,7 +7,8 @@ package com.hm.math;
 public class TrigonometricTest {
 
     public static void main(String[] args) {
-        System.out.println(Math.sin(Math.PI/6));
-        System.out.println(Math.cos(Math.PI/3));
+        //System.out.println(Math.sin(Math.PI/6));
+        //System.out.println(Math.cos(Math.PI/3));
+
     }
 }

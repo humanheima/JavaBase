@@ -9,6 +9,18 @@ import java.util.List;
 /**
  * Created by dumingwei on 2017/6/25.
  */
+
+//Java的泛型是不变型的
+class MyList<T extends Base> {
+
+    T t;
+
+    T get() {
+        return t;
+    }
+
+}
+
 public class MainTest {
 
     static class Erasure<T> {
@@ -73,8 +85,50 @@ public class MainTest {
             }
         };
         shape.draw();
+
+        test3(new ArrayList<Object>());
+
+        List<? super Shape> list = new ArrayList<Shape>();
+
+        list.contains(3);
+
+        MyList<Sub> lsub = new MyList<>();
+        MyList<Sub2> lsub2 = new MyList<>();
+        MyList<? extends Base> lbase = lsub;
+
+
+        //编译错误
+        //List<Fruit> fruits = new ArrayList<Orange>();
+
+        List<? extends Fruit> fruits = new ArrayList<Orange>();
+
+        //编译错误:不能添加任何类型的对象
+        //fruits.add(new Orange());
+        //fruits.add(new Fruit());
+        //fruits.add(new Object());
+        //fruits.add(null);//可以这么做，但是没有意义
+        //我们知道，返回值肯定是Fruit
+        Fruit f = fruits.get(0);
+
+
+        List<Object> objs = new ArrayList<>();
+        objs.add(new Object());
+        List<? super Fruit> canContainFruits = objs;
+        //没有问题，可以写入Fruit类及其子类
+        canContainFruits.add(new Orange());
+        canContainFruits.add(new Fruit());
+        //无法安全地读取,canContainFruits完全可能包含Fruit基类的对象，比如这里的Object
+        //Fruit f = canContainFruits.get(0);
+        //总是可以读取为Object，然而这并没有太多意义
+        Object o = canContainFruits.get(0);
+
+
     }
 
+
+    public <T extends Number & CharSequence> void sum(T num) {
+        //do something
+    }
 
     /**
      * 测试泛型擦除
@@ -150,6 +204,13 @@ public class MainTest {
         //shapeList.add(new Rectangle());//编译不通过
     }
 
+    /*public static <T> void test2_t(List<T extends Shape> shapeList) {
+        for (Shape shape : shapeList) {
+            shape.draw();
+        }
+        //shapeList.add(new Rectangle());//编译不通过
+    }*/
+
     /**
      * 设置通配符的下限
      * <p>
@@ -158,8 +219,9 @@ public class MainTest {
      * @param shapeList
      */
     public static void test3(List<? super Shape> shapeList) {
-
         shapeList.add(new Rectangle());
+        shapeList.add(new Circle());
+        Object obj = shapeList.get(0);
     }
 
     private static <T> void fromArrayToCollection(Collection<T> src, Collection<T> dest) {
@@ -191,7 +253,30 @@ public class MainTest {
      */
     private static <T> void fromArrayToCollection3(Collection<T> src, Collection<? super T> dest) {
         dest.addAll(src);
-
     }
 
 }
+
+
+class Fruit {
+
+}
+
+class Orange extends Fruit {
+
+}
+
+class Base<T extends Number> {
+
+    <T extends Number & Appendable> void test(T t) {
+
+    }
+}
+
+class Sub extends Base {
+}
+
+class Sub2 extends Base {
+}
+
+
