@@ -7,7 +7,7 @@ import java.util.Stack;
  * Desc: 从尾到头打印链表
  * 使用栈或者递归的方式来实现
  */
-public class ReverseLink {
+public class Test6 {
 
     public static void main(String[] args) {
         LinkNode head = new LinkNode();

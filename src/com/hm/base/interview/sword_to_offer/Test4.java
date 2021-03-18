@@ -11,7 +11,7 @@ package com.hm.base.interview.sword_to_offer;
  * 也就是说如果要查找的数字不在数组的右上角，则每－次都在数组的查找范围中剔除）行或者一列，这样每一步都可以缩小
  * 查找的范围，直到找到要查找的数字，或者查找范围为空。
  */
-public class FindNumberInTwoDimensionalArray {
+public class Test4 {
 
     public static void main(String[] args) {
         int[][] matrix = {
@@ -30,10 +30,6 @@ public class FindNumberInTwoDimensionalArray {
 
     }
 
-    /**
-     * @param matrix 二维数组
-     * @param number 要查找的数字
-     */
     /**
      * @param matrix 二维数组
      * @param number 要查找的数字
@@ -60,9 +56,6 @@ public class FindNumberInTwoDimensionalArray {
                 row++;
             }
         }
-
         return false;
-
     }
-
 }

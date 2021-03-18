@@ -114,6 +114,12 @@ public class RebuildTree {
     }
 
 
+    /**
+     *
+     * @param preOrder 二叉树前序遍历的结果
+     * @param midOrder 二叉树中序遍历的结果
+     * @return
+     */
     public static BinaryTreeNode construct(int[] preOrder, int[] midOrder) {
         if (preOrder == null || midOrder == null
                 || preOrder.length != midOrder.length
@@ -126,10 +132,10 @@ public class RebuildTree {
     }
 
     /**
-     * @param preOrder 前序遍历的结果
+     * @param preOrder 二叉树前序遍历的结果
      * @param pStart   前序遍历开始的位置
      * @param pEnd     前序遍历结束的位置
-     * @param midOrder 中序遍历的结果
+     * @param midOrder 二叉树中序遍历的结果
      * @param mStart   中序遍历的开始位置
      * @param mEnd     中序遍历的结束位置
      * @return 树的根节点
@@ -155,7 +161,7 @@ public class RebuildTree {
         node.value = value;
         /**
          * 递归构建当前根节点的左子树，左子树的元素个数：index-mStart个
-         * 左子树对应的前序遍历的位置在[pStart+1, ps+index-mStart]
+         * 左子树对应的前序遍历的位置在[pStart+1, pStart+index-mStart]
          * 左子树对应的中序遍历的位置在[mStart, index-1]
          */
         node.left = construct(preOrder, pStart + 1, pStart + index - mStart, midOrder, mStart, index - 1);
