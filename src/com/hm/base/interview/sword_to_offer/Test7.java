@@ -10,7 +10,7 @@ package com.hm.base.interview.sword_to_offer;
  * 重建出项目根目录下的{RebuildTree.png}所示的二叉树并输出它的头结点。
  * 参考链接：https://blog.csdn.net/derrantcm/article/details/45457557
  */
-public class RebuildTree {
+public class Test7 {
 
     public static void main(String[] args) {
 
@@ -115,7 +115,6 @@ public class RebuildTree {
 
 
     /**
-     *
      * @param preOrder 二叉树前序遍历的结果
      * @param midOrder 二叉树中序遍历的结果
      * @return
@@ -132,12 +131,12 @@ public class RebuildTree {
     }
 
     /**
-     * @param preOrder 二叉树前序遍历的结果
-     * @param pStart   前序遍历开始的位置
-     * @param pEnd     前序遍历结束的位置
-     * @param midOrder 二叉树中序遍历的结果
-     * @param mStart   中序遍历的开始位置
-     * @param mEnd     中序遍历的结束位置
+     * @param preOrder 要重建的树前序遍历的数组
+     * @param pStart   要重建的树的第一个节点在前序遍历数组中的位置
+     * @param pEnd     要重建的树的最后一个节点在前序遍历数组中的位置
+     * @param midOrder 要重建的树中序遍历的数组
+     * @param mStart   要重建的树的第一个节点在中序遍历数组中的位置
+     * @param mEnd     要重建的树的最后一个节点在中序遍历数组中的位置
      * @return 树的根节点
      */
     public static BinaryTreeNode construct(int[] preOrder, int pStart, int pEnd, int[] midOrder, int mStart, int mEnd) {
@@ -165,6 +164,7 @@ public class RebuildTree {
          * 左子树对应的中序遍历的位置在[mStart, index-1]
          */
         node.left = construct(preOrder, pStart + 1, pStart + index - mStart, midOrder, mStart, index - 1);
+        //node.left = construct(preOrder, pStart + 1, index - 1, midOrder, mStart, index - 1);
         /**
          * 递归构建当前根结点的右子树，右子树的元素个数：mEnd-index个
          * 右子树对应的前序遍历的位置在[pStart+index-mStart+1, pEnd]

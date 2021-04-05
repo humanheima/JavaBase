@@ -15,18 +15,16 @@ public class Test15 {
 
     public static void main(String[] args) {
 
-        System.out.println(numberOfOne(1));
+        /*System.out.println(numberOfOne(1));
         System.out.println(numberOfOne(0));
         System.out.println(numberOfOne(0x7FFFFFFF));
         System.out.println(numberOfOne(0x80000000));
-        System.out.println(numberOfOne(0xFFFFFFFF));
+        System.out.println(numberOfOne(0xFFFFFFFF));*/
         /**
          * -5在计算机中用补码表示是 1111 1111 1111 1111 1111 1111 1111 1011
          */
         System.out.println(numberOfOne(-5));
-
-        System.out.println(numberOfOne2(5));
-        System.out.println(numberOfOne2(-5));
+        System.out.println(numberOfOne(5));
 
     }
 
@@ -58,5 +56,15 @@ public class Test15 {
             n = (n - 1) & n;
         }
         return result;
+    }
+
+    public static String intToBinary(int value) {
+        StringBuilder numstr = new StringBuilder();
+        while (value > 0) {
+            int res = value % 2; //除2 取余数作为二进制数
+            numstr.insert(0, res);
+            value = value / 2;
+        }
+        return numstr.toString();
     }
 }

@@ -16,11 +16,12 @@ package com.hm.base.interview.sword_to_offer;
  * <p>
  * 参考链接：https://blog.csdn.net/DERRANTCM/article/details/46847919
  */
-public class NextNodeOfTree {
+public class Test8 {
 
     public static void main(String[] args) {
         //test01();
-        test02();
+        //test02();
+        test00();
 
     }
 
@@ -28,9 +29,43 @@ public class NextNodeOfTree {
      * 参考根目录下的NextNodeOfTree.png
      * 中序遍历的结果是{4,2,8,5,9,1,6,3,7}
      */
+    public static void test00() {
+        BinaryTreeNode n1 = new BinaryTreeNode('a');
+        BinaryTreeNode n2 = new BinaryTreeNode('b');
+        BinaryTreeNode n3 = new BinaryTreeNode('c');
+
+        BinaryTreeNode n4 = new BinaryTreeNode('d');
+        BinaryTreeNode n5 = new BinaryTreeNode('e');
+        BinaryTreeNode n6 = new BinaryTreeNode('f');
+
+        BinaryTreeNode n7 = new BinaryTreeNode('g');
+        BinaryTreeNode n8 = new BinaryTreeNode('h');
+        BinaryTreeNode n9 = new BinaryTreeNode('i');
+
+        assemble(n1, n2, n3, null);
+        assemble(n2, n4, n5, n1);
+        assemble(n3, n6, n7, n1);
+        assemble(n4, null, null, n2);
+        assemble(n5, n8, n9, n2);
+        assemble(n6, null, null, n3);
+        assemble(n7, null, null, n3);
+        assemble(n8, null, null, n5);
+        assemble(n9, null, null, n5);
+
+        System.out.println(getNext(n1));
+        System.out.println(getNext(n2));
+        System.out.println(getNext(n3));
+        System.out.println(getNext(n4));
+        System.out.println(getNext(n5));
+        System.out.println(getNext(n6));
+        System.out.println(getNext(n7));
+        System.out.println(getNext(n8));
+        System.out.println(getNext(n9));
+    }
+
+
     public static void test02() {
-        BinaryTreeNode n1 = new BinaryTreeNode(1); // 6
-        BinaryTreeNode n2 = new BinaryTreeNode(2); // 8
+       /* BinaryTreeNode n1 = new BinaryTreeNode(1);         BinaryTreeNode n2 = new BinaryTreeNode(2); // 8
         BinaryTreeNode n3 = new BinaryTreeNode(3); // 7
         BinaryTreeNode n4 = new BinaryTreeNode(4); // 2
         BinaryTreeNode n5 = new BinaryTreeNode(5); // 9
@@ -56,7 +91,7 @@ public class NextNodeOfTree {
         System.out.println(getNext(n6));
         System.out.println(getNext(n7));
         System.out.println(getNext(n8));
-        System.out.println(getNext(n9));
+        System.out.println(getNext(n9));*/
     }
 
 
@@ -65,7 +100,7 @@ public class NextNodeOfTree {
     //             4         5          6          7
     //          8     9   10   11   12   13    14   15
     public static void test01() {
-        BinaryTreeNode n1 = new BinaryTreeNode(1); // 12
+       /* BinaryTreeNode n1 = new BinaryTreeNode(1); // 12
         BinaryTreeNode n2 = new BinaryTreeNode(2); // 10
         BinaryTreeNode n3 = new BinaryTreeNode(3); // 14
         BinaryTreeNode n4 = new BinaryTreeNode(4); // 9
@@ -111,7 +146,7 @@ public class NextNodeOfTree {
         System.out.println(getNext(n12));
         System.out.println(getNext(n13));
         System.out.println(getNext(n14));
-        System.out.println(getNext(n15));
+        System.out.println(getNext(n15));*/
     }
 
 
@@ -156,7 +191,7 @@ public class NextNodeOfTree {
 
 
     private static class BinaryTreeNode {
-        private int val;
+        private char val;
         private BinaryTreeNode left;
         private BinaryTreeNode right;
         private BinaryTreeNode parent;
@@ -164,7 +199,7 @@ public class NextNodeOfTree {
         public BinaryTreeNode() {
         }
 
-        public BinaryTreeNode(int val) {
+        public BinaryTreeNode(char val) {
             this.val = val;
         }
 
