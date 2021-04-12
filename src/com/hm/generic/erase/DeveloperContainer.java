@@ -5,7 +5,7 @@ package com.hm.generic.erase;
  * <p>
  * Desc:
  */
-public class ObjectContainer<T> {
+public class DeveloperContainer<T extends AbsDeveloper> {
 
     private T contained;
 

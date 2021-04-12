@@ -1,25 +1,29 @@
 package com.hm.generic.erase;
 
 /**
- * Created by dumingwei on 2020/10/16.
+ * Created by dumingwei on 2021/4/11.
  * <p>
  * Desc:
  */
-public class Person {
+public abstract class AbsDeveloper {
 
     public String name;
     public int age;
 
-    public Person(String name, int age) {
+    public AbsDeveloper(String name, int age) {
         this.name = name;
         this.age = age;
     }
 
+
     @Override
     public String toString() {
-        return "Person{" +
+        return "AbsDeveloper{" +
                 "name='" + name + '\'' +
                 ", age=" + age +
                 '}';
     }
+
+    public abstract String workType();
+
 }

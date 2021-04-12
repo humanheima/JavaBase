@@ -7,11 +7,6 @@ package com.hm.generic.erase;
  */
 public class PersonContainer extends ObjectContainer<Person> {
 
-
-    public PersonContainer(Person contained) {
-        super(contained);
-    }
-
     @Override
     public void setContained(Person contained) {
         super.setContained(contained);
