@@ -23,6 +23,9 @@ public class RegularUtil {
     static final Pattern PARAM_URL_REGEX = Pattern.compile("\\{(" + PARAM + ")\\}");
     private static String REPOSITORY_URL = "https://api.github.com/repos/{owner}/{repo}/";
 
+    private static String colorRegex = "#([0-9a-fA-F]{6}|[0-9a-fA-F]{8})";
+
+
     public static void main(String args[]) {
         // System.out.println(getId(PC_ACTIVITY_URL));
         /*System.out.println(isImage(jpg));
@@ -32,17 +35,28 @@ public class RegularUtil {
         //System.out.println(stringFilter("*33333##"));
         //System.out.println(parsePathParameters(REPOSITORY_URL));
 
-        System.out.println(isNumber(null));
-        System.out.println(isNumber(""));
-        System.out.println(isNumber("0"));
-        System.out.println(isNumber("10"));
-        System.out.println(isNumber("0.0"));
-        System.out.println(isNumber("0.00"));
-        System.out.println(isNumber("0.01"));
-        System.out.println(isNumber("10.00"));
-        System.out.println(isNumber("100.000"));
+        String colorString1 = "#e83f46#ffe83f46";
 
-        System.out.println(new BigDecimal("1.00").toString());
+        Pattern pattern =Pattern.compile(colorRegex);
+
+        Matcher matcher=  pattern.matcher(colorString1);
+        while (matcher.find()){
+            System.out.println("find"+matcher.group());
+        }
+
+
+
+//        System.out.println(isNumber(null));
+//        System.out.println(isNumber(""));
+//        System.out.println(isNumber("0"));
+//        System.out.println(isNumber("10"));
+//        System.out.println(isNumber("0.0"));
+//        System.out.println(isNumber("0.00"));
+//        System.out.println(isNumber("0.01"));
+//        System.out.println(isNumber("10.00"));
+//        System.out.println(isNumber("100.000"));
+//
+//        System.out.println(new BigDecimal("1.00").toString());
     }
 
     private static Set<String> parsePathParameters(String path) {

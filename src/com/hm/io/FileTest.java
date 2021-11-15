@@ -10,18 +10,26 @@ public class FileTest {
     public static void main(String args[]) {
 
 
-        File file = new File("E:\\apks");
-        listFile(file);
+        //File file = new File("E:\\apks");
+        //listFile(file);
         //listRoot();
-        FilenameFilter filter = new FilenameFilter() {
+        /*FilenameFilter filter = new FilenameFilter() {
             @Override
             public boolean accept(File dir, String name) {
                 return name.endsWith(".txt");
             }
-        };
+        };*/
         //listFileFilter(filter);
 
         //testRenameTo();
+        try {
+            testCreateFileInMac();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Person person = new Person();
+        System.out.println(person.isB());
     }
 
     private static void testRenameTo() {
@@ -37,6 +45,17 @@ public class FileTest {
         }
         //直接将file2重命名为file1
         file2.renameTo(file1);
+    }
+
+    private static void testCreateFileInMac() throws IOException {
+        /*File file1=new File("/Users/dumingwei/IdeaProjects/JavaBase/file1.java");
+        file1.mkdir();
+        File file2=new File("/Users/dumingwei/IdeaProjects/JavaBase/file2.java");
+        file2.mkdir();*/
+
+        File file1 = new File("/Users/xmly/IdeaProjects/JavaBase/src/com/hm/io/", "FileTest.md");
+        file1.createNewFile();
+
     }
 
     private static void listFile(File file) {

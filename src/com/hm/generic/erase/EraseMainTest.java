@@ -13,14 +13,14 @@ public class EraseMainTest {
     public static void main(String[] args) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         ObjectContainer<Person> container = new ObjectContainer<>();
 
-       /* Person forrest = new Person("Forrest", 110);
+        Person forrest = new Person("Forrest", 110);
         container.setContained(forrest);
 
         Person outPerson = container.getContained();
 
-        System.out.println(outPerson);*/
+        System.out.println(outPerson);
 
-       /* try {
+        try {
             Method method =ObjectContainer.class.getDeclaredMethod("setContained",Object.class);
             Person jenny = new Person("Jenny", 110);
             method.invoke(container,jenny);
@@ -33,17 +33,17 @@ public class EraseMainTest {
         }
         System.out.println(container.getContained());
 
-        System.out.println("==============================");*/
+        System.out.println("==============================");
 
-       /* Method method = ObjectContainer.class.getDeclaredMethod("setContained", Object.class);
+        Method method = ObjectContainer.class.getDeclaredMethod("setContained", Object.class);
         String xiaodu = "xiaodu";
         method.invoke(container, xiaodu);
         //这样输出是没问题的
-        System.out.println(container.getContained());*/
+        System.out.println(container.getContained());
 
-        Method method = ObjectContainer.class.getDeclaredMethod("setContained", Object.class);
-        String xiaoya = "xiaoya";
-        method.invoke(container, xiaoya);
+        //Method method = ObjectContainer.class.getDeclaredMethod("setContained", Object.class);
+        //String xiaoya = "xiaoya";
+        //method.invoke(container, xiaoya);
         //这里就会有问题
         Person contained = container.getContained();
         System.out.println(contained);

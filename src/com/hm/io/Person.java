@@ -13,10 +13,34 @@ public class Person extends Animal implements Serializable {
     private String name;
     private int age;
 
+    private boolean aBoolean = true;
+
+    {
+        System.out.println("构造代码块，b = " + aBoolean);
+    }
+
+    public Person() {
+        super(false);
+        // b=false;
+        System.out.println("Person 构造函数");
+    }
+
     public Person(String name, int age) {
         System.out.println("Person");
         this.name = name;
         this.age = age;
+    }
+
+
+    public boolean isB() {
+        return aBoolean;
+    }
+
+    @Override
+    void parse(boolean b) {
+        aBoolean = b;
+
+        System.out.println("parse aBoolean = " + aBoolean);
     }
 
     private void writeObject(ObjectOutputStream out) throws IOException {
