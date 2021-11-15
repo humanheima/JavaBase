@@ -10,7 +10,7 @@ import java.util.Stack;
  * <p>
  * 参考链接：参考链接：{@see <a herf="https://blog.csdn.net/DERRANTCM/article/details/45457615">用两个栈实现队列</a>}
  */
-public class ImplementQueueWithTwoStack {
+public class Test9 {
 
     public static void main(String[] args) {
 
@@ -51,8 +51,6 @@ public class ImplementQueueWithTwoStack {
             }
             return stack2.pop();
         }
-
-
     }
 
 }

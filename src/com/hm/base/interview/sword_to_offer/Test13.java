@@ -11,7 +11,7 @@ package com.hm.base.interview.sword_to_offer;
  * <p>
  * 参考链接：https://blog.csdn.net/DERRANTCM/article/details/46887811
  */
-public class RobotMoveRange {
+public class Test13 {
 
     public static void main(String[] args) {
         System.out.println(movingCount(5, 10, 10) + "[21]");
@@ -40,9 +40,7 @@ public class RobotMoveRange {
 
         //用来标记访问过的方格
         boolean[] visited = new boolean[rows * cols];
-        for (int i = 0; i < visited.length; i++) {
-            visited[i] = false;
-        }
+        //从0行0列开始处理
         return movingCountCore(threshold, rows, cols, 0, 0, visited);
     }
 

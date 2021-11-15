@@ -4,7 +4,8 @@ package com.hm.base.interview.sword_to_offer;
 /**
  * Created by dumingwei on 2018/11/18
  * <p>
- * Desc:
+ * Desc:不修改数组找出重复的数字
+ * <p>
  * 在一个长度为n+1的数组里的所有数字都在1~n的范围内，所以数组中至少有一个数字是重复的。请找出数组中任意一个重复的数字，
  * 但是不能修改输入的数组。例如，如果输入长度为8的数组{2,3,5,4,3,2,6,7}，那么对应的输出是重复的数字2或者3。
  * <p>
@@ -13,7 +14,6 @@ package com.hm.base.interview.sword_to_offer;
  * 则把它复制到辅助数组中下标为m的位置。如果下标为m的位置上已经有数字了，则说明该数字重复了。由于使用了辅助空间，
  * 故该方案的空间复杂度是O(n)。
  * 2. 我们可以这样想：如果数组中有重复的数，那么n+1个1~n范围内的数中，一定有几个数的个数大于1。那么，我们可以利用这个思路解决该问题。
- * 例如长度为8的数组{1,2,3,4,5,6,7,1}，所有取值都在1-7之间，所以肯定至少又一个数字是重复的。我们可以利用这个思路解决该问题。
  * <p>
  * 我们把从1到n的数字从中间的数字m分为两部分，前面一半为1~m，后面一半为m+1~n。如果1~m的数字的数目等于m，
  * 则不能直接判断这一半区间是否包含重复的数字，反之，如果大于m，那么这一半的区间一定包含重复的数字；
@@ -22,12 +22,13 @@ package com.hm.base.interview.sword_to_offer;
  * 参考链接：{@see <a herf="https://blog.csdn.net/yz930618/article/details/76060160"></a>}
  * 参考链接：{@see <a herf="https://blog.csdn.net/weixin_37672169/article/details/79978096"></a>}
  */
-public class DuplicationInArrayAnother {
+public class Test3_2 {
 
     public static void main(String[] args) {
         int[] array = {2, 3, 5, 4, 3, 2, 6, 7};
         //System.out.println(duplicateUseAnotherArray(array));
         System.out.println(getDuplication(array));
+        System.out.println(getDuplication2(array));
     }
 
     /**
@@ -48,7 +49,6 @@ public class DuplicationInArrayAnother {
             if (numbers[i] < 1 || numbers[i] >= numbers.length) {
                 return -1;
             }
-            newArray[i] = -1;
         }
         for (int i = 0; i < numbers.length; i++) {
             if (newArray[numbers[i]] != numbers[i]) {
@@ -81,6 +81,40 @@ public class DuplicationInArrayAnother {
      * @return 重复的数字
      */
     public static int getDuplication(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return -1;
+        }
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] < 1 || arr[i] >= arr.length) {
+                return -1;
+            }
+        }
+
+        //区间开始的数字
+        int start = 1;
+        //区间结尾的数字
+        int end = arr.length - 1;
+        while (end >= start) {
+            //中间数字
+            int middle = start + ((end - start) >> 1);
+            int count = countRange(arr, start, middle);
+            if (end == start) {
+                if (count > 1) {
+                    return start;
+                } else {
+                    break;
+                }
+            }
+            if (count > (middle - start + 1)) {
+                end = middle;
+            } else {
+                start = middle + 1;
+            }
+        }
+        return -1;
+    }
+
+    public static int getDuplication2(int[] arr) {
         if (arr == null || arr.length == 0) {
             return -1;
         }

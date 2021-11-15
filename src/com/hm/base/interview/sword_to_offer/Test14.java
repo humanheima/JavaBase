@@ -15,7 +15,7 @@ package com.hm.base.interview.sword_to_offer;
  * * https://blog.csdn.net/qq_25827845/article/details/73351134 这个竟然收费了 艰难
  * * http://codingdict.com/blog/article/2018/12/18/655.html
  */
-public class CuttingLine {
+public class Test14 {
 
     public static void main(String[] args) {
         System.out.println(maxProduceAfterCutting(10));
@@ -38,11 +38,12 @@ public class CuttingLine {
         if (length == 3) {
             return 2;
         }
-        int products[] = new int[length + 1];
+        //上面本别返回了长度小于等于3时候的最优解，下面是计算长度大于3时候的情况
+        int[] products = new int[length + 1];
         products[0] = 0;
         products[1] = 1;
         /**
-         * 为什么这里products[2]等于2，例如当绳子长度为3的时候，我们剪成两段，其中一段为2，一段为1。这样长度为2的那段最大值就是2，
+         * 为什么这里products[2]等于2？例如当绳子长度为3的时候，我们剪成两段，其中一段为2，一段为1。这样长度为2的那段最大值就是2，
          * 而不是1，因为这一段我们不需要再剪了。
          */
         products[2] = 2;
@@ -60,7 +61,7 @@ public class CuttingLine {
 
         int result = 0;
 
-        /*for (int i = 4; i <= length; i++) {
+        for (int i = 4; i <= length; i++) {
 
             int max = 0;
             for (int j = 0; j <= i / 2; j++) {
@@ -70,18 +71,8 @@ public class CuttingLine {
                 }
                 products[i] = max;
             }
-        }*/
-
-        for (int i = 4; i <= length; i++) {
-            int max = 0;
-            for (int j = 0; j < i / 2; j++) {
-                int product = products[j] * products[i - j];
-                if (max < product) {
-                    max = product;
-                }
-            }
-            products[i] = max;
         }
+
         result = products[length];
         return result;
     }

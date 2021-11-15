@@ -8,7 +8,7 @@ package com.hm.base.interview.sword_to_offer;
  * <p>
  * 参考链接：https://blog.csdn.net/DERRANTCM/article/details/45457859
  */
-public class RotateSmallestNumInArray {
+public class Test11 {
 
     public static void main(String[] args) {
 
@@ -58,6 +58,7 @@ public class RotateSmallestNumInArray {
                 break;
             }
             mid = (low + high) / 2;
+            //如果三个数都相等，则需要进行顺序查找
             if (numbers[mid] == numbers[low] && numbers[mid] == numbers[high]) {
                 return minInOrder(numbers, low, high);
             }
