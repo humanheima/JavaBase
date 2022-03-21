@@ -4,6 +4,8 @@ import com.alibaba.fastjson.JSON;
 import com.google.gson.Gson;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.StringJoiner;
 
 /**
@@ -21,9 +23,16 @@ public class BooleanMainTest {
         System.out.println("Serializable Result With Gson :" + gson.toJson(model3));
 
         /* 对于同一个对象，我使用fastjson进行序列化，再使用Gson反序列化会发生什么？ */
-        System.out.println(gson.fromJson(JSON.toJSONString(model3),Model3.class));
+        System.out.println(gson.fromJson(JSON.toJSONString(model3), Model3.class));
 
+        List<Integer> integers = new ArrayList<>();
 
+        integers.add(1);
+        integers.add(2);
+        integers.add(3);
+        integers.add(4);
+
+        System.out.println(gson.toJson(integers));
 
     }
 
@@ -78,7 +87,7 @@ class Model3 implements Serializable {
 
     @Override
     public String toString() {
-        return new StringJoiner(", ", Model3.class.getSimpleName() + "[","]")
+        return new StringJoiner(", ", Model3.class.getSimpleName() + "[", "]")
                 .add("isSuccess=" + isSuccess)
                 .toString();
     }

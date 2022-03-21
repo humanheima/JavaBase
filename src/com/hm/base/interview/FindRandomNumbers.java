@@ -1,6 +1,5 @@
 package com.hm.base.interview;
 
-import com.hm.base.interview.sword_to_offer.DuplicationInArray;
 
 import java.util.Random;
 
@@ -23,7 +22,6 @@ public class FindRandomNumbers {
 
         }
         System.out.println();
-        System.out.println("查找是否有重复的数字" + DuplicationInArray.duplicate(result));
     }
 
     /**
