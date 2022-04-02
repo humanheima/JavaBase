@@ -21,9 +21,11 @@ public class SelectSort {
             min = i;
             for (int j = i + 1; j < len; j++) {
                 if (arr[min] > arr[j]) {
+                    //这轮过后，min指向最小的数据的index
                     min = j;
                 }
             }
+            //第一轮，把最小的数据放到序列第一的位置
             temp = arr[i];
             arr[i] = arr[min];
             arr[min] = temp;
