@@ -11,18 +11,18 @@ package com.hm.sort;
  */
 public class FastSort {
 
-    private static int a[] = {8, 4, 9, 1, 10, 6};
+    private static int[] array = {8, 4, 9, 1, 10, 6};
 
     public static void main(String args[]) {
-        //sortNormalArray();
-        System.out.println(Integer.MAX_VALUE);
+        sortNormalArray();
+        //System.out.println(Integer.MAX_VALUE);
         //sortBigArray();
     }
 
     private static void sortNormalArray() {
-        quickSort(a, 0, a.length - 1);
-        for (int i = 0; i < a.length; i++) {
-            System.out.print(a[i] + ",");
+        quickSort(array, 0, array.length - 1);
+        for (int i = 0; i < array.length; i++) {
+            System.out.print(array[i] + ",");
         }
     }
 

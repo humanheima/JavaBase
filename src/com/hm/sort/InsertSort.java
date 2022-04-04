@@ -8,7 +8,7 @@ package com.hm.sort;
  */
 public class InsertSort {
 
-    private static int a[] = {8, 1};
+    private static int a[] = {8, 1, 10, 2, 2, 3, 5};
 
     public static void main(String args[]) {
         sort(a);
@@ -28,7 +28,7 @@ public class InsertSort {
         }
 
         for (int i : a) {
-            System.out.print(i + ",");
+            System.out.print(i + " ");
         }
     }
 }
