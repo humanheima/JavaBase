@@ -22,7 +22,7 @@ public class MaxOccurCharTest {
     public static char getMaxOccurChar(String str) {
 
         int maxCount = 1;
-        Character result = new Character(str.charAt(0));
+        char result = str.charAt(0);
 
         Map<Character, Integer> map = new LinkedHashMap<>();
         for (int i = 0; i < str.length(); i++) {
@@ -42,6 +42,35 @@ public class MaxOccurCharTest {
             }
         }
         return result;
+    }
+
+    public static void sort(int[] array, int left, int right) {
+        if (left < right) {
+            int pivot = array[left];
+            int i = left;
+            int j = right;
+
+            while (i < j) {
+
+                while (i < j && array[j] > pivot) {
+                    j--;
+                }
+
+                if (i < j) {
+                    array[i] = array[j];
+                    i++;
+                }
+
+                while (array[i] > pivot) {
+                    i++;
+                }
+                if (i < j) {
+
+                }
+            }
+
+
+        }
     }
 
 

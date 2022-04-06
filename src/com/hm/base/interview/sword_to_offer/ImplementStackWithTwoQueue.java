@@ -2,11 +2,12 @@ package com.hm.base.interview.sword_to_offer;
 
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Stack;
 
 /**
  * Created by dumingwei on 2018/11/22
  * <p>
- * Desc:使用两个队列来实现栈,用一个队列实现一个栈
+ * Desc:使用两个队列来实现栈,用一个队列实现一个栈。栈，先进后出。
  * <p>
  * 参考链接：参考链接：{@see <a herf="https://www.jianshu.com/p/99d919146bf5">用队列实现一个栈</a>}
  */
@@ -44,6 +45,10 @@ public class ImplementStackWithTwoQueue {
 
     }
 
+    /**
+     *  两个队列实现栈
+     * @param <T>
+     */
     public static class TwoQueueStack<T> {
 
         private Queue<T> queue1 = new LinkedList<>();
