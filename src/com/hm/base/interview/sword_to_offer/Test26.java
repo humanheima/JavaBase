@@ -79,6 +79,7 @@ public class Test26 {
 
     public static boolean hasSubTree(BinaryTreeNode root1, BinaryTreeNode root2) {
 
+        //引用是同一个，当然是相等的了
         if (root1 == root2) {
             return true;
         }

@@ -1,5 +1,7 @@
 package com.hm.base.interview.sword_to_offer;
 
+import java.util.Arrays;
+
 /**
  * Created by dumingwei on 2018/12/10
  * <p>
@@ -19,8 +21,14 @@ public class Test24 {
 
     public static class ListNode {
 
+
         public int value;
         public ListNode next;
+
+        @Override
+        protected void finalize() throws Throwable {
+            super.finalize();
+        }
     }
 
     public static ListNode reverseList(ListNode head) {

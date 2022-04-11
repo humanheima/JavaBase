@@ -9,6 +9,7 @@ import java.util.Map;
  * Desc:给你一个字符串，输出频率最高且最先出现的字符
  * 假设有一个字符串，字符串的所有字符都在ascii编码的范围内，编码求出字符串中出现频率最高的字符，如果频率最高的字符有多个，则输出最先出现的字符。
  * <p>
+ * <p>
  * 参考链接：https://blog.csdn.net/hubiao_0618/article/details/105279236
  */
 public class MaxOccurCharTest {
@@ -17,13 +18,28 @@ public class MaxOccurCharTest {
 
         char result = getMaxOccurChar("hello world, every body!");
         System.out.println(result);
+
+        System.out.println(getMaxOccurCharTwo("hello world, every body!"));
     }
 
+    /**
+     * 解题思路
+     * <p>
+     * 1. 遍历字符串中的字符，用Map 保存键值对， key 是字符 ，value 是字符出现的次数。但是为了保证输出最先出现的字符，所以要用LinkedHashMap，不能用HashMap
+     * 2. 遍历Map，输出出现次数最多的 key
+     *
+     * @param str
+     * @return
+     */
     public static char getMaxOccurChar(String str) {
 
         int maxCount = 1;
         char result = str.charAt(0);
 
+        /**
+         * 为什么不能用HashMap，因为要确保输出最先出现的字符，所以要用LinkedHashMap
+         */
+        //Map<Character, Integer> map = new HashMap<>();
         Map<Character, Integer> map = new LinkedHashMap<>();
         for (int i = 0; i < str.length(); i++) {
             Character content = str.charAt(i);
@@ -36,42 +52,42 @@ public class MaxOccurCharTest {
         }
 
         for (Map.Entry<Character, Integer> entry : map.entrySet()) {
-            if (entry.getValue() > maxCount) {
+            Integer integer = entry.getValue();
+            if (integer > maxCount) {
                 result = entry.getKey();
-                maxCount = entry.getValue();
+                maxCount = integer;
             }
         }
         return result;
     }
 
-    public static void sort(int[] array, int left, int right) {
-        if (left < right) {
-            int pivot = array[left];
-            int i = left;
-            int j = right;
+    /**
+     * @param str
+     * @return
+     */
+    public static char getMaxOccurCharTwo(String str) {
 
-            while (i < j) {
+        int maxCount = 1;
+        char result = str.charAt(0);
 
-                while (i < j && array[j] > pivot) {
-                    j--;
-                }
+        Map<Character, Integer> map = new LinkedHashMap<>();
 
-                if (i < j) {
-                    array[i] = array[j];
-                    i++;
-                }
-
-                while (array[i] > pivot) {
-                    i++;
-                }
-                if (i < j) {
-
-                }
+        for (int i = str.length() - 1; i >= 0; i--) {
+            Character content = str.charAt(i);
+            Integer count = map.get(content);
+            if (count == null) {
+                map.put(content, 1);
+                count = 1;
+            } else {
+                map.put(content, count + 1);
+                count += 1;
             }
-
-
+            if (count >= maxCount) {
+                maxCount = count;
+                result = str.charAt(i);
+            }
         }
+        return result;
     }
-
 
 }

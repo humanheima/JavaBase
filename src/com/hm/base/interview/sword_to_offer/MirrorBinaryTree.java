@@ -123,6 +123,7 @@ public class MirrorBinaryTree {
     /**
      * 非递归版本，借助栈
      *
+     * 8 6 5 7 10 9 11
      * @param root
      */
     public static void mirrorTreeWithStack(TreeNode root) {
@@ -134,14 +135,17 @@ public class MirrorBinaryTree {
             //当栈不为 null 时出栈，交换左右子树。
             TreeNode root1 = stack.pop();
             swap(root1);
-            if (root1.right != null) {
-                //右子树不为 null 入栈
-                stack.push(root1.right);
-            }
+
             if (root1.left != null) {
                 //左子树不为 null 入栈
                 stack.push(root1.left);
             }
+
+            if (root1.right != null) {
+                //右子树不为 null 入栈
+                stack.push(root1.right);
+            }
+
         }
     }
 
