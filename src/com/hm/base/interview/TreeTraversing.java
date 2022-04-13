@@ -7,6 +7,7 @@ import java.util.List;
 
 /**
  * Crete by dumingwei on 2019-07-23
+ * 博客：https://www.jianshu.com/p/92d25e5c2cd7
  * Desc: 多叉树的遍历
  */
 public class TreeTraversing {

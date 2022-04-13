@@ -79,14 +79,13 @@ public class Test23 {
             return null;
         }
 
-        ListNode slow = head.next;
+        ListNode slow = head;
+
         //注释1，只有一个节点，没有环，返回null
-        if (slow == null) {
+        if (slow.next == null) {
             return null;
         }
-
-        //注释2，fast指针比slow指针快一步，也就是head.next.next
-        ListNode fast = slow.next;
+        ListNode fast = slow.next.next;
 
         while (fast != null && slow != null) {
             //注释3，快慢指针相遇，存在环
