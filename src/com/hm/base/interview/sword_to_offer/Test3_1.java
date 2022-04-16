@@ -5,7 +5,7 @@ package com.hm.base.interview.sword_to_offer;
  * Created by dumingwei on 2018/11/18
  * <p>
  * Desc: 数组中重复对数字
- *
+ * <p>
  * 在一个长度为n的数组里的所有数字都在0到n-1的范围内。数组中某些数字是重复的，但不知道有几个数字重复了，也不知道每个数字重复了几次。
  * 请找出数组中任意一个重复的数字。
  * 例如，如果输入长度为7的数组{2,3,1,0,2,5,3}，那么对应的输出是重复的数字2或者3。
@@ -35,19 +35,60 @@ package com.hm.base.interview.sword_to_offer;
 public class Test3_1 {
 
     public static void main(String[] args) {
+
+        Test3_1 test3_1 = new Test3_1();
         int[] numbers = {1, 3, 2, 0, 2, 5, 3};
-        System.out.println(duplicate(numbers));
+
+        System.out.println(test3_1.duplicate(numbers) + " , " + test3_1.findRepeatNumber(numbers));
 
         int[] numbers1 = {1, 2, 3, 4, 7, 5, 6, 0};
-        System.out.println(duplicate(numbers1));
+        System.out.println(test3_1.duplicate(numbers1) + " , " + test3_1.findRepeatNumber(numbers1));
 
         int[] numbers2 = {1, 10, 3};
-        System.out.println(duplicate(numbers2));
+        System.out.println(test3_1.duplicate(numbers2) + " , " + test3_1.findRepeatNumber(numbers2));
 
-        System.out.println(duplicate(null));
+        System.out.println(test3_1.duplicate(null) + " , " + test3_1.duplicate(null));
+
+        int[] numbers3 = {3, 4, 2, 0, 0, 1};
+        System.out.println(test3_1.duplicate(numbers3) + " , " + test3_1.findRepeatNumber(numbers3));
     }
 
-    public static int duplicate(int[] numbers) {
+    /**
+     * 交换位置
+     *
+     * @param nums
+     * @return
+     */
+    public int findRepeatNumber(int[] nums) {
+        if (nums == null || nums.length == 1) {
+            return -1;
+        }
+        /**
+         * 判断输入是否在[0,numbers.length-1]之间
+         */
+        for (int number : nums) {
+            if (number < 0 || number >= nums.length) {
+                return -1;
+            }
+        }
+        int length = nums.length;
+        for (int i = 0; i < length; i++) {
+            while (nums[i] != i) {
+                int dest = nums[nums[i]];
+                if (nums[i] == dest) {
+                    return nums[i];
+                } else {
+                    int temp = dest;
+                    nums[nums[i]] = nums[i];
+                    nums[i] = temp;
+                }
+            }
+        }
+        return -1;
+    }
+
+
+    public int duplicate(int[] numbers) {
         if (numbers == null || numbers.length < 1) {
             return -1;
         }

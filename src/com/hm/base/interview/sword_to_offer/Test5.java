@@ -24,7 +24,33 @@ public class Test5 {
             System.out.print(chars[i]);
         }
         System.out.println();
+
+        System.out.println("--------------");
+        Test5 test5 = new Test5();
+        System.out.println(test5.replaceSpace(happyString));
     }
+
+
+    public String replaceSpace(String s) {
+        if (s == null) {
+            return null;
+        }
+        StringBuilder stringBuilder = new StringBuilder();
+
+        int lastIndex = s.length() - 1;
+        for (int i = 0; i <= lastIndex; i++) {
+            char charAt = s.charAt(i);
+            if (charAt == ' ') {
+                stringBuilder.append('%');
+                stringBuilder.append('2');
+                stringBuilder.append('0');
+            } else {
+                stringBuilder.append(charAt);
+            }
+        }
+        return stringBuilder.toString();
+    }
+
 
     /**
      * @param chars      字符数组

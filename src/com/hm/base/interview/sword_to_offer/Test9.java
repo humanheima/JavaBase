@@ -1,5 +1,8 @@
 package com.hm.base.interview.sword_to_offer;
 
+import com.hm.algorithm.cp_one.practice_1_1.In;
+
+import java.util.Deque;
 import java.util.Stack;
 
 /**
@@ -14,9 +17,120 @@ public class Test9 {
 
     public static void main(String[] args) {
 
+        TwoStackList<Integer> twoStackList = new TwoStackList<>();
+
+        twoStackList.appendTail(1);
+        twoStackList.appendTail(2);
+        twoStackList.appendTail(3);
+        twoStackList.appendTail(4);
+
+        System.out.println(twoStackList.deleteHead());
+
+    }
+
+    class MyQueue {
+
+        Stack<Integer> firstStack = new Stack<>();
+        Stack<Integer> secondStack = new Stack<>();
+
+        public MyQueue() {
+
+        }
+
+        /**
+         * 栈是先进后出的
+         * 队列是先进先出的
+         * <p>
+         * 1. 开始 两个栈都为空
+         * 2. 第一个数据来 ，压入 firstStack
+         * 3. 第二个数据来，压入到 firstStack
+         * 3. 第3个数据来，压入到 firstStack
+         * 4. 取数据，firstStack 把栈中所有的元素 压入secondStack ，然后从secondStack中pop出第一个数据
+         * 5. 第4个数据来，压入到哪里呢？把secondStack所有元素压入firstStack。firstStack再压入新的元素
+         *
+         * @param value
+         */
+        public void push(int value) {
+            while (!secondStack.isEmpty()) {
+                firstStack.push(secondStack.pop());
+            }
+            firstStack.push(value);
+        }
+
+        public int pop() {
+            while (!firstStack.isEmpty()) {
+                secondStack.push(firstStack.pop());
+            }
+            if (secondStack.isEmpty()) {
+                return -1;
+            }
+            return secondStack.pop();
+        }
+
+        public int peek() {
+            while (!firstStack.isEmpty()) {
+                secondStack.push(firstStack.pop());
+            }
+            if (secondStack.isEmpty()) {
+                return -1;
+            }
+            return secondStack.peek();
+        }
+
+        public boolean empty() {
+            return firstStack.isEmpty() && secondStack.isEmpty();
+        }
+
     }
 
 
+    class CQueue {
+
+        Stack<Integer> firstStack = new Stack<>();
+        Stack<Integer> secondStack = new Stack<>();
+
+        public CQueue() {
+
+        }
+
+        /**
+         * 栈是先进后出的
+         * 队列是先进先出的
+         * <p>
+         * 1. 开始 两个栈都为空
+         * 2. 第一个数据来 ，压入 firstStack
+         * 3. 第二个数据来，压入到 firstStack
+         * 3. 第3个数据来，压入到 firstStack
+         * 4. 取数据，firstStack 把栈中所有的元素 压入secondStack ，然后从secondStack中pop出第一个数据
+         * 5. 第4个数据来，压入到哪里呢？把secondStack所有元素压入firstStack。firstStack再压入新的元素
+         *
+         * @param value
+         */
+        public void appendTail(int value) {
+            while (!secondStack.isEmpty()) {
+                firstStack.push(secondStack.pop());
+            }
+            firstStack.push(value);
+        }
+
+        public int deleteHead() {
+            while (!firstStack.isEmpty()) {
+                secondStack.push(firstStack.pop());
+            }
+            if (secondStack.isEmpty()) {
+                return -1;
+            }
+            return secondStack.pop();
+        }
+
+    }
+
+
+    /**
+     * 这种方法不要用
+     *
+     * @param <T>
+     */
     public static class TwoStackList<T> {
 
         /**

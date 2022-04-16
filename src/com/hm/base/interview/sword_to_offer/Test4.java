@@ -18,16 +18,57 @@ public class Test4 {
                 {1, 2, 8, 9},
                 {2, 4, 9, 12},
                 {4, 7, 10, 13},
+                {6, 8, 11, 15},
                 {6, 8, 11, 15}
         };
-        System.out.println(find(matrix, 7));    // 要查找的数在数组中
-        System.out.println(find(matrix, 5));    // 要查找的数不在数组中
-        System.out.println(find(matrix, 1));    // 要查找的数是数组中最小的数字
-        System.out.println(find(matrix, 15));   // 要查找的数是数组中最大的数字
-        System.out.println(find(matrix, 0));    // 要查找的数比数组中最小的数字还小
-        System.out.println(find(matrix, 16));   // 要查找的数比数组中最大的数字还大
-        System.out.println(find(null, 16));     // 健壮性测试，输入空指针
+        System.out.println(find(matrix, 7) + " , " + findNumberIn2DArray(matrix, 7));    // 要查找的数在数组中
+        System.out.println(find(matrix, 5) + " ，" + findNumberIn2DArray(matrix, 5));    // 要查找的数不在数组中
+        System.out.println(find(matrix, 1) + " ， " + findNumberIn2DArray(matrix, 1));    // 要查找的数是数组中最小的数字
+        System.out.println(find(matrix, 15) + " ， " + findNumberIn2DArray(matrix, 15));   // 要查找的数是数组中最大的数字
+        System.out.println(find(matrix, 0) + " ， " + findNumberIn2DArray(matrix, 0));    // 要查找的数比数组中最小的数字还小
+        System.out.println(find(matrix, 16) + " ， " + find(matrix, 16));   // 要查找的数比数组中最大的数字还大
+        System.out.println(find(null, 16) + "， " + find(null, 16));     // 健壮性测试，输入空指针
 
+        //System.out.println(find2(matrix, 0));
+
+        System.out.println("-------------------");
+
+//        System.out.println(find2(matrix, 7));    // 要查找的数在数组中
+//        System.out.println(find2(matrix, 5));    // 要查找的数不在数组中
+//        System.out.println(find2(matrix, 1));    // 要查找的数是数组中最小的数字
+//        System.out.println(find2(matrix, 15));   // 要查找的数是数组中最大的数字
+//        System.out.println(find2(matrix, 0));    // 要查找的数比数组中最小的数字还小
+//        System.out.println(find2(matrix, 16));   // 要查找的数比数组中最大的数字还大
+//        System.out.println(find2(null, 16));     // 健壮性测试，输入空指针
+
+
+    }
+
+    private static boolean findNumberIn2DArray(int[][] matrix, int target) {
+        if (matrix == null) {
+            return false;
+        }
+        int length = matrix.length;
+        for (int i = 0; i < length; i++) {
+            int[] row = matrix[i];
+            //System.out.println(row.length);
+            int rightColumn = row.length - 1;
+            for (int j = rightColumn; j >= 0; j--) {
+                int temp = matrix[i][j];
+                if (temp == target) {
+                    return true;
+                }
+                if (temp > target) {
+                    //右边的列不用找了
+                    rightColumn--;
+                }
+                if (temp < target) {
+                    //这一行不用找了。都是小于
+                    break;
+                }
+            }
+        }
+        return false;
     }
 
     /**
@@ -58,4 +99,6 @@ public class Test4 {
         }
         return false;
     }
+
+
 }

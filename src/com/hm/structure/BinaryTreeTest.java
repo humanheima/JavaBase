@@ -18,6 +18,9 @@ public class BinaryTreeTest {
 
     public static void main(String[] args) {
         BinaryTreeNode root = createTree();
+        postOrderTraversal(root);
+        printTree(root);
+
         /*recurseFront(root);
         System.out.println();
         recurseEnd(root);
@@ -42,23 +45,115 @@ public class BinaryTreeTest {
         //postOrderTraversal(root);
         //System.out.println();
 
-        System.out.println(findDeep(root));
+        //System.out.println(findDeep(root));
 
+        BinaryTreeTest treeTest = new BinaryTreeTest();
+
+        TreeNode root2 = treeTest.createTree2();
+        System.out.println(treeTest.postorderTraversal(root2));
+
+    }
+
+    public List<Integer> preorderTraversal2(TreeNode root) {
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode current = root;
+        List<Integer> list = new ArrayList<>();
+        while (current != null || !stack.isEmpty()) {
+            while (current != null) {
+                list.add(current.val);
+                stack.push(current);
+                current = current.left;
+            }
+            current = stack.pop();
+            //if (current.right != null) {
+            current = current.right;
+            //}
+        }
+        return list;
+    }
+
+    public List<Integer> inorderTraversal(TreeNode root) {
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode current = root;
+        List<Integer> list = new ArrayList<>();
+        while (current != null || !stack.isEmpty()) {
+            while (current != null) {
+                stack.push(current);
+                current = current.left;
+            }
+            current = stack.pop();
+            list.add(current.val);
+
+            // if (current.right != null) {
+            current = current.right;
+            // }
+        }
+        return list;
     }
 
     /**
-     * 递归实现的前序遍历
+     * 非递归后序遍历
      *
      * @param root
      */
-    public static void recurseFront(BinaryTreeNode root) {
-        if (root == null) {
-            return;
+    public static void postOrderTraversal(BinaryTreeNode root) {
+        Stack<BinaryTreeNode> treeNodeStack = new Stack<>();
+        BinaryTreeNode node = root;
+        BinaryTreeNode lastVisit = root;
+        while (node != null || !treeNodeStack.isEmpty()) {
+            while (node != null) {
+                treeNodeStack.push(node);
+                node = node.left;
+            }
+            //查看当前栈顶元素
+            node = treeNodeStack.peek();
+            /**
+             * 如果其右子树也为空，或者右子树已经访问，则可以直接输出当前节点的值
+             */
+            if (node.right == null || node.right == lastVisit) {
+                System.out.print(node.value + " ");
+                treeNodeStack.pop();
+                lastVisit = node;
+                node = null;
+            } else {
+                //继续遍历右子树
+                node = node.right;
+            }
         }
-        System.out.print(root.value + " ");
-        recurseFront(root.left);
-        recurseFront(root.right);
+
     }
+
+
+    /**
+     * 非递归后序遍历，先左节点，后右节点，再父节点
+     *
+     * @param root
+     * @return
+     */
+    public List<Integer> postorderTraversal(TreeNode root) {
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode current = root;
+        TreeNode lastVisit = root;
+
+        List<Integer> list = new ArrayList<>();
+        while (current != null || !stack.isEmpty()) {
+            while (current != null) {
+                stack.push(current);
+                current = current.left;
+            }
+            current = stack.peek();
+            if (current.right == null || current.right == lastVisit) {
+                TreeNode pop = stack.pop();
+                lastVisit = pop;
+                list.add(pop.val);
+                current = null;
+            } else {
+                current = current.right;
+            }
+        }
+        return list;
+    }
+
 
     /**
      * 非递归前序遍历
@@ -82,6 +177,41 @@ public class BinaryTreeTest {
             }
         }
 
+    }
+
+
+    /**
+     * 递归实现的前序遍历
+     *
+     * @param root
+     */
+    public static void recurseFront(BinaryTreeNode root) {
+        if (root == null) {
+            return;
+        }
+        System.out.print(root.value + " ");
+        recurseFront(root.left);
+        recurseFront(root.right);
+    }
+
+
+    public class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode() {
+        }
+
+        TreeNode(int val) {
+            this.val = val;
+        }
+
+        TreeNode(int val, TreeNode left, TreeNode right) {
+            this.val = val;
+            this.left = left;
+            this.right = right;
+        }
     }
 
 
@@ -133,38 +263,6 @@ public class BinaryTreeTest {
         System.out.print(root.value + " ");
     }
 
-    /**
-     * 非递归后序遍历
-     *
-     * @param root
-     */
-    public static void postOrderTraversal(BinaryTreeNode root) {
-        Stack<BinaryTreeNode> treeNodeStack = new Stack<>();
-        BinaryTreeNode node = root;
-        BinaryTreeNode lastVisit = root;
-        while (node != null || !treeNodeStack.isEmpty()) {
-            while (node != null) {
-                treeNodeStack.push(node);
-                node = node.left;
-            }
-            //查看当前栈顶元素
-            node = treeNodeStack.peek();
-            /**
-             * 如果其右子树也为空，或者右子树已经访问，则可以直接输出当前节点的值
-             */
-            if (node.right == null || node.right == lastVisit) {
-                System.out.print(node.value + " ");
-                treeNodeStack.pop();
-                lastVisit = node;
-                node = null;
-            } else {
-                //继续遍历右子树
-                node = node.right;
-            }
-        }
-
-    }
-
 
     public static BinaryTreeNode createTree() {
         // 初始化节点
@@ -177,6 +275,31 @@ public class BinaryTreeTest {
         BinaryTreeNode rootLeftLeftRightLeft = new BinaryTreeNode(7);
         BinaryTreeNode rootLeftLeftRightRight = new BinaryTreeNode(8);
         BinaryTreeNode rootRightRight = new BinaryTreeNode(5);
+        // 为root节点 赋予左右值
+        root.left = rootLeft;
+        root.right = rootRight;
+        root.left.left = rootLeftLeft;
+        root.left.left.right = rootLeftLeftRight;
+        root.left.left.right.left = rootLeftLeftRightLeft;
+        root.left.left.right.right = rootLeftLeftRightRight;
+
+        root.right.right = rootRightRight;
+
+        // 返回树根节点
+        return root;
+    }
+
+    public TreeNode createTree2() {
+        // 初始化节点
+        TreeNode root = new TreeNode(1);
+        TreeNode rootLeft = new TreeNode(2);
+        TreeNode rootRight = new TreeNode(3);
+
+        TreeNode rootLeftLeft = new TreeNode(4);
+        TreeNode rootLeftLeftRight = new TreeNode(6);
+        TreeNode rootLeftLeftRightLeft = new TreeNode(7);
+        TreeNode rootLeftLeftRightRight = new TreeNode(8);
+        TreeNode rootRightRight = new TreeNode(5);
         // 为root节点 赋予左右值
         root.left = rootLeft;
         root.right = rootRight;
@@ -211,7 +334,7 @@ public class BinaryTreeTest {
         queue.add(root);
         while (!queue.isEmpty()) {
             BinaryTreeNode current = queue.poll();
-            System.out.println("current = " + current.value);
+            //System.out.println("current = " + current.value);
             if (current.left != null) {
                 queue.add(current.left);
             }

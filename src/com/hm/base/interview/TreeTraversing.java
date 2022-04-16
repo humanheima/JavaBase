@@ -96,6 +96,51 @@ public class TreeTraversing {
         }
     }
 
+    /**
+     * 深度优先需要构建一个后进先出的栈
+     *
+     * @param root
+     */
+    public List<Integer> preorder(Node root) {
+        List<Integer> list = new ArrayList<>();
+        if (root == null) {
+            return list;
+        }
+        Deque<Node> nodeDeque = new LinkedList<>();
+        Node node = root;
+        nodeDeque.push(node);
+        while (!nodeDeque.isEmpty()) {
+            node = nodeDeque.pop();
+            list.add(node.val);
+            List<Node> children = node.children;
+            //注意这里要从后向前遍历
+            for (int i = children.size() - 1; i >= 0; i--) {
+                //从头压入
+                nodeDeque.push(children.get(i));
+            }
+        }
+        return list;
+    }
+
+    class Node {
+        public int val;
+        public List<Node> children;
+
+        public Node() {
+        }
+
+        public Node(int _val) {
+            val = _val;
+        }
+
+        public Node(int _val, List<Node> _children) {
+            val = _val;
+            children = _children;
+        }
+    }
+
+    ;
+
     public static void main(String[] args) {
         TreeNode root = makeTree();
         //recursion(root);

@@ -23,6 +23,8 @@ public class Test6 {
         printListInverselyUseStack(head);
         System.out.println("\n---------------------------------");
         printListInverselyRecursively(head);
+
+        new Test6().reversePrint(null);
     }
 
     public static class LinkNode {
@@ -30,6 +32,41 @@ public class Test6 {
         int value;
         LinkNode next;
     }
+
+
+    public class ListNode {
+        int val;
+        ListNode next;
+
+        ListNode(int x) {
+            val = x;
+            next = null;
+        }
+    }
+
+
+    public int[] reversePrint(ListNode head) {
+        System.out.println();
+        int[] arr = {};
+        System.out.println(arr.length);
+        if (head == null) {
+            return arr;
+        }
+        Stack<ListNode> stack = new Stack<>();
+        ListNode current = head;
+        while (current != null) {
+            stack.push(current);
+            current = current.next;
+        }
+        int size = stack.size();
+        int[] array = new int[size];
+        for (int i = 0; i < size; i++) {
+            array[i] = stack.pop().val;
+        }
+        return array;
+
+    }
+
 
     /**
      * 使用栈来实现
