@@ -8,17 +8,12 @@ public class Test16 {
 
     public static void main(String[] args) {
 
-        System.out.println(power(3, 3));
-
-        System.out.println(power(0, 3));
-
-        System.out.println(power(0, 0));
-
-        System.out.println(power(0, 1));
-
-        System.out.println(power(2, -2));
-
-        System.out.println(power(-2, -2));
+        System.out.println(power(3, 3) + ", " + power2(3, 3));
+        System.out.println(power(0, 3) + ", " + power2(0, 3));
+        System.out.println(power(0, 0) + ", " + power2(0, 0));
+        System.out.println(power(0, 1) + ", " + power2(0, 1));
+        System.out.println(power(2, -2) + ", " + power2(2, -2));
+        System.out.println(power(-2, -2) + ", " + power2(-2, -2));
     }
 
     /**
@@ -46,6 +41,49 @@ public class Test16 {
         return result;
     }
 
+    public static double power2(double x, int n) {
+        if (x == 0 && n < 0) {
+            throw new IllegalArgumentException("Invalid input,x is zero and n less than zero.");
+        }
+        //指数为0,就返回1.
+        if (n == 0) {
+            return 1;
+        }
+        //求指数的绝对值
+        long exp = n;
+        if (n < 0) {
+            exp = -exp;
+        }
+        double result = powerWithUnsignedExponent2(x, exp);
+        if (n < 0) {
+            result = 1 / result;
+        }
+        return result;
+    }
+
+    private static double powerWithUnsignedExponent2(double base, long exp) {
+        //方法1 效率高
+        if (exp == 0) {
+            return 1;
+        }
+        if (exp == 1) {
+            return base;
+        }
+        double result = powerWithUnsignedExponent2(base, exp >> 1);
+        result *= result;
+        //如果指数是奇数，就还要乘以一次底数。
+        if (exp % 2 != 0) {
+            result *= base;
+        }
+        return result;
+//        //方法2 效率低
+//        double result = 1.0;
+//        for (int i = 1; i <= exp; i++) {
+//            result *= base;
+//        }
+//        return result;
+    }
+
     /**
      * 求一个数的整数次幂，不考虑溢出
      *
@@ -54,7 +92,6 @@ public class Test16 {
      * @return
      */
     private static double powerWithUnsignedExponent(double base, long exp) {
-
         //方法1 效率高
         if (exp == 0) {
             return 1;

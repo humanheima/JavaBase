@@ -16,17 +16,17 @@ public class Test7 {
 
         test1();
         System.out.println();
-        test2();
-        System.out.println();
-        test3();
-        System.out.println();
-        test4();
-        System.out.println();
-        test5();
-        System.out.println();
-        test6();
-        System.out.println();
-        test7();
+//        test2();
+//        System.out.println();
+//        test3();
+//        System.out.println();
+//        test4();
+//        System.out.println();
+//        test5();
+//        System.out.println();
+//        test6();
+//        System.out.println();
+//        test7();
 
     }
 
@@ -41,7 +41,7 @@ public class Test7 {
     private static void test1() {
         int[] preorder = {1, 2, 4, 7, 3, 5, 6, 8};
         int[] inorder = {4, 7, 2, 1, 5, 3, 8, 6};
-        BinaryTreeNode root = construct(preorder, inorder);
+        TreeNode root = construct(preorder, inorder);
         printTree(root);
     }
 
@@ -58,7 +58,7 @@ public class Test7 {
     private static void test2() {
         int[] preorder = {1, 2, 3, 4, 5};
         int[] inorder = {5, 4, 3, 2, 1};
-        BinaryTreeNode root = construct(preorder, inorder);
+        TreeNode root = construct(preorder, inorder);
         printTree(root);
     }
 
@@ -75,7 +75,7 @@ public class Test7 {
     private static void test3() {
         int[] preorder = {1, 2, 3, 4, 5};
         int[] inorder = {1, 2, 3, 4, 5};
-        BinaryTreeNode root = construct(preorder, inorder);
+        TreeNode root = construct(preorder, inorder);
         printTree(root);
     }
 
@@ -83,7 +83,7 @@ public class Test7 {
     private static void test4() {
         int[] preorder = {1};
         int[] inorder = {1};
-        BinaryTreeNode root = construct(preorder, inorder);
+        TreeNode root = construct(preorder, inorder);
         printTree(root);
     }
 
@@ -96,7 +96,7 @@ public class Test7 {
     private static void test5() {
         int[] preorder = {1, 2, 4, 5, 3, 6, 7};
         int[] inorder = {4, 2, 5, 1, 6, 3, 7};
-        BinaryTreeNode root = construct(preorder, inorder);
+        TreeNode root = construct(preorder, inorder);
         printTree(root);
     }
 
@@ -109,24 +109,24 @@ public class Test7 {
     private static void test7() {
         int[] preorder = {1, 2, 4, 5, 3, 6, 7};
         int[] inorder = {4, 2, 8, 1, 6, 3, 7};
-        BinaryTreeNode root = construct(preorder, inorder);
+        TreeNode root = construct(preorder, inorder);
         printTree(root);
     }
 
 
     /**
-     * @param preOrder 二叉树前序遍历的结果
-     * @param midOrder 二叉树中序遍历的结果
+     * @param preorder 二叉树前序遍历的结果
+     * @param inorder 二叉树中序遍历的结果
      * @return
      */
-    public static BinaryTreeNode construct(int[] preOrder, int[] midOrder) {
-        if (preOrder == null || midOrder == null
-                || preOrder.length != midOrder.length
-                || preOrder.length < 1) {
+    public static TreeNode construct(int[] preorder, int[] inorder) {
+        if (preorder == null || inorder == null
+                || preorder.length != inorder.length
+                || preorder.length < 1) {
             return null;
 
         }
-        return construct(preOrder, 0, preOrder.length - 1, midOrder, 0, midOrder.length - 1);
+        return construct(preorder, 0, preorder.length - 1, inorder, 0, inorder.length - 1);
 
     }
 
@@ -139,7 +139,7 @@ public class Test7 {
      * @param mEnd     要重建的树的最后一个节点在中序遍历数组中的位置
      * @return 树的根节点
      */
-    public static BinaryTreeNode construct(int[] preOrder, int pStart, int pEnd, int[] midOrder, int mStart, int mEnd) {
+    public static TreeNode construct(int[] preOrder, int pStart, int pEnd, int[] midOrder, int mStart, int mEnd) {
         //开始位置大于结束位置，说明已经没有需要处理的元素了。
         if (pStart > pEnd) {
             return null;
@@ -156,8 +156,8 @@ public class Test7 {
             throw new IllegalArgumentException("Invalid input");
         }
         //创建当前的根节点，并为根节点赋值
-        BinaryTreeNode node = new BinaryTreeNode();
-        node.value = value;
+        TreeNode node = new TreeNode();
+        node.val = value;
         /**
          * 递归构建当前根节点的左子树，左子树的元素个数：index-mStart个
          * 左子树对应的前序遍历的位置在[pStart+1, pStart+index-mStart]
@@ -175,10 +175,25 @@ public class Test7 {
         return node;
     }
 
+
+    public static class TreeNode {
+
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        public TreeNode() {
+        }
+
+        public TreeNode(int val) {
+            this.val = val;
+        }
+    }
+
     // 前序遍历二叉树
-    public static void printTree(BinaryTreeNode root) {
+    public static void printTree(TreeNode root) {
         if (root != null) {
-            System.out.print(root.value + " ");
+            System.out.print(root.val + " ");
             printTree(root.left);
             printTree(root.right);
         }

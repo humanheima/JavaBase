@@ -16,6 +16,17 @@ public class Test12 {
         System.out.println(hasPath("ABCESFCSADEE".toCharArray(), 3, 4, "AXBCCED".toCharArray()));// false
     }
 
+
+    public boolean exist(char[][] board, String word) {
+        if (board == null || word == null || word.isEmpty()) {
+            return false;
+        }
+
+
+        return false;
+    }
+
+
     public static boolean hasPath(char[] matrix, int rows, int cols, char[] str) {
         if (matrix == null || matrix.length != rows * cols || str == null || str.length < 1) {
             return false;
@@ -34,13 +45,13 @@ public class Test12 {
     }
 
     /**
-     * @param matrix     输入矩阵
-     * @param rows       矩阵行数
-     * @param cols       矩阵列数
-     * @param str        要搜索的字符串
-     * @param visited    访问标记数组
-     * @param row        当前处理的行号
-     * @param col        当前处理的列号
+     * @param matrix         输入矩阵
+     * @param rows           矩阵行数
+     * @param cols           矩阵列数
+     * @param str            要搜索的字符串
+     * @param visited        访问标记数组
+     * @param row            当前处理的行号
+     * @param col            当前处理的列号
      * @param foundCharCount 已经找到的str中字符个数
      * @return 是否找到
      */

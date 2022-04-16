@@ -71,6 +71,59 @@ public class FrogJumpSteps {
         return jumpN;
     }
 
+    public int numWays(int n) {
+        int MOD = 1000000007;
+        if (n == 0) {
+            return 1;
+        }
+        if (n == 1) {
+            return 1;
+        }
+        if (n == 2) {
+            return 2;
+        }
+
+        int preTwo = 1;
+        int prepOne = 2;
+        int jumpN = 0;
+        for (int i = 3; i <= n; i++) {
+            jumpN = (preTwo + prepOne) % MOD;
+            preTwo = prepOne;
+            prepOne = jumpN;
+        }
+        return jumpN;
+    }
+
+    /**
+     * 爬楼梯问题，1 <= n <= 45
+     *
+     * @param n
+     * @return
+     */
+    public int climbStairs(int n) {
+        if (n == 0) {
+            return 1;
+        }
+        if (n == 1) {
+            return 1;
+        }
+        if (n == 2) {
+            return 2;
+        }
+
+        int preTwo = 1;
+        int prepOne = 2;
+        int jumpN = 0;
+        for (int i = 3; i <= n; i++) {
+            jumpN = (preTwo + prepOne);
+            preTwo = prepOne;
+            prepOne = jumpN;
+        }
+        return jumpN;
+
+    }
+
+
     /**
      * 递归解法
      *
