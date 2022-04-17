@@ -1,5 +1,6 @@
 package com.hm.handwrite;
 
+import com.hm.algorithm.ListNode;
 import com.hm.base.interview.sword_to_offer.Test24;
 import com.hm.base.interview.sword_to_offer.Test24.*;
 
@@ -15,7 +16,7 @@ public class ReverseLinkHandWrite {
         test2();
     }
 
-    public static Test24.ListNode reverseList(Test24.ListNode head) {
+    public static ListNode reverseList(ListNode head) {
 
         if (head == null) {
             return null;
@@ -23,10 +24,10 @@ public class ReverseLinkHandWrite {
         if (head.next == null) {
             return head;
         }
-        Test24.ListNode curr = head;
-        Test24.ListNode reverseHead = curr;
-        Test24.ListNode pre = null;
-        Test24.ListNode next;
+        ListNode curr = head;
+        ListNode reverseHead = curr;
+        ListNode pre = null;
+        ListNode next;
 
         while (curr != null) {
             next = curr.next;
@@ -43,31 +44,31 @@ public class ReverseLinkHandWrite {
 
     private static void test2() {
         ListNode head = new ListNode();
-        head.value = 1;
+        head.val = 1;
 
         head.next = new ListNode();
-        head.next.value = 2;
+        head.next.val = 2;
 
         head.next.next = new ListNode();
-        head.next.next.value = 3;
+        head.next.next.val = 3;
 
         head.next.next.next = new ListNode();
-        head.next.next.next.value = 4;
+        head.next.next.next.val = 4;
 
         head.next.next.next.next = new ListNode();
-        head.next.next.next.next.value = 5;
+        head.next.next.next.next.val = 5;
 
         head.next.next.next.next.next = new ListNode();
-        head.next.next.next.next.next.value = 6;
+        head.next.next.next.next.next.val = 6;
 
         head.next.next.next.next.next.next = new ListNode();
-        head.next.next.next.next.next.next.value = 7;
+        head.next.next.next.next.next.next.val = 7;
 
         head.next.next.next.next.next.next.next = new ListNode();
-        head.next.next.next.next.next.next.next.value = 8;
+        head.next.next.next.next.next.next.next.val = 8;
 
         head.next.next.next.next.next.next.next.next = new ListNode();
-        head.next.next.next.next.next.next.next.next.value = 9;
+        head.next.next.next.next.next.next.next.next.val = 9;
 
         printList(head);
         head = reverseList(head);
@@ -78,7 +79,7 @@ public class ReverseLinkHandWrite {
 
     public static void printList(ListNode head) {
         while (head != null) {
-            System.out.print(head.value + "->");
+            System.out.print(head.val + "->");
             head = head.next;
         }
         System.out.println("null");

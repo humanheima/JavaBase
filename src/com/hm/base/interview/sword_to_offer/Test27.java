@@ -26,8 +26,36 @@ public class Test27 {
 
     }
 
+    public static void mirror(BinaryTreeNode node) {
+        if (node != null) {
+            BinaryTreeNode temp = node.left;
+            node.left = node.right;
+            node.right = temp;
+            mirror(node.left);
+            mirror(node.right);
+        }
+    }
+
+
+    public TreeNode mirrorTree(TreeNode root) {
+        swap(root);
+        return root;
+    }
+
+    public void swap(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        TreeNode left = root.left;
+        root.left = root.right;
+        root.right = left;
+        swap(root.left);
+        swap(root.right);
+    }
+
+
     private static void test3() {
-        BinaryTreeNode node=null;
+        BinaryTreeNode node = null;
         mirror(node);
         Utils.printTree(node);
     }
@@ -116,14 +144,5 @@ public class Test27 {
         Utils.printTree(root);
     }
 
-    public static void mirror(BinaryTreeNode node) {
-        if (node != null) {
-            BinaryTreeNode temp = node.left;
-            node.left = node.right;
-            node.right = temp;
-            mirror(node.left);
-            mirror(node.right);
-        }
-    }
 
 }

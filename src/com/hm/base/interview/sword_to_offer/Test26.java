@@ -21,53 +21,55 @@ public class Test26 {
      *
      * @param root
      */
-    public static void recurseFront(BinaryTreeNode root) {
+    public static void recurseFront(TreeNode root) {
         if (root == null) {
             return;
         }
-        System.out.print(root.value + " ");
+        System.out.print(root.val + " ");
         recurseFront(root.left);
         recurseFront(root.right);
     }
 
     public static void main(String[] args) {
-        test1();
+        //test1();
+        test2();
+        //test3();
     }
 
     private static void test1() {
-        BinaryTreeNode root1 = new BinaryTreeNode();
-        root1.value = 8;
+        TreeNode root1 = new TreeNode();
+        root1.val = 8;
 
-        root1.right = new BinaryTreeNode();
-        root1.right.value = 7;
+        root1.right = new TreeNode();
+        root1.right.val = 7;
 
-        root1.left = new BinaryTreeNode();
-        root1.left.value = 8;
+        root1.left = new TreeNode();
+        root1.left.val = 8;
 
-        root1.left.left = new BinaryTreeNode();
-        root1.left.left.value = 9;
+        root1.left.left = new TreeNode();
+        root1.left.left.val = 9;
 
-        root1.left.right = new BinaryTreeNode();
-        root1.left.right.value = 2;
+        root1.left.right = new TreeNode();
+        root1.left.right.val = 2;
 
-        root1.left.right.left = new BinaryTreeNode();
+        root1.left.right.left = new TreeNode();
         /**
-         * root1.left.right.left的value没有赋值
+         * root1.left.right.left的val没有赋值
          */
         //感觉下面不对，
-        root1.left.right.left.value = 4;
+        root1.left.right.left.val = 4;
 
-        root1.left.right.right = new BinaryTreeNode();
-        root1.left.right.right.value = 7;
+        root1.left.right.right = new TreeNode();
+        root1.left.right.right.val = 7;
 
         recurseFront(root1);
 
-        BinaryTreeNode root2 = new BinaryTreeNode();
-        root2.value = 8;
-        root2.left = new BinaryTreeNode();
-        root2.left.value = 9;
-        root2.right = new BinaryTreeNode();
-        root2.right.value = 2;
+        TreeNode root2 = new TreeNode();
+        root2.val = 8;
+        root2.left = new TreeNode();
+        root2.left.val = 9;
+        root2.right = new TreeNode();
+        root2.right.val = 2;
 
         System.out.println(hasSubTree(root1, root2));
         System.out.println(hasSubTree(root2, root1));
@@ -77,8 +79,75 @@ public class Test26 {
         System.out.println(hasSubTree(null, null));
     }
 
-    public static boolean hasSubTree(BinaryTreeNode root1, BinaryTreeNode root2) {
+    private static void test2() {
+        TreeNode root1 = new TreeNode(10);
+        root1.left = new TreeNode(12);
+        root1.right = new TreeNode(6);
 
+        root1.left.left = new TreeNode(8);
+        root1.left.right = new TreeNode(3);
+        root1.right.left = new TreeNode(11);
+
+        recurseFront(root1);
+        System.out.println();
+
+        TreeNode root2 = new TreeNode(10);
+        root2.left = new TreeNode(12);
+        root2.right = new TreeNode(6);
+        root2.left.left = new TreeNode(8);
+
+        recurseFront(root2);
+
+        System.out.println();
+
+        Test26 test26 = new Test26();
+
+        System.out.println(test26.isSubStructure(root1, root2));
+    }
+
+    private static void test3() {
+        TreeNode root1 = new TreeNode(10);
+        root1.left = new TreeNode(12);
+        root1.right = new TreeNode(6);
+
+        root1.left.left = new TreeNode(8);
+        root1.left.right = new TreeNode(3);
+        root1.right.left = new TreeNode(11);
+
+        //recurseFront(root1);
+
+        TreeNode root2 = root1;
+
+        Test26 test26 = new Test26();
+
+        System.out.println(test26.isSubStructure(root1, root2));
+    }
+
+
+    /**
+     * LeetCode 上的官方解法
+     * <p>
+     * 链接：https://leetcode-cn.com/problems/shu-de-zi-jie-gou-lcof/solution/mian-shi-ti-26-shu-de-zi-jie-gou-xian-xu-bian-li-p/
+     * 来源：力扣（LeetCode）
+     *
+     * @param A
+     * @param B
+     * @return
+     */
+    public boolean isSubStructure(TreeNode A, TreeNode B) {
+        if (A == null || B == null) {
+            return false;
+        }
+        return (recur(A, B) || isSubStructure(A.left, B) || isSubStructure(A.right, B));
+    }
+
+    boolean recur(TreeNode A, TreeNode B) {
+        if (B == null) return true;
+        if (A == null || A.val != B.val) return false;
+        return recur(A.left, B.left) && recur(A.right, B.right);
+    }
+
+    public static boolean hasSubTree(TreeNode root1, TreeNode root2) {
         //引用是同一个，当然是相等的了
         if (root1 == root2) {
             return true;
@@ -93,7 +162,7 @@ public class Test26 {
         boolean result = false;
 
         //如果节点的值相等，就调用匹配方法
-        if (root1.value == root2.value) {
+        if (root1.val == root2.val) {
             result = match(root1, root2);
         }
         if (result) {
@@ -110,7 +179,7 @@ public class Test26 {
      * @param root2
      * @return
      */
-    private static boolean match(BinaryTreeNode root1, BinaryTreeNode root2) {
+    private static boolean match(TreeNode root1, TreeNode root2) {
         //只要两个对象是同一个就返回true
         if (root1 == root2) {
             return true;
@@ -124,7 +193,7 @@ public class Test26 {
             return false;
         }
         // 如果两个结点的值相等，则分别判断其左子结点和右子结点
-        if (root1.value == root2.value) {
+        if (root1.val == root2.val) {
             return match(root1.left, root2.left) && match(root1.right, root2.right);
         }
         // 结点值不相等返回false

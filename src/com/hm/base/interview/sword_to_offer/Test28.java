@@ -11,7 +11,7 @@ package com.hm.base.interview.sword_to_offer;
  * 中序遍历（left，父节点，right）
  * 后序遍历（left，right,父节点）
  * 在这三种遍历算法中，都是先遍历左子节点再遍历右子节点。
- *
+ * <p>
  * 我们是否可以定义一种遍历算法，先遍历右子节点再遍历左子节点？
  * 比如我们针对前序遍历定义一种对称的遍历算法，即先遍历父节点，再遍历它的右子节点，最后遍历它的左子节点。
  * 我们发现可以比较二叉树的前序遍历序列和对称前序遍历序列来判断二叉树是不是对称的。如果两个序列一样，那么二叉树就是对称的。
@@ -28,6 +28,24 @@ package com.hm.base.interview.sword_to_offer;
  * 参考链接：https://blog.csdn.net/derrantcm/article/details/46847939
  */
 public class Test28 {
+
+
+    public boolean isSymmetric(TreeNode root) {
+        return isSymmetrical2(root, root);
+    }
+
+    public boolean isSymmetrical2(TreeNode left, TreeNode right) {
+        if (left == null && right == null) {
+            return true;
+        }
+        if (left == null || right == null) {
+            return false;
+        }
+        if (left.val != right.val) {
+            return false;
+        }
+        return isSymmetrical2(left.left, right.right) && isSymmetrical2(left.right, right.left);
+    }
 
 
     public static boolean isSymmetrical(BinaryTreeNode root) {

@@ -19,6 +19,9 @@ package com.hm.base.interview.sword_to_offer;
  * 测试用例 + 或者 -
  * 测试用例 1.1e
  * 测试用例 1.1e
+ * <p>
+ * TODO 算法有问题，有些场景不满足 小数点的前后两侧，至少有一侧是数字。
+ * LeetCode 官方解法参考 Test20_LeetCode
  */
 public class Test20 {
 
@@ -119,6 +122,76 @@ public class Test20 {
             index++;
         }
         return index;
+    }
+
+
+    /**
+     * LeetCode 的提交还有问题 有些场景不满足 小数点的前后两侧，至少有一侧是数字。
+     *
+     * @param s
+     * @return
+     */
+    public boolean isNumber(String s) {
+        //去掉空白字符
+        if (s == null) {
+            return false;
+        }
+        s = s.trim();
+
+        if (s.isEmpty()) {
+            return false;
+        }
+        int index = 0;
+        if (s.charAt(index) == '+' || s.charAt(index) == '-') {
+            index++;
+        }
+        if (index >= s.length()) {
+            return false;
+        }
+        boolean numeric = true;
+        //扫描整数部分
+        index = scanDigits(s, index);
+        //还没有到达字符串末尾
+        //小数点前或者e前的一个位置
+        int digitBeforePointIndex = index - 1;
+        if (index < s.length()) {
+            if (s.charAt(index) == '.') {
+
+                //如果是小数点，移动到下一个位置
+                index++;
+                //扫描小数部分
+                index = scanDigits(s, index);
+                //至少保证有一个数字
+                if (index >= s.length()) {
+                    if (s.charAt(s.length() - 1) >= '0' && s.charAt(s.length() - 1) <= '9') {
+                        numeric = true;
+                    } else {
+                        numeric = false;
+                    }
+                } else if (s.charAt(index) == 'e' || s.charAt(index) == 'E') {
+                    //扫描指数部分
+                    if (digitBeforePointIndex >= 0 && s.charAt(digitBeforePointIndex) >= '0' && s.charAt(digitBeforePointIndex) <= '9') {
+                        numeric = isExponential(s, index);
+                    } else {
+                        numeric = false;
+                    }
+                } else {
+                    numeric = false;
+                }
+            } else if (s.charAt(index) == 'e' || s.charAt(index) == 'E') {
+                if (digitBeforePointIndex >= 0 && s.charAt(digitBeforePointIndex) >= '0' && s.charAt(digitBeforePointIndex) <= '9') {
+                    numeric = isExponential(s, index);
+                } else {
+                    numeric = false;
+                }
+            } else {
+                numeric = false;
+            }
+            return numeric;
+        } else {
+            return true;
+        }
+
     }
 
 

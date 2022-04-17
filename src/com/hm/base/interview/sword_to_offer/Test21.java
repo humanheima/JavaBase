@@ -16,30 +16,107 @@ package com.hm.base.interview.sword_to_offer;
 public class Test21 {
 
     public static void main(String[] args) {
+        //test1();
+        test2();
+        //test3();
+        test4();
+    }
+
+    private static void test1() {
         int[] array = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
-        reorderOddEven(array);
+        //reorderOddEven(array);
+        //printArray(array);
+
+        Test21 test21 = new Test21();
+        test21.exchange(array);
         printArray(array);
     }
 
-    public static void reorderOddEven(int[] arr) {
-        if (arr == null || arr.length < 2) {
+    private static void test2() {
+        int[] array = {1, 2, 3, 4};
+        //reorderOddEven(array);
+        //printArray(array);
+
+        Test21 test21 = new Test21();
+        test21.exchange(array);
+        printArray(array);
+    }
+
+    private static void test3() {
+        int[] array = {1, 2, 3, 4, 5};
+        //reorderOddEven(array);
+        //printArray(array);
+
+        Test21 test21 = new Test21();
+        test21.exchange(array);
+        printArray(array);
+    }
+
+    private static void test4() {
+        //int[] array = {1, 3, 5};
+        int[] array = {2, 16, 3, 5, 13, 1, 16, 1, 12, 18, 11, 8, 11, 11, 5, 1};
+        Test21 test21 = new Test21();
+        test21.exchange(array);
+        printArray(array);
+    }
+
+
+    /**
+     * 第一个想到的是前后两个指针
+     *
+     * @param nums
+     * @return
+     */
+    public int[] exchange(int[] nums) {
+        if (nums == null || nums.length <= 1) {
+            return nums;
+        }
+        int mid = nums.length / 2;
+        int left = 0;
+        int right = nums.length - 1;
+
+        while (left < mid && right > mid) {
+            while (right > mid && nums[right] % 2 == 0) {
+                right--;
+            }
+            while (left < mid && nums[left] % 2 == 1) {
+                left++;
+            }
+            if (right < mid) {
+                break;
+            }
+            if (left >= mid) {
+                break;
+            }
+            int temp = nums[right];
+            nums[right] = nums[left];
+            nums[left] = temp;
+            left++;
+            right--;
+        }
+        return nums;
+    }
+
+
+    public static void reorderOddEven(int[] nums) {
+        if (nums == null || nums.length < 2) {
             return;
         }
         int start = 0;
-        int end = arr.length - 1;
+        int end = nums.length - 1;
         while (start < end) {
-            while (start < end && arr[start] % 2 != 0) {
+            while (start < end && nums[start] % 2 != 0) {
                 start++;
             }
-            while (start < end && arr[end] % 2 == 0) {
+            while (start < end && nums[end] % 2 == 0) {
                 end--;
             }
             // 找到后就将奇数和偶数交换位置
             // 对于start=end的情况，交换不会产生什么影响
             // 所以将if判断省去了
-            int temp = arr[start];
-            arr[start] = arr[end];
-            arr[end] = temp;
+            int temp = nums[start];
+            nums[start] = nums[end];
+            nums[end] = temp;
         }
     }
 

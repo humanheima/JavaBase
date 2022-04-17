@@ -1,7 +1,7 @@
 package com.hm.base.interview.sword_to_offer;
 
-import com.hm.base.interview.sword_to_offer.Test18.ListNode;
 
+import com.hm.algorithm.ListNode;
 
 /**
  * Created by dumingwei on 2018/12/10
@@ -40,7 +40,7 @@ public class Test25 {
         ListNode pointer = root;
         while (head1 != null && head2 != null) {
             // 下面的操作合并较小的元素
-            if (head1.value < head2.value) {
+            if (head1.val < head2.val) {
                 pointer.next = head1;
                 head1 = head1.next;
             } else {
@@ -77,7 +77,7 @@ public class Test25 {
             return head1;
         }
         ListNode mergedHead = null;
-        if (head1.value < head2.value) {
+        if (head1.val < head2.val) {
             mergedHead = head1;
             mergedHead.next = merge2(head1.next, head2);
 
@@ -102,51 +102,51 @@ public class Test25 {
 
     private static void test2() {
         ListNode head = new ListNode();
-        head.value = 1;
+        head.val = 1;
         ListNode mergedHead = merge(head, null);
         printList(mergedHead);
     }
 
     private static void test3() {
         ListNode head = new ListNode();
-        head.value = 1;
+        head.val = 1;
         ListNode head2 = new ListNode();
-        head2.value = 1;
+        head2.val = 1;
         ListNode mergedHead = merge(head, head2);
         printList(mergedHead);
     }
 
     private static void test0() {
         ListNode head = new ListNode();
-        head.value = 1;
+        head.val = 1;
 
         head.next = new ListNode();
-        head.next.value = 2;
+        head.next.val = 2;
 
         head.next.next = new ListNode();
-        head.next.next.value = 3;
+        head.next.next.val = 3;
 
         head.next.next.next = new ListNode();
-        head.next.next.next.value = 4;
+        head.next.next.next.val = 4;
 
         head.next.next.next.next = new ListNode();
-        head.next.next.next.next.value = 5;
+        head.next.next.next.next.val = 5;
 
 
         ListNode head2 = new ListNode();
-        head2.value = 1;
+        head2.val = 1;
 
         head2.next = new ListNode();
-        head2.next.value = 3;
+        head2.next.val = 3;
 
         head2.next.next = new ListNode();
-        head2.next.next.value = 5;
+        head2.next.next.val = 5;
 
         head2.next.next.next = new ListNode();
-        head2.next.next.next.value = 6;
+        head2.next.next.next.val = 6;
 
         head2.next.next.next.next = new ListNode();
-        head2.next.next.next.next.value = 7;
+        head2.next.next.next.next.val = 7;
 
 //        head = merge(head, head2);
         head = merge2(head, head2);
@@ -160,7 +160,7 @@ public class Test25 {
      */
     public static void printList(ListNode head) {
         while (head != null) {
-            System.out.print(head.value + "->");
+            System.out.print(head.val + "->");
             head = head.next;
         }
         System.out.println("null");

@@ -15,14 +15,55 @@ public class Test17 {
 
     public static void main(String[] args) {
 
-        //printOneToNthDigits(0);
-        //printOneToNthDigits(1);
-        //printOneToNthDigits(2);
-        //printOneToNthDigits(3);
+//        printOneToNthDigits(0);
+//        printOneToNthDigits(1);
+//        printOneToNthDigits(2);
+//        printOneToNthDigits(3);
 
+        Test17 test17 = new Test17();
+        test17.printArray2(test17.printNumbers(0));
+        test17.printArray2(test17.printNumbers(1));
+        test17.printArray2(test17.printNumbers(0));
         /*printOneToNthDigits2(1);
         printOneToNthDigits2(4);*/
     }
+
+    public void printArray2(int[] ints) {
+        if (ints == null) {
+            return;
+        }
+        for (int i = 0; i < ints.length; i++) {
+            System.out.print(ints[i] + " ");
+
+        }
+        System.out.println();
+
+    }
+
+    /**
+     * 在 LeetCode上的提交
+     * @param n
+     * @return
+     */
+    public int[] printNumbers(int n) {
+        if (n < 1) {
+            int[] result = {};
+            return result;
+
+        }
+        int maxLimit = 1;
+        while (n > 0) {
+            maxLimit *= 10;
+            n--;
+        }
+        System.out.println("maxLimit = " + maxLimit);
+        int[] result = new int[maxLimit - 1];
+        for (int i = 0; i < maxLimit - 1; i++) {
+            result[i] = i + 1;
+        }
+        return result;
+    }
+
 
     /**
      * @param n 数字的最大位数

@@ -1,6 +1,6 @@
 package com.hm.base.interview.sword_to_offer;
 
-import java.util.Arrays;
+import com.hm.algorithm.ListNode;
 
 /**
  * Created by dumingwei on 2018/12/10
@@ -19,17 +19,28 @@ import java.util.Arrays;
 public class Test24 {
 
 
-    public static class ListNode {
+    public ListNode reverseList2(ListNode head) {
 
-
-        public int value;
-        public ListNode next;
-
-        @Override
-        protected void finalize() throws Throwable {
-            super.finalize();
+        if (head == null || head.next == null) {
+            return head;
         }
+        //用于记录反转后的链表的头节点
+        ListNode reverseHead = null;
+        ListNode current = head;
+        ListNode pre = null;
+        ListNode next;
+
+
+        while (current != null) {
+            reverseHead = current;
+            next = current.next;
+            current.next = pre;
+            pre = current;
+            current = next;
+        }
+        return reverseHead;
     }
+
 
     public static ListNode reverseList(ListNode head) {
 
@@ -62,7 +73,7 @@ public class Test24 {
      */
     public static void printList(ListNode head) {
         while (head != null) {
-            System.out.print(head.value + "->");
+            System.out.print(head.val + "->");
             head = head.next;
         }
         System.out.println("null");
@@ -82,7 +93,7 @@ public class Test24 {
 
     private static void test1() {
         ListNode head = new ListNode();
-        head.value = 1;
+        head.val = 1;
         printList(head);
         head = reverseList(head);
         printList(head);
@@ -92,31 +103,31 @@ public class Test24 {
 
     private static void test2() {
         ListNode head = new ListNode();
-        head.value = 1;
+        head.val = 1;
 
         head.next = new ListNode();
-        head.next.value = 2;
+        head.next.val = 2;
 
         head.next.next = new ListNode();
-        head.next.next.value = 3;
+        head.next.next.val = 3;
 
         head.next.next.next = new ListNode();
-        head.next.next.next.value = 4;
+        head.next.next.next.val = 4;
 
         head.next.next.next.next = new ListNode();
-        head.next.next.next.next.value = 5;
+        head.next.next.next.next.val = 5;
 
         head.next.next.next.next.next = new ListNode();
-        head.next.next.next.next.next.value = 6;
+        head.next.next.next.next.next.val = 6;
 
         head.next.next.next.next.next.next = new ListNode();
-        head.next.next.next.next.next.next.value = 7;
+        head.next.next.next.next.next.next.val = 7;
 
         head.next.next.next.next.next.next.next = new ListNode();
-        head.next.next.next.next.next.next.next.value = 8;
+        head.next.next.next.next.next.next.next.val = 8;
 
         head.next.next.next.next.next.next.next.next = new ListNode();
-        head.next.next.next.next.next.next.next.next.value = 9;
+        head.next.next.next.next.next.next.next.next.val = 9;
 
         printList(head);
         head = reverseList(head);

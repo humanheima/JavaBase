@@ -1,6 +1,6 @@
 package com.hm.base.interview.sword_to_offer;
 
-import com.hm.base.interview.sword_to_offer.Test18.ListNode;
+import com.hm.algorithm.ListNode;
 
 /**
  * Created by dumingwei on 2018/12/6
@@ -22,41 +22,72 @@ public class Test22 {
 
     public static void main(String[] args) {
         ListNode head = new ListNode();
-        head.value = 1;
+        head.val = 1;
 
         head.next = new ListNode();
-        head.next.value = 2;
+        head.next.val = 2;
 
         head.next.next = new ListNode();
-        head.next.next.value = 3;
+        head.next.next.val = 3;
 
         head.next.next.next = new ListNode();
-        head.next.next.next.value = 4;
+        head.next.next.next.val = 4;
 
         head.next.next.next.next = new ListNode();
-        head.next.next.next.next.value = 5;
+        head.next.next.next.next.val = 5;
 
         head.next.next.next.next.next = new ListNode();
-        head.next.next.next.next.next.value = 6;
+        head.next.next.next.next.next.val = 6;
 
         head.next.next.next.next.next.next = new ListNode();
-        head.next.next.next.next.next.next.value = 7;
+        head.next.next.next.next.next.next.val = 7;
 
         head.next.next.next.next.next.next.next = new ListNode();
-        head.next.next.next.next.next.next.next.value = 8;
+        head.next.next.next.next.next.next.next.val = 8;
 
         head.next.next.next.next.next.next.next.next = new ListNode();
-        head.next.next.next.next.next.next.next.next.value = 9;
+        head.next.next.next.next.next.next.next.next.val = 9;
 
-        System.out.println(findKthToTail(head, 1).value); // 倒数第一个
-        System.out.println(findKthToTail(head, 5).value); // 中间的一个
-        System.out.println(findKthToTail(head, 9).value); // 倒数最后一个就是顺数第一个
+        System.out.println(findKthToTail(head, 1).val); // 倒数第一个
+        System.out.println(findKthToTail(head, 5).val); // 中间的一个
+        System.out.println(findKthToTail(head, 9).val); // 倒数最后一个就是顺数第一个
 
         System.out.println(findKthToTail(head, 10));
 
-        System.out.println(findKthToTail(head,0));
-        System.out.println(findKthToTail(null,0));
+        System.out.println(findKthToTail(head, 0));
+        System.out.println(findKthToTail(null, 0));
     }
+
+
+    /**
+     * LeetCode 的解法
+     *
+     * @param head 头结点
+     * @param k    倒数第k个节点
+     * @return
+     */
+    public ListNode getKthFromEnd(ListNode head, int k) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode fastPoint = head;
+        ListNode slowPoint = head;
+        while (fastPoint != null && k > 0) {
+            fastPoint = fastPoint.next;
+            k--;
+        }
+        if (fastPoint == null) {
+            return null;
+        }
+
+        while (fastPoint != null && slowPoint != null) {
+            fastPoint = fastPoint.next;
+            slowPoint = slowPoint.next;
+        }
+
+        return slowPoint;
+    }
+
 
     /**
      * 输入一个键表，输出该链表中倒数第k 个节点．为了符合大多数人的习惯，

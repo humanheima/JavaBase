@@ -1,5 +1,7 @@
 package com.hm.base.interview.sword_to_offer;
 
+import com.hm.algorithm.ListNode;
+
 /**
  * Created by dumingwei on 2018/12/2
  * <p>
@@ -16,23 +18,23 @@ public class Test18 {
 
     public static void main(String[] args) {
         ListNode head = new ListNode();
-        head.value = 1;
+        head.val = 1;
 
         ListNode second = new ListNode();
         head.next = second;
-        second.value = 2;
+        second.val = 2;
 
         ListNode third = new ListNode();
         second.next = third;
-        third.value = 3;
+        third.val = 3;
 
         ListNode forth = new ListNode();
         third.next = forth;
-        forth.value = 4;
+        forth.val = 4;
 
         ListNode last = new ListNode();
         forth.next = last;
-        last.value = 5;
+        last.val = 5;
 
 
         //删除的节点为空
@@ -57,11 +59,37 @@ public class Test18 {
 
     }
 
-    public static class ListNode {
 
-        public int value;
-        public ListNode next;
+    /**
+     * LeetCode 提交点代码
+     * 注意点：删除的可能是头结点
+     * @param head
+     * @param val
+     * @return
+     */
+    public ListNode deleteNode(ListNode head, int val) {
+        if (head == null) {
+            return head;
+        }
+
+        ListNode pre = head;
+        ListNode current = head;
+
+        while (current != null && current.val != val) {
+            pre = current;
+            current = current.next;
+        }
+        if (current != null) {
+            if (current == head) {
+                return head.next;
+            }else {
+                pre.next = current.next;
+            }
+        }
+        return head;
+
     }
+
 
     /**
      * 删除节点，前提是节点一定在链表中,如果节点不存在那么会抛出异常
@@ -94,7 +122,7 @@ public class Test18 {
             temp.next = null;
             //toBeDeleteNode = null;
         } else {
-            toBeDeleteNode.value = toBeDeleteNode.next.value;
+            toBeDeleteNode.val = toBeDeleteNode.next.val;
             toBeDeleteNode.next = toBeDeleteNode.next.next;
         }
         return head;
@@ -103,7 +131,7 @@ public class Test18 {
 
     public static void printList(ListNode head) {
         while (head != null) {
-            System.out.print(head.value + "->");
+            System.out.print(head.val + "->");
             head = head.next;
         }
         System.out.println("null");

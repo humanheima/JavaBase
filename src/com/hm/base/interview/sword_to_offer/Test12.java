@@ -14,6 +14,16 @@ public class Test12 {
         //ADEE
         System.out.println(hasPath("ABCESFCSADEE".toCharArray(), 3, 4, "ABCCED".toCharArray()));// true
         System.out.println(hasPath("ABCESFCSADEE".toCharArray(), 3, 4, "AXBCCED".toCharArray()));// false
+
+        System.out.println("----------------");
+        char[][] board = new char[3][4];
+        board[0] = "ABCE".toCharArray();
+        board[1] = "SFCS".toCharArray();
+        board[2] = "ADEE".toCharArray();
+        Test12 test12 = new Test12();
+
+        System.out.println(test12.exist(board, "ABCCED"));
+        System.out.println(test12.exist(board, "AXBCCED"));
     }
 
 
@@ -21,9 +31,62 @@ public class Test12 {
         if (board == null || word == null || word.isEmpty()) {
             return false;
         }
-
-
+        int rows = board.length;
+        int columns = board[0].length;
+        boolean[][] visited = new boolean[rows][columns];
+        //已经找到的字符在word中的下标，这里用数组传递，直接用int值的话，每次传递的都是0。
+        Integer foundCharIndexOfWord = 0;
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
+                if (hasPathCore2(board, rows, columns, word, visited, i, j, foundCharIndexOfWord)) {
+                    return true;
+                }
+            }
+        }
         return false;
+    }
+
+    /**
+     * @param board                输入矩阵
+     * @param rows                 矩阵行数
+     * @param cols                 矩阵列数
+     * @param word                 要搜索的字符串
+     * @param visited              访问标记数组
+     * @param currentRow           当前处理的行号
+     * @param currentColumn        当前处理的列号
+     * @param foundCharIndexOfWord 已经找到的字符在word中的下标
+     * @return 是否找到
+     */
+    public boolean hasPathCore2(char[][] board, int rows, int cols, String word, boolean[][] visited, int currentRow, int currentColumn, Integer foundCharIndexOfWord) {
+        //注释1处，已经找到了字符串中的所有字符，返回true，
+        if (foundCharIndexOfWord == word.length()) {
+            return true;
+        }
+        //注释2处，hasPath为false
+        boolean hasPath = false;
+        //判断currentRow*currentColumn是否是当前字符
+        if (currentRow >= 0 && currentRow < rows
+                && currentColumn >= 0 && currentColumn < cols
+                && board[currentRow][currentColumn] == word.charAt(foundCharIndexOfWord)
+                && !visited[currentRow][currentColumn]) {
+            //找到一个字符，将当前位置置为已经遍历过了，不可以再进入
+            visited[currentRow][currentColumn] = true;
+            //将找到的字符个数加1
+            foundCharIndexOfWord++;
+
+            //按左右上下回溯
+            hasPath = hasPathCore2(board, rows, cols, word, visited, currentRow, currentColumn - 1, foundCharIndexOfWord)//减小一列，向左搜索
+                    || hasPathCore2(board, rows, cols, word, visited, currentRow, currentColumn + 1, foundCharIndexOfWord)//增加一列，向右搜索
+                    || hasPathCore2(board, rows, cols, word, visited, currentRow - 1, currentColumn, foundCharIndexOfWord)//减小行，向上搜索
+                    || hasPathCore2(board, rows, cols, word, visited, currentRow + 1, currentColumn, foundCharIndexOfWord);//增加一行，向下搜索
+            if (!hasPath) {
+                foundCharIndexOfWord--;
+                //如果从当前节点出发，没有找到匹配的字符串，那么这个节点还是可以进入的。
+                visited[currentRow][currentColumn] = false;
+            }
+        }
+
+        return hasPath;
     }
 
 
