@@ -1,7 +1,6 @@
 package com.hm.base.interview.sword_to_offer;
 
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 
 /**
  * Created by dmw on 2018/12/16.
@@ -25,26 +24,78 @@ import java.util.Queue;
  */
 public class Test32_2 {
 
+
+    //       8
+    //    /    \
+    //   6     10
+    //  / \   / \
+    // 5   7 9  11
+
+    /**
+     * LeetCode 上的提交
+     *
+     * @param root
+     * @return
+     */
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        List<List<Integer>> result = new ArrayList<>();
+        if (root == null) {
+            return result;
+        }
+        Queue<TreeNode> stack = new LinkedList<>();
+        stack.offer(root);
+        int currentLevelToPrint = 1;
+        List<Integer> currentLevelNodeList = new ArrayList<>();
+        int nextLevelToPrint = 0;
+        while (!stack.isEmpty()) {
+
+            TreeNode node = stack.poll();
+            int val = node.val;
+            currentLevelNodeList.add(val);
+            currentLevelToPrint--;
+            if (node.left != null) {
+                stack.offer(node.left);
+                nextLevelToPrint++;
+            }
+            if (node.right != null) {
+                stack.offer(node.right);
+                nextLevelToPrint++;
+            }
+
+            if (currentLevelToPrint == 0) {
+                result.add(currentLevelNodeList);
+                currentLevelNodeList = new ArrayList<>();
+                currentLevelToPrint = nextLevelToPrint;
+                nextLevelToPrint = 0;
+            }
+        }
+        return result;
+    }
+
+    public void test1(TreeNode root) {
+        List<List<Integer>> result = levelOrder(root);
+
+        System.out.println(result);
+
+    }
+
+
     public static void main(String[] args) {
         //       8
         //    /    \
         //   6     10
         //  / \   / \
         // 5   7 9  11
-        BinaryTreeNode root = new BinaryTreeNode();
-        root.value = 8;
-        root.left = new BinaryTreeNode();
-        root.left.value = 6;
-        root.left.left = new BinaryTreeNode();
-        root.left.left.value = 5;
-        root.left.right = new BinaryTreeNode();
-        root.left.right.value = 7;
-        root.right = new BinaryTreeNode();
-        root.right.value = 10;
-        root.right.left = new BinaryTreeNode();
-        root.right.left.value = 9;
-        root.right.right = new BinaryTreeNode();
-        root.right.right.value = 11;
+        TreeNode root = new TreeNode(8);
+        root.left = new TreeNode(6);
+        root.left.left = new TreeNode(5);
+        root.left.right = new TreeNode(7);
+        root.right = new TreeNode(10);
+        root.right.left = new TreeNode(9);
+        root.right.right = new TreeNode(11);
+
+        new Test32_2().test1(root);
+
         printFromTopToBottomEveryLine(root);
 
         //         1
@@ -56,16 +107,16 @@ public class Test32_2 {
         //   7
         //  /
         // 9
-        BinaryTreeNode root2 = new BinaryTreeNode();
-        root2.value = 1;
-        root2.left = new BinaryTreeNode();
-        root2.left.value = 3;
-        root2.left.left = new BinaryTreeNode();
-        root2.left.left.value = 5;
-        root2.left.left.left = new BinaryTreeNode();
-        root2.left.left.left.value = 7;
-        root2.left.left.left.left = new BinaryTreeNode();
-        root2.left.left.left.left.value = 9;
+        TreeNode root2 = new TreeNode();
+        root2.val = 1;
+        root2.left = new TreeNode();
+        root2.left.val = 3;
+        root2.left.left = new TreeNode();
+        root2.left.left.val = 5;
+        root2.left.left.left = new TreeNode();
+        root2.left.left.left.val = 7;
+        root2.left.left.left.left = new TreeNode();
+        root2.left.left.left.left.val = 9;
         System.out.println("\n");
         printFromTopToBottomEveryLine(root2);
 
@@ -78,22 +129,22 @@ public class Test32_2 {
         //       6
         //        \
         //         8
-        BinaryTreeNode root3 = new BinaryTreeNode();
-        root3.value = 0;
-        root3.right = new BinaryTreeNode();
-        root3.right.value = 2;
-        root3.right.right = new BinaryTreeNode();
-        root3.right.right.value = 4;
-        root3.right.right.right = new BinaryTreeNode();
-        root3.right.right.right.value = 6;
-        root3.right.right.right.right = new BinaryTreeNode();
-        root3.right.right.right.right.value = 8;
+        TreeNode root3 = new TreeNode();
+        root3.val = 0;
+        root3.right = new TreeNode();
+        root3.right.val = 2;
+        root3.right.right = new TreeNode();
+        root3.right.right.val = 4;
+        root3.right.right.right = new TreeNode();
+        root3.right.right.right.val = 6;
+        root3.right.right.right.right = new TreeNode();
+        root3.right.right.right.right.val = 8;
         System.out.println("\n");
         printFromTopToBottomEveryLine(root3);
 
         // 1
-        BinaryTreeNode root4 = new BinaryTreeNode();
-        root4.value = 1;
+        TreeNode root4 = new TreeNode();
+        root4.val = 1;
         System.out.println("\n");
         printFromTopToBottomEveryLine(root4);
 
@@ -107,19 +158,19 @@ public class Test32_2 {
      *
      * @param root
      */
-    private static void printFromTopToBottomEveryLine(BinaryTreeNode root) {
+    private static void printFromTopToBottomEveryLine(TreeNode root) {
         if (root != null) {
-            Queue<BinaryTreeNode> list = new LinkedList<>();
+            Queue<TreeNode> list = new LinkedList<>();
             list.add(root);
             // 用于记录当前处理的节点
-            BinaryTreeNode curNode;
+            TreeNode curNode;
             //表示当前行还没有打印的节点数
             int toBePrinted = 1;
             //下一层节点的数目
             int nextLineNodeCount = 0;
             while (!list.isEmpty()) {
                 curNode = list.remove();
-                System.out.print(curNode.value + " ");
+                System.out.print(curNode.val + " ");
                 if (curNode.left != null) {
                     list.add(curNode.left);
                     nextLineNodeCount++;

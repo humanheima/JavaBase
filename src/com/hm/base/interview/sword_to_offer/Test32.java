@@ -1,7 +1,6 @@
 package com.hm.base.interview.sword_to_offer;
 
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 
 /**
  * Created by dmw on 2018/12/16.
@@ -22,27 +21,73 @@ import java.util.Queue;
  */
 public class Test32 {
 
-    public static void main(String[] args) {
+
+    /**
+     * LeetCode 上的提交
+     *
+     * @param root
+     * @return
+     */
+    //       8
+    //    /    \
+    //   6     10
+    //  / \   / \
+    // 5   7 9  11
+    public int[] levelOrder(TreeNode root) {
+        if (root == null) {
+            int[] result = {};
+            return result;
+        }
+        List<Integer> tempList = new ArrayList<>();
+        Queue<TreeNode> stack = new LinkedList<>();
+        stack.add(root);
+        while (!stack.isEmpty()) {
+            TreeNode node = stack.poll();
+            tempList.add(node.val);
+            if (node.left != null) {
+                stack.offer(node.left);
+            }
+            if (node.right != null) {
+                stack.offer(node.right);
+            }
+        }
+        int size = tempList.size();
+        int[] result = new int[size];
+        for (int i = 0; i < size; i++) {
+            result[i] = tempList.get(i);
+        }
+        //System.out.println(tempList);
+        return result;
+
+    }
+
+    private static void test1() {
         //       8
         //    /    \
         //   6     10
         //  / \   / \
         // 5   7 9  11
-        BinaryTreeNode root = new BinaryTreeNode();
-        root.value = 8;
-        root.left = new BinaryTreeNode();
-        root.left.value = 6;
-        root.left.left = new BinaryTreeNode();
-        root.left.left.value = 5;
-        root.left.right = new BinaryTreeNode();
-        root.left.right.value = 7;
-        root.right = new BinaryTreeNode();
-        root.right.value = 10;
-        root.right.left = new BinaryTreeNode();
-        root.right.left.value = 9;
-        root.right.right = new BinaryTreeNode();
-        root.right.right.value = 11;
+        TreeNode root = new TreeNode();
+        root.val = 8;
+        root.left = new TreeNode();
+        root.left.val = 6;
+        root.left.left = new TreeNode();
+        root.left.left.val = 5;
+        root.left.right = new TreeNode();
+        root.left.right.val = 7;
+        root.right = new TreeNode();
+        root.right.val = 10;
+        root.right.left = new TreeNode();
+        root.right.left.val = 9;
+        root.right.right = new TreeNode();
+        root.right.right.val = 11;
+
         printFromTopToBottom(root);
+        new Test32().levelOrder(root);
+    }
+
+    public static void main(String[] args) {
+        test1();
 
         //         1
         //        /
@@ -53,16 +98,16 @@ public class Test32 {
         //   7
         //  /
         // 9
-        BinaryTreeNode root2 = new BinaryTreeNode();
-        root2.value = 1;
-        root2.left = new BinaryTreeNode();
-        root2.left.value = 3;
-        root2.left.left = new BinaryTreeNode();
-        root2.left.left.value = 5;
-        root2.left.left.left = new BinaryTreeNode();
-        root2.left.left.left.value = 7;
-        root2.left.left.left.left = new BinaryTreeNode();
-        root2.left.left.left.left.value = 9;
+        TreeNode root2 = new TreeNode();
+        root2.val = 1;
+        root2.left = new TreeNode();
+        root2.left.val = 3;
+        root2.left.left = new TreeNode();
+        root2.left.left.val = 5;
+        root2.left.left.left = new TreeNode();
+        root2.left.left.left.val = 7;
+        root2.left.left.left.left = new TreeNode();
+        root2.left.left.left.left.val = 9;
         System.out.println("\n");
         printFromTopToBottom(root2);
 
@@ -75,22 +120,22 @@ public class Test32 {
         //       6
         //        \
         //         8
-        BinaryTreeNode root3 = new BinaryTreeNode();
-        root3.value = 0;
-        root3.right = new BinaryTreeNode();
-        root3.right.value = 2;
-        root3.right.right = new BinaryTreeNode();
-        root3.right.right.value = 4;
-        root3.right.right.right = new BinaryTreeNode();
-        root3.right.right.right.value = 6;
-        root3.right.right.right.right = new BinaryTreeNode();
-        root3.right.right.right.right.value = 8;
+        TreeNode root3 = new TreeNode();
+        root3.val = 0;
+        root3.right = new TreeNode();
+        root3.right.val = 2;
+        root3.right.right = new TreeNode();
+        root3.right.right.val = 4;
+        root3.right.right.right = new TreeNode();
+        root3.right.right.right.val = 6;
+        root3.right.right.right.right = new TreeNode();
+        root3.right.right.right.right.val = 8;
         System.out.println("\n");
         printFromTopToBottom(root3);
 
         // 1
-        BinaryTreeNode root4 = new BinaryTreeNode();
-        root4.value = 1;
+        TreeNode root4 = new TreeNode();
+        root4.val = 1;
         System.out.println("\n");
         printFromTopToBottom(root4);
 
@@ -102,15 +147,15 @@ public class Test32 {
     /**
      * @param root
      */
-    private static void printFromTopToBottom(BinaryTreeNode root) {
+    private static void printFromTopToBottom(TreeNode root) {
         if (root != null) {
-            Queue<BinaryTreeNode> list = new LinkedList<>();
+            Queue<TreeNode> list = new LinkedList<>();
             list.add(root);
 
-            BinaryTreeNode curNode;
+            TreeNode curNode;
             while (!list.isEmpty()) {
                 curNode = list.remove();
-                System.out.print(curNode.value + " ");
+                System.out.print(curNode.val + " ");
                 if (curNode.left != null) {
                     list.add(curNode.left);
                 }
