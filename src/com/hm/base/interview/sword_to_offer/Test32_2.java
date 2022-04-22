@@ -42,23 +42,23 @@ public class Test32_2 {
         if (root == null) {
             return result;
         }
-        Queue<TreeNode> stack = new LinkedList<>();
-        stack.offer(root);
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
         int currentLevelToPrint = 1;
         List<Integer> currentLevelNodeList = new ArrayList<>();
         int nextLevelToPrint = 0;
-        while (!stack.isEmpty()) {
+        while (!queue.isEmpty()) {
 
-            TreeNode node = stack.poll();
+            TreeNode node = queue.poll();
             int val = node.val;
             currentLevelNodeList.add(val);
             currentLevelToPrint--;
             if (node.left != null) {
-                stack.offer(node.left);
+                queue.offer(node.left);
                 nextLevelToPrint++;
             }
             if (node.right != null) {
-                stack.offer(node.right);
+                queue.offer(node.right);
                 nextLevelToPrint++;
             }
 

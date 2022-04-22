@@ -39,16 +39,16 @@ public class Test32 {
             return result;
         }
         List<Integer> tempList = new ArrayList<>();
-        Queue<TreeNode> stack = new LinkedList<>();
-        stack.add(root);
-        while (!stack.isEmpty()) {
-            TreeNode node = stack.poll();
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        while (!queue.isEmpty()) {
+            TreeNode node = queue.poll();
             tempList.add(node.val);
             if (node.left != null) {
-                stack.offer(node.left);
+                queue.offer(node.left);
             }
             if (node.right != null) {
-                stack.offer(node.right);
+                queue.offer(node.right);
             }
         }
         int size = tempList.size();

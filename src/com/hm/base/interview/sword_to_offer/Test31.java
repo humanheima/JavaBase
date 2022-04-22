@@ -41,16 +41,16 @@ public class Test31 {
         int[] push6 = {1};
         int[] pop6 = {1};//true
 
-        System.out.println(isPopOrder(push, pop1));
-        System.out.println(isPopOrder(push, pop2));
-        System.out.println(isPopOrder(push, pop3));
-        System.out.println(isPopOrder(push, pop4));
+        System.out.println(validateStackSequences(push, pop1));
+        System.out.println(validateStackSequences(push, pop2));
+        System.out.println(validateStackSequences(push, pop3));
+        System.out.println(validateStackSequences(push, pop4));
 
-        System.out.println(isPopOrder(push5, pop5));
+        System.out.println(validateStackSequences(push5, pop5));
 
-        System.out.println(isPopOrder(push6, pop6));
+        System.out.println(validateStackSequences(push6, pop6));
 
-        System.out.println(isPopOrder(null, null));//false
+        System.out.println(validateStackSequences(null, null));//false
 
         System.out.println("---------------------------------");
 
@@ -67,13 +67,13 @@ public class Test31 {
     }
 
     /**
-     * @param push 压栈序列
-     * @param pop  出栈序列
+     * @param pushed 压栈序列
+     * @param popped  出栈序列
      * @return true 出栈序列是入栈序列的一个弹出序列
      */
-    public static boolean isPopOrder(int[] push, int[] pop) {
-        if (push == null || pop == null || push.length == 0 || pop.length == 0 || push.length != pop.length) {
-            return false;
+    public static boolean validateStackSequences(int[] pushed, int[] popped) {
+        if (pushed == null || popped == null || pushed.length == 0 || popped.length == 0 || pushed.length != popped.length) {
+            return true;
         }
         //用于存放入栈时的数据
         Stack<Integer> stack = new Stack<>();
@@ -83,16 +83,16 @@ public class Test31 {
         int popIndex = 0;
 
         //如果还有出栈的元素要处理
-        while (popIndex < pop.length) {
+        while (popIndex < popped.length) {
             // 入栈元素还未全部入栈的条件下，如果栈为空，或者栈顶的元素不与当前处理的相等，则一直进行入栈操作，
-            while (pushIndex < push.length && (stack.isEmpty() || (stack.peek() != pop[popIndex]))) {
-                stack.push(push[pushIndex]);
+            while (pushIndex < pushed.length && (stack.isEmpty() || (stack.peek() != popped[popIndex]))) {
+                stack.push(pushed[pushIndex]);
                 pushIndex++;
             }
             /**
              * 如果入栈元素等于出栈元素,入栈元素弹出，继续处理下一个出栈元素
              */
-            if (stack.peek() == pop[popIndex]) {
+            if (stack.peek() == popped[popIndex]) {
                 stack.pop();
                 //处理下一个元素
                 popIndex++;

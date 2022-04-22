@@ -1,5 +1,7 @@
 package com.hm.base.interview.sword_to_offer;
 
+import com.hm.algorithm.ListNode;
+
 import java.util.Stack;
 
 /**
@@ -33,18 +35,6 @@ public class Test6 {
         LinkNode next;
     }
 
-
-    public class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode(int x) {
-            val = x;
-            next = null;
-        }
-    }
-
-
     public int[] reversePrint(ListNode head) {
         System.out.println();
         int[] arr = {};
@@ -64,7 +54,6 @@ public class Test6 {
             array[i] = stack.pop().val;
         }
         return array;
-
     }
 
 

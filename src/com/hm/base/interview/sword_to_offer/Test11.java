@@ -18,38 +18,41 @@ public class Test11 {
 
         // 旋转0个元素
         int[] array0 = {1, 2, 3, 4, 5};
-        System.out.println(min(array0));
+        System.out.println(minArray2(array0));
 
         int[] array1 = {3, 4, 5, 1, 2};
-        System.out.println(min(array1));
+        System.out.println(minArray2(array1));
 
         // 有重复数字，并且重复的数字刚好的最小的数字
         int[] array2 = {3, 4, 5, 1, 1, 2};
-        System.out.println(min(array2));
+        System.out.println(minArray2(array2));
 
         // 有重复数字，但重复的数字不是第一个数字和最后一个数字
         int[] array3 = {3, 4, 5, 1, 2, 2};
-        System.out.println(min(array3));
+        System.out.println(minArray2(array3));
 
         // 有重复的数字，并且重复的数字刚好是第一个数字和最后一个数字
         int[] array4 = {1, 0, 1, 1, 1};
-        System.out.println(min(array4));
+        System.out.println(minArray2(array4));
 
         // 数组中只有一个数字
         int[] array6 = {2};
-        System.out.println(min(array6));
+        System.out.println(minArray2(array6));
 
         // 数组中数字都相同
         int[] array7 = {1, 1, 1, 1, 1, 1, 1};
-        System.out.println(min(array7));
+        System.out.println(minArray2(array7));
+
+        int[] array8 = {3, 3, 1, 3};
+        System.out.println(minArray2(array8));
 
         // 输入NULL
-        System.out.println(min(null));
+        System.out.println(minArray2(null));
 
     }
 
 
-    public int minArray(int[] numbers) {
+    public static int minArray2(int[] numbers) {
         if (numbers == null) {
             return -5001;
         }
@@ -70,9 +73,12 @@ public class Test11 {
     }
 
 
-    private static int min(int[] numbers) {
-        if (numbers == null || numbers.length == 0) {
-            throw new IllegalArgumentException("Invalid input.");
+    public static int minArray(int[] numbers) {
+        if (numbers == null) {
+            return -5001;
+        }
+        if (numbers.length == 1) {
+            return numbers[0];
         }
         int low = 0;
         int high = numbers.length - 1;
@@ -84,7 +90,10 @@ public class Test11 {
                 break;
             }
             mid = (low + high) / 2;
-            //如果三个数都相等，则需要进行顺序查找
+            //如果三个数都相等，则需要进行顺序查找，注意，这三个数不是连着的，可能是如下：
+            /**
+             * [3,3,1,3]
+             */
             if (numbers[mid] == numbers[low] && numbers[mid] == numbers[high]) {
                 return minInOrder(numbers, low, high);
             }
@@ -105,7 +114,7 @@ public class Test11 {
      * @param high
      * @return
      */
-    private static int minInOrder(int[] numbers, int low, int high) {
+    public static int minInOrder(int[] numbers, int low, int high) {
         int result = numbers[low];
         for (int i = low + 1; i <= high; i++) {
             if (result > numbers[i]) {

@@ -218,10 +218,8 @@ public class Test34 {
                 findPath2(root.left, curSum, expectedSum, result);
                 // 递归处理右子树
                 findPath2(root.right, curSum, expectedSum, result);
-            }
-            // 如果当前和与期望的和相等
-            else if (curSum == expectedSum) {
-                // 当前结点是叶结点，则输出结果
+            } else if (curSum == expectedSum) {
+                //如果当前和与期望的和相等，当前结点是叶结点，则输出结果
                 if (root.left == null && root.right == null) {
                     System.out.println(result);
                 }

@@ -234,7 +234,7 @@ public class BinaryTreeTest {
      * @param root
      */
     public static void middleOrderTraversal(BinaryTreeNode root) {
-        Deque<BinaryTreeNode> stack = new ArrayDeque<>();
+        Stack<BinaryTreeNode> stack = new Stack<>();
         BinaryTreeNode node = root;
         while (node != null || !stack.isEmpty()) {
             while (node != null) {

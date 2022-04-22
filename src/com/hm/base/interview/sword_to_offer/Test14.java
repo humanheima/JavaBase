@@ -18,8 +18,8 @@ package com.hm.base.interview.sword_to_offer;
 public class Test14 {
 
     public static void main(String[] args) {
-        System.out.println(maxProduceAfterCutting(10));
-        System.out.println(maxProduceAfterCuttingGreedy(10));
+        System.out.println(maxProduceAfterCutting(30));
+        System.out.println(maxProduceAfterCuttingGreedy(30));
     }
 
     /**
@@ -35,10 +35,11 @@ public class Test14 {
         if (length == 2) {
             return 1;
         }
+        //只能剪成 1*2 最长的一段
         if (length == 3) {
             return 2;
         }
-        //上面本别返回了长度小于等于3时候的最优解，下面是计算长度大于3时候的情况
+        //上面分别返回了长度小于等于3时候的最优解，下面是计算长度大于3时候的情况
         int[] products = new int[length + 1];
         products[0] = 0;
         products[1] = 1;
@@ -69,8 +70,8 @@ public class Test14 {
                 if (max < product) {
                     max = product;
                 }
-                products[i] = max;
             }
+            products[i] = max;
         }
 
         result = products[length];
@@ -108,6 +109,11 @@ public class Test14 {
         int timesOf3 = length / 3;
         /**
          * 当绳子最后剩下的长度为4的时候，不能再减去长度为3的绳子段，此时更好的方法是把绳子减去长度为e的两段，因为2*2>3*1
+         * 比如绳子长度为13
+         * 1. 尽可能减长度为3的绳子，可以剪4段长度为3的绳子，还剩一根长度为1的绳子，最终乘积是：  3*3*3*3*1 =81
+         * 1. 尽可能减长度为3的绳子，可以剪4段长度为3的绳子，当绳子最后剩下的长度为4的时候，不能再减去长度为3的绳子段，
+         * 最终乘积是：  3*3*3*4 = 27 * 4 108
+         *
          */
         if (length - timesOf3 * 3 == 1) {
             timesOf3 -= 1;

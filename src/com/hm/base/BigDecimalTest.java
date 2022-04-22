@@ -31,7 +31,7 @@ public class BigDecimalTest {
         System.out.println(new BigDecimal(Double.toString(4.015)).multiply(new BigDecimal(Double.toString(100))));
         System.out.println(new BigDecimal(Double.toString(303.1)).divide(new BigDecimal(Double.toString(1000))));
 
-        BigDecimal decimal = new BigDecimal(2.035);
+        BigDecimal decimal = new BigDecimal(0);
         //保留两位小数
         BigDecimal bigDecimal = decimal.setScale(2, BigDecimal.ROUND_DOWN);
         System.out.println(bigDecimal.toString());
