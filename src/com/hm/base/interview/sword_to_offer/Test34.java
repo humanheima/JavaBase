@@ -28,14 +28,22 @@ import java.util.List;
 public class Test34 {
 
     public static void main(String[] args) {
-        //test0();
-        //test1();
-        //test2();
-        //test3();
+        test0();
+        System.out.println("-----------------");
+        test1();
+        System.out.println("-----------------");
+
+        test2();
+        System.out.println("-----------------");
+
+        test3();
+        System.out.println("-----------------");
+
         test4();
 
 
     }
+
 
     private static void test0() {
         //            10
@@ -43,20 +51,22 @@ public class Test34 {
         //        5        12
         //       /\
         //      4  7
-        BinaryTreeNode root = new BinaryTreeNode();
-        root.value = 10;
-        root.left = new BinaryTreeNode();
-        root.left.value = 5;
-        root.left.left = new BinaryTreeNode();
-        root.left.left.value = 4;
-        root.left.right = new BinaryTreeNode();
-        root.left.right.value = 7;
-        root.right = new BinaryTreeNode();
-        root.right.value = 12;
+        TreeNode root = new TreeNode();
+        root.val = 10;
+        root.left = new TreeNode();
+        root.left.val = 5;
+        root.left.left = new TreeNode();
+        root.left.left.val = 4;
+        root.left.right = new TreeNode();
+        root.left.right.val = 7;
+        root.right = new TreeNode();
+        root.right.val = 12;
 
         // 有两条路径上的结点和为22
         System.out.println("findPath(root, 22);");
         findPath(root, 22);
+        System.out.println(new Test34().pathSum(root, 22));
+
     }
 
     private static void test1() {
@@ -65,20 +75,23 @@ public class Test34 {
         //        5        12
         //       /\
         //      4  7
-        BinaryTreeNode root = new BinaryTreeNode();
-        root.value = 10;
-        root.left = new BinaryTreeNode();
-        root.left.value = 5;
-        root.left.left = new BinaryTreeNode();
-        root.left.left.value = 4;
-        root.left.right = new BinaryTreeNode();
-        root.left.right.value = 7;
-        root.right = new BinaryTreeNode();
-        root.right.value = 12;
+        TreeNode root = new TreeNode();
+        root.val = 10;
+        root.left = new TreeNode();
+        root.left.val = 5;
+        root.left.left = new TreeNode();
+        root.left.left.val = 4;
+        root.left.right = new TreeNode();
+        root.left.right.val = 7;
+        root.right = new TreeNode();
+        root.right.val = 12;
 
         // 有两条路径上的结点和为10 这个是不行的，因为10不是叶子节点
         System.out.println("findPath(root, 10);");
         findPath(root, 10);
+
+        System.out.println(new Test34().pathSum(root, 10));
+
     }
 
     private static void test2() {
@@ -87,29 +100,35 @@ public class Test34 {
         //        5        12
         //       /\
         //      4  7
-        BinaryTreeNode root = new BinaryTreeNode();
-        root.value = 10;
-        root.left = new BinaryTreeNode();
-        root.left.value = 5;
-        root.left.left = new BinaryTreeNode();
-        root.left.left.value = 4;
-        root.left.right = new BinaryTreeNode();
-        root.left.right.value = 7;
-        root.right = new BinaryTreeNode();
-        root.right.value = 12;
+        TreeNode root = new TreeNode();
+        root.val = 10;
+        root.left = new TreeNode();
+        root.left.val = 5;
+        root.left.left = new TreeNode();
+        root.left.left.val = 4;
+        root.left.right = new TreeNode();
+        root.left.right.val = 7;
+        root.right = new TreeNode();
+        root.right.val = 12;
 
         System.out.println("findPath(root, 19);");
         findPath(root, 19);
+
+        System.out.println(new Test34().pathSum(root, 19));
+
     }
 
     private static void test3() {
         //            10
 
-        BinaryTreeNode root = new BinaryTreeNode();
-        root.value = 10;
+        TreeNode root = new TreeNode();
+        root.val = 10;
 
         System.out.println("findPath(root, 10);");
         findPath(root, 10);
+
+        System.out.println(new Test34().pathSum(root, 10));
+
     }
 
     private static void test4() {
@@ -118,21 +137,57 @@ public class Test34 {
         //        5        12
         //       /\
         //      0  7
-        BinaryTreeNode root = new BinaryTreeNode();
-        root.value = -10;
-        root.left = new BinaryTreeNode();
-        root.left.value = 5;
-        root.left.left = new BinaryTreeNode();
-        root.left.left.value = 0;
-        root.left.right = new BinaryTreeNode();
-        root.left.right.value = 7;
-        root.right = new BinaryTreeNode();
-        root.right.value = 12;
+        TreeNode root = new TreeNode();
+        root.val = -10;
+        root.left = new TreeNode();
+        root.left.val = 5;
+        root.left.left = new TreeNode();
+        root.left.left.val = 0;
+        root.left.right = new TreeNode();
+        root.left.right.val = 7;
+        root.right = new TreeNode();
+        root.right.val = 12;
 
         System.out.println("findPath(root, -5);");
         findPath(root, -5);
-        System.out.println("findPath2(root, -5);");
-        findPath2(root, -5);
+        //System.out.println("findPath2(root, -5);");
+        //findPath2(root, -5);
+        Test34 test34 = new Test34();
+        List<List<Integer>> result = test34.pathSum(root, -5);
+        System.out.println(result);
+    }
+
+
+    public List<List<Integer>> pathSum(TreeNode root, int target) {
+        List<List<Integer>> result = new ArrayList<>();
+        if (root == null) {
+            return result;
+        }
+        findPath3(root, 0, target, new ArrayList<>(), result);
+        return result;
+    }
+
+    public void findPath3(TreeNode root, int curSum, int target, List<Integer> path, List<List<Integer>> result) {
+        curSum += root.val;
+        path.add(root.val);
+        /**
+         * 如果是叶节点，并且路径上节点值的和等于输入的值
+         */
+        boolean isLeaf = (root.left == null) && (root.right == null);
+        if (curSum == target && isLeaf) {
+            List<Integer> temp = new ArrayList<>(path);
+            result.add(temp);
+        }
+
+        //如果不是叶节点
+        if (root.left != null) {
+            findPath3(root.left, curSum, target, path, result);
+        }
+        if (root.right != null) {
+            findPath3(root.right, curSum, target, path, result);
+        }
+        //返回父节点之前，在路径上删除当前节点
+        path.remove(path.size() - 1);
     }
 
 
@@ -140,7 +195,7 @@ public class Test34 {
      * @param root
      * @param expectedNumber 期望的整数值
      */
-    public static void findPath(BinaryTreeNode root, int expectedNumber) {
+    public static void findPath(TreeNode root, int expectedNumber) {
         if (root == null) {
             return;
         }
@@ -149,9 +204,9 @@ public class Test34 {
 
     }
 
-    private static void findPath(BinaryTreeNode root, int curSum, int expectedNumber, List<Integer> result) {
-        curSum += root.value;
-        result.add(root.value);
+    private static void findPath(TreeNode root, int curSum, int expectedNumber, List<Integer> result) {
+        curSum += root.val;
+        result.add(root.val);
         /**
          * 如果是叶节点，并且路径上节点值的和等于输入的值
          */
@@ -188,7 +243,7 @@ public class Test34 {
      * @param root        树的根结点
      * @param expectedSum 要求的路径和
      */
-    public static void findPath2(BinaryTreeNode root, int expectedSum) {
+    public static void findPath2(TreeNode root, int expectedSum) {
         // 创建一个链表，用于存放根结点到当前处理结点的所经过的结点
         List<Integer> list = new ArrayList<>();
 
@@ -204,14 +259,14 @@ public class Test34 {
      * @param expectedSum 要求的路径和
      * @param result      根结点到当前处理结点的所经过的结点，（还未包括当前结点）
      */
-    public static void findPath2(BinaryTreeNode root, int curSum, int expectedSum, List<Integer> result) {
+    public static void findPath2(TreeNode root, int curSum, int expectedSum, List<Integer> result) {
 
         // 如果结点不为空就进行处理
         if (root != null) {
             // 加上当前结点的值
-            curSum += root.value;
+            curSum += root.val;
             // 将当前结点入队
-            result.add(root.value);
+            result.add(root.val);
             // 如果当前结点的值小于期望的和
             if (curSum < expectedSum) {
                 // 递归处理左子树

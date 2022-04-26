@@ -13,8 +13,8 @@ package com.hm.base.interview.sword_to_offer;
  * 3. 任意节点的左、右子树也分别为二叉查找树；
  * 4. 没有键值相等的节点。
  * <p>
- * 解题思路：在后序遍历得到的序列中， 最后一个数字是树的根结点的值。数组中前面的数字可以分为两部分： 第一部分是左子树结点的值，它们都比根结点的值小;
- * 第二部分是右子树结点的值，它们都比根结点的值大。
+ * 解题思路：在后序遍历得到的序列中， 最后一个数字是树的根节点的值。数组中前面的数字可以分为两部分： 第一部分是左子树节点的值，它们都比根节点的值小;
+ * 第二部分是右子树节点的值，它们都比根节点的值大。
  * <p>
  * 测试用例：
  * 输入的后序遍历对应一棵 二叉树，包括完全二叉树，所有节点都没有左/右子树的二叉树，只有一个节点的二叉树
@@ -24,9 +24,55 @@ package com.hm.base.interview.sword_to_offer;
  */
 public class Test33 {
 
+    public boolean verifyPostorder2(int[] postorder) {
+        return recur(postorder, 0, postorder.length - 1);
+    }
+
+    boolean recur(int[] postorder, int start, int end) {
+        if (start >= end) {
+            return true;
+        }
+        int index = start;
+        while (postorder[index] < postorder[end]) {
+            index++;
+        }
+        int m = index;
+        while (postorder[index] > postorder[end]) {
+            index++;
+        }
+        return index == end && recur(postorder, start, m - 1) && recur(postorder, m, end - 1);
+    }
+
+    public boolean verifyPostorder(int[] postorder) {
+        if (postorder == null || postorder.length == 0) {
+            return false;
+        }
+        return verifySequenceOfBST2(postorder, 0, postorder.length - 1);
+    }
+
+    public boolean verifySequenceOfBST2(int[] sequence, int start, int end) {
+        if (start >= end) {
+            return true;
+        }
+        int index = start;
+        //找到第一个大于根节点（sequence[end]）的元素的位置
+        while (sequence[index] < sequence[end]) {
+            index++;
+        }
+
+        int right = index;
+        //从[right,end-1]所有的元素必须大于根元素
+        while (sequence[index] > sequence[end]) {
+            index++;
+        }
+        return index == end && verifySequenceOfBST2(sequence, start, right - 1)
+                && verifySequenceOfBST2(sequence, right, end - 1);
+    }
+
+
     public static boolean verifySequenceOfBST(int[] sequence) {
         if (sequence == null || sequence.length == 0) {
-            return false;
+            return true;
         }
         return verifySequenceOfBST(sequence, 0, sequence.length - 1);
     }
@@ -40,33 +86,27 @@ public class Test33 {
         while (index < end && sequence[index] < sequence[end]) {
             index++;
         }
-        //说明这棵树只有左子节点
-        if (index == end) {
-            return true;
-        }
 
         int right = index;
         //从[right,end-1]所有的元素必须大于根元素
         while (index < end && sequence[index] > sequence[end]) {
             index++;
         }
-        if (index != end) {
-            return false;
-        }
-        index = right;
-        return verifySequenceOfBST(sequence, start, index - 1)
-                && verifySequenceOfBST(sequence, index, end - 1);
+        return right == end && verifySequenceOfBST(sequence, start, right - 1)
+                && verifySequenceOfBST(sequence, right, end - 1);
     }
 
     public static void main(String[] args) {
+        int[] postOrder = {5, 2, -17, -11, 25, 76, 62, 98, 92, 61};
+        System.out.println(new Test33().verifyPostorder(postOrder));
         test1();
-        test2();
-        test3();
-        test4();
-        test5();
-        test6();
-        test7();
-        test8();
+//        test2();
+//        test3();
+//        test4();
+//        test5();
+//        test6();
+//        test7();
+//        test8();
     }
 
     private static void test1() {
@@ -75,8 +115,9 @@ public class Test33 {
         //        6     14
         //       /\     /\
         //      4  8  12  16
-        int[] data = {4, 8, 6, 12, 16, 14, 10};
-        System.out.println("true: " + verifySequenceOfBST(data));
+        //int[] data = {4, 8, 6, 12, 16, 14, 10};
+        int[] data = {5, 2, -17, -11, 25, 76, 62, 98, 92, 61};
+        System.out.println(verifySequenceOfBST(data));
     }
 
     private static void test2() {
@@ -118,7 +159,7 @@ public class Test33 {
     }
 
     private static void test5() {
-        // 树中只有1个结点
+        // 树中只有1个节点
         int[] data5 = {5};
         System.out.println("true: " + verifySequenceOfBST(data5));
     }

@@ -18,8 +18,9 @@ package com.hm.base.interview.sword_to_offer;
 public class Test14 {
 
     public static void main(String[] args) {
-        System.out.println(maxProduceAfterCutting(30));
-        System.out.println(maxProduceAfterCuttingGreedy(30));
+        //System.out.println(maxProduceAfterCutting(30));
+        //System.out.println(maxProduceAfterCuttingGreedy(13));
+        System.out.println(new Test14().cuttingRope(13));
     }
 
     /**
@@ -65,7 +66,7 @@ public class Test14 {
         for (int i = 4; i <= length; i++) {
 
             int max = 0;
-            for (int j = 0; j <= i / 2; j++) {
+            for (int j = 1; j <= i / 2; j++) {
                 int product = products[j] * products[i - j];
                 if (max < product) {
                     max = product;
@@ -92,21 +93,21 @@ public class Test14 {
      * 当 n>=5 时，3(n-3)>=2(n-2)，因此，应该尽可能多地剪长度为 3 的绳子段。
      * 当 n=4 时，剪成两根长度为 2 的绳子，其实没必要剪，只是题目的要求是至少要剪一刀。
      *
-     * @param length 绳子的长度
+     * @param n 绳子的长度
      * @return
      */
-    public static int maxProduceAfterCuttingGreedy(int length) {
-        if (length < 2) {
+    public static int maxProduceAfterCuttingGreedy(int n) {
+        if (n < 2) {
             return 0;
         }
-        if (length == 2) {
+        if (n == 2) {
             return 1;
         }
-        if (length == 3) {
+        if (n == 3) {
             return 2;
         }
         //尽可能多的减去长度为3的绳子段，这个需要去证明，长度为3的段数越多乘积越大
-        int timesOf3 = length / 3;
+        int timesOf3 = n / 3;
         /**
          * 当绳子最后剩下的长度为4的时候，不能再减去长度为3的绳子段，此时更好的方法是把绳子减去长度为e的两段，因为2*2>3*1
          * 比如绳子长度为13
@@ -115,11 +116,48 @@ public class Test14 {
          * 最终乘积是：  3*3*3*4 = 27 * 4 108
          *
          */
-        if (length - timesOf3 * 3 == 1) {
+        if (n - timesOf3 * 3 == 1) {
             timesOf3 -= 1;
         }
-        int timeOf2 = (length - timesOf3 * 3) / 2;
+        int timeOf2 = (n - timesOf3 * 3) / 2;
         return (int) Math.pow(3, timesOf3) * (int) Math.pow(2, timeOf2);
+
+    }
+
+    /**
+     * @param n 绳子的长度
+     * @return
+     */
+    public int cuttingRope(int n) {
+        if (n < 2) {
+            return 0;
+        }
+        if (n == 2) {
+            return 1;
+        }
+        if (n == 3) {
+            return 2;
+        }
+        //尽可能多的减去长度为3的绳子段，这个需要去证明，长度为3的段数越多乘积越大
+        long timesOf3 = n / 3;
+
+        if (n - timesOf3 * 3 == 1) {
+            timesOf3 -= 1;
+        }
+        long timeOf2 = (n - timesOf3 * 3) / 2;
+        long result = 0;
+        if (timesOf3 > 0) {
+            long tempResult = 1;
+            for (long i = timesOf3; i > 0; i--) {
+                tempResult = tempResult * 3;
+                tempResult = tempResult % 1000000007;
+            }
+
+            result = tempResult;
+
+
+        }
+        return (int) ((result * 4) % 1000000007);
 
     }
 

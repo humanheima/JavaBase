@@ -14,19 +14,6 @@ package com.hm.base.interview.sword_to_offer;
 public class Test13 {
 
     public static void main(String[] args) {
-        System.out.println(movingCountSward(5, 10, 10) + "[21]");
-        System.out.println(movingCountSward(1, 2, 3) + "[3]");
-        System.out.println(movingCountSward(15, 20, 20) + "[359]");
-        System.out.println(movingCountSward(10, 1, 100) + "[29]");
-        System.out.println(movingCountSward(10, 1, 10) + "[10]");
-        System.out.println(movingCountSward(15, 100, 1) + "[79]");
-        System.out.println(movingCountSward(15, 10, 1) + "[10]");
-        System.out.println(movingCountSward(5, 10, 10) + "[21]");
-        System.out.println(movingCountSward(12, 1, 1) + "[1]");
-        System.out.println(movingCountSward(-10, 10, 10) + "[0]");
-
-        System.out.println("-----------------");
-
         Test13 test13 = new Test13();
         System.out.println(test13.movingCount(10, 10, 5));
         System.out.println(test13.movingCount(2, 3, 1));
@@ -34,13 +21,13 @@ public class Test13 {
     }
 
 
-    public int movingCount(int m, int n, int k) {
+    public int movingCount(int rows, int columns, int threshold) {
         //记录格子是否进入过
-        if (m < 1 || n < 1 || k < 0) {
+        if (rows < 1 || columns < 1 || threshold < 0) {
             return 0;
         }
-        boolean[][] visited = new boolean[m][n];
-        return movingCountCore2(k, m, n, 0, 0, visited);
+        boolean[][] visited = new boolean[rows][columns];
+        return movingCountCore2(threshold, rows, columns, 0, 0, visited);
     }
 
     /**
@@ -80,66 +67,6 @@ public class Test13 {
         return row >= 0 && row < rows
                 && col >= 0 && col < cols
                 && !visited[row][col]
-                && (getDigitSum(row) + getDigitSum(col) <= threshold);
-    }
-
-
-    /**
-     * @param threshold 约束值
-     * @param rows      行数
-     * @param cols      列数
-     * @return 最多可走的方格
-     */
-    public static int movingCountSward(int threshold, int rows, int cols) {
-
-        if (threshold < 0 || rows < 0 || cols < 0) {
-            return 0;
-        }
-
-        //用来标记访问过的方格
-        boolean[] visited = new boolean[rows * cols];
-        //从0行0列开始处理
-        return movingCountCore(threshold, rows, cols, 0, 0, visited);
-    }
-
-    /**
-     * @param threshold 约束值
-     * @param rows      行数
-     * @param cols      列数
-     * @param row       当前处理的行
-     * @param col       当前处理的列
-     * @param visited   访问标记数组
-     * @return 最多可走的方格
-     */
-    private static int movingCountCore(int threshold, int rows, int cols, int row, int col, boolean[] visited) {
-
-        int count = 0;
-        if (check(threshold, rows, cols, row, col, visited)) {
-            visited[row * cols + col] = true;
-            count = 1;
-            count = count + movingCountCore(threshold, rows, cols, row - 1, col, visited);
-            count = count + movingCountCore(threshold, rows, cols, row, col - 1, visited);
-            count = count + movingCountCore(threshold, rows, cols, row + 1, col, visited);
-            count = count + movingCountCore(threshold, rows, cols, row, col + 1, visited);
-        }
-        return count;
-    }
-
-    /**
-     * 判断机器人能否进入坐标为（row,col）的方格
-     *
-     * @param threshold
-     * @param rows
-     * @param cols
-     * @param row
-     * @param col
-     * @param visited
-     * @return 是否可以进入
-     */
-    private static boolean check(int threshold, int rows, int cols, int row, int col, boolean[] visited) {
-        return row >= 0 && row < rows
-                && col >= 0 && col < cols
-                && !visited[row * cols + col]
                 && (getDigitSum(row) + getDigitSum(col) <= threshold);
     }
 
