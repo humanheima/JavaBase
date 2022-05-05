@@ -29,6 +29,11 @@ public class MainTest2 {
         List<Object> objs = new ArrayList<>();
         List<? super Animal> animals = objs;
 
+//        List<Animal> animalList = new ArrayList<>();
+//        animalList.add(new Cat());
+//        animalList.add(new Dog());
+//        Animal animal = animalList.get(0);
+
     }
 
     public static void feedAll(Herd<? extends Animal> animals) {
@@ -57,7 +62,7 @@ public class MainTest2 {
         return retVal;
     }
 
-    class Animal {
+    static class Animal {
 
         public void feed() {
 
@@ -68,11 +73,11 @@ public class MainTest2 {
         }
     }
 
-    class Dog extends Animal {
+    static class Dog extends Animal {
 
     }
 
-    class Cat extends Animal {
+    static class Cat extends Animal {
 
     }
 
