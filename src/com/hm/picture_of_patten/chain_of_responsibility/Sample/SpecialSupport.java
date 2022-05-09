@@ -1,5 +1,10 @@
-package com.hm.picture_of_patten.chain_of_responsibility.ChainOfResponsibility.Sample;
+package com.hm.picture_of_patten.chain_of_responsibility.Sample;
 
+/**
+ * Created by dumingwei on 2022/5/8
+ *
+ * Desc:
+ */
 public class SpecialSupport extends Support {
     private int number;                                 // 只能解决指定编号的问题
     public SpecialSupport(String name, int number) {    // 构造函数

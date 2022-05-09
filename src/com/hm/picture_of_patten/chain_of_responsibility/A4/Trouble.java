@@ -1,4 +1,4 @@
-package com.hm.picture_of_patten.chain_of_responsibility.ChainOfResponsibility.Sample;
+package com.hm.picture_of_patten.chain_of_responsibility.A4;
 
 public class Trouble {
     private int number;             // 问题编号

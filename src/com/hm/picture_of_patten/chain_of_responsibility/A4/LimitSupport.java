@@ -1,4 +1,4 @@
-package com.hm.picture_of_patten.chain_of_responsibility.ChainOfResponsibility.A4;
+package com.hm.picture_of_patten.chain_of_responsibility.A4;
 
 public class LimitSupport extends Support {
     private int limit;                              // 可以解决编号小于limit的问题

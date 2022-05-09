@@ -1,4 +1,4 @@
-package com.hm.picture_of_patten.chain_of_responsibility.ChainOfResponsibility.A4;
+package com.hm.picture_of_patten.chain_of_responsibility.A4;
 
 public class SpecialSupport extends Support {
     private int number;                                 // 只能解决指定编号的问题

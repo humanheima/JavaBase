@@ -1,4 +1,4 @@
-package com.hm.picture_of_patten.chain_of_responsibility.ChainOfResponsibility.A4;
+package com.hm.picture_of_patten.chain_of_responsibility.Sample;
 
 public abstract class Support {
     private String name;                    // 解决问题的实例的名字
@@ -10,15 +10,13 @@ public abstract class Support {
         this.next = next;
         return next;
     }
-    public void support(Trouble trouble) {
-        for (Support obj = this; true; obj = obj.next) {
-            if (obj.resolve(trouble)) {
-                obj.done(trouble);
-                break;
-            } else if (obj.next == null) {
-                obj.fail(trouble);
-                break;
-            }
+    public void support(Trouble trouble) {  // 解决问题的步骤
+        if (resolve(trouble)) {
+            done(trouble);
+        } else if (next != null) {
+            next.support(trouble);
+        } else {
+            fail(trouble);
         }
     }
     public String toString() {              // 显示字符串

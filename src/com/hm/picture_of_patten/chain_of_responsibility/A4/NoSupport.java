@@ -1,4 +1,4 @@
-package com.hm.picture_of_patten.chain_of_responsibility.ChainOfResponsibility.A4;
+package com.hm.picture_of_patten.chain_of_responsibility.A4;
 
 public class NoSupport extends Support {
     public NoSupport(String name) {

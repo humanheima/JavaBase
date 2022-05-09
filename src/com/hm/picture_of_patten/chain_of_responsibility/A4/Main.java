@@ -1,4 +1,4 @@
-package com.hm.picture_of_patten.chain_of_responsibility.ChainOfResponsibility.A4;
+package com.hm.picture_of_patten.chain_of_responsibility.A4;
 
 public class Main {
     public static void main(String[] args) {

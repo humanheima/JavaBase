@@ -1,4 +1,4 @@
-package com.hm.picture_of_patten.chain_of_responsibility.ChainOfResponsibility.A4;
+package com.hm.picture_of_patten.chain_of_responsibility.A4;
 
 public class OddSupport extends Support {
     public OddSupport(String name) {                // 构造函数
