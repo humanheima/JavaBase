@@ -7,7 +7,7 @@ import java.util.Properties;
 /**
  * Created by dumingwei on 2022/5/8
  * <p>
- * Desc:
+ * Desc:用来从邮件地址中获取用户名字的数据库类
  */
 public class Database {
 

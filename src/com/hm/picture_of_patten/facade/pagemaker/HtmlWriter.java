@@ -6,7 +6,7 @@ import java.io.IOException;
 /**
  * Created by dumingwei on 2022/5/8
  * <p>
- * Desc:
+ * Desc:用于编写HTML文件的类
  */
 public class HtmlWriter {
     private Writer writer;

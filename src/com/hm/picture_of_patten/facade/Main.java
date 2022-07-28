@@ -6,7 +6,7 @@ import com.hm.picture_of_patten.facade.pagemaker.PageMaker;
 /**
  * Created by dumingwei on 2022/5/8
  * <p>
- * Desc:
+ * Desc:测试类
  */
 public class Main {
 

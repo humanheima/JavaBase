@@ -7,7 +7,7 @@ import java.util.Properties;
 /**
  * Created by dumingwei on 2022/5/8
  * <p>
- * Desc:
+ * Desc:扮演Facade角色并提供高层接口的类
  */
 
 public class PageMaker {
@@ -17,9 +17,9 @@ public class PageMaker {
 
     public static void makeWelcomePage(String mailaddr, String filename) {
         try {
-            Properties mailprop = Database.getProperties("/Users/dumingwei/IdeaProjects/JavaBase/src/com/hm/picture_of_patten/facade/maildata");
+            Properties mailprop = Database.getProperties("/Users/dumingwei/idea_project/JavaBase/src/com/hm/picture_of_patten/facade/maildata");
             String username = mailprop.getProperty(mailaddr);
-            HtmlWriter writer = new HtmlWriter(new FileWriter(filename));
+            HtmlWriter writer = new HtmlWriter(new FileWriter("/Users/dumingwei/idea_project/JavaBase/src/com/hm/picture_of_patten/facade/" + filename));
             writer.title("Welcome to " + username + "'s page!");
             writer.paragraph("欢迎来到" + username + "的主页。");
             writer.paragraph("等着你的邮件哦！");
