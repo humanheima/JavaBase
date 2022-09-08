@@ -1,6 +1,7 @@
 package com.hm.base;
 
 import java.io.*;
+import java.net.URLEncoder;
 
 /**
  * Created by dumingwei on 2017/10/16.
@@ -8,7 +9,8 @@ import java.io.*;
 public class TestString {
 
     public static void main(String[] args) {
-        copy();
+        //copy();
+        testByteOffset();
     }
 
     private static void copy() {
@@ -48,6 +50,37 @@ public class TestString {
                 }
             }
         }
+    }
+
+
+    private static void testByteOffset() {
+        String s = "xcv.0 古道西风瘦马夕阳西下";
+        String substring = s.substring(0, 0);
+        System.out.println("haha" + substring + "哈哈");
+        System.out.println(s.length());
+        String childStr = s.substring(6);
+        System.out.println(childStr);
+        System.out.println(childStr.length());
+
+        byte[] bytes = s.getBytes();
+
+        byte[] bytesChild = childStr.getBytes();
+
+        System.out.println(bytes.length);
+        System.out.println(bytesChild.length);
+
+        int sentenceFirstCharIndex = s.indexOf(childStr);
+        System.out.println(sentenceFirstCharIndex);
+
+        String frontString = s.substring(0, sentenceFirstCharIndex);
+
+        System.out.println(frontString);
+        byte[] frontBytes = frontString.getBytes();
+
+        System.out.println(frontBytes.length);
+
+        System.out.println(new String(frontBytes));
+
     }
 
 }
