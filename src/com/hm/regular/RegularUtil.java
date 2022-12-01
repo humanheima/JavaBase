@@ -10,6 +10,7 @@ import java.util.regex.Pattern;
 
 /**
  * Created by dumingwei on 2017/5/24.
+ * 参考链接：https://www.liaoxuefeng.com/wiki/1252599548343744/1255945288020320
  */
 public class RegularUtil {
 
@@ -57,6 +58,8 @@ public class RegularUtil {
 //        System.out.println(isNumber("100.000"));
 //
 //        System.out.println(new BigDecimal("1.00").toString());
+
+        test();
     }
 
     private static Set<String> parsePathParameters(String path) {
@@ -107,5 +110,25 @@ public class RegularUtil {
         return m.replaceAll("");
     }
 
+
+    private static void  test(){
+        //String taskReqString = "[DefaultTaskExecutionRequest{args=[:assembleCommonDebug],projectPath='null'}]";
+        String taskReqString = "[DefaultTaskExecutionRequest{args=[:resguardCommonDebug],projectPath='null'}]";
+
+        /**
+         *  . 点可以匹配任意一个字符，注意是一个。
+         *  * 型号可以匹配任意个字符，包括0个字符。
+         *  ? 问号这里表示非贪婪匹配。
+         */
+        Pattern pattern = Pattern.compile("(assemble|resguard)(.*?Release|.*?Debug)");
+        Matcher matcher = pattern.matcher(taskReqString);
+        if (matcher.find()){
+          int count = matcher.groupCount();
+            for (int i = 0; i <= count; i++) {
+                System.out.println(matcher.group(i));
+            }
+        }
+
+    }
 
 }
