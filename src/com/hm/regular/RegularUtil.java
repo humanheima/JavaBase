@@ -38,13 +38,12 @@ public class RegularUtil {
 
         String colorString1 = "#e83f46#ffe83f46";
 
-        Pattern pattern =Pattern.compile(colorRegex);
+        Pattern pattern = Pattern.compile(colorRegex);
 
-        Matcher matcher=  pattern.matcher(colorString1);
-        while (matcher.find()){
-            System.out.println("find"+matcher.group());
+        Matcher matcher = pattern.matcher(colorString1);
+        while (matcher.find()) {
+            System.out.println("find" + matcher.group());
         }
-
 
 
 //        System.out.println(isNumber(null));
@@ -59,7 +58,92 @@ public class RegularUtil {
 //
 //        System.out.println(new BigDecimal("1.00").toString());
 
-        test();
+        //test();
+        //testHH();
+        testMatcher();
+        //testMatcher1();
+    }
+
+
+    private static void testHH() {
+        String s = "\uD83D\uDE0A《xxx书名》\uD83D\uDE0A，XXXXX#xx001#";
+
+        String pattern = "\\uD83D\\uDE0A《.*》\\uD83D\\uDE0A";
+        Matcher matcher = Pattern.compile(pattern).matcher(s);
+        if (matcher.find()) {
+            System.out.println(matcher.group());
+            //System.out.println(matcher.start());
+            //System.out.println(matcher.end());
+            System.out.println(s.substring(matcher.start(), matcher.end()));
+        }
+
+
+        //匹配 以#开头，以#结尾，中间可以有任何内容(可以为空)的字符串。
+        String pattern2 = "#.*#";
+        Matcher matcher2 = Pattern.compile(pattern2).matcher(s);
+        //System.out.println(matcher.find());
+        if (matcher2.find()) {
+            System.out.println(matcher2.group());
+            //System.out.println(matcher2.start());
+            //System.out.println(matcher2.end());
+            System.out.println(s.substring(matcher2.start(), matcher2.end()));
+        }
+        //return matcher.find();
+    }
+
+    private static void testMatcher() {
+        String s = "\uD83D\uDE0A《xxx书名》\uD83D\uDE0A，XXXXX##";
+        Pattern bookNamePattern = Pattern.compile("\\uD83D\\uDE0A《.*》\\uD83D\\uDE0A");
+
+        Matcher bookNameMatcher = bookNamePattern.matcher(s);
+        String bookName = null;
+        if (bookNameMatcher.find()) {
+            bookName = bookNameMatcher.group(0);
+        }
+        if (bookName != null) {
+            bookName = bookName.replace("\uD83D\uDE0A《", "");
+            bookName = bookName.replace("》\uD83D\uDE0A", "");
+        }
+        if (bookName == null) {
+            return;
+        }
+
+        System.out.println("bookname = " + bookName);
+
+        String channel = null;
+        //匹配 以#开头，以#结尾，中间可以有任何内容(可以为空)的字符串。
+        String channelPattern = "#.*#";
+        Matcher channelMatcher = Pattern.compile(channelPattern).matcher(s);
+        //System.out.println(matcher.find());
+        if (channelMatcher.find()) {
+            channel = channelMatcher.group(0);
+        }
+        if (channel != null) {
+            channel = channel.replace("#", "");
+        }
+
+        if (channel != null && !channel.isEmpty()) {
+            System.out.println("channel = " + channel);
+        } else {
+            System.out.println("channel = null ，或者为空字符串");
+        }
+    }
+
+
+    /**
+     * 测试分组匹配
+     */
+    private static void testMatcher1() {
+        Pattern p = Pattern.compile("(\\d{3,4})\\-(\\d{7,8})");
+        Matcher m = p.matcher("010-12345678");
+        if (m.matches()) {
+            String g1 = m.group(1);
+            String g2 = m.group(2);
+            System.out.println(g1);
+            System.out.println(g2);
+        } else {
+            System.out.println("匹配失败!");
+        }
     }
 
     private static Set<String> parsePathParameters(String path) {
@@ -111,7 +195,7 @@ public class RegularUtil {
     }
 
 
-    private static void  test(){
+    private static void test() {
         //String taskReqString = "[DefaultTaskExecutionRequest{args=[:assembleCommonDebug],projectPath='null'}]";
         String taskReqString = "[DefaultTaskExecutionRequest{args=[:resguardCommonDebug],projectPath='null'}]";
 
@@ -122,8 +206,8 @@ public class RegularUtil {
          */
         Pattern pattern = Pattern.compile("(assemble|resguard)(.*?Release|.*?Debug)");
         Matcher matcher = pattern.matcher(taskReqString);
-        if (matcher.find()){
-          int count = matcher.groupCount();
+        if (matcher.find()) {
+            int count = matcher.groupCount();
             for (int i = 0; i <= count; i++) {
                 System.out.println(matcher.group(i));
             }
