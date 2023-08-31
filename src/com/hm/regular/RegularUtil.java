@@ -36,14 +36,14 @@ public class RegularUtil {
         //System.out.println(stringFilter("*33333##"));
         //System.out.println(parsePathParameters(REPOSITORY_URL));
 
-        String colorString1 = "#e83f46#ffe83f46";
+        //String colorString1 = "#e83f46#ffe83f46";
 
-        Pattern pattern = Pattern.compile(colorRegex);
+        //Pattern pattern = Pattern.compile(colorRegex);
 
-        Matcher matcher = pattern.matcher(colorString1);
-        while (matcher.find()) {
-            System.out.println("find" + matcher.group());
-        }
+        //Matcher matcher = pattern.matcher(colorString1);
+        //while (matcher.find()) {
+        //    System.out.println("find" + matcher.group());
+        //}
 
 
 //        System.out.println(isNumber(null));
@@ -60,8 +60,10 @@ public class RegularUtil {
 
         //test();
         //testHH();
-        testMatcher();
+        //testMatcher();
         //testMatcher1();
+
+        testParentheses();
     }
 
 
@@ -213,6 +215,20 @@ public class RegularUtil {
             }
         }
 
+    }
+
+    public static void testParentheses() {
+        String input = "This is a string(***hh）hhh";
+        String pattern = "（.*）"; // Pattern to match strings with parentheses
+
+        Pattern regex = Pattern.compile(pattern);
+        Matcher matcher = regex.matcher(input);
+
+        if (matcher.find()) {
+            System.out.println("String contains the pattern");
+        } else {
+            System.out.println("String does not contain the pattern");
+        }
     }
 
 }

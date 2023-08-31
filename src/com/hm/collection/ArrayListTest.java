@@ -31,7 +31,8 @@ public class ArrayListTest {
         arrayList.clear();
         testSubList();
         testRemoveInForEach();*/
-        testRemoveInForEach();
+        //testRemoveInForEach();
+        testSubListWithSize();
     }
 
     private static void testSubList() {
@@ -76,4 +77,27 @@ public class ArrayListTest {
         System.out.println(arrayList);
 
     }
+
+    public static void testSubListWithSize() {
+        List<String> list = new ArrayList<>();
+        for (int i = 1; i <= 100; i++) {
+            list.add("" + i);
+        }
+        List<List<String>> sublists = sublistBySize(list, 30);
+        for (List<String> sublist : sublists) {
+            System.out.println(sublist);
+            System.out.println();
+        }
+
+    }
+
+    public static List<List<String>> sublistBySize(List<String> list, int size) {
+        List<List<String>> sublists = new ArrayList<>();
+        for (int i = 0; i < list.size(); i += size) {
+            int endIndex = Math.min(i + size, list.size());
+            sublists.add(list.subList(i, endIndex));
+        }
+        return sublists;
+    }
+
 }
