@@ -21,14 +21,15 @@ public class Student implements Cloneable {
         stu1.setAdd(address);
         stu1.setNumber(12345);
         stu1.setName("杜明伟");
+
         Student stu2 = (Student) stu1.clone();
-        System.out.println("学生1：" + stu1.getNumber() + ",地址：" + stu1.getAdd().getAddress() + ",name" + stu1.getName());
-        System.out.println("学生2：" + stu2.getNumber() + ",地址：" + stu2.getAdd().getAddress() + ",name" + stu2.getName());
+        System.out.println("学生1：" + stu1.getNumber() + ",地址：" + stu1.getAdd().getAddress() + ",name：" + stu1.getName());
+        System.out.println("学生2：" + stu2.getNumber() + ",地址：" + stu2.getAdd().getAddress() + ",name：" + stu2.getName());
         stu2.setNumber(54321);
         address.setAddress("北京");
         stu1.setName("别了");
-        System.out.println("学生1：" + stu1.getNumber() + ",地址：" + stu1.getAdd().getAddress() + ",name" + stu1.getName());
-        System.out.println("学生2：" + stu2.getNumber() + ",地址：" + stu2.getAdd().getAddress() + ",name" + stu2.getName());
+        System.out.println("学生1：" + stu1.getNumber() + ",地址：" + stu1.getAdd().getAddress() + ",name：" + stu1.getName());
+        System.out.println("学生2：" + stu2.getNumber() + ",地址：" + stu2.getAdd().getAddress() + ",name：" + stu2.getName());
     }
 
     @Override

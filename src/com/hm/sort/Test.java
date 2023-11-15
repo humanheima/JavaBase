@@ -18,6 +18,8 @@ public class Test {
         destinations.add("malta");
         destinations.add("palma");
         destinations.add("paris");
+        destinations.subList(0,4);
+
         System.out.println(autoCorrectSuggestions("paris", destinations));
     }
 
