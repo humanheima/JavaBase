@@ -26,8 +26,10 @@ public class FormatterTest {
         //test.test5();
         //test.testFormatGenerate();
         //test.testFormatDateTime();
-        test.testPercent();
-        test.testLineSeparator();
+        //test.testPercent();
+        //test.testLineSeparator();
+
+        test.testFormatDateTimeEnglish();
     }
 
     public void test1() {
@@ -282,6 +284,91 @@ public class FormatterTest {
     public void testLineSeparator() {
         String output = String.format("%1$s%ngood afternoon", "Hello world");
         System.out.println(output);
+    }
+
+    /**
+     * 测试日期格式化
+     */
+    public void testFormatDateTimeEnglish() {
+        Date date = new Date();
+        long time = date.getTime();
+
+        /**
+         * output=19:05:30 下午
+         */
+        String output = String.format(Locale.US, "%1$tH:%1$tM:%1$tS %1$tr", time);
+        System.out.println("output=" + output);
+
+        /**
+         * output1=19:05
+         */
+        String output1 = String.format(Locale.US, "%1$tR", time);
+        System.out.println("output1=" + output1);
+
+        /**
+         * output2=19:05:30
+         */
+        String output2 = String.format(Locale.US, "%1$tT", time);
+        System.out.println("output2=" + output2);
+
+        /**
+         * output3=07:05:30 下午
+         */
+        String output3 = String.format(Locale.US, "%1$tr", time);
+        System.out.println("output3=" + output3);
+
+        /**
+         * output4=2023-11-15 十一月 星期三
+         */
+        String output4 = String.format(Locale.US, "%1$tY-%1$tm-%1$td %1$tB %1$ta", time);
+        System.out.println("output4=" + output4);
+
+
+        /**
+         * output5=11/15/23
+         */
+        String output5 = String.format(Locale.US, "%1$tD", time);
+        System.out.println("output5=" + output5);
+
+        /**
+         * output6=2023-11-15
+         */
+        String output6 = String.format(Locale.US, "%1$tF", time);
+        System.out.println("output6=" + output6);
+
+        /**
+         * output7=星期三 十一月 15 19:08:52 CST 2023
+         */
+        String output7 = String.format(Locale.US, "%1$tc", time);
+        System.out.println("output7=" + output7);
+
+        /**
+         * 输出样式 output8=19:15 PM
+         */
+        String output8 = String.format(Locale.US, "%1$TR %1$Tp", time);
+        System.out.println("output8=" + output8);
+
+        /**
+         * 输出样式 19:32 下午
+         */
+        String output8Zh = String.format(Locale.getDefault(), "%1$TR %1$Tp", time);
+        System.out.println("output8Zh=" + output8Zh);
+
+        /**
+         *
+         * 输出样式 Jan 23, 2024
+         */
+        String output9 = String.format(Locale.US, "%1$tb %1$td, %1$tY", time);
+        System.out.println("output9=" + output9);
+
+
+        /**
+         *
+         * 输出样式 output9ZH=一月 23, 2024
+         */
+        String output9ZH = String.format(Locale.getDefault(), "%1$tb %1$td, %1$tY", time);
+        System.out.println("output9ZH=" + output9ZH);
+
     }
 
 }

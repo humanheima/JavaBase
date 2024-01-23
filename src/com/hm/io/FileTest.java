@@ -7,11 +7,14 @@ import java.io.*;
  */
 public class FileTest {
 
-    public static void main(String args[]) {
+    private static FileWriter fw = null;
 
+    public static void main(String args[]) throws IOException {
 
-        //File file = new File("E:\\apks");
-        //listFile(file);
+        fw = new FileWriter("so_files.txt", true);
+
+        File file = new File("/Users/dumingwei/OLD_AS_Project/dreamder-android-two/app/build/outputs/apk/common/debug/app-common-debug/lib");
+        listFile(file);
         //listRoot();
         /*FilenameFilter filter = new FilenameFilter() {
             @Override
@@ -22,14 +25,14 @@ public class FileTest {
         //listFileFilter(filter);
 
         //testRenameTo();
-        try {
-            testCreateFileInMac();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        Person person = new Person();
-        System.out.println(person.isB());
+//        try {
+//            testCreateFileInMac();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//        Person person = new Person();
+//        System.out.println(person.isB());
     }
 
     private static void testRenameTo() {
@@ -58,12 +61,51 @@ public class FileTest {
 
     }
 
-    private static void listFile(File file) {
+    private static void listFile(File file) throws IOException {
         File[] files = file.listFiles();
+
         for (File file1 : files) {
-            System.out.println(file1.getAbsoluteFile());
-            if (file1.isDirectory())
-                listFile(file1);
+            if (file1.isDirectory()) {
+                File[] soFiles = file1.listFiles(new FilenameFilter() {
+                    @Override
+                    public boolean accept(File dir, String name) {
+                        if (name.endsWith(".so")) {
+                            return true;
+                        }
+                        return false;
+
+                    }
+                });
+
+                System.out.println("soFiles.length = " + soFiles.length);
+                for (File soFile : soFiles) {
+                    String replace = soFile.getAbsolutePath().replace("/Users/dumingwei/OLD_AS_Project/dreamder-android-two/app/build/outputs/apk/common/debug/app-common-debug", "");
+                    String finalPath = "\t\t\t'" + replace + "',";
+
+                    writeString(finalPath);
+                }
+
+            }
+        }
+
+        fw.flush();
+        fw.close();
+
+        System.out.println("遍历结束");
+
+    }
+
+
+    /**
+     * 向文件中写入一个字符串
+     */
+    private static void writeString(String text) {
+        try {
+            fw.write(text);
+            fw.write("\n");
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

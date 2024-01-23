@@ -26,6 +26,7 @@ public class FileWriterDemo {
             }
             //String str = "\nhello world";
             fw.write(builder.toString());
+
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
