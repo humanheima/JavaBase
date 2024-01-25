@@ -343,31 +343,40 @@ public class FormatterTest {
         System.out.println("output7=" + output7);
 
         /**
-         * 输出样式 output8=19:15 PM
+         * 输出样式 2:28 PM
+         *
          */
-        String output8 = String.format(Locale.US, "%1$TR %1$Tp", time);
+        String output8 = String.format(Locale.US, "%1$tl:%1$tM %1$Tp", time);
         System.out.println("output8=" + output8);
 
         /**
          * 输出样式 19:32 下午
          */
-        String output8Zh = String.format(Locale.getDefault(), "%1$TR %1$Tp", time);
+        String output8Zh = String.format(Locale.getDefault(), "%1$Tl:%1$tM %1$Tp", time);
         System.out.println("output8Zh=" + output8Zh);
+
+        /**
+         *
+         * 输出样式 Jan 23
+         */
+        String output9 = String.format(Locale.US, "%1$tb %1$td", time);
+        System.out.println("output9=" + output9);
+
 
         /**
          *
          * 输出样式 Jan 23, 2024
          */
-        String output9 = String.format(Locale.US, "%1$tb %1$td, %1$tY", time);
-        System.out.println("output9=" + output9);
+        String output10 = String.format(Locale.US, "%1$tb %1$td, %1$tY", time);
+        System.out.println("output10=" + output10);
 
 
         /**
          *
          * 输出样式 output9ZH=一月 23, 2024
          */
-        String output9ZH = String.format(Locale.getDefault(), "%1$tb %1$td, %1$tY", time);
-        System.out.println("output9ZH=" + output9ZH);
+        String output10ZH = String.format(Locale.getDefault(), "%1$tb %1$td, %1$tY", time);
+        System.out.println("output10ZH=" + output10ZH);
 
     }
 
