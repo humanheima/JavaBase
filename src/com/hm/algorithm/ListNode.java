@@ -12,8 +12,13 @@ public class ListNode {
     public ListNode() {
     }
 
-    ListNode(int x) {
+    public ListNode(int x) {
         val = x;
     }
 
+    @Override
+    public String toString() {
+        return hashCode() + " : ListNode{" +
+                "val=" + val + "}";
+    }
 }

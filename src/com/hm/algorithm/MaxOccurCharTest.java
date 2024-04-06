@@ -1,5 +1,6 @@
 package com.hm.algorithm;
 
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -20,6 +21,8 @@ public class MaxOccurCharTest {
         System.out.println(result);
 
         System.out.println(getMaxOccurCharTwo("hello world, every body!"));
+
+        System.out.println(highestFreqFirstChar("h"));
     }
 
     /**
@@ -62,6 +65,33 @@ public class MaxOccurCharTest {
     }
 
     /**
+     * 这是在Copilot的解法基础上改了一个条件 count >= maxCount，并从后往前遍历字符串
+     *
+     * @param str
+     * @return
+     */
+    public static char highestFreqFirstChar(String str) {
+        Map<Character, Integer> countMap = new HashMap<>();
+        int maxCount = 0;
+        char maxChar = ' ';
+
+        for (int i = str.length() - 1; i >= 0; i--) {
+            char c = str.charAt(i);
+            int count = countMap.getOrDefault(c, 0) + 1;
+            countMap.put(c, count);
+
+            if (count >= maxCount) {
+                maxCount = count;
+                maxChar = c;
+            }
+        }
+
+        return maxChar;
+    }
+
+    /**
+     * 第二种解题思路
+     *
      * @param str
      * @return
      */
