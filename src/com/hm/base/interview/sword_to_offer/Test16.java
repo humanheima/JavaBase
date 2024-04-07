@@ -3,17 +3,23 @@ package com.hm.base.interview.sword_to_offer;
 /**
  * Created by dmw on 2018/12/1.
  * Desc:实现函数double Power(double base, int exponent)，求base的exponent次方。不得使用库函数，同时不需要考虑大数问题。
+ * <p>
+ * 在数学中，一个数的 n 次方定义为将该数自乘 n 次。例如，2 的 3 次方（也写作 2^3）等于 2 * 2 * 2，结果是 8。
+ * 如果 n 是负数，那么一个数的 n 次方定义为 1 除以该数的 |n| 次方。
+ * 例如，2 的 -3 次方（也写作 2^-3）等于 1 / (2 * 2 * 2)，结果是 1/8。
+ * 如果 n 是 0，任何数（除了 0）的 0 次方都定义为 1。0 的 0 次方在数学中是未定义的。
  */
 public class Test16 {
 
     public static void main(String[] args) {
 
-        System.out.println(power(3, 3) + ", " + power2(3, 3));
-        System.out.println(power(0, 3) + ", " + power2(0, 3));
-        System.out.println(power(0, 0) + ", " + power2(0, 0));
-        System.out.println(power(0, 1) + ", " + power2(0, 1));
-        System.out.println(power(2, -2) + ", " + power2(2, -2));
-        System.out.println(power(-2, -2) + ", " + power2(-2, -2));
+        System.out.println(power(3, 3) + " 对比 Math.pow(3, 3) =  " + Math.pow(3, 3));
+        System.out.println(power(0, 3) + " 对比 Math.pow(0, 3) =  " + Math.pow(0, 3));
+        System.out.println(power(0, 0) + " 对比 Math.pow(0, 0) =  " + Math.pow(0, 0));
+        System.out.println(power(0, 1) + " 对比 Math.pow(0, 1) =  " + Math.pow(0, 1));
+        System.out.println(power(2, -2) + " 对比 Math.pow(2, -2) =  " + Math.pow(2, -2));
+        System.out.println(power(-2, -2) + " 对比 Math.pow(-2, -2) =  " + Math.pow(-2, -2));
+        System.out.println(power(-2, -3) + " 对比 Math.pow(-2, -3) =  " + Math.pow(-2, -3));
     }
 
     /**
