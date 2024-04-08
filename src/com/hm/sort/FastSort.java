@@ -84,34 +84,33 @@ public class FastSort {
         }
     }
 
-    private static void sort(int[] a, int left, int right) {
-        int dp;
+    private static void sort(int[] arr, int left, int right) {
         if (left < right) {
-            dp = partition(a, left, right);
-            sort(a, left, dp - 1);
-            sort(a, dp + 1, right);
+            int pivotIndex = partition(arr, left, right);
+            sort(arr, left, pivotIndex - 1);
+            sort(arr, pivotIndex + 1, right);
         }
     }
 
-    private static int partition(int[] a, int left, int right) {
-        int pivot = a[left];
+    private static int partition(int[] arr, int left, int right) {
+        int pivot = arr[left];
         while (left < right) {
-            while (left < right && a[right] >= pivot) {
+            while (left < right && arr[right] >= pivot) {
                 right--;
             }
             if (left < right) {
-                a[left] = a[right];
+                arr[left] = arr[right];
                 left++;
             }
-            while (left < right && a[left] <= pivot) {
+            while (left < right && arr[left] <= pivot) {
                 left++;
             }
             if (left < right) {
-                a[right] = a[left];
+                arr[right] = arr[left];
                 right--;
             }
         }
-        a[left] = pivot;
+        arr[left] = pivot;
         return left;
     }
 }

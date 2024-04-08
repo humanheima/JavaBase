@@ -68,7 +68,6 @@ public class Test51 {
         }
         for (int i = 0; i < numbers.length; i++) {
             // 当number[i]与i不相同的时候一直交换
-
             while (numbers[i] != i) {
                 if (numbers[i] == numbers[numbers[i]]) {
                     return numbers[i];

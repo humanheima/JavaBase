@@ -13,13 +13,21 @@ import java.util.*;
  * 参考链接：<a href="https://www.jianshu.com/p/456af5480cee></a>
  * <p>
  * https://blog.csdn.net/snow_7/article/details/51818580
+ * 二叉树，看看遍历的方式，前序遍历，中序遍历，后序遍历，层次遍历就行了。重建二叉树啥的太高级了，不看了。
  */
 public class BinaryTreeTest {
 
     public static void main(String[] args) {
         BinaryTreeNode root = createTree();
-        postOrderTraversal(root);
-        printTree(root);
+        //postOrderTraversal(root);
+        //printTree(root);
+
+        testPreOrder(root);
+
+
+        testMidOrder(root);
+
+        testEndOrder(root);
 
         /*recurseFront(root);
         System.out.println();
@@ -47,11 +55,32 @@ public class BinaryTreeTest {
 
         //System.out.println(findDeep(root));
 
-        BinaryTreeTest treeTest = new BinaryTreeTest();
+//        BinaryTreeTest treeTest = new BinaryTreeTest();
+//
+//        TreeNode root2 = treeTest.createTree2();
+//        System.out.println(treeTest.postorderTraversal(root2));
 
-        TreeNode root2 = treeTest.createTree2();
-        System.out.println(treeTest.postorderTraversal(root2));
+    }
 
+    private static void testEndOrder(BinaryTreeNode root) {
+        recurseEnd(root);
+        System.out.println();
+        postorderTraversal(root);
+    }
+
+    private static void testMidOrder(BinaryTreeNode root) {
+        recurseMid(root);
+        System.out.println();
+        middleOrderTraversal(root);
+        System.out.println();
+    }
+
+    private static void testPreOrder(BinaryTreeNode root) {
+        recurseFront(root);
+        System.out.println();
+
+        preorderTraversalUseStack(root);
+        System.out.println();
     }
 
     public List<Integer> preorderTraversal2(TreeNode root) {
@@ -91,36 +120,40 @@ public class BinaryTreeTest {
         return list;
     }
 
+
     /**
-     * 非递归后序遍历
+     * 非递归后序遍历，先左节点，后右节点，再父节点
+     * Copilot 给出的写法，这种方法好理解
+     * <p>
+     * 在 Java 中，我们可以使用两个栈来实现二叉树的后序遍历，而不使用递归。以下是实现步骤：
+     * 创建两个空栈，记为 stack1 和 stack2。
+     * 将根节点压入 stack1。
+     * 弹出 stack1 的顶部节点，将其压入 stack2。
+     * 然后将该节点的左子节点和右子节点分别压入 stack1。
+     * 重复步骤3和4，直到 stack1 为空。
+     * 所有元素都在 stack2 中，从栈顶到栈底的顺序为左-右-根，这就是后序遍历的顺序。
      *
      * @param root
      */
-    public static void postOrderTraversal(BinaryTreeNode root) {
-        Stack<BinaryTreeNode> treeNodeStack = new Stack<>();
-        BinaryTreeNode node = root;
-        BinaryTreeNode lastVisit = root;
-        while (node != null || !treeNodeStack.isEmpty()) {
-            while (node != null) {
-                treeNodeStack.push(node);
-                node = node.left;
+    public static void postorderTraversal(BinaryTreeNode root) {
+        Stack<BinaryTreeNode> stack1 = new Stack<>();
+        Stack<BinaryTreeNode> stack2 = new Stack<>();
+        if (root != null) {
+            stack1.push(root);
+            while (!stack1.isEmpty()) {
+                root = stack1.pop();
+                stack2.push(root);
+                if (root.left != null) {
+                    stack1.push(root.left);
+                }
+                if (root.right != null) {
+                    stack1.push(root.right);
+                }
             }
-            //查看当前栈顶元素
-            node = treeNodeStack.peek();
-            /**
-             * 如果其右子树也为空，或者右子树已经访问，则可以直接输出当前节点的值
-             */
-            if (node.right == null || node.right == lastVisit) {
-                System.out.print(node.value + " ");
-                treeNodeStack.pop();
-                lastVisit = node;
-                node = null;
-            } else {
-                //继续遍历右子树
-                node = node.right;
+            while (!stack2.isEmpty()) {
+                System.out.print(stack2.pop().value + " ");
             }
         }
-
     }
 
 
@@ -154,31 +187,36 @@ public class BinaryTreeTest {
         return list;
     }
 
-
     /**
-     * 非递归前序遍历
+     * 非递归前序遍历，使用栈
+     * <p>
+     * 在 Java 中，我们可以使用栈来实现二叉树的前序遍历，而不使用递归。以下是实现步骤：
+     * 创建一个空栈。
+     * 将根节点压入栈中。
+     * 当栈不为空时，弹出栈顶元素，打印节点的值，并先将其右子节点（如果有）压入栈中，然后将其左子节点（如果有）压入栈中。
+     * 重复步骤3，直到栈为空。
      *
      * @param root
      */
-    public static void preOrderTraversal(BinaryTreeNode root) {
-        Deque<BinaryTreeNode> stack = new ArrayDeque<>();
-        BinaryTreeNode node = root;
-        while (node != null || !stack.isEmpty()) {
-            while (node != null) {
-                System.out.print(node.value + " ");
-                //为了之后能找到该节点的右子树，暂存该节点
-                stack.push(node);
-                node = node.left;
+    public static void preorderTraversalUseStack(BinaryTreeNode root) {
+        if (root == null) {
+            return;
+        }
+        Stack<BinaryTreeNode> stack = new Stack<>();
+        stack.push(root);
+
+        while (!stack.isEmpty()) {
+            BinaryTreeNode node = stack.pop();
+            System.out.print(node.value + " ");
+
+            if (node.right != null) {
+                stack.push(node.right);
             }
-            //一直到当前节点的左子树为null，开始考虑当前节点的右子树
-            if (!stack.isEmpty()) {
-                node = stack.pop();
-                node = node.right;
+            if (node.left != null) {
+                stack.push(node.left);
             }
         }
-
     }
-
 
     /**
      * 递归实现的前序遍历
@@ -221,8 +259,9 @@ public class BinaryTreeTest {
      * @param root
      */
     public static void recurseMid(BinaryTreeNode root) {
-        if (root == null)
+        if (root == null) {
             return;
+        }
         recurseMid(root.getLeft());
         System.out.print(root.value + " ");
         recurseMid(root.getRight());
@@ -230,6 +269,11 @@ public class BinaryTreeTest {
 
     /**
      * 非递归中序遍历
+     * 创建一个空栈。
+     * 初始化当前节点为根节点。
+     * 将当前节点压入栈中，并将当前节点设置为其左子节点。
+     * 如果当前节点为空且栈非空，则从栈中弹出一个节点，打印节点的值，并将当前节点设置为其右子节点。
+     * 重复步骤3和4，直到当前节点为空且栈也为空。
      *
      * @param root
      */
@@ -256,8 +300,9 @@ public class BinaryTreeTest {
      * @param root
      */
     public static void recurseEnd(BinaryTreeNode root) {
-        if (root == null)
+        if (root == null) {
             return;
+        }
         recurseEnd(root.getLeft());
         recurseEnd(root.getRight());
         System.out.print(root.value + " ");

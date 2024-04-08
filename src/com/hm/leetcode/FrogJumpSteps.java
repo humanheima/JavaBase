@@ -30,17 +30,17 @@ public class FrogJumpSteps {
      */
     public static void main(String[] args) {
 
-        System.out.println(frogJump(3));
-        System.out.println(frogJump(4));
-        System.out.println(frogJump(5));
-        System.out.println(frogJump(6));
+        System.out.println(frogJump(3) + " " + jumpFloor(3));
+        System.out.println(frogJump(4) + " " + jumpFloor(4));
+        System.out.println(frogJump(5) + " " + jumpFloor(5));
+        System.out.println(frogJump(6) + " " + jumpFloor(6));
 
         System.out.println();
 
-        System.out.println(frogJumpRecursively(3));
-        System.out.println(frogJumpRecursively(4));
-        System.out.println(frogJumpRecursively(5));
-        System.out.println(frogJumpRecursively(6));
+        System.out.println(frogJumpRecursively(3) + " " + jumpFloor(3));
+        System.out.println(frogJumpRecursively(4) + " " + jumpFloor(4));
+        System.out.println(frogJumpRecursively(5) + " " + jumpFloor(5));
+        System.out.println(frogJumpRecursively(6) + " " + jumpFloor(6));
     }
 
     /**
@@ -69,6 +69,31 @@ public class FrogJumpSteps {
             prepOne = jumpN;
         }
         return jumpN;
+    }
+
+    /**
+     * 动态规划的解法，Copilot推荐的解法，感觉更好理解
+     * @param n
+     * @return
+     */
+    static int jumpFloor(int n) {
+        if (n <= 0) {
+            return 0;
+        }
+        if (n == 1) {
+            return 1;
+        }
+        if (n == 2) {
+            return 2;
+        }
+
+        int[] dp = new int[n + 1];
+        dp[1] = 1;
+        dp[2] = 2;
+        for (int i = 3; i <= n; i++) {
+            dp[i] = dp[i - 1] + dp[i - 2];
+        }
+        return dp[n];
     }
 
     public int numWays(int n) {
