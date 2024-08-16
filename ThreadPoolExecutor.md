@@ -34,7 +34,7 @@ Future<?> submit(Runnable task);
 一般可以使用`Executors`类中的静态方法来创建`ThreadPoolExecutor`实例。
 
 ```java
-//创建一个可固定数量线程的线程池和一个无限队列
+//创建一个固定数量线程的线程池和一个无限队列
 public static ExecutorService newFixedThreadPool(int nThreads) {
         return new ThreadPoolExecutor(nThreads, nThreads,
                                       0L, TimeUnit.MILLISECONDS,
@@ -162,7 +162,7 @@ public void execute(Runnable command) {
     if (command == null)
         throw new NullPointerException();
     int c = ctl.get();
-    //注释1处，获取线程状态
+    //注释1处，获取线程数量
     if (workerCountOf(c) < corePoolSize) {
         if (addWorker(command, true))
             return;
@@ -196,7 +196,7 @@ public void execute(Runnable command) {
 比如队列满了以后，我们要等到队列有可用空间才能将元素加入到队列中。所以我们在添加元素成功以后，这段时间内线程池的状态可能发生了变化，所以要再次检查。
 
 当任务被添加到了阻塞队列前，线程池处于RUNNING 状态，但如果在添加到队列成功后，线程池进入了SHUTDOWN 状态或者其他状态，这时候是不应该再接收新的任务的，所以需要把这个任务从队列中移除，并且拒绝该任务。同样，在没有添加到队列前，可能有一个有效线程，但添加完任务后，这个线程可能因为闲置超时或者异常被干掉了，这时候需要创建一个新的线程来执行任务。
- * 2.1 如果线程池状态不是是`RUNNING`了，并且能成功的把任务从队列中移除,就拒绝任务。
+ * 2.1 如果线程池状态不是`RUNNING`了，并且能成功的把任务从队列中移除,就拒绝任务。
  * 2.2 如果任务加入到队列了，但是此时线程池中没有工作线程了，就添加一个线程来执行任务。
 
 注释3处，如果我们不能把任务加入队列，那么我们尝试添加一个新线程，如果添加失败就拒绝任务。
@@ -567,8 +567,8 @@ public List<Runnable> shutdownNow() {
 
 现在总结一下 线程池执行任务的流程：
 1.如果当前线程池中的线程数目小于corePoolSize，则每来一个任务，就会创建一个线程去执行这个任务；
- 2.如果当前线程池中的线程数目>=corePoolSize，则每来一个任务，会尝试将其添加到任务缓存队列当中，若添加成功，则该任务会等待空闲线程将其取出去执行；若添加失败（一般来说是任务缓存队列已满），则会尝试创建新的线程去执行这个任务；
- 3.如果当前线程池中的线程数目达到maximumPoolSize，则会采取任务拒绝策略进行处理；
+2.如果当前线程池中的线程数目>=corePoolSize，则每来一个任务，会尝试将其添加到任务缓存队列当中，若添加成功，则该任务会等待空闲线程将其取出去执行；若添加失败（一般来说是任务缓存队列已满），则会尝试创建新的线程去执行这个任务；
+3.如果当前线程池中的线程数目达到maximumPoolSize，则会采取任务拒绝策略进行处理；
  
 结尾：若有不正之处请多多谅解，并欢迎批评指正。
 

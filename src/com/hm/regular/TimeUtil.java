@@ -20,13 +20,16 @@ public class TimeUtil {
 
     public static void main(String[] args) {
         format = new SimpleDateFormat("yyyy年M月d日");
-        format2 = new SimpleDateFormat("yyyy-M-d");
+        //format2 = new SimpleDateFormat("yyyy-M-d");
+        //format2 = new SimpleDateFormat("a h:mm");
+        //format2 = new SimpleDateFormat("h:mm a");
 
         weekDateFormat = new SimpleDateFormat("M月d日E", Locale.getDefault());
         hourDateFormat = new SimpleDateFormat("HH", Locale.getDefault());
 
         try {
             Date date = format.parse("2017年6月20日");
+            System.out.println(format2.format(System.currentTimeMillis()));
             System.out.println(format2.format(date));
             System.out.println(getCalendarWeek(date));
         } catch (ParseException e) {

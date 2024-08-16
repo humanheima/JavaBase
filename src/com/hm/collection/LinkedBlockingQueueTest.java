@@ -9,6 +9,7 @@ public class LinkedBlockingQueueTest {
 
     public static void main(String[] args) {
         LinkedBlockingQueue<Integer> queue = new LinkedBlockingQueue<>();
-        queue.remove(2);
+        //queue.remove(2);
+        queue.offer(1);
     }
 }

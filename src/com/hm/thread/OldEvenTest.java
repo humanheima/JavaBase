@@ -14,9 +14,9 @@ public class OldEvenTest {
     public static void main(String[] args) {
 
         //method1();
-        method2();
+        //method2();
 
-        //method3();
+        method3();
     }
 
 
