@@ -70,6 +70,11 @@ public class Test48 {
         return maxLength;
     }
 
+    /**
+     * 这个是比较好的方法，外层循环，每次加step，比+1 效率高。就用这种方式来实现
+     * @param s
+     * @return
+     */
     public int lengthOfLongestSubstring2(String s) {
         int length = s.length();
         List<List<Character>> stringBuilderList = new ArrayList<>();
