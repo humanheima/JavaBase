@@ -12,8 +12,8 @@ import java.util.Stack;
 public class ReverseLinkedListUseStack {
 
     public static void main(String[] args) {
-        //test0();
-        test1();
+        test0();
+        //test1();
     }
 
     private static void test0() {
@@ -47,8 +47,8 @@ public class ReverseLinkedListUseStack {
         PrintNodeUtil.printListNode(head);
 
         System.out.println("反转后的链表");
-        //ListNode reverseHead = reverseListUseStack(head);
-        ListNode reverseHead = reverseListUseStack2(head);
+        ListNode reverseHead = reverseListUseStack(head);
+        //ListNode reverseHead = reverseListUseStack2(head);
         PrintNodeUtil.printListNode(reverseHead);
 
     }
@@ -111,7 +111,7 @@ public class ReverseLinkedListUseStack {
         //记录翻转后的头节点
         ListNode reverseHead = null;
         //用来从反转后的头节点向前遍历
-        ListNode reverseHeadTraverse = null;
+        ListNode previous = null;
 
         while (cur != null) {
             stack.push(cur);
@@ -123,12 +123,12 @@ public class ReverseLinkedListUseStack {
             if (reverseHead == null) {
                 //最后一个元素next本来就是null，这里不需要再置为null
                 reverseHead = stack.pop();
-                reverseHeadTraverse = reverseHead;
+                previous = reverseHead;
             } else {
                 ListNode temp = stack.pop();
                 temp.next = null;
-                reverseHeadTraverse.next = temp;
-                reverseHeadTraverse = temp;
+                previous.next = temp;
+                previous = temp;
             }
         }
 

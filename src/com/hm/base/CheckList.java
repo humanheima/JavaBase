@@ -8,7 +8,10 @@ public class CheckList {
 
     public static int checkLastElements(List<Element> list, int maxCheck) {
         // 从 list.size() - 1 开始遍历，到 0 结束
-        for (int i = list.size() - 1; i >= 0 && (list.size() - i) <= maxCheck; i--) {
+        int size = list.size();
+        System.out.println("size = " + size);
+        for (int i = size - 1; i >= 0 && (size - i) <= maxCheck; i--) {
+            System.out.println("haha " + i);
             Element element = list.get(i);
             if (element.isChecked()) {
                 return i; // 找到 checked=true 的元素
@@ -23,6 +26,7 @@ public class CheckList {
 
         myList.add(new Element(false));
         myList.add(new Element(false));
+        myList.add(new Element(true));
         myList.add(new Element(true));
         myList.add(new Element(true));
         myList.add(new Element(true));
