@@ -160,12 +160,16 @@ public class ReverseLinkedListUseStack {
             temp = temp.next;
         }
 
+        //1 -> 2 -> 3  -> null
         while (!stack.isEmpty()) {
+            //0->3
+            //0->3 -> 2 -> 1
             cur.next = stack.pop();
             cur = cur.next;
         }
         //注释2处，注意，遍历结束的时候，temp就是null了。最后一个节点的next要置为null
-        cur.next = temp;
+        ////0->3 -> 2 -> 1 -> null
+        cur.next = null;
         return dummy.next;
     }
 
