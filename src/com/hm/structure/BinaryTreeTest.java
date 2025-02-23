@@ -280,6 +280,14 @@ public class BinaryTreeTest {
      * 遍历的树以项目根目录下的BinaryTree.png为例
      * <p>
      * 输出结果 4，7，6，8，2，1，3，5
+     *
+     *
+     * 很直观的一个想法：
+     *
+     * 1. 如果节点 node 不为null，将节点 node 入栈。循环判断，如果 node 的 left 不为null， 将 node = node.left 继续入栈，直到 node =null。
+     * 2. 从栈中 pop一个节点出来。输出节点的值。如果 node right ！=null ,node = node.right.
+     * 3. 整个算法的结束条件是： node ==null || stack 是空。所以外层循环可以写成  while (node != null || !stack.isEmpty())
+     *
      * <p>
      * 非递归中序遍历
      * 1. 创建一个空栈，初始化当前节点为根节点。
