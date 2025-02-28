@@ -12,10 +12,9 @@ public class Test58_Simple {
 
     public static void main(String[] args) {
         char[] array = "i want eat a apple".toCharArray();
-        for (char c : array) {
-            System.out.print(c);
-        }
-        reverse(array);
+        printCharArray(array);
+        //reverse(array);
+        reverse2(array);
     }
 
     /**
@@ -34,7 +33,7 @@ public class Test58_Simple {
             i++;
             j--;
         }
-        System.out.println("----------------");
+        System.out.println("\n----------------");
         for (char c : array) {
             System.out.print(c);
         }
@@ -62,4 +61,48 @@ public class Test58_Simple {
     }
 
 
+    private static void reverse2(char[] array) {
+        if (array == null || array.length == 1) {
+            return;
+        }
+        int i = 0;
+        int j = array.length - 1;
+        reverseRegion(array, i, j);
+
+        int start = 0;
+        int end = 0;
+        while (start < array.length) {
+            while (end < array.length && array[end] != ' ') {
+                end++;
+            }
+            reverseRegion(array, start, end - 1);
+            start = end + 1;
+            end = end + 1;
+            System.out.println();
+        }
+        printCharArray(array);
+    }
+
+
+    private static void reverseRegion(char[] array, int start, int end) {
+        if (array == null || array.length == 1) {
+            return;
+        }
+        int i = start;
+        int j = end;
+        while (i < j) {
+            char temp = array[i];
+            array[i] = array[j];
+            array[j] = temp;
+            i++;
+            j--;
+        }
+    }
+
+    private static void printCharArray(char[] array) {
+        System.out.println("\n-----");
+        for (char c : array) {
+            System.out.print(c);
+        }
+    }
 }
