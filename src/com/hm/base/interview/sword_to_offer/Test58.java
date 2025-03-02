@@ -3,7 +3,7 @@ package com.hm.base.interview.sword_to_offer;
 /**
  * Created by dumingwei on 2022/4/13.
  * <p>
- * Desc:
+ * Desc:翻转单词顺序
  * <p>
  * 作者：LeetCode-Solution
  * 链接：https://leetcode-cn.com/problems/fan-zhuan-dan-ci-shun-xu-lcof/solution/fan-zhuan-dan-ci-shun-xu-by-leetcode-sol-vnwj/
@@ -20,7 +20,16 @@ public class Test58 {
     }
 
     public String reverseWords(String s) {
-        StringBuilder sb = trimSpaces(s);
+        if (s == null) {
+            return s;
+        }
+        s = s.trim();
+
+        if (s.isEmpty()) {
+            return s;
+        }
+
+        StringBuilder sb = trimCenterSpaces(s);
 
         // 翻转整个字符串
         reverse(sb, 0, sb.length() - 1);
@@ -31,22 +40,14 @@ public class Test58 {
         return sb.toString();
     }
 
-    public StringBuilder trimSpaces(String s) {
+    public StringBuilder trimCenterSpaces(String s) {
         int left = 0;
         int right = s.length() - 1;
-        // 去掉字符串开头的空白字符
-        while (left <= right && s.charAt(left) == ' ') {
-            left++;
-        }
-
-        // 去掉字符串末尾的空白字符
-        while (left <= right && s.charAt(right) == ' ') {
-            right--;
-        }
 
         // 将字符串间多余的空白字符去除
         StringBuilder sb = new StringBuilder();
-        while (left <= right) {
+        //最后一个肯定不是空格
+        while (left < right) {
             char c = s.charAt(left);
 
             if (c != ' ') {
