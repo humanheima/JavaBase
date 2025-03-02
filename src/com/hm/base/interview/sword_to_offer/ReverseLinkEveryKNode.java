@@ -1,21 +1,13 @@
 package com.hm.base.interview.sword_to_offer;
 
+import com.hm.algorithm.ListNode;
+
 /**
  * Crete by dumingwei on 2020-02-09
  * Desc: 链表每k位逆序
  */
 public class ReverseLinkEveryKNode {
 
-    public static class ListNode {
-
-        int value;
-
-        public ListNode(int value) {
-            this.value = value;
-        }
-
-        ListNode next;
-    }
 
     public static void main(String[] args) {
 
@@ -39,7 +31,7 @@ public class ReverseLinkEveryKNode {
         ListNode head = reverseKGroup(n1, 3);
 
         while (head != null) {
-            System.out.println(head.value);
+            System.out.println(head.val);
             head = head.next;
         }
     }

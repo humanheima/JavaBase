@@ -2,6 +2,8 @@ package com.hm.base.interview.android;
 // 定义链表节点类
 
 
+import com.hm.algorithm.ListNode;
+
 /**
  * 给出两个整数，比如 123， 98 ，把这两个整数分别转化成一个链表，然后将两个链表相加，输出正确的结果为整数
  * <p>
@@ -14,7 +16,7 @@ public class AddTwoNumbers {
     public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         ListNode dummy = new ListNode(0);
         ListNode current = dummy;
-        //进制
+        //进制，比如 3+9 = 12 ，要进1
         int carry = 0;
 
         while (l1 != null || l2 != null || carry != 0) {
@@ -67,7 +69,7 @@ public class AddTwoNumbers {
         int result = 0;
         temp = head;
         for (int i = 0; i < length; i++) {
-            result += temp.val * Math.pow(10, i);
+            result += (int) (temp.val * Math.pow(10, i));
             temp = temp.next;
         }
         return result;

@@ -1,5 +1,7 @@
 package com.hm.leetcode.code21;
 
+import com.hm.algorithm.ListNode;
+
 /**
  * Created by dumingwei on 2022/4/4.
  * <p>
@@ -124,20 +126,6 @@ public class LeetCode21 {
         return head.next;
     }
 
-    private static class ListNode {
-
-        int val;
-        ListNode next;
-
-        public ListNode(int val) {
-            this.val = val;
-        }
-
-        public ListNode(int val, ListNode next) {
-            this.val = val;
-            this.next = next;
-        }
-    }
 
 
 }

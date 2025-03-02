@@ -1,5 +1,7 @@
 package com.hm.leetcode.code160;
 
+import com.hm.algorithm.ListNode;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -128,14 +130,4 @@ public class LeetCode160 {
         return null;
     }
 
-
-    public class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode(int x) {
-            val = x;
-            next = null;
-        }
-    }
 }
