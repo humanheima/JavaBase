@@ -67,33 +67,6 @@ public class BinaryTreeTest {
         postorderTraversal(root);
     }
 
-    private static void testMidOrder(TreeNode root) {
-        recurseMid(root);
-        System.out.println();
-        middleOrderTraversal(root);
-        System.out.println();
-    }
-
-    public List<Integer> inorderTraversal(TreeNode root) {
-        Stack<TreeNode> stack = new Stack<>();
-        TreeNode current = root;
-        List<Integer> list = new ArrayList<>();
-        while (current != null || !stack.isEmpty()) {
-            while (current != null) {
-                stack.push(current);
-                current = current.left;
-            }
-            current = stack.pop();
-            list.add(current.value);
-
-            // if (current.right != null) {
-            current = current.right;
-            // }
-        }
-        return list;
-    }
-
-
     /**
      * 遍历的树以项目根目录下的BinaryTree.png为例
      * <p>
@@ -164,92 +137,6 @@ public class BinaryTreeTest {
         return list;
     }
 
-    /**
-     * 遍历的树以项目根目录下的BinaryTree.png为例
-     * 前序遍历：1，2，4，6，7，8，3，5
-     * 非递归前序遍历，使用栈 ：先访问根节点，然后递归地访问左子树，最后递归地访问右子树
-     * <p>
-     * 在 Java 中，我们可以使用栈来实现二叉树的前序遍历，而不使用递归。以下是实现步骤：
-     * 1. 创建一个空栈。
-     * 2. 将根节点压入栈中。
-     * 3. 当栈不为空时，弹出栈顶元素，打印节点的值，并先将其右子节点（如果有）压入栈中，然后将其左子节点（如果有）压入栈中。
-     * 重复步骤3，直到栈为空。
-     *
-     * @param root
-     */
-    public static void preorderTraversalUseStack(TreeNode root) {
-        if (root == null) {
-            return;
-        }
-        Stack<TreeNode> stack = new Stack<>();
-        stack.push(root);
-
-        while (!stack.isEmpty()) {
-            TreeNode node = stack.pop();
-            System.out.print(node.value + " ");
-
-            if (node.right != null) {
-                stack.push(node.right);
-            }
-            if (node.left != null) {
-                stack.push(node.left);
-            }
-        }
-    }
-
-
-    /**
-     * 递归实现的中序遍历
-     *
-     * @param root
-     */
-    public static void recurseMid(TreeNode root) {
-        if (root == null) {
-            return;
-        }
-        recurseMid(root.getLeft());
-        System.out.print(root.value + " ");
-        recurseMid(root.getRight());
-    }
-
-    /**
-     * 遍历的树以项目根目录下的BinaryTree.png为例
-     * <p>
-     * 输出结果 4，7，6，8，2，1，3，5
-     * <p>
-     * <p>
-     * 很直观的一个想法：
-     * <p>
-     * 1. 如果节点 node 不为null，将节点 node 入栈。循环判断，如果 node 的 left 不为null， 将 node = node.left 继续入栈，直到 node =null。
-     * 2. 从栈中 pop一个节点出来。输出节点的值。如果 node right ！=null ,node = node.right.
-     * 3. 整个算法的结束条件是： node ==null || stack 是空。所以外层循环可以写成  while (node != null || !stack.isEmpty())
-     *
-     * <p>
-     * 非递归中序遍历
-     * 1. 创建一个空栈，初始化当前节点为根节点。
-     * 2. 将当前节点压入栈中，并将当前节点设置为其左子节点。
-     * 3. 如果当前节点为空且栈非空，则从栈中弹出一个节点，打印节点的值，并将当前节点设置为其右子节点。
-     * 4. 重复步骤2和3，直到当前节点为空且栈也为空。
-     * 输出结果 4，7，6，8，2，1，3，5
-     *
-     * @param root
-     */
-    public static void middleOrderTraversal(TreeNode root) {
-        Stack<TreeNode> stack = new Stack<>();
-        TreeNode node = root;
-        while (node != null || !stack.isEmpty()) {
-            while (node != null) {
-                stack.push(node);
-                node = node.left;
-            }
-            //一直到当前节点的左子树为null，开始考虑当前节点的右子树
-            if (!stack.isEmpty()) {
-                node = stack.pop();
-                System.out.print(node.value + " ");
-                node = node.right;
-            }
-        }
-    }
 
     /**
      * 递归实现的后序遍历递归实现
@@ -291,30 +178,6 @@ public class BinaryTreeTest {
         return root;
     }
 
-    public TreeNode createTree2() {
-        // 初始化节点
-        TreeNode root = new TreeNode(1);
-        TreeNode rootLeft = new TreeNode(2);
-        TreeNode rootRight = new TreeNode(3);
-
-        TreeNode rootLeftLeft = new TreeNode(4);
-        TreeNode rootLeftLeftRight = new TreeNode(6);
-        TreeNode rootLeftLeftRightLeft = new TreeNode(7);
-        TreeNode rootLeftLeftRightRight = new TreeNode(8);
-        TreeNode rootRightRight = new TreeNode(5);
-        // 为root节点 赋予左右值
-        root.left = rootLeft;
-        root.right = rootRight;
-        root.left.left = rootLeftLeft;
-        root.left.left.right = rootLeftLeftRight;
-        root.left.left.right.left = rootLeftLeftRightLeft;
-        root.left.left.right.right = rootLeftLeftRightRight;
-
-        root.right.right = rootRightRight;
-
-        // 返回树根节点
-        return root;
-    }
 
     private static TreeNode reverseBinaryTree(TreeNode root) {
         if (root == null) {

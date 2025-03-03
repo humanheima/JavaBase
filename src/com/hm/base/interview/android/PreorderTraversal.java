@@ -1,4 +1,6 @@
-package com.hm.structure;
+package com.hm.base.interview.android;
+
+import com.hm.structure.TreeNode;
 
 import java.util.ArrayList;
 import java.util.List;
