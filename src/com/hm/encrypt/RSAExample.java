@@ -2,10 +2,7 @@ package com.hm.encrypt;
 
 import javax.crypto.Cipher;
 import java.nio.charset.StandardCharsets;
-import java.security.KeyPair;
-import java.security.KeyPairGenerator;
-import java.security.PrivateKey;
-import java.security.PublicKey;
+import java.security.*;
 import java.util.Base64;
 
 /**
@@ -14,6 +11,13 @@ import java.util.Base64;
 public class RSAExample {
 
     public static void main(String[] args) throws Exception {
+
+        printSupportedAlgorithms();
+        System.out.println(
+
+        );
+
+
         // 生成RSA密钥对
         KeyPairGenerator keyGen = KeyPairGenerator.getInstance("RSA");
         keyGen.initialize(2048); // 密钥长度
@@ -31,6 +35,18 @@ public class RSAExample {
         String decryptedText = decrypt(encryptedText, privateKey);
         System.out.println("解密后: " + decryptedText);
     }
+
+    public static void printSupportedAlgorithms() {
+        for (Provider provider : Security.getProviders()) {
+            System.out.println("Provider: " + provider.getName());
+            for (Provider.Service service : provider.getServices()) {
+                if (service.getType().equals("KeyPairGenerator")) {
+                    System.out.println("  Algorithm: " + service.getAlgorithm());
+                }
+            }
+        }
+    }
+
 
     public static String encrypt(String plainText, PublicKey publicKey) throws Exception {
         Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");

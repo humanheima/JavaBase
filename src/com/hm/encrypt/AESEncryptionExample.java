@@ -4,7 +4,10 @@ import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import java.nio.charset.StandardCharsets;
+import java.security.Provider;
+import java.security.Security;
 import java.util.Base64;
+import java.util.Set;
 
 /**
  * 对称加密
@@ -12,6 +15,11 @@ import java.util.Base64;
 public class AESEncryptionExample {
 
     public static void main(String[] args) throws Exception {
+
+        printSupportedAlgorithms();
+
+        System.out.println();
+
         String plainText = "Hello, Symmetric Encryption!";
 
         // 生成AES密钥（128位）
@@ -26,6 +34,17 @@ public class AESEncryptionExample {
         // 解密
         String decryptedText = decrypt(encryptedText, secretKey);
         System.out.println("解密后: " + decryptedText);
+    }
+
+    public static void printSupportedAlgorithms() {
+        for (Provider provider : Security.getProviders()) {
+            System.out.println("Provider: " + provider.getName());
+            for (Provider.Service service : provider.getServices()) {
+                if (service.getType().equals("KeyGenerator")) {
+                    System.out.println("  Algorithm: " + service.getAlgorithm());
+                }
+            }
+        }
     }
 
     public static String encrypt(String plainText, SecretKey secretKey) throws Exception {
