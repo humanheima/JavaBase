@@ -1,7 +1,5 @@
 package com.hm.structure;
 
-import com.hm.collection.TreeSetTest;
-
 /**
  * Created by dmw on 2018/12/27.
  * Desc: 二叉查找树
@@ -16,20 +14,20 @@ import com.hm.collection.TreeSetTest;
  */
 public class BinarySearchTree {
 
-    public BinaryTreeNode root;
+    public TreeNode root;
 
     public BinarySearchTree() {
     }
 
-    public BinarySearchTree(BinaryTreeNode root) {
+    public BinarySearchTree(TreeNode root) {
         this.root = root;
     }
 
-    public BinaryTreeNode insert(int key) {
-        BinaryTreeNode newNode = new BinaryTreeNode(key);
-        BinaryTreeNode current = root;
+    public TreeNode insert(int key) {
+        TreeNode newNode = new TreeNode(key);
+        TreeNode current = root;
         //标记要插入节点的父节点
-        BinaryTreeNode parent;
+        TreeNode parent;
         //如果根节点为空
         if (current == null) {
             root = newNode;
@@ -53,8 +51,8 @@ public class BinarySearchTree {
         }
     }
 
-    public BinaryTreeNode search(int key) {
-        BinaryTreeNode current = root;
+    public TreeNode search(int key) {
+        TreeNode current = root;
         while (current != null && key != current.value) {
             if (key < current.value) {
                 current = current.left;
@@ -65,10 +63,10 @@ public class BinarySearchTree {
         return current;
     }
 
-    public BinaryTreeNode delete(int key) {
+    public TreeNode delete(int key) {
         //标记要删除节点的父节点
-        BinaryTreeNode parent = root;
-        BinaryTreeNode current = root;
+        TreeNode parent = root;
+        TreeNode current = root;
         //标记当前节点是父节点的左节点还是右节点
         boolean isLeftChild = false;
         // 找到删除节点及是否在左子树
@@ -115,7 +113,7 @@ public class BinarySearchTree {
             }
         } else {
             // 如果删除节点左右子节点都不为空,则先找到待删除节点的中序遍历的后继节点，用该后继节点的值替换待删除的节点的值，然后删除后继节点。
-            BinaryTreeNode successor = getDeleteSuccessor(current);
+            TreeNode successor = getDeleteSuccessor(current);
             if (current == root) {
                 root = successor;
             } else if (isLeftChild) {
@@ -131,7 +129,7 @@ public class BinarySearchTree {
         return current;
     }
 
-    public void printTree(BinaryTreeNode root) {
+    public void printTree(TreeNode root) {
         if (root != null) {
             printTree(root.left);
             System.out.print("" + root.value + " ");
@@ -145,11 +143,11 @@ public class BinarySearchTree {
      * @param deleteNode
      * @return
      */
-    private BinaryTreeNode getDeleteSuccessor(BinaryTreeNode deleteNode) {
+    private TreeNode getDeleteSuccessor(TreeNode deleteNode) {
         //要删除节点的后继节点
-        BinaryTreeNode successor = null;
-        BinaryTreeNode successorParent = null;
-        BinaryTreeNode current = deleteNode.right;
+        TreeNode successor = null;
+        TreeNode successorParent = null;
+        TreeNode current = deleteNode.right;
         while (current != null) {
             successorParent = successor;
             successor = current;

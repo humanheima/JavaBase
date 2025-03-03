@@ -19,11 +19,9 @@ import java.util.*;
 public class BinaryTreeTest {
 
     public static void main(String[] args) {
-        BinaryTreeNode root = createTree();
+        TreeNode root = createTree();
         //postOrderTraversal(root);
         //printTree(root);
-
-        //testPreOrder(root);
 
 
         //testMidOrder(root);
@@ -63,43 +61,17 @@ public class BinaryTreeTest {
 
     }
 
-    private static void testEndOrder(BinaryTreeNode root) {
+    private static void testEndOrder(TreeNode root) {
         recurseEnd(root);
         System.out.println();
         postorderTraversal(root);
     }
 
-    private static void testMidOrder(BinaryTreeNode root) {
+    private static void testMidOrder(TreeNode root) {
         recurseMid(root);
         System.out.println();
         middleOrderTraversal(root);
         System.out.println();
-    }
-
-    private static void testPreOrder(BinaryTreeNode root) {
-        recurseFront(root);
-        System.out.println();
-
-        preorderTraversalUseStack(root);
-        System.out.println();
-    }
-
-    public List<Integer> preorderTraversal2(TreeNode root) {
-        Stack<TreeNode> stack = new Stack<>();
-        TreeNode current = root;
-        List<Integer> list = new ArrayList<>();
-        while (current != null || !stack.isEmpty()) {
-            while (current != null) {
-                list.add(current.val);
-                stack.push(current);
-                current = current.left;
-            }
-            current = stack.pop();
-            //if (current.right != null) {
-            current = current.right;
-            //}
-        }
-        return list;
     }
 
     public List<Integer> inorderTraversal(TreeNode root) {
@@ -112,7 +84,7 @@ public class BinaryTreeTest {
                 current = current.left;
             }
             current = stack.pop();
-            list.add(current.val);
+            list.add(current.value);
 
             // if (current.right != null) {
             current = current.right;
@@ -122,12 +94,11 @@ public class BinaryTreeTest {
     }
 
 
-
     /**
      * 遍历的树以项目根目录下的BinaryTree.png为例
-     *
+     * <p>
      * 后序遍历：7，8，6，4，2，5，3，1
-     *
+     * <p>
      * 非递归后序遍历，先左节点，后右节点，再父节点
      * Copilot 给出的写法，这种方法好理解
      * <p>
@@ -139,12 +110,11 @@ public class BinaryTreeTest {
      * 重复步骤3和4，直到 stack1 为空。
      * 所有元素都在 stack2 中，从栈顶到栈底的顺序为左-右-根，这就是后序遍历的顺序。
      *
-     *
      * @param root
      */
-    public static void postorderTraversal(BinaryTreeNode root) {
-        Stack<BinaryTreeNode> stack1 = new Stack<>();
-        Stack<BinaryTreeNode> stack2 = new Stack<>();
+    public static void postorderTraversal(TreeNode root) {
+        Stack<TreeNode> stack1 = new Stack<>();
+        Stack<TreeNode> stack2 = new Stack<>();
         if (root != null) {
             stack1.push(root);
             while (!stack1.isEmpty()) {
@@ -170,7 +140,7 @@ public class BinaryTreeTest {
      * @param root
      * @return
      */
-    public List<Integer> postorderTraversal(TreeNode root) {
+    public List<Integer> postorderTraversal2(TreeNode root) {
         Stack<TreeNode> stack = new Stack<>();
         TreeNode current = root;
         TreeNode lastVisit = root;
@@ -185,7 +155,7 @@ public class BinaryTreeTest {
             if (current.right == null || current.right == lastVisit) {
                 TreeNode pop = stack.pop();
                 lastVisit = pop;
-                list.add(pop.val);
+                list.add(pop.value);
                 current = null;
             } else {
                 current = current.right;
@@ -207,15 +177,15 @@ public class BinaryTreeTest {
      *
      * @param root
      */
-    public static void preorderTraversalUseStack(BinaryTreeNode root) {
+    public static void preorderTraversalUseStack(TreeNode root) {
         if (root == null) {
             return;
         }
-        Stack<BinaryTreeNode> stack = new Stack<>();
+        Stack<TreeNode> stack = new Stack<>();
         stack.push(root);
 
         while (!stack.isEmpty()) {
-            BinaryTreeNode node = stack.pop();
+            TreeNode node = stack.pop();
             System.out.print(node.value + " ");
 
             if (node.right != null) {
@@ -227,47 +197,13 @@ public class BinaryTreeTest {
         }
     }
 
-    /**
-     * 递归实现的前序遍历
-     *
-     * @param root
-     */
-    public static void recurseFront(BinaryTreeNode root) {
-        if (root == null) {
-            return;
-        }
-        System.out.print(root.value + " ");
-        recurseFront(root.left);
-        recurseFront(root.right);
-    }
-
-
-    public class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode() {
-        }
-
-        TreeNode(int val) {
-            this.val = val;
-        }
-
-        TreeNode(int val, TreeNode left, TreeNode right) {
-            this.val = val;
-            this.left = left;
-            this.right = right;
-        }
-    }
-
 
     /**
      * 递归实现的中序遍历
      *
      * @param root
      */
-    public static void recurseMid(BinaryTreeNode root) {
+    public static void recurseMid(TreeNode root) {
         if (root == null) {
             return;
         }
@@ -280,10 +216,10 @@ public class BinaryTreeTest {
      * 遍历的树以项目根目录下的BinaryTree.png为例
      * <p>
      * 输出结果 4，7，6，8，2，1，3，5
-     *
-     *
+     * <p>
+     * <p>
      * 很直观的一个想法：
-     *
+     * <p>
      * 1. 如果节点 node 不为null，将节点 node 入栈。循环判断，如果 node 的 left 不为null， 将 node = node.left 继续入栈，直到 node =null。
      * 2. 从栈中 pop一个节点出来。输出节点的值。如果 node right ！=null ,node = node.right.
      * 3. 整个算法的结束条件是： node ==null || stack 是空。所以外层循环可以写成  while (node != null || !stack.isEmpty())
@@ -298,9 +234,9 @@ public class BinaryTreeTest {
      *
      * @param root
      */
-    public static void middleOrderTraversal(BinaryTreeNode root) {
-        Stack<BinaryTreeNode> stack = new Stack<>();
-        BinaryTreeNode node = root;
+    public static void middleOrderTraversal(TreeNode root) {
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode node = root;
         while (node != null || !stack.isEmpty()) {
             while (node != null) {
                 stack.push(node);
@@ -320,7 +256,7 @@ public class BinaryTreeTest {
      *
      * @param root
      */
-    public static void recurseEnd(BinaryTreeNode root) {
+    public static void recurseEnd(TreeNode root) {
         if (root == null) {
             return;
         }
@@ -330,17 +266,17 @@ public class BinaryTreeTest {
     }
 
 
-    public static BinaryTreeNode createTree() {
+    public static TreeNode createTree() {
         // 初始化节点
-        BinaryTreeNode root = new BinaryTreeNode(1);
-        BinaryTreeNode rootLeft = new BinaryTreeNode(2);
-        BinaryTreeNode rootRight = new BinaryTreeNode(3);
+        TreeNode root = new TreeNode(1);
+        TreeNode rootLeft = new TreeNode(2);
+        TreeNode rootRight = new TreeNode(3);
 
-        BinaryTreeNode rootLeftLeft = new BinaryTreeNode(4);
-        BinaryTreeNode rootLeftLeftRight = new BinaryTreeNode(6);
-        BinaryTreeNode rootLeftLeftRightLeft = new BinaryTreeNode(7);
-        BinaryTreeNode rootLeftLeftRightRight = new BinaryTreeNode(8);
-        BinaryTreeNode rootRightRight = new BinaryTreeNode(5);
+        TreeNode rootLeftLeft = new TreeNode(4);
+        TreeNode rootLeftLeftRight = new TreeNode(6);
+        TreeNode rootLeftLeftRightLeft = new TreeNode(7);
+        TreeNode rootLeftLeftRightRight = new TreeNode(8);
+        TreeNode rootRightRight = new TreeNode(5);
         // 为root节点 赋予左右值
         root.left = rootLeft;
         root.right = rootRight;
@@ -380,12 +316,12 @@ public class BinaryTreeTest {
         return root;
     }
 
-    private static BinaryTreeNode reverseBinaryTree(BinaryTreeNode root) {
+    private static TreeNode reverseBinaryTree(TreeNode root) {
         if (root == null) {
             return null;
         } else {
-            BinaryTreeNode left = reverseBinaryTree(root.getLeft());
-            BinaryTreeNode right = reverseBinaryTree(root.getRight());
+            TreeNode left = reverseBinaryTree(root.getLeft());
+            TreeNode right = reverseBinaryTree(root.getRight());
             root.left = right;
             root.right = left;
             return root;
@@ -393,13 +329,13 @@ public class BinaryTreeTest {
 
     }
 
-    private static void printTree(BinaryTreeNode root) {
+    private static void printTree(TreeNode root) {
         if (root == null)
             return;
-        Queue<BinaryTreeNode> queue = new LinkedList<>();
+        Queue<TreeNode> queue = new LinkedList<>();
         queue.add(root);
         while (!queue.isEmpty()) {
-            BinaryTreeNode current = queue.poll();
+            TreeNode current = queue.poll();
             //System.out.println("current = " + current.value);
             if (current.left != null) {
                 queue.add(current.left);
@@ -411,7 +347,7 @@ public class BinaryTreeTest {
     }
 
     //获取最大深度
-    private static int maxDepth(BinaryTreeNode node) {
+    private static int maxDepth(TreeNode node) {
         if (node == null)
             return 0;
         int leftDepth = maxDepth(node.left);
@@ -420,14 +356,14 @@ public class BinaryTreeTest {
     }
 
     //获取最小深度
-    private static int getMinDepth(BinaryTreeNode root) {
+    private static int getMinDepth(TreeNode root) {
         if (root == null) {
             return 0;
         }
         return getMin(root);
     }
 
-    private static int getMin(BinaryTreeNode root) {
+    private static int getMin(TreeNode root) {
         if (root == null) {
             return Integer.MAX_VALUE;
         }
@@ -443,11 +379,11 @@ public class BinaryTreeTest {
      * @param root
      * @return
      */
-    public static int findDeep(BinaryTreeNode root) {
+    public static int findDeep(TreeNode root) {
         if (root == null)
             return 0;
-        BinaryTreeNode current = null;
-        Deque<BinaryTreeNode> queue = new ArrayDeque<>();
+        TreeNode current = null;
+        Deque<TreeNode> queue = new ArrayDeque<>();
         queue.offer(root);
         int cur, last;
         int level = 0;

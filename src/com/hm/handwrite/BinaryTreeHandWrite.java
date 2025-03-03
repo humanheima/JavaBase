@@ -1,7 +1,7 @@
 package com.hm.handwrite;
 
 
-import com.hm.structure.BinaryTreeNode;
+import com.hm.structure.TreeNode;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
@@ -15,11 +15,11 @@ public class BinaryTreeHandWrite {
 
     public static void main(String[] args) {
 
-        BinaryTreeNode root = createTree();
+        TreeNode root = createTree();
         frontTraversal(root);
     }
 
-    public static void recurseFront(BinaryTreeNode root) {
+    public static void recurseFront(TreeNode root) {
 
         if (root == null) {
             return;
@@ -29,10 +29,10 @@ public class BinaryTreeHandWrite {
         recurseFront(root.right);
     }
 
-    public static void frontTraversal(BinaryTreeNode root) {
+    public static void frontTraversal(TreeNode root) {
 
-        Deque<BinaryTreeNode> stack = new ArrayDeque<>();
-        BinaryTreeNode node = root;
+        Deque<TreeNode> stack = new ArrayDeque<>();
+        TreeNode node = root;
         while (node != null || !stack.isEmpty()) {
 
             while (node != null) {
@@ -49,17 +49,17 @@ public class BinaryTreeHandWrite {
         }
     }
 
-    public static BinaryTreeNode createTree() {
+    public static TreeNode createTree() {
         // 初始化节点
-        BinaryTreeNode root = new BinaryTreeNode(1);
-        BinaryTreeNode rootLeft = new BinaryTreeNode(2);
-        BinaryTreeNode rootRight = new BinaryTreeNode(3);
+        TreeNode root = new TreeNode(1);
+        TreeNode rootLeft = new TreeNode(2);
+        TreeNode rootRight = new TreeNode(3);
 
-        BinaryTreeNode rootLeftLeft = new BinaryTreeNode(4);
-        BinaryTreeNode rootLeftLeftRight = new BinaryTreeNode(6);
-        BinaryTreeNode rootLeftLeftRightLeft = new BinaryTreeNode(7);
-        BinaryTreeNode rootLeftLeftRightRight = new BinaryTreeNode(8);
-        BinaryTreeNode rootRightRight = new BinaryTreeNode(5);
+        TreeNode rootLeftLeft = new TreeNode(4);
+        TreeNode rootLeftLeftRight = new TreeNode(6);
+        TreeNode rootLeftLeftRightLeft = new TreeNode(7);
+        TreeNode rootLeftLeftRightRight = new TreeNode(8);
+        TreeNode rootRightRight = new TreeNode(5);
         // 为root节点 赋予左右值
         root.left = rootLeft;
         root.right = rootRight;
