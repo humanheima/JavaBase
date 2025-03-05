@@ -1,5 +1,7 @@
 package com.hm.base.interview.sword_to_offer;
 
+import com.hm.structure.TreeNode;
+
 /**
  * Created by dumingwei on 2018/12/12
  * <p>
@@ -41,7 +43,7 @@ public class Test28 {
         if (left == null || right == null) {
             return false;
         }
-        if (left.val != right.val) {
+        if (left.value != right.value) {
             return false;
         }
         return isSymmetrical2(left.left, right.right) && isSymmetrical2(left.right, right.left);

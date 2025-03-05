@@ -1,5 +1,7 @@
 package com.hm.base.interview.sword_to_offer;
 
+import com.hm.structure.TreeNode;
+
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.LinkedList;
@@ -13,15 +15,6 @@ import java.util.Queue;
  */
 public class MirrorBinaryTree {
 
-    static class TreeNode {
-        int val;
-        TreeNode left = null;
-        TreeNode right = null;
-
-        public TreeNode(int val) {
-            this.val = val;
-        }
-    }
 
     public static void main(String[] args) {
 
@@ -65,7 +58,7 @@ public class MirrorBinaryTree {
         if (root == null) {
             return;
         }
-        System.out.print(root.val + " ");
+        System.out.print(root.value + " ");
         recurseFront(root.left);
         recurseFront(root.right);
     }
@@ -122,8 +115,9 @@ public class MirrorBinaryTree {
 
     /**
      * 非递归版本，借助栈
-     *
+     * <p>
      * 8 6 5 7 10 9 11
+     *
      * @param root
      */
     public static void mirrorTreeWithStack(TreeNode root) {

@@ -1,5 +1,7 @@
 package com.hm.base.interview.sword_to_offer;
 
+import com.hm.structure.TreeNode;
+
 import java.util.*;
 
 /**
@@ -38,7 +40,7 @@ public class Test32_3 {
             current.add(root);
             while (current.size() > 0) {
                 node = current.pop();
-                System.out.print(node.val + " ");
+                System.out.print(node.value + " ");
                 if (flag == 0) {// 当前是从左往右打印的，那就按从左往右入栈
                     if (node.left != null) {
                         reverse.push(node.left);
@@ -78,7 +80,7 @@ public class Test32_3 {
         current.add(root);
         while (current.size() > 0) {
             TreeNode node = current.pop();
-            tempList.add(node.val);
+            tempList.add(node.value);
             if (flag == 0) {// 当前是从左往右打印的，那就按从左往右入栈
                 if (node.left != null) {
                     reverse.push(node.left);
@@ -116,19 +118,19 @@ public class Test32_3 {
         //  / \   / \
         // 5   7 9  11
         TreeNode root = new TreeNode();
-        root.val = 8;
+        root.value = 8;
         root.left = new TreeNode();
-        root.left.val = 6;
+        root.left.value = 6;
         root.left.left = new TreeNode();
-        root.left.left.val = 5;
+        root.left.left.value = 5;
         root.left.right = new TreeNode();
-        root.left.right.val = 7;
+        root.left.right.value = 7;
         root.right = new TreeNode();
-        root.right.val = 10;
+        root.right.value = 10;
         root.right.left = new TreeNode();
-        root.right.left.val = 9;
+        root.right.left.value = 9;
         root.right.right = new TreeNode();
-        root.right.right.val = 11;
+        root.right.right.value = 11;
         printFromTopToBottomRoundabout(root);
 
         Test32_3 test32_3 = new Test32_3();
@@ -148,15 +150,15 @@ public class Test32_3 {
         //  /
         // 9
         TreeNode root2 = new TreeNode();
-        root2.val = 1;
+        root2.value = 1;
         root2.left = new TreeNode();
-        root2.left.val = 3;
+        root2.left.value = 3;
         root2.left.left = new TreeNode();
-        root2.left.left.val = 5;
+        root2.left.left.value = 5;
         root2.left.left.left = new TreeNode();
-        root2.left.left.left.val = 7;
+        root2.left.left.left.value = 7;
         root2.left.left.left.left = new TreeNode();
-        root2.left.left.left.left.val = 9;
+        root2.left.left.left.left.value = 9;
         System.out.println("\n");
         printFromTopToBottomRoundabout(root2);
 
@@ -170,21 +172,21 @@ public class Test32_3 {
         //        \
         //         8
         TreeNode root3 = new TreeNode();
-        root3.val = 0;
+        root3.value = 0;
         root3.right = new TreeNode();
-        root3.right.val = 2;
+        root3.right.value = 2;
         root3.right.right = new TreeNode();
-        root3.right.right.val = 4;
+        root3.right.right.value = 4;
         root3.right.right.right = new TreeNode();
-        root3.right.right.right.val = 6;
+        root3.right.right.right.value = 6;
         root3.right.right.right.right = new TreeNode();
-        root3.right.right.right.right.val = 8;
+        root3.right.right.right.right.value = 8;
         System.out.println("\n");
         printFromTopToBottomRoundabout(root3);
 
         // 1
         TreeNode root4 = new TreeNode();
-        root4.val = 1;
+        root4.value = 1;
         System.out.println("\n");
         printFromTopToBottomRoundabout(root4);
 

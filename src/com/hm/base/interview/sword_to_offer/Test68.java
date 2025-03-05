@@ -1,5 +1,7 @@
 package com.hm.base.interview.sword_to_offer;
 
+import com.hm.structure.TreeNode;
+
 import java.util.*;
 
 /**
@@ -54,16 +56,16 @@ public class Test68 {
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         dfs(root);
         while (p != null) {
-            visited.add(p.val);
+            visited.add(p.value);
             //获取当前节点的父节点
-            p = parent.get(p.val);
+            p = parent.get(p.value);
         }
         while (q != null) {
-            if (visited.contains(q.val)) {
+            if (visited.contains(q.value)) {
                 return q;
             }
             //获取父节点
-            q = parent.get(q.val);
+            q = parent.get(q.value);
         }
         return null;
     }
@@ -71,12 +73,12 @@ public class Test68 {
     public void dfs(TreeNode root) {
         if (root.left != null) {
             //放入的是当前节点的值，和当前节点的父节点
-            parent.put(root.left.val, root);
+            parent.put(root.left.value, root);
             dfs(root.left);
         }
         if (root.right != null) {
             //放入的是当前节点的值，和当前节点的父节点
-            parent.put(root.right.val, root);
+            parent.put(root.right.value, root);
             dfs(root.right);
         }
     }

@@ -1,5 +1,7 @@
 package com.hm.base.interview.sword_to_offer;
 
+import com.hm.structure.TreeNode;
+
 /**
  * Created by dumingwei on 2018/11/20
  * <p>
@@ -157,7 +159,7 @@ public class Test7 {
         }
         //创建当前的根节点，并为根节点赋值
         TreeNode node = new TreeNode();
-        node.val = value;
+        node.value = value;
         /**
          * 递归构建当前根节点的左子树，左子树的元素个数：index-mStart个
          * 左子树对应的前序遍历的位置在[pStart+1, pStart+index-mStart]
@@ -175,25 +177,10 @@ public class Test7 {
         return node;
     }
 
-
-    public static class TreeNode {
-
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        public TreeNode() {
-        }
-
-        public TreeNode(int val) {
-            this.val = val;
-        }
-    }
-
     // 前序遍历二叉树
     public static void printTree(TreeNode root) {
         if (root != null) {
-            System.out.print(root.val + " ");
+            System.out.print(root.value + " ");
             printTree(root.left);
             printTree(root.right);
         }

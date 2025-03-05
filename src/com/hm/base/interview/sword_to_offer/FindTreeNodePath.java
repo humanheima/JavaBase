@@ -1,5 +1,7 @@
 package com.hm.base.interview.sword_to_offer;
 
+import com.hm.structure.TreeNode;
+
 import java.util.LinkedList;
 
 public class FindTreeNodePath {
@@ -31,7 +33,7 @@ public class FindTreeNodePath {
         boolean hasPath = getPathToTarget(root, node4, path);
         if (hasPath) {
             for (TreeNode node : path) {
-                System.out.print(node.val + " ");
+                System.out.print(node.value + " ");
             }
         }
         System.out.println();
@@ -41,7 +43,7 @@ public class FindTreeNodePath {
         hasPath = getPathToTarget(root, new TreeNode(9), path);
         if (hasPath) {
             for (TreeNode node : path) {
-                System.out.print(node.val + " ");
+                System.out.print(node.value + " ");
             }
         }
 
