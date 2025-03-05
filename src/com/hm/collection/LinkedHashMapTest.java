@@ -1,7 +1,5 @@
 package com.hm.collection;
 
-import com.hm.base.interview.Student;
-
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -13,55 +11,47 @@ public class LinkedHashMapTest {
     static final int MAXIMUM_CAPACITY = 1 << 30;
 
     public static void main(String[] args) {
-        LinkedHashMap<String, Student> map = new LinkedHashMap<>(16, 0.75f, true);
-        map.put("java", new Student("dmw", 18));
-        map.put("android", new Student("hm", 18));
-        map.put("kotlin", new Student("hello", 18));
-        //map.put("java", new Student("dmw", 18));
-        for (Map.Entry<String, Student> entry : map.entrySet()) {
-            System.out.println("key:" + entry.getKey() + ",value" + entry.getValue());
+        /**
+         * 指定访问顺序（true 表示按访问顺序，false 表示按插入顺序）
+         * 访问顺序模式
+         * 除了插入顺序，LinkedHashMap 还支持访问顺序（access order）。
+         * 通过将构造方法的 accessOrder 参数设置为 true，可以让 LinkedHashMap 按照访问顺序排序，即最近访问的元素会被移动到链表的末尾。
+         * 这种特性非常适合实现 LRU（Least Recently Used，最近最少使用）缓存。
+         */
+
+        //insertOrder();
+
+        accessOrder();
+
+    }
+
+    public static void insertOrder() {
+        LinkedHashMap<String, Integer> map = new LinkedHashMap<>();
+        map.put("Apple", 1);
+        map.put("Banana", 2);
+        map.put("Orange", 3);
+
+        for (Map.Entry<String, Integer> entry : map.entrySet()) {
+            System.out.println(entry.getKey() + ": " + entry.getValue());
         }
-        Student student = map.get("android");
-        map.put("java",new Student("zjc",20));
-        System.out.println(student.getName());
-        System.out.println("------------");
+    }
 
-        for (Map.Entry<String, Student> entry : map.entrySet()) {
-            System.out.println("key:" + entry.getKey() + ",value" + entry.getValue());
-        }
-        /*System.out.println(map);
+    public static void accessOrder() {
+        // 设置访问顺序，容量为 3
+        LinkedHashMap<String, Integer> map = new LinkedHashMap<>(3, 0.75f, true);
+        map.put("A", 1);
+        map.put("B", 2);
+        map.put("C", 3);
 
-        Student student = map.get("java");
-        System.out.println(student);
-        student.setAge(19);
+        System.out.println("初始顺序: " + map);
 
-        System.out.println(student);
+        // 访问 A，A 会被移到末尾
+        map.get("A");
+        System.out.println("访问 A 后: " + map);
 
-
-        System.out.println(map);*/
-
-        //Map<String, Integer> map1=Collections.synchronizedMap(new HashMap<>());
-        // map1.put("haha",33);
-      /*  System.out.println(map.put("ios", 99));
-        System.out.println(map.containsKey("ios"));
-        System.out.println(map.containsValue(99));*/
-        /*for (String key : map.keySet()) {
-            System.out.println(key+",value:"+map.get(key));
-        }
-        map.forEach(new BiConsumer<String, Integer>() {
-            @Override
-            public void accept(String s, Integer integer) {
-                System.out.println(s+","+integer);
-            }
-        });
-        map.remove("java");
-        System.out.println(map);
-        System.out.println(3|3);*/
-        // System.out.println(tableSizeFor(20));
-       /* int a=2;
-        int c=a<<1;
-        System.out.println(a);
-        System.out.println(c);*/
+        // 添加 D，超出容量时移除最早未访问的元素，参考同目录下的 LRUCache 类。
+        map.put("D", 4);
+        System.out.println("添加 D 后: " + map);
     }
 
 }

@@ -1,4 +1,4 @@
-LinkedHashMap使用双向链表保存数据。该双向链表定义了LinkedHashMap的迭代顺序，通常就是key插入到map中
+LinkedHashMap 使用双向链表保存数据。该双向链表定义了LinkedHashMap的迭代顺序，通常就是key插入到map中
 的顺序（insertion-order），一个key重新插入到map中不会影响插入顺序（insertion-order）。
 
 LinkedHashMap可以用来拷贝一个map对象，并保持map对象中数据的原始顺序，然后在晚些时候返回。
