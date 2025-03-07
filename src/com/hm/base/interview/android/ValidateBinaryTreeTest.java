@@ -12,14 +12,14 @@ import com.hm.structure.TreeNode;
  * 检查中序遍历结果是否严格递增即可判断是否为有效的二叉搜索树。
  *
  */
-class BinaryTreeTest {
+class ValidateBinaryTreeTest {
 
 
     private TreeNode prev = null;  // 记录前一个访问的节点
 
 
     public static void main(String[] args) {
-        BinaryTreeTest binaryTreeTest = new BinaryTreeTest();
+        ValidateBinaryTreeTest validateBinaryTreeTest = new ValidateBinaryTreeTest();
 
         // 测试用例1：有效BST
         //     5
@@ -28,7 +28,7 @@ class BinaryTreeTest {
         TreeNode root1 = new TreeNode(5);
         root1.left = new TreeNode(3);
         root1.right = new TreeNode(7);
-        System.out.println("Test1: " + binaryTreeTest.isValidBST(root1));  // true
+        System.out.println("Test1: " + validateBinaryTreeTest.isValidBST(root1));  // true
 
         // 测试用例2：无效BST
         //     5
