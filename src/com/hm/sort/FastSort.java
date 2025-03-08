@@ -14,9 +14,11 @@ public class FastSort {
     private static int[] array = {8, 4, 9, 1, 10, 6};
 
     public static void main(String args[]) {
-        sortNormalArray();
+        //sortNormalArray();
         //System.out.println(Integer.MAX_VALUE);
         //sortBigArray();
+
+        sort(array, 0, array.length - 1);
     }
 
     private static void sortNormalArray() {
@@ -84,33 +86,40 @@ public class FastSort {
         }
     }
 
-    private static void sort(int[] arr, int left, int right) {
-        if (left < right) {
-            int pivotIndex = partition(arr, left, right);
-            sort(arr, left, pivotIndex - 1);
-            sort(arr, pivotIndex + 1, right);
+    private static void sort(int[] arr, int low, int high) {
+        if (low < high) {
+            int pivotIndex = partition(arr, low, high);
+            sort(arr, low, pivotIndex - 1);
+            sort(arr, pivotIndex + 1, high);
         }
     }
 
-    private static int partition(int[] arr, int left, int right) {
-        int pivot = arr[left];
-        while (left < right) {
-            while (left < right && arr[right] >= pivot) {
-                right--;
+    /**
+     * private static int[] array = {8, 4, 9, 1, 10, 6};
+     * @param arr
+     * @param low
+     * @param high
+     * @return
+     */
+    private static int partition(int[] arr, int low, int high) {
+        int pivot = arr[low];
+        while (low < high) {
+            while (low < high && arr[high] >= pivot) {
+                high--;
             }
-            if (left < right) {
-                arr[left] = arr[right];
-                left++;
+            if (low < high) {
+                arr[low] = arr[high];
+                low++;
             }
-            while (left < right && arr[left] <= pivot) {
-                left++;
+            while (low < high && arr[low] <= pivot) {
+                low++;
             }
-            if (left < right) {
-                arr[right] = arr[left];
-                right--;
+            if (low < high) {
+                arr[high] = arr[low];
+                high--;
             }
         }
-        arr[left] = pivot;
-        return left;
+        arr[low] = pivot;
+        return low;
     }
 }
