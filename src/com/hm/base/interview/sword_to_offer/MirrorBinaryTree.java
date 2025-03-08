@@ -58,7 +58,7 @@ public class MirrorBinaryTree {
         if (root == null) {
             return;
         }
-        System.out.print(root.value + " ");
+        System.out.print(root.val + " ");
         recurseFront(root.left);
         recurseFront(root.right);
     }

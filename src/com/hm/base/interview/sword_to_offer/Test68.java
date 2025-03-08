@@ -56,16 +56,16 @@ public class Test68 {
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         dfs(root);
         while (p != null) {
-            visited.add(p.value);
+            visited.add(p.val);
             //获取当前节点的父节点
-            p = parent.get(p.value);
+            p = parent.get(p.val);
         }
         while (q != null) {
-            if (visited.contains(q.value)) {
+            if (visited.contains(q.val)) {
                 return q;
             }
             //获取父节点
-            q = parent.get(q.value);
+            q = parent.get(q.val);
         }
         return null;
     }
@@ -73,12 +73,12 @@ public class Test68 {
     public void dfs(TreeNode root) {
         if (root.left != null) {
             //放入的是当前节点的值，和当前节点的父节点
-            parent.put(root.left.value, root);
+            parent.put(root.left.val, root);
             dfs(root.left);
         }
         if (root.right != null) {
             //放入的是当前节点的值，和当前节点的父节点
-            parent.put(root.right.value, root);
+            parent.put(root.right.val, root);
             dfs(root.right);
         }
     }

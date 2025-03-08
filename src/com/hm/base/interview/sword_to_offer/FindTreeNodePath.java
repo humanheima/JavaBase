@@ -33,7 +33,7 @@ public class FindTreeNodePath {
         boolean hasPath = getPathToTarget(root, node4, path);
         if (hasPath) {
             for (TreeNode node : path) {
-                System.out.print(node.value + " ");
+                System.out.print(node.val + " ");
             }
         }
         System.out.println();
@@ -43,7 +43,7 @@ public class FindTreeNodePath {
         hasPath = getPathToTarget(root, new TreeNode(9), path);
         if (hasPath) {
             for (TreeNode node : path) {
-                System.out.print(node.value + " ");
+                System.out.print(node.val + " ");
             }
         }
 

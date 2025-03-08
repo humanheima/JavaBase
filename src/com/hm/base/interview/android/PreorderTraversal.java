@@ -59,7 +59,7 @@ public class PreorderTraversal {
         if (node == null) {
             return; // 空节点，返回
         }
-        result.add(node.value); // 访问根节点
+        result.add(node.val); // 访问根节点
         preorder(node.left);  // 遍历左子树
         preorder(node.right); // 遍历右子树
     }
@@ -83,7 +83,7 @@ public class PreorderTraversal {
 
         while (!stack.isEmpty()) {
             TreeNode node = stack.pop(); // 弹出当前节点
-            result.add(node.value);        // 访问根节点
+            result.add(node.val);        // 访问根节点
 
             // 先压右子节点（后访问）
             if (node.right != null) {

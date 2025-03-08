@@ -56,7 +56,7 @@ class ValidateBinaryTreeTest {
         }
 
         // 检查当前节点与前一个节点
-        if (prev != null && root.value <= prev.value) {
+        if (prev != null && root.val <= prev.val) {
             return false;  // 必须严格大于，不能等于
         }
         prev = root;  // 更新prev
@@ -81,12 +81,12 @@ class ValidateBinaryTreeTest {
         }
 
         // 检查当前节点值是否在范围内
-        if (node.value <= min || node.value >= max) {
+        if (node.val <= min || node.val >= max) {
             return false;
         }
 
         // 递归检查左右子树，更新边界
-        return validate(node.left, min, node.value) &&  // 左子树上限为当前值
-                validate(node.right, node.value, max);   // 右子树下限为当前值
+        return validate(node.left, min, node.val) &&  // 左子树上限为当前值
+                validate(node.right, node.val, max);   // 右子树下限为当前值
     }
 }

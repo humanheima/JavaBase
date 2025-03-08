@@ -101,7 +101,7 @@ public class BinaryTreeTest {
                 }
             }
             while (!stack2.isEmpty()) {
-                System.out.print(stack2.pop().value + " ");
+                System.out.print(stack2.pop().val + " ");
             }
         }
     }
@@ -128,7 +128,7 @@ public class BinaryTreeTest {
             if (current.right == null || current.right == lastVisit) {
                 TreeNode pop = stack.pop();
                 lastVisit = pop;
-                list.add(pop.value);
+                list.add(pop.val);
                 current = null;
             } else {
                 current = current.right;
@@ -149,7 +149,7 @@ public class BinaryTreeTest {
         }
         recurseEnd(root.getLeft());
         recurseEnd(root.getRight());
-        System.out.print(root.value + " ");
+        System.out.print(root.val + " ");
     }
 
 

@@ -52,7 +52,7 @@ public class InorderTraversal {
             return; // 空节点，返回
         }
         inorder(node.left);   // 遍历左子树
-        result.add(node.value); // 访问根节点
+        result.add(node.val); // 访问根节点
         inorder(node.right);  // 遍历右子树
     }
 
@@ -82,7 +82,7 @@ public class InorderTraversal {
 
             // 弹出栈顶节点
             current = stack.pop();
-            result.add(current.value); // 访问根节点
+            result.add(current.val); // 访问根节点
 
             // 处理右子树
             current = current.right;

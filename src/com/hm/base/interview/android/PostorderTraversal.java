@@ -44,7 +44,7 @@ public class PostorderTraversal {
         // 再遍历右子树
         postorderTraversal(root.right);
         // 最后访问根节点
-        System.out.print(root.value + " ");
+        System.out.print(root.val + " ");
     }
 
     /**
@@ -82,7 +82,7 @@ public class PostorderTraversal {
              * 比如 4 的右节点是 6，访问过了以后，下次就不访问了。不然会一直访问。
              */
             if (peekNode.right == null || peekNode.right == lastVisited) {
-                System.out.print(peekNode.value + " ");
+                System.out.print(peekNode.val + " ");
                 lastVisited = stack.pop();
             }
             // 否则，转向右子树

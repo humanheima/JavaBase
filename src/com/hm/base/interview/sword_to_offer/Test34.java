@@ -54,15 +54,15 @@ public class Test34 {
         //       /\
         //      4  7
         TreeNode root = new TreeNode();
-        root.value = 10;
+        root.val = 10;
         root.left = new TreeNode();
-        root.left.value = 5;
+        root.left.val = 5;
         root.left.left = new TreeNode();
-        root.left.left.value = 4;
+        root.left.left.val = 4;
         root.left.right = new TreeNode();
-        root.left.right.value = 7;
+        root.left.right.val = 7;
         root.right = new TreeNode();
-        root.right.value = 12;
+        root.right.val = 12;
 
         // 有两条路径上的结点和为22
         System.out.println("findPath(root, 22);");
@@ -78,15 +78,15 @@ public class Test34 {
         //       /\
         //      4  7
         TreeNode root = new TreeNode();
-        root.value = 10;
+        root.val = 10;
         root.left = new TreeNode();
-        root.left.value = 5;
+        root.left.val = 5;
         root.left.left = new TreeNode();
-        root.left.left.value = 4;
+        root.left.left.val = 4;
         root.left.right = new TreeNode();
-        root.left.right.value = 7;
+        root.left.right.val = 7;
         root.right = new TreeNode();
-        root.right.value = 12;
+        root.right.val = 12;
 
         // 有两条路径上的结点和为10 这个是不行的，因为10不是叶子节点
         System.out.println("findPath(root, 10);");
@@ -103,15 +103,15 @@ public class Test34 {
         //       /\
         //      4  7
         TreeNode root = new TreeNode();
-        root.value = 10;
+        root.val = 10;
         root.left = new TreeNode();
-        root.left.value = 5;
+        root.left.val = 5;
         root.left.left = new TreeNode();
-        root.left.left.value = 4;
+        root.left.left.val = 4;
         root.left.right = new TreeNode();
-        root.left.right.value = 7;
+        root.left.right.val = 7;
         root.right = new TreeNode();
-        root.right.value = 12;
+        root.right.val = 12;
 
         System.out.println("findPath(root, 19);");
         findPath(root, 19);
@@ -124,7 +124,7 @@ public class Test34 {
         //            10
 
         TreeNode root = new TreeNode();
-        root.value = 10;
+        root.val = 10;
 
         System.out.println("findPath(root, 10);");
         findPath(root, 10);
@@ -140,15 +140,15 @@ public class Test34 {
         //       /\
         //      0  7
         TreeNode root = new TreeNode();
-        root.value = -10;
+        root.val = -10;
         root.left = new TreeNode();
-        root.left.value = 5;
+        root.left.val = 5;
         root.left.left = new TreeNode();
-        root.left.left.value = 0;
+        root.left.left.val = 0;
         root.left.right = new TreeNode();
-        root.left.right.value = 7;
+        root.left.right.val = 7;
         root.right = new TreeNode();
-        root.right.value = 12;
+        root.right.val = 12;
 
         System.out.println("findPath(root, -5);");
         findPath(root, -5);
@@ -170,8 +170,8 @@ public class Test34 {
     }
 
     public void findPath3(TreeNode root, int curSum, int target, List<Integer> path, List<List<Integer>> result) {
-        curSum += root.value;
-        path.add(root.value);
+        curSum += root.val;
+        path.add(root.val);
         /**
          * 如果是叶节点，并且路径上节点值的和等于输入的值
          */
@@ -207,8 +207,8 @@ public class Test34 {
     }
 
     private static void findPath(TreeNode root, int curSum, int expectedNumber, List<Integer> result) {
-        curSum += root.value;
-        result.add(root.value);
+        curSum += root.val;
+        result.add(root.val);
         /**
          * 如果是叶节点，并且路径上节点值的和等于输入的值
          */
@@ -266,9 +266,9 @@ public class Test34 {
         // 如果结点不为空就进行处理
         if (root != null) {
             // 加上当前结点的值
-            curSum += root.value;
+            curSum += root.val;
             // 将当前结点入队
-            result.add(root.value);
+            result.add(root.val);
             // 如果当前结点的值小于期望的和
             if (curSum < expectedSum) {
                 // 递归处理左子树

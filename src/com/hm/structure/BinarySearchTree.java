@@ -35,7 +35,7 @@ public class BinarySearchTree {
         }
         while (true) {
             parent = current;
-            if (key < current.value) {
+            if (key < current.val) {
                 current = current.left;
                 if (current == null) {
                     parent.left = newNode;
@@ -53,8 +53,8 @@ public class BinarySearchTree {
 
     public TreeNode search(int key) {
         TreeNode current = root;
-        while (current != null && key != current.value) {
-            if (key < current.value) {
+        while (current != null && key != current.val) {
+            if (key < current.val) {
                 current = current.left;
             } else {
                 current = current.right;
@@ -70,9 +70,9 @@ public class BinarySearchTree {
         //标记当前节点是父节点的左节点还是右节点
         boolean isLeftChild = false;
         // 找到删除节点及是否在左子树
-        while (current.value != key) {
+        while (current.val != key) {
             parent = current;
-            if (current.value > key) {
+            if (current.val > key) {
                 isLeftChild = true;
                 current = current.left;
             } else {
@@ -132,7 +132,7 @@ public class BinarySearchTree {
     public void printTree(TreeNode root) {
         if (root != null) {
             printTree(root.left);
-            System.out.print("" + root.value + " ");
+            System.out.print("" + root.val + " ");
             printTree(root.right);
         }
     }

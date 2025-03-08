@@ -36,7 +36,7 @@ public class BinaryTreeHandWrite {
         while (node != null || !stack.isEmpty()) {
 
             while (node != null) {
-                System.out.println(node.value + " ");
+                System.out.println(node.val + " ");
                 stack.push(node);
                 node = node.left;
             }

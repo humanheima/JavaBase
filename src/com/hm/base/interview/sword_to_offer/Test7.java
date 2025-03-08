@@ -159,7 +159,7 @@ public class Test7 {
         }
         //创建当前的根节点，并为根节点赋值
         TreeNode node = new TreeNode();
-        node.value = value;
+        node.val = value;
         /**
          * 递归构建当前根节点的左子树，左子树的元素个数：index-mStart个
          * 左子树对应的前序遍历的位置在[pStart+1, pStart+index-mStart]
@@ -180,7 +180,7 @@ public class Test7 {
     // 前序遍历二叉树
     public static void printTree(TreeNode root) {
         if (root != null) {
-            System.out.print(root.value + " ");
+            System.out.print(root.val + " ");
             printTree(root.left);
             printTree(root.right);
         }

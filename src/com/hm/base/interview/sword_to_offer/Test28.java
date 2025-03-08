@@ -43,7 +43,7 @@ public class Test28 {
         if (left == null || right == null) {
             return false;
         }
-        if (left.value != right.value) {
+        if (left.val != right.val) {
             return false;
         }
         return isSymmetrical2(left.left, right.right) && isSymmetrical2(left.right, right.left);

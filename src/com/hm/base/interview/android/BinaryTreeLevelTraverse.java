@@ -71,7 +71,7 @@ public class BinaryTreeLevelTraverse {
 
         while (!queue.isEmpty()) {
             TreeNode node = queue.poll();
-            result.add(node.value);
+            result.add(node.val);
             if (node.left != null) {
                 queue.offer(node.left);
             }
@@ -98,7 +98,7 @@ public class BinaryTreeLevelTraverse {
 
             for (int i = 0; i < levelSize; i++) {
                 TreeNode node = queue.poll();
-                currentLevel.add(node.value);
+                currentLevel.add(node.val);
                 if (node.left != null) {
                     queue.offer(node.left);
                 }
