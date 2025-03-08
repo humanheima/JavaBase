@@ -25,10 +25,13 @@ public class SelectSort {
                     min = j;
                 }
             }
-            //第一轮，把最小的数据放到序列第一的位置
-            temp = arr[i];
-            arr[i] = arr[min];
-            arr[min] = temp;
+            if (min != i) {
+                //第一轮，把最小的数据放到序列第一的位置
+                temp = arr[i];
+                arr[i] = arr[min];
+                arr[min] = temp;
+            }
+
         }
         for (int i : array) {
             System.out.print(i + ",");
