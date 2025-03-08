@@ -9,8 +9,9 @@ import com.hm.structure.TreeNode;
  * 假设输入的前序遍历和中序遍历的结果中都不含重复的数字。
  * 例如：前序遍历序列｛ 1, 2, 4, 7, 3, 5, 6, 8｝和
  * 中序遍历序列｛4, 7, 2, 1, 5, 3, 8，6}，
- * 重建出项目根目录下的{RebuildTree.png}所示的二叉树并输出它的头结点。
- * 参考链接：https://blog.csdn.net/derrantcm/article/details/45457557
+ * 重建出项目根目录下的{RebuildTree.png}所示的二叉树并输出它的头节点。
+ * 参考：输入某二叉树的前序遍历和中序遍历的结果，请重建出该二叉树.md
+ * 参考链接：{@link <a herf="https://blog.csdn.net/derrantcm/article/details/45457557 ">
  */
 public class Test7 {
 
@@ -118,7 +119,7 @@ public class Test7 {
 
     /**
      * @param preorder 二叉树前序遍历的结果
-     * @param inorder 二叉树中序遍历的结果
+     * @param inorder  二叉树中序遍历的结果
      * @return
      */
     public static TreeNode construct(int[] preorder, int[] inorder) {
@@ -134,47 +135,50 @@ public class Test7 {
 
     /**
      * @param preOrder 要重建的树前序遍历的数组
-     * @param pStart   要重建的树的第一个节点在前序遍历数组中的位置
-     * @param pEnd     要重建的树的最后一个节点在前序遍历数组中的位置
-     * @param midOrder 要重建的树中序遍历的数组
-     * @param mStart   要重建的树的第一个节点在中序遍历数组中的位置
-     * @param mEnd     要重建的树的最后一个节点在中序遍历数组中的位置
+     * @param preStart   要重建的树的第一个节点在前序遍历数组中的位置
+     * @param preEnd     要重建的树的最后一个节点在前序遍历数组中的位置
+     * @param inOrder 要重建的树中序遍历的数组
+     * @param inStart   要重建的树的第一个节点在中序遍历数组中的位置
+     * @param inEnd     要重建的树的最后一个节点在中序遍历数组中的位置
      * @return 树的根节点
      */
-    public static TreeNode construct(int[] preOrder, int pStart, int pEnd, int[] midOrder, int mStart, int mEnd) {
+    public static TreeNode construct(int[] preOrder, int preStart, int preEnd, int[] inOrder, int inStart, int inEnd) {
         //开始位置大于结束位置，说明已经没有需要处理的元素了。
-        if (pStart > pEnd) {
+        if (preStart > preEnd) {
             return null;
         }
         //取前序遍历的第一个数字，就是当前的根节点
-        int value = preOrder[pStart];
-        int index = mStart;
+        int rootVal = preOrder[preStart];
+
+        TreeNode root = new TreeNode(rootVal);
+
+        int rootIndex = inStart;
         //在中序遍历中找根节点的位置
-        while (index <= mEnd && midOrder[index] != value) {
-            index++;
+        while (rootIndex <= inEnd && inOrder[rootIndex] != rootVal) {
+            rootIndex++;
         }
         //如果在整个中序遍历的数组中没有找到，说明说入的参数是不合法的，抛出异常
-        if (index > mEnd) {
+        if (rootIndex > inEnd) {
             throw new IllegalArgumentException("Invalid input");
         }
-        //创建当前的根节点，并为根节点赋值
-        TreeNode node = new TreeNode();
-        node.val = value;
+
+        // 计算左子树节点数
+        int leftTreeSize = rootIndex - inStart;
+
         /**
-         * 递归构建当前根节点的左子树，左子树的元素个数：index-mStart个
-         * 左子树对应的前序遍历的位置在[pStart+1, pStart+index-mStart]
-         * 左子树对应的中序遍历的位置在[mStart, index-1]
+         * 递归构建当前根节点的左子树，左子树的元素个数：rootIndex-mStart个
+         * 左子树对应的前序遍历的位置在[preStart+1, preStart+rootIndex-inStart]
+         * 左子树对应的中序遍历的位置在[inStart, rootIndex-1]
          */
-        node.left = construct(preOrder, pStart + 1, pStart + index - mStart, midOrder, mStart, index - 1);
-        //node.left = construct(preOrder, pStart + 1, index - 1, midOrder, mStart, index - 1);
+        root.left = construct(preOrder, preStart + 1, preStart + leftTreeSize, inOrder, inStart, rootIndex - 1);
         /**
-         * 递归构建当前根结点的右子树，右子树的元素个数：mEnd-index个
-         * 右子树对应的前序遍历的位置在[pStart+index-mStart+1, pEnd]
-         * 右子树对应的中序遍历的位置在[index+1, mEnd]
+         * 递归构建当前根结点的右子树，右子树的元素个数：inEnd-index个
+         * 右子树对应的前序遍历的位置在[preStart+rootIndex-inStart+1, preEnd]
+         * 右子树对应的中序遍历的位置在[rootIndex+1, inEnd]
          */
 
-        node.right = construct(preOrder, pStart + index - mStart + 1, pEnd, midOrder, index + 1, mEnd);
-        return node;
+        root.right = construct(preOrder, preStart + leftTreeSize + 1, preEnd, inOrder, rootIndex + 1, inEnd);
+        return root;
     }
 
     // 前序遍历二叉树
