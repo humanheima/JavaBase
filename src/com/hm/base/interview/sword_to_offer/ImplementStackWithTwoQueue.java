@@ -7,6 +7,7 @@ import java.util.Queue;
  * Created by dumingwei on 2018/11/22
  * <p>
  * Desc:使用两个队列来实现栈,用一个队列实现一个栈。栈，先进后出。
+ * 用队列实现栈
  * <p>
  * 参考链接：参考链接：{@see <a herf="https://www.jianshu.com/p/99d919146bf5">用队列实现一个栈</a>}
  */
@@ -27,7 +28,7 @@ public class ImplementStackWithTwoQueue {
         System.out.println(stack.pop());
         System.out.println(stack.pop());*/
 
-        AQueueImplmentStack<Integer> stack = new AQueueImplmentStack<>();
+        AQueueImplementStack<Integer> stack = new AQueueImplementStack<>();
         stack.push(1);
         stack.push(2);
         stack.push(3);
@@ -110,6 +111,8 @@ public class ImplementStackWithTwoQueue {
 
     /**
      * 两个队列实现栈
+     * 栈，先进后出
+     * 队列，先进先出
      *
      * @param <T>
      */
@@ -152,11 +155,11 @@ public class ImplementStackWithTwoQueue {
     /**
      * 用一个队列实现一个栈
      */
-    public static class AQueueImplmentStack<E> {
+    public static class AQueueImplementStack<E> {
 
         private Queue<E> queue = new LinkedList<>();
 
-        public AQueueImplmentStack() {
+        public AQueueImplementStack() {
         }
 
         public void push(E e) {
