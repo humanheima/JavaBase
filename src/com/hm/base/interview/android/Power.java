@@ -2,6 +2,7 @@ package com.hm.base.interview.android;
 
 /**
  * 1. 一个数的0次方=1
+ * 数值的整数次方，可以使用快速幂算法
  *
  */
 public class Power {
@@ -26,21 +27,21 @@ public class Power {
             return 1.0;
         }
 
-        // 将负指数转为正指数
+        // 将 n 转为 long 类型，避免负数溢出
         long exp = exponent; // 用 long 避免 int 溢出
         if (exponent < 0) {
             exp = -exp;
             base = 1 / base;
         }
 
-        // 快速幂算法
+        // 快速幂算法，按位处理指数
         double result = 1.0;
         while (exp > 0) {
             // 如果当前指数最低位为 1，乘上当前 base
             if ((exp & 1) == 1) {
                 result *= base;
             }
-            // base 平方，指数右移
+            // 底数平方，指数右移
             base *= base;
             exp >>= 1;
         }
