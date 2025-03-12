@@ -18,7 +18,9 @@ public class SingleNumberII {
          * 例如 7 (111)，-7 = 001（补码），7 & 001 = 001。
          */
         // 找到最低位为 1 的掩码
+        //这里是不是可以直接使用1，代替
         int mask = xorResult & (-xorResult); // 提取最低位的 1
+        System.out.println("xorResult & (-xorResult) = " + mask);
 
         /**
          * 分组：
@@ -42,7 +44,7 @@ public class SingleNumberII {
     }
 
     public static void main(String[] args) {
-        int[] nums = {1, 2, 3, 2, 4, 1};
+        int[] nums = {1, 2, 6, 2, 4, 1};
         int[] result = findTwoSingleNumbers(nums);
 
         System.out.println("只出现一次的两个数字是: " + result[0] + " 和 " + result[1]);

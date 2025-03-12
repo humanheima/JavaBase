@@ -2,6 +2,9 @@ package com.hm.base.interview.android;
 
 import com.hm.structure.TreeNode;
 
+/**
+ * 序列化与反序列化二叉树.md
+ */
 public class SerializeTree {
 
     /**

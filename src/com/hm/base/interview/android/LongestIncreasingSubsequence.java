@@ -30,6 +30,7 @@ public class LongestIncreasingSubsequence {
         int maxLength = 1;  // 记录全局最长长度
         
         for (int i = 1; i < n; i++) {
+            //这里是小于i，也就是取i元素之前的所有元素
             for (int j = 0; j < i; j++) {
                 if (nums[i] > nums[j]) {
                     dp[i] = Math.max(dp[i], dp[j] + 1);

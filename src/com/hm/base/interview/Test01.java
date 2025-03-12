@@ -1,7 +1,8 @@
 package com.hm.base.interview;
 
-import java.util.Set;
-import java.util.TreeSet;
+import com.hm.structure.TreeNode;
+
+import java.util.*;
 
 /**
  * Created by dumingwei on 2017/10/1.
@@ -18,4 +19,27 @@ public class Test01 {
             System.out.println(student);
         }
     }
+
+    private List<Integer> preOrderTraversal2(TreeNode root) {
+        if (root == null) {
+            return null;
+        }
+        List<Integer> result = new ArrayList<>();
+        Stack<TreeNode> stack = new Stack<>();
+        stack.push(root);
+        while (!stack.isEmpty()) {
+            TreeNode node = stack.pop();
+            result.add(node.val);
+            if (node.right != null) {
+                stack.push(node.right);
+            }
+            if (node.left != null) {
+                stack.push(node.left);
+            }
+        }
+
+        return result;
+
+    }
+
 }

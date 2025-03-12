@@ -1,5 +1,8 @@
 package com.hm.base.interview.android;
 
+/**
+ * 归并排序
+ */
 public class MergeSort {
 
     // 测试代码
