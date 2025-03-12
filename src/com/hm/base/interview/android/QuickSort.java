@@ -30,6 +30,14 @@ public class QuickSort {
         }
     }
 
+    /**
+     * 返回的是基准所在的位置
+     *
+     * @param arr
+     * @param low
+     * @param high
+     * @return
+     */
     // 分区方法
     private static int partition(int[] arr, int low, int high) {
         // 选择最后一个元素作为基准
@@ -47,7 +55,7 @@ public class QuickSort {
         }
         // 将基准放到正确位置
         swap(arr, i + 1, high);
-        return i + 1; // 返回基准位置
+        return i + 1; // 注意，返回基准位置是 i + 1
     }
 
     // 交换数组中两个元素
