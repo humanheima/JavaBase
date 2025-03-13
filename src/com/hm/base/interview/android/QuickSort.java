@@ -9,7 +9,7 @@ public class QuickSort {
 
     // 测试代码
     public static void main(String[] args) {
-        int[] arr = {4, 3, 8, 6, 2, 7, 1, 4};
+        int[] arr = {5, 3, 8, 6, 2, 7, 1, 4};
         System.out.println("原始数组：");
         printArray(arr);
 
@@ -45,7 +45,7 @@ public class QuickSort {
         // i 表示小于基准的区域边界
         int i = low - 1;
 
-        // 遍历数组，将小于基准的元素放到左边
+        // 注意这个解释：遍历数组，将小于基准的元素放到左边
         for (int j = low; j < high; j++) {
             if (arr[j] <= pivot) {
                 i++;
