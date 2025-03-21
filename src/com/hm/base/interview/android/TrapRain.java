@@ -9,7 +9,7 @@ public class TrapRain {
     public static void main(String[] args) {
         TrapRain trapRain = new TrapRain();
         //int[] height = {0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1};
-        int[] height = {4, 2, 0, 3, 2, 5}; // 小数组测试用例
+        int[] height = {4, 2, 0, 3, 2, 3}; // 小数组测试用例
         System.out.println("接雨水量: " + trapRain.trap(height)); // 输出: 6
     }
 

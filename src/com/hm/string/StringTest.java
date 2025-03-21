@@ -1,18 +1,15 @@
 package com.hm.string;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import com.hm.anno.A;
-
-import java.text.SimpleDateFormat;
-import java.util.*;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 
 /**
  * Created by dumingwei on 2017/4/13.
  */
 public class StringTest {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws UnsupportedEncodingException {
 
         /*Map<String, AlbumListenInfo> map = new HashMap<>();
         SimpleDateFormat format = new SimpleDateFormat("yyy_MM_dd");
@@ -47,8 +44,17 @@ public class StringTest {
 
         long aaa = 120;
         long bbbb = 10;
-        System.out.println( String.format("%1$02d:%2$02d", aaa,bbbb));
+        System.out.println(String.format("%1$02d:%2$02d", aaa, bbbb));
 
+
+        byte[] utf8Bytes = "登录 IM SDK 失败".getBytes("UTF-8");
+        ;
+        String wrong = new String(utf8Bytes, "ISO-8859-1"); // 乱码
+        String fixed = new String(wrong.getBytes("ISO-8859-1"), "UTF-8"); // 还原
+
+        String value = URLEncoder.encode("登录 IM SDK 失败", "UTF-8");
+        System.out.println("value = " + value);
+        System.out.println("decoe = " + URLDecoder.decode(value, "UTF-16"));
 
     }
 }

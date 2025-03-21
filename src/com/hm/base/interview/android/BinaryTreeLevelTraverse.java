@@ -8,7 +8,8 @@ import java.util.List;
 import java.util.Queue;
 
 /**
- * 二叉树分层遍历
+ * 什么是层序遍历
+ * 参考算法解题思路/二叉树的层序遍历.md
  */
 public class BinaryTreeLevelTraverse {
 
