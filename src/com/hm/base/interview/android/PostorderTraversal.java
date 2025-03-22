@@ -2,12 +2,16 @@ package com.hm.base.interview.android;
 
 import com.hm.structure.TreeNode;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
 
 /**
- * 二叉树后序遍历
+ * 二叉树后序遍历.md
  */
 public class PostorderTraversal {
+
+    private List<Integer> result = new ArrayList<>();
 
     public static void main(String[] args) {
         // 构建测试树：    1
@@ -23,28 +27,37 @@ public class PostorderTraversal {
         root.left.left = new TreeNode(4);
         root.left.right = new TreeNode(5);
 
-        root.left.left.right= new TreeNode(6);
+        root.left.left.right = new TreeNode(6);
 
 
         PostorderTraversal solution = new PostorderTraversal();
         System.out.println("后序遍历结果：");
+
         //递归算法
-        //solution.postorderTraversal(root);  // 输出: 4 5 2 3 1
+        solution.postorderTraversal(root);  // 输出: 6 4 5 2 3 1
+        System.out.println(solution.result);
+
+
         //使用栈实现
-        solution.postorderTraversal1(root);  // 输出: 4 5 2 3 1
+        solution.postorderTraversal1(root);  // 输出: 6 4 5 2 3 1
     }
 
 
     public void postorderTraversal(TreeNode root) {
+        result.clear();
+        postorder(root);
+    }
+
+    public void postorder(TreeNode root) {
         if (root == null) {
             return;
         }
         // 先遍历左子树
-        postorderTraversal(root.left);
+        postorder(root.left);
         // 再遍历右子树
-        postorderTraversal(root.right);
+        postorder(root.right);
         // 最后访问根节点
-        System.out.print(root.val + " ");
+        result.add(root.val);
     }
 
     /**

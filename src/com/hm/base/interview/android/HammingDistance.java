@@ -72,10 +72,9 @@ public class HammingDistance {
         // 统计二进制中 1 的个数
         while (xor != 0) {
             distance += xor & 1; // 检查最低位是否为 1
-            xor >>= 1;           // 右移一位
+            xor >>= 1;           // 右移一位，注意右移的写法
         }
         return distance;
     }
-
 
 }

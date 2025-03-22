@@ -7,12 +7,12 @@ import java.util.List;
 import java.util.Stack;
 
 /**
- * 二叉树的中序遍历
+ * 二叉树的中序遍历.md
  * 中序遍历的核心是按照“左-根-右”的顺序递归或迭代地访问每个节点：
  */
 public class InorderTraversal {
     // 存储遍历结果
-    private List<Integer> result = new ArrayList<>();
+    private final List<Integer> result = new ArrayList<>();
 
     // 测试
     public static void main(String[] args) {
