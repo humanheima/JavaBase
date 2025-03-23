@@ -1,7 +1,7 @@
 package com.hm.base.interview.android;
 
 /**
- * 合并两个有序数组
+ * 合并两个有序数组.md
  */
 public class MergeSortedArrays {
     public static int[] merge(int[] nums1, int[] nums2) {

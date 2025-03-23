@@ -7,6 +7,7 @@ import java.util.Comparator;
 import java.util.List;
 
 /**
+ * 合并区间.md
  * 题目描述
  * 给定一个区间的集合（通常以二维数组形式表示），请合并所有重叠的区间。
  * 例如：
@@ -68,7 +69,7 @@ public class MergeIntervals {
         // 遍历所有区间
         for (int i = 1; i < intervals.length; i++) {
             int[] current = intervals[i];
-            //当前列表最后一个区间
+            //列表最后一个区间
             int[] last = result.get(result.size() - 1);
 
             // 判断是否重叠

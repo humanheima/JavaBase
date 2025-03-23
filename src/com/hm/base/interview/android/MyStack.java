@@ -74,8 +74,8 @@ public class MyStack {
             queue2.offer(queue1.poll());
         }
         // 获取最后一个元素但不移除
-        int result = queue1.peek();
-        queue2.offer(queue1.poll()); // 将最后一个元素也移到 queue2
+        int result = queue1.poll();
+        queue2.offer(result); // 将最后一个元素也移到 queue2
         // 交换 queue1 和 queue2
         Queue<Integer> temp = queue1;
         queue1 = queue2;
