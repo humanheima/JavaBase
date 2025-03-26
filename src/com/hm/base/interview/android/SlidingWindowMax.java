@@ -4,7 +4,7 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 
 /**
- * 滑动窗口最大值
+ * 滑动窗口最大值.md
  */
 public class SlidingWindowMax {
 

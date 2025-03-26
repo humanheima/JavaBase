@@ -45,7 +45,7 @@ public class QuickSort {
         // i 表示小于基准的区域边界
         int i = low - 1;
 
-        // 注意这个解释：遍历数组，将小于基准的元素放到左边
+        // 注意这个解释：遍历数组基准左边的所有值，将小于基准的元素放到左边
         for (int j = low; j < high; j++) {
             if (arr[j] <= pivot) {
                 i++;

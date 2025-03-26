@@ -5,6 +5,15 @@ package com.hm.base.interview.android;
  * 只出现一次的数字，用异或解决
  */
 public class SingleNumber {
+
+    public static void main(String[] args) {
+        int[] nums1 = {2, 2, 1};
+        int[] nums2 = {4, 1, 2, 1, 2};
+
+        System.out.println("数组 [2, 2, 1] 中只出现一次的数字是: " + singleNumber(nums1)); // 输出: 1
+        System.out.println("数组 [4, 1, 2, 1, 2] 中只出现一次的数字是: " + singleNumber(nums2)); // 输出: 4
+    }
+
     public static int singleNumber(int[] nums) {
         int result = 0;
         for (int num : nums) {
@@ -13,11 +22,5 @@ public class SingleNumber {
         return result;
     }
 
-    public static void main(String[] args) {
-        int[] nums1 = {2, 2, 1};
-        int[] nums2 = {4, 1, 2, 1, 2};
-        
-        System.out.println("数组 [2, 2, 1] 中只出现一次的数字是: " + singleNumber(nums1)); // 输出: 1
-        System.out.println("数组 [4, 1, 2, 1, 2] 中只出现一次的数字是: " + singleNumber(nums2)); // 输出: 4
-    }
+
 }

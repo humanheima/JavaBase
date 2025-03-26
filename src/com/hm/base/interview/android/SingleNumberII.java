@@ -5,6 +5,14 @@ package com.hm.base.interview.android;
  */
 public class SingleNumberII {
 
+    public static void main(String[] args) {
+        //int[] nums = {1, 2, 6, 2, 4, 1};
+        int[] nums = {1, 2, 1, 3, 2, 5};
+        int[] result = findTwoSingleNumbers(nums);
+
+        System.out.println("只出现一次的两个数字是: " + result[0] + " 和 " + result[1]);
+    }
+
     public static int[] findTwoSingleNumbers(int[] nums) {
         // 第一次异或：得到 x ^ y
         int xorResult = 0;
@@ -12,15 +20,22 @@ public class SingleNumberII {
             xorResult ^= num;
         }
 
+        System.out.println("xorResult = " + xorResult + "  二进制表示 = " + Integer.toBinaryString(xorResult));
+        System.out.println();
+
         /**
          * 掩码计算：
          * xorResult & (-xorResult) 是位运算技巧，提取最低位的 1。
          * 例如 7 (111)，-7 = 001（补码），7 & 001 = 001。
+         *
+         * xorResult = 2 (10), -2 = 10 (补码), 2 & 10 = 10 & 10 = 10，区分位是第二位(从右到左)
+         *
+         *
          */
         // 找到最低位为 1 的掩码
         //这里是不是可以直接使用1，代替
         int mask = xorResult & (-xorResult); // 提取最低位的 1
-        System.out.println("xorResult & (-xorResult) = " + mask);
+        System.out.println("xorResult & (-xorResult) = " + mask + "  二进制表示 = " + Integer.toBinaryString(mask));
 
         /**
          * 分组：
@@ -43,10 +58,4 @@ public class SingleNumberII {
         return new int[]{num1, num2};
     }
 
-    public static void main(String[] args) {
-        int[] nums = {1, 2, 6, 2, 4, 1};
-        int[] result = findTwoSingleNumbers(nums);
-
-        System.out.println("只出现一次的两个数字是: " + result[0] + " 和 " + result[1]);
-    }
 }
