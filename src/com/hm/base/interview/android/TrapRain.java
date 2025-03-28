@@ -25,7 +25,7 @@ public class TrapRain {
         int water = 0;               // 总接水量
 
         while (left < right) {
-            // 更新左右最大高度
+            // 更新左右最大高度，初始化的时候，分别为最左边和最右边柱子的高度
             leftMax = Math.max(leftMax, height[left]);
             rightMax = Math.max(rightMax, height[right]);
 

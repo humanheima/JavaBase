@@ -11,6 +11,7 @@ import java.util.List;
  * 找出所有满足条件的三元组 [nums[i], nums[j], nums[k]]，
  * 使得 nums[i] + nums[j] + nums[k] = 0，
  * 且三元组中的元素不能重复使用（即 i != j != k）。结果中不能包含重复的三元组。
+ * 看懂了，双指针方法挺好理解。
  */
 public class ThreeSum {
 
