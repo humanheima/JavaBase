@@ -25,7 +25,7 @@ public class Test48 {
 
         //method2();
 
-        method3();
+        //method3();
     }
 
     private static void method3() {
@@ -39,7 +39,7 @@ public class Test48 {
 
     private static void method2() {
         System.out.println("--------------");
-        new Test48().lengthOfLongestSubstring2("dvdf");
+        System.out.println(new Test48().lengthOfLongestSubstring2("dvdf"));;
         System.out.println(new Test48().lengthOfLongestSubstring2(" "));
         new Test48().lengthOfLongestSubstring2("abcabcbb");
         new Test48().lengthOfLongestSubstring2("bbbbb");
@@ -92,6 +92,7 @@ public class Test48 {
 
     /**
      * 这个是比较好的方法，外层循环，每次加step，比+1 效率高。就用这种方式来实现
+     * TODO 这个不对，加 step 会漏掉。
      *
      * @param s
      * @return
@@ -124,8 +125,6 @@ public class Test48 {
                 maxLength = length1;
             }
         }
-
-        System.out.println(stringBuilderList.get(index).toString());
         return maxLength;
     }
 

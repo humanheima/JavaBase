@@ -17,7 +17,7 @@ import java.util.Map;
  * <p>
  * 链接：https://leetcode-cn.com/problems/two-sum/solution/liang-shu-zhi-he-by-leetcode-2/
  */
-public class LeetCode_1 {
+public class LeetCode1 {
 
     public static void main(String[] args) {
         int[] nums = {3, 2, 7, 11, 15};

@@ -1,7 +1,7 @@
 package com.hm;
 
 import com.hm.algorithm.ListNode;
-import com.hm.algorithm.PrintNodeUtil;
+import com.hm.algorithm.NodeUtil;
 
 import java.util.Stack;
 
@@ -23,7 +23,7 @@ public class TempTest {
 
         //ListNode result = reverse(head);
         ListNode result = reverseKNode(head, 3);
-        PrintNodeUtil.printListNode(result);
+        NodeUtil.printList(result);
 
     }
 

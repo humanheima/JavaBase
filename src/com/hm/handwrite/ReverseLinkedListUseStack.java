@@ -1,7 +1,7 @@
 package com.hm.handwrite;
 
 import com.hm.algorithm.ListNode;
-import com.hm.algorithm.PrintNodeUtil;
+import com.hm.algorithm.NodeUtil;
 
 import java.util.Stack;
 
@@ -44,12 +44,12 @@ public class ReverseLinkedListUseStack {
         head.next.next.next.next.next.next.next.next = new ListNode();
         head.next.next.next.next.next.next.next.next.val = 9;
 
-        PrintNodeUtil.printListNode(head);
+        NodeUtil.printListNode(head);
 
         System.out.println("反转后的链表");
         ListNode reverseHead = reverseListUseStack(head);
         //ListNode reverseHead = reverseListUseStack2(head);
-        PrintNodeUtil.printListNode(reverseHead);
+        NodeUtil.printListNode(reverseHead);
 
     }
 
@@ -81,11 +81,11 @@ public class ReverseLinkedListUseStack {
 //        head.next.next.next.next.next.next.next.next = new ListNode();
 //        head.next.next.next.next.next.next.next.next.val = 9;
 
-        PrintNodeUtil.printListNode(head);
+        NodeUtil.printListNode(head);
 
         System.out.println("K节点反转后的链表");
         ListNode reverseHead = reverseKNodes(head, 3);
-        PrintNodeUtil.printListNode(reverseHead);
+        NodeUtil.printListNode(reverseHead);
     }
 
     /**
