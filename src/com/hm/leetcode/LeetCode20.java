@@ -1,4 +1,4 @@
-package com.hm.base.interview.android;
+package com.hm.leetcode;
 
 import java.util.Stack;
 
@@ -9,11 +9,13 @@ import java.util.Stack;
  * 1. 左括号必须用相同类型的右括号闭合
  * 2. 左括号必须以正确的顺序闭合
  * 3. 空字符串视为有效
+ * LeetCode20
  */
-public class ValidParentheses {
+public class LeetCode20 {
 
     /**
      * 使用这种算法就很好
+     *
      * @param s
      * @return
      */
@@ -55,7 +57,7 @@ public class ValidParentheses {
 
     // 测试代码
     public static void main(String[] args) {
-        ValidParentheses solution = new ValidParentheses();
+        LeetCode20 solution = new LeetCode20();
         String[] tests = {"()", "()[]{}", "(]", "([)]", "{[]}"};
         for (String test : tests) {
             System.out.println("Input: " + test + " -> Output: " + solution.isValid(test));
