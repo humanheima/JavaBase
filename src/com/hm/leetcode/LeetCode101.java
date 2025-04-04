@@ -1,6 +1,9 @@
-package com.hm.base.interview.sword_to_offer;
+package com.hm.leetcode;
 
 import com.hm.structure.TreeNode;
+
+import java.util.LinkedList;
+import java.util.Queue;
 
 /**
  * Created by dumingwei on 2018/12/12
@@ -29,43 +32,7 @@ import com.hm.structure.TreeNode;
  * <p>
  * 参考链接：https://blog.csdn.net/derrantcm/article/details/46847939
  */
-public class Test28 {
-
-
-    public boolean isSymmetric(TreeNode root) {
-        return isSymmetrical2(root, root);
-    }
-
-    public boolean isSymmetrical2(TreeNode left, TreeNode right) {
-        if (left == null && right == null) {
-            return true;
-        }
-        if (left == null || right == null) {
-            return false;
-        }
-        if (left.val != right.val) {
-            return false;
-        }
-        return isSymmetrical2(left.left, right.right) && isSymmetrical2(left.right, right.left);
-    }
-
-
-    public static boolean isSymmetrical(BinaryTreeNode root) {
-        return isSymmetrical(root, root);
-    }
-
-    private static boolean isSymmetrical(BinaryTreeNode left, BinaryTreeNode right) {
-        if (left == null && right == null) {
-            return true;
-        }
-        if (left == null || right == null) {
-            return false;
-        }
-        if (left.value != right.value) {
-            return false;
-        }
-        return isSymmetrical(left.left, right.right) && isSymmetrical(left.right, right.left);
-    }
+public class LeetCode101 {
 
     public static void main(String[] args) {
 
@@ -76,12 +43,56 @@ public class Test28 {
         test05();
         test06();
         test07();
-
     }
 
-    private static void assemble(BinaryTreeNode node, BinaryTreeNode left, BinaryTreeNode right) {
-        node.left = left;
-        node.right = right;
+    public static boolean isSymmetric(TreeNode root) {
+        if (root == null) return true;
+        return isMirror(root.left, root.right);
+    }
+
+    private static boolean isMirror(TreeNode left, TreeNode right) {
+        // 两个节点都为空，对称
+        if (left == null && right == null) return true;
+        // 一个为空，另一个不为空，不对称
+        if (left == null || right == null) return false;
+
+        // 检查值是否相等，且子树是否镜像
+        return left.val == right.val
+                && isMirror(left.left, right.right)  // TODO 这里注意，左的左 vs 右的右
+                && isMirror(left.right, right.left); // TODO 这里注意，左的右 vs 右的左
+    }
+
+    /**
+     * 使用迭代
+     *
+     * @param root
+     * @return
+     */
+    public boolean isSymmetricIterative(TreeNode root) {
+        if (root == null) return true;
+
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root.left);
+        queue.offer(root.right);
+
+        while (!queue.isEmpty()) {
+            TreeNode left = queue.poll();
+            TreeNode right = queue.poll();
+
+            // 两个节点都为空，继续
+            if (left == null && right == null) continue;
+            // 一个为空，另一个不为空，不对称
+            if (left == null || right == null) return false;
+            // 值不相等，不对称
+            if (left.val != right.val) return false;
+
+            queue.offer(left.left);
+            queue.offer(right.right);
+            queue.offer(left.right);
+            queue.offer(right.left);
+        }
+
+        return true;
     }
 
     //结构对称
@@ -92,13 +103,13 @@ public class Test28 {
     //                    5     7   7    5
 
     public static void test01() {
-        BinaryTreeNode n1 = new BinaryTreeNode(8);
-        BinaryTreeNode n2 = new BinaryTreeNode(6);
-        BinaryTreeNode n3 = new BinaryTreeNode(6);
-        BinaryTreeNode n4 = new BinaryTreeNode(5);
-        BinaryTreeNode n5 = new BinaryTreeNode(7);
-        BinaryTreeNode n6 = new BinaryTreeNode(7);
-        BinaryTreeNode n7 = new BinaryTreeNode(5);
+        TreeNode n1 = new TreeNode(8);
+        TreeNode n2 = new TreeNode(6);
+        TreeNode n3 = new TreeNode(6);
+        TreeNode n4 = new TreeNode(5);
+        TreeNode n5 = new TreeNode(7);
+        TreeNode n6 = new TreeNode(7);
+        TreeNode n7 = new TreeNode(5);
 
         assemble(n1, n2, n3);
         assemble(n2, n4, n5);
@@ -108,7 +119,7 @@ public class Test28 {
         assemble(n6, null, null);
         assemble(n7, null, null);
 
-        System.out.println(isSymmetrical(n1));
+        System.out.println(isSymmetric(n1));
 
     }
 
@@ -121,12 +132,12 @@ public class Test28 {
     //                    5     7   7
 
     public static void test02() {
-        BinaryTreeNode n1 = new BinaryTreeNode(8);
-        BinaryTreeNode n2 = new BinaryTreeNode(6);
-        BinaryTreeNode n3 = new BinaryTreeNode(6);
-        BinaryTreeNode n4 = new BinaryTreeNode(5);
-        BinaryTreeNode n5 = new BinaryTreeNode(7);
-        BinaryTreeNode n6 = new BinaryTreeNode(7);
+        TreeNode n1 = new TreeNode(8);
+        TreeNode n2 = new TreeNode(6);
+        TreeNode n3 = new TreeNode(6);
+        TreeNode n4 = new TreeNode(5);
+        TreeNode n5 = new TreeNode(7);
+        TreeNode n6 = new TreeNode(7);
 
         assemble(n1, n2, n3);
         assemble(n2, n4, n5);
@@ -135,7 +146,7 @@ public class Test28 {
         assemble(n5, null, null);
         assemble(n6, null, null);
 
-        System.out.println(isSymmetrical(n1));
+        System.out.println(isSymmetric(n1));
 
     }
 
@@ -147,13 +158,13 @@ public class Test28 {
     //                    5     7   7    10
 
     public static void test03() {
-        BinaryTreeNode n1 = new BinaryTreeNode(8);
-        BinaryTreeNode n2 = new BinaryTreeNode(6);
-        BinaryTreeNode n3 = new BinaryTreeNode(6);
-        BinaryTreeNode n4 = new BinaryTreeNode(5);
-        BinaryTreeNode n5 = new BinaryTreeNode(7);
-        BinaryTreeNode n6 = new BinaryTreeNode(7);
-        BinaryTreeNode n7 = new BinaryTreeNode(10);
+        TreeNode n1 = new TreeNode(8);
+        TreeNode n2 = new TreeNode(6);
+        TreeNode n3 = new TreeNode(6);
+        TreeNode n4 = new TreeNode(5);
+        TreeNode n5 = new TreeNode(7);
+        TreeNode n6 = new TreeNode(7);
+        TreeNode n7 = new TreeNode(10);
 
         assemble(n1, n2, n3);
         assemble(n2, n4, n5);
@@ -163,22 +174,22 @@ public class Test28 {
         assemble(n6, null, null);
         assemble(n7, null, null);
 
-        System.out.println(isSymmetrical(n1));
+        System.out.println(isSymmetric(n1));
 
     }
 
     //节点为null
     public static void test04() {
 
-        System.out.println(isSymmetrical(null));
+        System.out.println(isSymmetric(null));
 
     }
 
     //只有一个节点
     public static void test05() {
-        BinaryTreeNode n1 = new BinaryTreeNode(1);
+        TreeNode n1 = new TreeNode(1);
         assemble(n1, null, null);
-        System.out.println(isSymmetrical(n1));
+        System.out.println(isSymmetric(n1));
 
     }
 
@@ -190,13 +201,13 @@ public class Test28 {
     //                    8     8   8    8
 
     public static void test06() {
-        BinaryTreeNode n1 = new BinaryTreeNode(8);
-        BinaryTreeNode n2 = new BinaryTreeNode(8);
-        BinaryTreeNode n3 = new BinaryTreeNode(8);
-        BinaryTreeNode n4 = new BinaryTreeNode(8);
-        BinaryTreeNode n5 = new BinaryTreeNode(8);
-        BinaryTreeNode n6 = new BinaryTreeNode(8);
-        BinaryTreeNode n7 = new BinaryTreeNode(8);
+        TreeNode n1 = new TreeNode(8);
+        TreeNode n2 = new TreeNode(8);
+        TreeNode n3 = new TreeNode(8);
+        TreeNode n4 = new TreeNode(8);
+        TreeNode n5 = new TreeNode(8);
+        TreeNode n6 = new TreeNode(8);
+        TreeNode n7 = new TreeNode(8);
 
         assemble(n1, n2, n3);
         assemble(n2, n4, n5);
@@ -206,7 +217,7 @@ public class Test28 {
         assemble(n6, null, null);
         assemble(n7, null, null);
 
-        System.out.println(isSymmetrical(n1));
+        System.out.println(isSymmetric(n1));
 
     }
 
@@ -218,12 +229,12 @@ public class Test28 {
     //                    8     8   8
 
     public static void test07() {
-        BinaryTreeNode n1 = new BinaryTreeNode(8);
-        BinaryTreeNode n2 = new BinaryTreeNode(8);
-        BinaryTreeNode n3 = new BinaryTreeNode(8);
-        BinaryTreeNode n4 = new BinaryTreeNode(8);
-        BinaryTreeNode n5 = new BinaryTreeNode(8);
-        BinaryTreeNode n6 = new BinaryTreeNode(8);
+        TreeNode n1 = new TreeNode(8);
+        TreeNode n2 = new TreeNode(8);
+        TreeNode n3 = new TreeNode(8);
+        TreeNode n4 = new TreeNode(8);
+        TreeNode n5 = new TreeNode(8);
+        TreeNode n6 = new TreeNode(8);
 
         assemble(n1, n2, n3);
         assemble(n2, n4, n5);
@@ -232,8 +243,13 @@ public class Test28 {
         assemble(n5, null, null);
         assemble(n6, null, null);
 
-        System.out.println(isSymmetrical(n1));
+        System.out.println(isSymmetric(n1));
 
+    }
+
+    private static void assemble(TreeNode node, TreeNode left, TreeNode right) {
+        node.left = left;
+        node.right = right;
     }
 
 

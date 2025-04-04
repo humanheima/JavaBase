@@ -1,4 +1,4 @@
-package com.hm.base.interview.android;
+package com.hm.leetcode;
 
 import com.hm.structure.TreeNode;
 
@@ -6,10 +6,10 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 /**
- * 树的最大深度
+ * Created by p_dmweidu on 2025/4/4
+ * Desc: 树的最大深度
  */
-public class TreeMaxDepth {
-
+public class LeetCode104 {
 
     public static void main(String[] args) {
         // 创建测试用的二叉树
@@ -24,7 +24,7 @@ public class TreeMaxDepth {
         root.left.left = new TreeNode(4);
         root.left.right = new TreeNode(5);
 
-        TreeMaxDepth solution = new TreeMaxDepth();
+        LeetCode104 solution = new LeetCode104();
 
         // 测试递归法
         int depthRecursive = solution.maxDepthRecursive(root);
@@ -60,6 +60,7 @@ public class TreeMaxDepth {
      * 迭代法（广度优先搜索BFS）
      * 基本思想：按层遍历树，记录层数
      * 使用队列来逐层访问节点，每处理完一层，深度加1
+     *
      * @param root
      * @return
      */

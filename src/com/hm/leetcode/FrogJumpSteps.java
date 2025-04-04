@@ -22,6 +22,8 @@ package com.hm.leetcode;
  * 参考根目录下的图片FromJUmpSteps.png
  * <p>
  * 参考链接：https://blog.csdn.net/xmc281141947/article/details/70738918
+ *
+ * {@link LeetCode70}
  */
 public class FrogJumpSteps {
 
@@ -118,36 +120,6 @@ public class FrogJumpSteps {
         }
         return jumpN;
     }
-
-    /**
-     * 爬楼梯问题，1 <= n <= 45
-     *
-     * @param n
-     * @return
-     */
-    public int climbStairs(int n) {
-        if (n == 0) {
-            return 1;
-        }
-        if (n == 1) {
-            return 1;
-        }
-        if (n == 2) {
-            return 2;
-        }
-
-        int preTwo = 1;
-        int prepOne = 2;
-        int jumpN = 0;
-        for (int i = 3; i <= n; i++) {
-            jumpN = (preTwo + prepOne);
-            preTwo = prepOne;
-            prepOne = jumpN;
-        }
-        return jumpN;
-
-    }
-
 
     /**
      * 递归解法

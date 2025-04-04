@@ -21,4 +21,17 @@ public class ListNode {
         return hashCode() + " : ListNode{" +
                 "val=" + val + "}";
     }
+
+    // 辅助方法：打印链表
+    public static void printList(ListNode head) {
+        ListNode curr = head;
+        while (curr != null) {
+            System.out.print(curr.val);
+            if (curr.next != null) {
+                System.out.print(" -> ");
+            }
+            curr = curr.next;
+        }
+        System.out.println();
+    }
 }

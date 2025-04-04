@@ -13,7 +13,6 @@ package com.hm.leetcode.code88;
  * <p>
  * 来源：力扣（LeetCode）
  * 链接：https://leetcode-cn.com/problems/merge-sorted-array
- * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class LeetCode88 {
 
@@ -71,27 +70,30 @@ public class LeetCode88 {
      * @param n     nums2 中需要排序的元素个数
      */
     public void merge(int[] nums1, int m, int[] nums2, int n) {
-        int totalLength = m + n - 1;
-        int p1 = m - 1;//第一个数组的最后一个要比较的元素的下标索引
-        int p2 = n - 1;//第2个数组的最后一个要比较的元素的下标索引
-        for (int i = 0; i <= totalLength; i++) {
-            if (p1 >= 0 && p2 >= 0) {
-                if (nums1[p1] > nums2[p2]) {
-                    //数组1的最后一个元素大，放到末尾，数组1的指针加1
-                    nums1[totalLength - i] = nums1[p1];
-                    p1--;
-                } else {
-                    nums1[totalLength - i] = nums2[p2];
-                    p2--;
-                }
-            } else if (p1 >= 0) {//第二个数组没有元素了
-                nums1[totalLength - i] = nums1[p1];
+        // p1 指向 nums1 的有效元素末尾
+        int p1 = m - 1;
+        // p2 指向 nums2 的末尾
+        int p2 = n - 1;
+        // p 指向合并后 nums1 的末尾
+        int p = m + n - 1;
+
+        // 当 nums1 和 nums2 都有元素时
+        while (p1 >= 0 && p2 >= 0) {
+            if (nums1[p1] > nums2[p2]) {
+                nums1[p] = nums1[p1];
                 p1--;
-            } else if (p2 >= 0) {
-                nums1[totalLength - i] = nums2[p2];
+            } else {
+                nums1[p] = nums2[p2];
                 p2--;
             }
+            p--;
+        }
 
+        // 如果 nums2 还有剩余元素，复制到 nums1
+        while (p2 >= 0) {
+            nums1[p] = nums2[p2];
+            p2--;
+            p--;
         }
     }
 
