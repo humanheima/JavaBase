@@ -1,7 +1,7 @@
 上一篇文章[Java AbstractQueuedSynchronizer（AQS）浅析之一](https://www.jianshu.com/p/4bb911920394)
 我们分析了AQS在ReentrantLock中的运用。**注意：ReentrantLock是以独享模式获取锁和释放锁的**，今天这篇文章，我们看一看AQS在ReentrantReadWriteLock中的应用。
 
-**ReentrantReadWriteLock类结构**
+** ReentrantReadWriteLock 类结构**
 ```java
 public class ReentrantReadWriteLock
         implements ReadWriteLock, java.io.Serializable {
@@ -645,44 +645,34 @@ protected final boolean tryRelease(int releases) {
 如果当前线程持有写锁，然后获取了读锁，然后释放了写锁，就从写锁降级到了读锁。但是从一个读锁升级到写锁是不可能的。一个锁降级的例子
 
 ```
-class CachedData {
+private final ReentrantReadWriteLock rwLock = new ReentrantReadWriteLock();
+    private int data = 0;
 
-    String data;
-    volatile boolean cacheValid;
-
-    final ReentrantReadWriteLock rwl = new ReentrantReadWriteLock();
-
-    void processCachedData() {
-        rwl.readLock().lock();
-        if (!cacheValid) {
-            // 在获取写锁之前必须释放读锁
-            rwl.readLock().unlock();
-            rwl.writeLock().lock();
-            try {
-                // 重新检查状态，因为另一个线程可能在执行此操作之前已获得写锁定并更改了状态。
-                if (!cacheValid) {
-                    //修改数据
-                    System.out.println("修改数据");
-                    data = "Hello world";
-                    cacheValid = true;
-                }
-                // 通过在释放写锁之前获取读锁来实现降级
-                rwl.readLock().lock();
-            } finally {
-                rwl.writeLock().unlock(); // 释放写锁但仍持有读锁
-            }
-        }
-
+    public void processData() {
+        // 获取写锁
+        rwLock.writeLock().lock();
         try {
-            //读数据
-            System.out.println("读取数据");
-            System.out.println(data);
+            // 修改数据
+            data = 42;
+            System.out.println(Thread.currentThread().getName() + " 修改数据为: " + data);
+
+            // 在持有写锁时获取读锁（开始锁降级）
+            rwLock.readLock().lock();
+            try {
+                // 这里仍然持有写锁和读锁
+                System.out.println(Thread.currentThread().getName() + " 在写锁下读取数据: " + data);
+            } finally {
+                // 释放写锁，完成锁降级（此时只持有读锁）
+                rwLock.writeLock().unlock();
+            }
+
+            // 现在只持有读锁，可以继续读取
+            System.out.println(Thread.currentThread().getName() + " 降级后读取数据: " + data);
         } finally {
-            rwl.readLock().unlock();
+            // 释放读锁
+            rwLock.readLock().unlock();
         }
     }
-}
-
 ```
 
 

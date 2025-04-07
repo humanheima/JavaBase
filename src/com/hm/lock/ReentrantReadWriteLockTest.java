@@ -15,33 +15,36 @@ public class ReentrantReadWriteLockTest {
     public static void main(String[] args) {
         ReentrantReadWriteLockTest test = new ReentrantReadWriteLockTest();
 
-        test.testLockDowngrade();
+        //test.testLockDowngrade();
 
-        /*new Thread() {
+        new Thread() {
             public void run() {
                 test.write(Thread.currentThread());
             }
-        }.start();*/
+        }.start();
 
-       /* try {
+        try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-*/
-        /*new Thread() {
+        new Thread() {
             public void run() {
                 test.read(Thread.currentThread());
             }
-        }.start();*/
+        }.start();
 
 
     }
 
+    /**
+     * 读锁和写锁互斥，只有在写锁释放以后，才能进行读操作
+     * @param thread
+     */
     private void read(Thread thread) {
         rwl.readLock().lock();
         try {
-            for (int i = 0; i < 1000; i++) {
+            for (int i = 0; i < 3; i++) {
                 System.out.println(thread.getName() + "正在进行读操作" + i);
             }
             System.out.println(thread.getName() + "读操作完毕");
@@ -55,7 +58,7 @@ public class ReentrantReadWriteLockTest {
     private void write(Thread thread) {
         rwl.writeLock().lock();
         try {
-            for (int i = 0; i < 100; i++) {
+            for (int i = 0; i < 1000; i++) {
                 System.out.println(thread.getName() + "正在进行写操作" + i);
             }
             System.out.println(thread.getName() + "写操作完毕");
