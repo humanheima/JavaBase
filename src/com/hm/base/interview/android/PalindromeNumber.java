@@ -1,13 +1,18 @@
 package com.hm.base.interview.android;
 
 /**
- * 回文数，不把数子转化成字符串
+ * Created by p_dmweidu on 2025/03/09
+ * Desc: 回文数，不把数子转化成字符串
+ * <p>
+ * 回文数，不把数字转化为字符串.md
  */
 public class PalindromeNumber {
 
     public static void main(String[] args) {
         // 测试用例
-        System.out.println("12321 是回文数吗？ " + isPalindrome(12321)); // true
+        //System.out.println("12321 是回文数吗？ " + isPalindrome(12321)); // true
+        System.out.println("123321 是回文数吗？ " + isPalindrome(123321)); // true
+
 //        System.out.println("121 是回文数吗？ " + isPalindrome(121));    // true
 //        System.out.println("12345 是回文数吗？ " + isPalindrome(12345)); // false
 //        System.out.println("-121 是回文数吗？ " + isPalindrome(-121));   // false

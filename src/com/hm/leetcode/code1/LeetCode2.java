@@ -7,7 +7,7 @@ import static com.hm.algorithm.NodeUtil.createList;
 
 /**
  * Created by p_dmweidu on 2025/3/28
- * Desc:
+ * Desc: 两数之和
  */
 public class LeetCode2 {
 
@@ -15,7 +15,7 @@ public class LeetCode2 {
     public static void main(String[] args) {
 
         LeetCode2 solution = new LeetCode2();
-// 测试用例1: 普通情况 [2,4,3] + [5,6,4] = [7,0,8]
+        // 测试用例1: 普通情况 [2,4,3] + [5,6,4] = [7,0,8]
         ListNode l1 = createList(new int[]{2, 4, 3});
         ListNode l2 = createList(new int[]{5, 6, 4});
 

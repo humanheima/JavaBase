@@ -1,4 +1,4 @@
-package com.hm.base.interview.android;
+package com.hm.leetcode.code15;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,7 +18,9 @@ public class ThreeSum {
     // 测试代码
     public static void main(String[] args) {
         ThreeSum solution = new ThreeSum();
-        int[] nums = {-1, 0, 1, 2, -1, -4};
+        //int[] nums = {-1, 0, 1, 2, -1, -4, -4};
+        //先排序好，简单理解
+        int[] nums = {-4, -4, -1, 0, 1, 2, 2, 2};
         List<List<Integer>> result = solution.threeSum(nums);
         System.out.println(result); // 输出: [[-1, -1, 2], [-1, 0, 1]]
     }
