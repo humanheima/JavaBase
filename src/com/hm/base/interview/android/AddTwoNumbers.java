@@ -9,7 +9,7 @@ import com.hm.algorithm.ListNode;
  * <p>
  * 123 +9 = 132
  * <p>
- * 这道题目和 StringAddition 类似。
+ * 这道题目和 StringAddition 类似。懂了
  */
 public class AddTwoNumbers {
 
