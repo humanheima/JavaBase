@@ -6,6 +6,7 @@ package com.hm.base.interview.android;
  * <p>
  * 考二进制位运算，异或算法。
  * 使用异或操作找出不同的位。当且仅当两个输入值不同时，输出为真（1）；输入值相同时，输出为假（0）。
+ * 看懂了
  */
 public class HammingDistance {
 
