@@ -11,23 +11,48 @@ import com.hm.algorithm.ListNode;
 class RemoveNthFromEnd {
 
 
-    public ListNode removeNthFromEnd(ListNode head, int n) {
+    // 测试代码
+    public static void main(String[] args) {
+        RemoveNthFromEnd solution = new RemoveNthFromEnd();
 
-        // 创建哑节点，指向头节点
+        // 测试用例1: 删除倒数第2个节点 [1,2,3,4,5], n=2 -> [1,2,3,5]
+        ListNode head1 = createList(new int[]{1,2,3,4,5});
+        ListNode result1 = solution.removeNthFromEnd(head1, 2);
+        printList(result1); // 预期输出: 1->2->3->5
+
+        // 测试用例2: 删除头节点 [1], n=1 -> []
+        ListNode head2 = createList(new int[]{1});
+        ListNode result2 = solution.removeNthFromEnd(head2, 1);
+        printList(result2); // 预期输出: (空)
+
+        // 测试用例3: 删除倒数第1个节点 [1,2], n=1 -> [1]
+        ListNode head3 = createList(new int[]{1,2});
+        ListNode result3 = solution.removeNthFromEnd(head3, 1);
+        printList(result3); // 预期输出: 1
+    }
+
+
+    /**
+     *
+     * @param head
+     * @param k
+     * @return
+     */
+    public ListNode removeNthFromEnd(ListNode head, int k) {
+        // 创建哑节点，处理删除头节点的情况
         ListNode dummy = new ListNode(0);
         dummy.next = head;
-
-        // 定义快慢指针
         ListNode fast = dummy;
         ListNode slow = dummy;
 
-        // fast 先走 n 步
-        for (int i = 0; i < n; i++) {
+        // 快指针先走 n+1 步
+        for (int i = 0; i <= k; i++) {
+            if (fast == null) return head; // n 超过链表长度
             fast = fast.next;
         }
 
-        // fast 和 slow 同时移动，直到 fast 到达末尾
-        while (fast.next != null) {
+        // 快慢指针一起移动，直到快指针到末尾
+        while (fast != null) {
             fast = fast.next;
             slow = slow.next;
         }
@@ -35,7 +60,35 @@ class RemoveNthFromEnd {
         // 删除目标节点
         slow.next = slow.next.next;
 
-        // 返回新头节点
         return dummy.next;
+    }
+
+
+
+    // 辅助方法：创建链表
+    private static ListNode createList(int[] arr) {
+        ListNode dummy = new ListNode();
+        ListNode current = dummy;
+        for (int val : arr) {
+            current.next = new ListNode(val);
+            current = current.next;
+        }
+        return dummy.next;
+    }
+
+    // 辅助方法：打印链表
+    private static void printList(ListNode head) {
+        if (head == null) {
+            System.out.println("(空)");
+            return;
+        }
+        while (head != null) {
+            System.out.print(head.val);
+            if (head.next != null) {
+                System.out.print("->");
+            }
+            head = head.next;
+        }
+        System.out.println();
     }
 }

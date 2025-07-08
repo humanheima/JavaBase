@@ -16,7 +16,7 @@ import java.util.List;
 public class MergeSortKListNodeHandWrite {
 
     /**
-     * 手写方法
+     * 手写方法，哈哈，感觉这种方法挺巧妙的。
      * @param lists
      * @return
      */

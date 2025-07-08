@@ -6,27 +6,27 @@ import java.util.Queue;
 /**
  * Created by dumingwei on 2018/11/22
  * <p>
- * Desc:使用两个队列来实现栈,用一个队列实现一个栈。栈，先进后出。
+ * Desc:使用两个队列来实现栈,用一个队列实现一个栈。栈的特点是先进后出。
  * 用队列实现栈
  * <p>
- * 参考链接：参考链接：{@see <a herf="https://www.jianshu.com/p/99d919146bf5">用队列实现一个栈</a>}
+ * 参考链接：{@see <a herf="https://www.jianshu.com/p/99d919146bf5">用队列实现一个栈</a>}
  */
 public class ImplementStackWithTwoQueue {
 
     public static void main(String[] args) {
 
-        /*TwoQueueStack<Integer> stack = new TwoQueueStack<>();
-        System.out.println(stack.pop());
-        stack.push(1);
-        stack.push(2);
-        stack.push(3);
-        System.out.println(stack.pop());
-        System.out.println(stack.pop());
-        stack.push(4);
-        stack.push(5);
-        System.out.println(stack.pop());
-        System.out.println(stack.pop());
-        System.out.println(stack.pop());*/
+//        TwoQueueStack<Integer> stack = new TwoQueueStack<>();
+//        System.out.println(stack.pop());
+//        stack.push(1);
+//        stack.push(2);
+//        stack.push(3);
+//        System.out.println(stack.pop());
+//        System.out.println(stack.pop());
+//        stack.push(4);
+//        stack.push(5);
+//        System.out.println(stack.pop());
+//        System.out.println(stack.pop());
+//        System.out.println(stack.pop());
 
         AQueueImplementStack<Integer> stack = new AQueueImplementStack<>();
         stack.push(1);
@@ -118,8 +118,8 @@ public class ImplementStackWithTwoQueue {
      */
     public static class TwoQueueStack<T> {
 
-        private Queue<T> queue1 = new LinkedList<>();
-        private Queue<T> queue2 = new LinkedList<>();
+        private final Queue<T> queue1 = new LinkedList<>();
+        private final Queue<T> queue2 = new LinkedList<>();
 
         public TwoQueueStack() {
         }

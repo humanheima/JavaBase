@@ -34,8 +34,8 @@ public class PostorderTraversal {
         System.out.println("后序遍历结果：");
 
         //递归算法
-        solution.postorderTraversal(root);  // 输出: 6 4 5 2 3 1
-        System.out.println(solution.result);
+        //solution.postorderTraversal(root);  // 输出: 6 4 5 2 3 1
+        //System.out.println(solution.result);
 
 
         //使用栈实现

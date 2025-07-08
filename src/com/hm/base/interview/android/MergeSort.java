@@ -1,7 +1,7 @@
 package com.hm.base.interview.android;
 
 /**
- * 归并排序.md
+ * 算法解题思路/归并排序.md
  */
 public class MergeSort {
 
@@ -15,6 +15,24 @@ public class MergeSort {
 
         System.out.print("排序后数组: ");
         printArray(arr);
+    }
+
+    // 主函数，用于调用归并排序
+    public static void sort(int[] arr) {
+        if (arr == null || arr.length <= 1) {
+            return;
+        }
+        mergeSort(arr, 0, arr.length - 1);
+    }
+
+    // 递归实现归并排序
+    private static void mergeSort(int[] arr, int left, int right) {
+        if (left < right) {  // 递归终止条件
+            int mid = (left + right) / 2;
+            mergeSort(arr, left, mid);      // 排序左半部分
+            mergeSort(arr, mid + 1, right); // 排序右半部分
+            merge(arr, left, mid, right);   // 合并两部分
+        }
     }
 
     // 合并两个有序子数组
@@ -45,27 +63,10 @@ public class MergeSort {
         }
 
         // 将临时数组复制回原数组
-        for (int m = 0; m < temp.length; m++) {
-            arr[left + m] = temp[m];
-        }
-    }
-
-    // 递归实现归并排序
-    private static void mergeSort(int[] arr, int left, int right) {
-        if (left < right) {  // 递归终止条件
-            int mid = (left + right) / 2;
-            mergeSort(arr, left, mid);      // 排序左半部分
-            mergeSort(arr, mid + 1, right); // 排序右半部分
-            merge(arr, left, mid, right);   // 合并两部分
-        }
-    }
-
-    // 主函数，用于调用归并排序
-    public static void sort(int[] arr) {
-        if (arr == null || arr.length <= 1) {
-            return;
-        }
-        mergeSort(arr, 0, arr.length - 1);
+//        for (int m = 0; m < temp.length; m++) {
+//            arr[left + m] = temp[m];
+//        }
+        System.arraycopy(temp, 0, arr, left, temp.length);
     }
 
 

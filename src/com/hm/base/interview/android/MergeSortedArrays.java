@@ -1,10 +1,12 @@
 package com.hm.base.interview.android;
 
 /**
- * 合并两个有序数组.md
+ * 合并两个有序数组.md，看懂了。
  */
 public class MergeSortedArrays {
+
     public static int[] merge(int[] nums1, int[] nums2) {
+
         int n = nums1.length; // 第一个数组的长度
         int m = nums2.length; // 第二个数组的长度
         int[] result = new int[n + m]; // 结果数组

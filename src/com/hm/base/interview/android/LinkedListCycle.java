@@ -8,6 +8,7 @@ import java.util.HashSet;
  * 链表中环的检测
  * 方法1：快慢指针法实现
  * 方法2：哈希表法，这种方法挺好的。而且，重复的点就是环的入口。
+ * 看懂了
  */
 public class LinkedListCycle {
 

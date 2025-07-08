@@ -21,8 +21,8 @@ class MinStackAuxiliary {
         System.out.println("Min: " + minStack.getMin()); // 输出 -2
     }
 
-    private Stack<Integer> dataStack;  // 数据栈
-    private Stack<Integer> minStack;   // 辅助栈，存储最小值
+    private final Stack<Integer> dataStack;  // 数据栈
+    private final Stack<Integer> minStack;   // 辅助栈，存储最小值
 
     public MinStackAuxiliary() {
         dataStack = new Stack<>();

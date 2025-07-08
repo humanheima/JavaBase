@@ -30,7 +30,7 @@ public class MergeIntervals {
 
     private static void test1(MergeIntervals solution) {
         int[][] intervals = {{1, 3}, {2, 6}, {8, 10}, {15, 18}};
-        int[][] merged = solution.merge(intervals);
+        List<int[]> merged = solution.merge(intervals);
 
         for (int[] interval : merged) {
             System.out.println("[" + interval[0] + "," + interval[1] + "]");
@@ -39,17 +39,19 @@ public class MergeIntervals {
 
     private static void test2(MergeIntervals solution) {
         int[][] intervals = {{1, 4}, {4, 5}};
-        int[][] merged = solution.merge(intervals);
+        List<int[]> merged = solution.merge(intervals);
 
         for (int[] interval : merged) {
             System.out.println("[" + interval[0] + "," + interval[1] + "]");
         }
     }
 
-    public int[][] merge(int[][] intervals) {
+    public List<int[]> merge(int[][] intervals) {
+        // 使用 List 存储结果
+        List<int[]> result = new ArrayList<>();
         // 边界检查
         if (intervals == null || intervals.length <= 1) {
-            return intervals;
+            return result;
         }
 
         // 按起始点排序
@@ -62,8 +64,6 @@ public class MergeIntervals {
             }
         });
 
-        // 使用 List 存储结果
-        List<int[]> result = new ArrayList<>();
         result.add(intervals[0]); // 先加入第一个区间
 
         // 遍历所有区间
@@ -83,7 +83,8 @@ public class MergeIntervals {
         }
 
         // 转换为数组返回
-        return result.toArray(new int[result.size()][]);
+        //return result.toArray(new int[result.size()][]);
+        return result;
     }
 
 

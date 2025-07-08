@@ -24,6 +24,13 @@ public class PreorderTraversal {
     public static void main(String[] args) {
 
         // 构建示例树: 1 -> 2 -> 4, 5; 1 -> 3 -> 6
+
+        /**                 1
+         *              /     \
+         *             2       3
+         *            / \      \
+         *           4   5      6
+         */
         TreeNode root = new TreeNode(1);
         root.left = new TreeNode(2);
         root.right = new TreeNode(3);
