@@ -1,7 +1,7 @@
 package com.hm.base.interview.android;
 
 /**
- * 接雨水.md
+ * 算法解题思路/接雨水.md
  */
 public class TrapRain {
 
@@ -9,8 +9,8 @@ public class TrapRain {
     public static void main(String[] args) {
         TrapRain trapRain = new TrapRain();
         //int[] height = {0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1};
-        int[] height = {4, 2, 0, 3, 2, 3}; // 小数组测试用例
-        System.out.println("接雨水量: " + trapRain.trap(height)); // 输出: 6
+        int[] height = {4, 2, 0, 3, 2, 3}; // 小数组测试用例，输出5
+        System.out.println("total water: " + trapRain.trap(height)); // 输出: 6
     }
 
     public int trap(int[] height) {

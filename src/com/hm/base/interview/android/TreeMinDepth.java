@@ -5,6 +5,10 @@ import com.hm.structure.TreeNode;
 import java.util.LinkedList;
 import java.util.Queue;
 
+/**
+ * Created by p_dmweidu on 2025/7/10
+ * Desc: 二叉树的最小深度.md
+ */
 class TreeMinDepth {
 
     public static void main(String[] args) {

@@ -3,6 +3,7 @@ package com.hm.base.interview.android;
 import com.hm.structure.TreeNode;
 
 /**
+ * 验证二叉搜索树（BST）（中序遍历或递归边界）.md
  * 验证二叉搜索树（BST）（中序遍历或递归边界），算法原理解析
  *
  * 使用第2种方式

@@ -52,7 +52,7 @@ public class StringAddition {
         // 当还有数字或进位时继续循环
         while (i >= 0 || j >= 0 || carry > 0) {
             // 注释2处，获取当前位的数字，若无则为 0
-            //注意，这里的 num1.charAt(i) - '0' 是将 char 转换为 int
+            //TODO 注意，这里的 num1.charAt(i) - '0' 是将 char 转换为 int
             int digit1 = (i >= 0) ? num1.charAt(i) - '0' : 0;
             int digit2 = (j >= 0) ? num2.charAt(j) - '0' : 0;
 
