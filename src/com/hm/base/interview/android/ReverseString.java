@@ -3,8 +3,7 @@ package com.hm.base.interview.android;
 import java.util.Stack;
 
 /**
- * 翻转字符串
- * 反转字符串
+ * 翻转/反转字符串
  */
 public class ReverseString {
 

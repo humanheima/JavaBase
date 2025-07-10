@@ -2,17 +2,24 @@ package com.hm.base.interview.android;
 
 import com.hm.structure.TreeNode;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 序列化与反序列化二叉树.md
+ * 使用前序遍历序列化二叉树
  */
 public class SerializeTree {
 
+    private List<Integer> result = new ArrayList<>();
+
     /**
-     *     1
-     *    / \
-     *   2   3
-     *  /     \
+     * 1
+     * / \
+     * 2   3
+     * /     \
      * 4       5
+     *
      * @param args
      */
     public static void main(String[] args) {
@@ -32,6 +39,11 @@ public class SerializeTree {
 
         // 反序列化
         TreeNode deserialized = codec.deserialize(serialized);
+
+        codec.result.clear();
+        codec.preorder(deserialized);
+        System.out.println(codec.result);
+
 
         // 验证：再次序列化并比较
         //String serializedAgain = codec.serialize(deserialized);
@@ -62,12 +74,27 @@ public class SerializeTree {
     // 反序列化字符串为二叉树
     public TreeNode deserialize(String data) {
         String[] nodes = data.split(",");
+
+//        for (String node : nodes) {
+//            System.out.print(node);
+//        }
         int[] index = {0}; // 用数组包装索引，以便在递归中修改
         return deserializeHelper(nodes, index);
     }
 
     private TreeNode deserializeHelper(String[] nodes, int[] index) {
-        if (index[0] >= nodes.length || nodes[index[0]].equals("#")) {
+/*        if (index[0] >= nodes.length || nodes[index[0]].equals("#")) {
+            index[0]++;
+            return null;
+        }*/
+
+
+        if (index[0] >= nodes.length) {
+            return null;
+        }
+        String val = nodes[index[0]];
+
+        if (val.equals("#")) {
             index[0]++;
             return null;
         }
@@ -77,5 +104,21 @@ public class SerializeTree {
         root.left = deserializeHelper(nodes, index);
         root.right = deserializeHelper(nodes, index);
         return root;
+    }
+
+
+    /**
+     * 递归实现的前序遍历
+     *
+     * @param node
+     */
+    // 递归辅助函数
+    private void preorder(TreeNode node) {
+        if (node == null) {
+            return; // 空节点，返回
+        }
+        result.add(node.val); // 访问根节点
+        preorder(node.left);  // 遍历左子树
+        preorder(node.right); // 遍历右子树
     }
 }

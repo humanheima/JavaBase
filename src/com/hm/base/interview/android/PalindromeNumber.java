@@ -39,7 +39,6 @@ public class PalindromeNumber {
             x = x / 10;                       // 去掉最后一位
         }
 
-        //12321
         // 比较前半部分和后半部分
         // x == reversed（偶数位） 或 x == reversed / 10（奇数位）
         return x == reversed || x == reversed / 10;

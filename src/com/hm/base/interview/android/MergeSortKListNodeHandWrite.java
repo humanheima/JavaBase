@@ -32,13 +32,13 @@ public class MergeSortKListNodeHandWrite {
             }
         }
         Collections.sort(list);
-        ListNode head = new ListNode(0);
-        ListNode cur = head;
+        ListNode dummy = new ListNode(0);
+        ListNode cur = dummy;
         for (int num : list) {
             cur.next = new ListNode(num);
             cur = cur.next;
         }
-        return head.next;
+        return dummy.next;
     }
 
 

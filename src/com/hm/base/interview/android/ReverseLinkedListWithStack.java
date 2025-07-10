@@ -8,6 +8,7 @@ import java.util.Stack;
  * 如何使用栈来实现翻转单链表，比较好理解，就用这种方式来实现了
  */
 public class ReverseLinkedListWithStack {
+
     public ListNode reverseList(ListNode head) {
         // 如果链表为空或只有一个节点，直接返回
         if (head == null || head.next == null) {

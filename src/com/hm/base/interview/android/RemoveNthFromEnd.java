@@ -15,20 +15,40 @@ class RemoveNthFromEnd {
     public static void main(String[] args) {
         RemoveNthFromEnd solution = new RemoveNthFromEnd();
 
-        // 测试用例1: 删除倒数第2个节点 [1,2,3,4,5], n=2 -> [1,2,3,5]
-        ListNode head1 = createList(new int[]{1,2,3,4,5});
-        ListNode result1 = solution.removeNthFromEnd(head1, 2);
-        printList(result1); // 预期输出: 1->2->3->5
+//        test1(solution);
+//
+//        test2(solution);
+//
+//        test3(solution);
 
-        // 测试用例2: 删除头节点 [1], n=1 -> []
-        ListNode head2 = createList(new int[]{1});
-        ListNode result2 = solution.removeNthFromEnd(head2, 1);
-        printList(result2); // 预期输出: (空)
+        test4(solution);
+    }
 
+    private static void test4(RemoveNthFromEnd solution) {
+        ListNode head4 = createList(new int[]{2});
+        ListNode result4 = solution.removeNthFromEnd(head4, 1);
+        printList(result4); //
+    }
+
+    private static void test3(RemoveNthFromEnd solution) {
         // 测试用例3: 删除倒数第1个节点 [1,2], n=1 -> [1]
         ListNode head3 = createList(new int[]{1,2});
         ListNode result3 = solution.removeNthFromEnd(head3, 1);
         printList(result3); // 预期输出: 1
+    }
+
+    private static void test2(RemoveNthFromEnd solution) {
+        // 测试用例2: 删除头节点 [1], n=1 -> []
+        ListNode head2 = createList(new int[]{1});
+        ListNode result2 = solution.removeNthFromEnd(head2, 1);
+        printList(result2); // 预期输出: (空)
+    }
+
+    private static void test1(RemoveNthFromEnd solution) {
+        // 测试用例1: 删除倒数第2个节点 [1,2,3,4,5], n=2 -> [1,2,3,5]
+        ListNode head1 = createList(new int[]{1,2,3,4,5});
+        ListNode result1 = solution.removeNthFromEnd(head1, 2);
+        printList(result1); // 预期输出: 1->2->3->5
     }
 
 
