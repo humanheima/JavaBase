@@ -5,6 +5,7 @@ import com.hm.algorithm.ListNode;
 /**
  * Created by p_dmweidu on 2025/4/4
  * Desc: 删除有序链表中的重复项
+ * https://leetcode.cn/problems/remove-duplicates-from-sorted-list/
  */
 class LeetCode83 {
 

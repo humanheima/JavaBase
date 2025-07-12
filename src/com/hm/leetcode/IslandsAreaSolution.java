@@ -2,7 +2,7 @@ package com.hm.leetcode;
 
 /**
  * Created by p_dmweidu on 2025/4/11
- * Desc: 最大岛屿面积问题.md
+ * Desc: 岛屿最大面积问题.md
  */
 public class IslandsAreaSolution {
 

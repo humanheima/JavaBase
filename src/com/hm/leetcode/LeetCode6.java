@@ -9,12 +9,21 @@ public class LeetCode6 {
     public static void main(String[] args) {
 
         LeetCode6 solution = new LeetCode6();
+
+        test1(solution);
+
+        //test2(solution);
+    }
+
+    private static void test1(LeetCode6 solution) {
         // 测试用例 1
         String s1 = "PAYPALISHIRING";
         int numRows1 = 3;
         String result1 = solution.convert(s1, numRows1);
         System.out.println("Test 1: " + result1 + " (Expected: PAHNAPLSIIGYIR)");
+    }
 
+    private static void test2(LeetCode6 solution) {
         // 测试用例 2
         String s2 = "PAYPALISHIRING";
         int numRows2 = 4;
@@ -22,6 +31,12 @@ public class LeetCode6 {
         System.out.println("Test 2: " + result2 + " (Expected: PINALSIGYAHRPI)");
     }
 
+    /**
+     * 行数
+     * @param s
+     * @param numRows
+     * @return
+     */
     public String convert(String s, int numRows) {
         // 如果行数为 1，直接返回原字符串
         if (numRows == 1) return s;

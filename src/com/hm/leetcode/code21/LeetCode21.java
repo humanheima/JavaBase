@@ -90,16 +90,18 @@ public class LeetCode21 {
 
     public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
 
-        ListNode head = new ListNode(0);
-        ListNode currentNode = head;
-
         if (list1 == null && list2 == null) {
             return null;
         }
+
+        ListNode dummy = new ListNode(0);
+        ListNode currentNode = dummy;
+
         if (list1 == null) {
             currentNode = list2;
             return currentNode;
         }
+
         if (list2 == null) {
             currentNode = list1;
             return currentNode;
@@ -122,7 +124,7 @@ public class LeetCode21 {
         if (list2 != null) {
             currentNode.next = list2;
         }
-        return head.next;
+        return dummy.next;
     }
 
 

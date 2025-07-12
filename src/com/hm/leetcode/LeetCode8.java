@@ -3,6 +3,7 @@ package com.hm.leetcode;
 /**
  * Created by p_dmweidu on 2025/3/30
  * Desc:
+ * LeetCode8.md
  */
 public class LeetCode8 {
 
@@ -15,9 +16,16 @@ public class LeetCode8 {
         System.out.println(solution.myAtoi("91283472332")); // 输出: 2147483647
     }
 
+    /**
+     * 将字符串转换为整数 AISCII to Integer
+     * @param s
+     * @return
+     */
     public int myAtoi(String s) {
 
-        if (s == null || s.isEmpty()) return 0;
+        if (s == null || s.isEmpty()) {
+            return 0;
+        }
 
         int i = 0;          // 字符串索引
         int sign = 1;       // 正负号，1为正，-1为负

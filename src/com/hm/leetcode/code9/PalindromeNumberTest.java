@@ -31,13 +31,25 @@ public class PalindromeNumberTest {
 
     public static void main(String[] args) {
 
-        System.out.println(isPalindrome(1));
-        System.out.println(isPalindrome(12));
-        System.out.println(isPalindrome(11));
-        System.out.println(isPalindrome(12321));
-        System.out.println(isPalindrome(123321));
-        System.out.println(isPalindrome(123421));
+        test1(1);
+
+        test1(11);
+        test1(12);
+
+        test1(121);
+        test1(1221);
+        test1(12321);
+        test1(123321);
+        test1(123421);
+
     }
+
+    private static void test1(int number) {
+        System.out.println(isPalindrome(number));
+        System.out.println(isPalindrome2(number));
+        System.out.println();
+    }
+
 
 
     /**
@@ -77,5 +89,35 @@ public class PalindromeNumberTest {
         }
         return result;
     }
+
+    /**
+     * 不把数字转化成字符串的写法
+     * @param x
+     * @return
+     */
+    public static boolean isPalindrome2(int x) {
+        // 特殊情况处理
+        if (x < 0) {
+            return false; // 负数不是回文数
+        }
+        if (x == 0) {
+            return true; // 0 是回文数
+        }
+        if (x % 10 == 0) {
+            return false; // 末尾为 0（非 0 本身）不是回文数
+        }
+
+        // 反转后半部分
+        int reversed = 0;
+        while (x > reversed) {
+            reversed = reversed * 10 + x % 10; // 提取最后一位并加入 reversed
+            x = x / 10;                       // 去掉最后一位
+        }
+
+        // 比较前半部分和后半部分
+        // x == reversed（偶数位） 或 x == reversed / 10（奇数位）
+        return x == reversed || x == reversed / 10;
+    }
+
 
 }

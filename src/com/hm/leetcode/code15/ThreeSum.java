@@ -17,6 +17,10 @@ public class ThreeSum {
 
     // 测试代码
     public static void main(String[] args) {
+        test1();
+    }
+
+    private static void test1() {
         ThreeSum solution = new ThreeSum();
         //int[] nums = {-1, 0, 1, 2, -1, -4, -4};
         //先排序好，简单理解

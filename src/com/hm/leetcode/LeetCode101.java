@@ -7,6 +7,8 @@ import java.util.Queue;
 
 /**
  * Created by dumingwei on 2018/12/12
+ *
+ * https://leetcode.cn/problems/symmetric-tree/
  * <p>
  * Desc:请实现一个函数来判断一棵二叉树是不是对称的。如果一棵二叉树和它的镜像一样，那么它是对称的。
  * <p>

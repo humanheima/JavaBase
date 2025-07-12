@@ -30,7 +30,9 @@ public class LongestIncreasingSubsequence {
 
     // 方法1：动态规划 Dynamic Programming
     public static int lengthOfLIS_DP(int[] nums) {
-        if (nums == null || nums.length == 0) return 0;
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
 
         int n = nums.length;
         int[] dp = new int[n];

@@ -11,6 +11,8 @@ import java.util.Set;
  * Desc: 160. 相交链表
  * 作者：LeetCode-Solution
  * 链接：https://leetcode-cn.com/problems/intersection-of-two-linked-lists/solution/xiang-jiao-lian-biao-by-leetcode-solutio-a8jn/
+ * <p>
+ * 推荐 hash 算法，或者双指针算法
  */
 public class LeetCode160 {
 
@@ -30,7 +32,7 @@ public class LeetCode160 {
         headA_2.next = headA_3;
         headA_3.next = headA_4;
 
-        System.out.println(headA_2);
+        System.out.println("headA_2 = " + headA_2);
 
         ListNode headB = new ListNode(5);
         ListNode headB_1 = new ListNode(6);
@@ -46,7 +48,7 @@ public class LeetCode160 {
         headB_3.next = headB_4;
         headB_4.next = headB_5;
 
-        System.out.println(headB_3);
+        System.out.println("headB_3 = " + headB_3);
 
         ListNode listNode = getIntersectionNode(headA, headB);
 
@@ -128,6 +130,29 @@ public class LeetCode160 {
             temp = temp.next;
         }
         return null;
+    }
+
+    /**
+     * 双指针法，感觉也挺好
+     *
+     * @param headA
+     * @param headB
+     * @return
+     */
+    public ListNode getIntersectionNodeTowPoint(ListNode headA, ListNode headB) {
+        if (headA == null || headB == null) {
+            return null;
+        }
+
+        ListNode pA = headA;
+        ListNode pB = headB;
+
+        while (pA != pB) {
+            pA = (pA == null) ? headB : pA.next;
+            pB = (pB == null) ? headA : pB.next;
+        }
+
+        return pA; // 返回相交节点或 null
     }
 
 }

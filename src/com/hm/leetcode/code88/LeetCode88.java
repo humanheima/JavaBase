@@ -20,8 +20,8 @@ public class LeetCode88 {
     public static void main(String[] args) {
         LeetCode88 leetCode88 = new LeetCode88();
         leetCode88.test1();
-        leetCode88.test2();
-        leetCode88.test3();
+        //leetCode88.test2();
+        //leetCode88.test3();
     }
 
     private void test1() {

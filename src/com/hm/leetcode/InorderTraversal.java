@@ -15,6 +15,15 @@ public class InorderTraversal {
     private final List<Integer> result = new ArrayList<>();
 
     // 测试
+
+    /**
+     *                  1
+     *                 / \
+     *               2   3
+     *              / \   \
+     *             4   5   6
+     * @param args
+     */
     public static void main(String[] args) {
         // 构建示例树: 1 -> 2 -> 4, 5; 1 -> 3 -> 6
         TreeNode root = new TreeNode(1);

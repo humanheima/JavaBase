@@ -12,7 +12,6 @@ package com.hm.leetcode.code657;
  * <p>
  * 注意：机器人“面朝”的方向无关紧要。 “R” 将始终使机器人向右移动一次，“L” 将始终向左移动等。此外，假设每次移动机器人的移动幅度相同。
  * <p>
- * 来源：力扣（LeetCode）
  * 链接：https://leetcode-cn.com/problems/robot-return-to-origin
  * <p>
  * 解题思路：向左移动的次数等于向右移动的次数 && 向上移动的次数=向下移动的次数。
@@ -20,6 +19,8 @@ package com.hm.leetcode.code657;
  * value1：向上减1，向左减1；
  * value2：向下加1，向右加1；
  * 如果最后value1和value2都为0，说明可以回到原点。
+ * 看懂了，简单那
+ *
  */
 public class LeetCode657 {
 

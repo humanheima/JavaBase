@@ -18,6 +18,7 @@ class LeetCode26 {
         LeetCode26 solution = new LeetCode26();
         int result = solution.removeDuplicates(nums);
         System.out.println(result);
+        System.out.println(Arrays.toString(nums));
     }
 
     public int removeDuplicates(int[] nums) {

@@ -2,11 +2,12 @@ package com.hm.leetcode;
 
 /**
  * Created by p_dmweidu on 2025/4/4
- * Desc: LeetCode70，爬楼梯
+ * Desc: LeetCode70，爬楼梯 https://leetcode.cn/problems/climbing-stairs/
  */
 class LeetCode70 {
 
     public static void main(String[] args) {
+
         LeetCode70 solution = new LeetCode70();
         System.out.println(solution.climbStairs(4));
     }

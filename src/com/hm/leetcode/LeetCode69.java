@@ -3,6 +3,7 @@ package com.hm.leetcode;
 /**
  * Created by p_dmweidu on 2025/4/4
  * Desc: x的平方根，使用二分查找类似
+ * https://leetcode.cn/problems/sqrtx/
  * <p>
  * 给你一个非负整数 x ，计算并返回 x 的 算术平方根 。
  * <p>
@@ -13,6 +14,43 @@ package com.hm.leetcode;
 class LeetCode69 {
 
 
+    /**
+     * 用这个吧，可以精确找到平方根
+     *
+     * @param x
+     * @return
+     */
+    public int mySqrtGrok(int x) {
+        if (x == 0) return 0;
+
+        // 定义查找范围
+        int left = 1, right = x;
+        int result = 0;
+
+        while (left <= right) {
+            int mid = left + (right - left) / 2; // 避免溢出
+            // 使用 long 防止 mid * mid 溢出
+            long square = (long) mid * mid;
+
+            if (square == x) {
+                return mid; // 找到精确平方根
+            } else if (square < x) {
+                result = mid; // 记录当前可能的答案
+                left = mid + 1; // 尝试更大的值
+            } else {
+                right = mid - 1; // 平方太大，尝试更小的值
+            }
+        }
+
+        return result;
+    }
+
+    /**
+     * 这个没法精确找到平方根，要整个循环结束
+     *
+     * @param x
+     * @return
+     */
     public int mySqrt(int x) {
         if (x == 0) return 0;
         if (x == 1) return 1;
@@ -22,8 +60,7 @@ class LeetCode69 {
         int ans = 0;
 
         while (left <= right) {
-            int mid = left + (right - left) / 2;
-            // 用除法避免溢出
+            int mid = left + (right - left) / 2;// 避免溢出
             if (mid <= x / mid) {
                 ans = mid; // 记录当前合法答案
                 left = mid + 1; // 尝试更大的值

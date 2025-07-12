@@ -18,16 +18,32 @@ import java.util.List;
  * 作者：LeetCode-Solution
  * 链接：https://leetcode-cn.com/problems/permutations/solution/quan-pai-lie-by-leetcode-solution-2/
  * 来源：力扣（LeetCode）
- * 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
  * 这题还是难以理解
+ * todo 后面再看
  */
 public class LeetCode46 {
 
 
     public static void main(String[] args) {
+        //test2();
+        test1();
+    }
+
+    private static void test1() {
+        int[] array = {1, 2, 3};
+        LeetCode46 leetCode46 = new LeetCode46();
+        List<List<Integer>> result = leetCode46.permute(array);
+        for (List<Integer> list : result) {
+            System.out.println(list);
+        }
+    }
+    private static void test2() {
         int[] array = {1, 2, 3, 4};
         LeetCode46 leetCode46 = new LeetCode46();
-        leetCode46.permute(array);
+        List<List<Integer>> result = leetCode46.permute(array);
+        for (List<Integer> list : result) {
+            System.out.println(list);
+        }
     }
 
     public List<List<Integer>> permute(int[] nums) {
@@ -48,20 +64,20 @@ public class LeetCode46 {
      * @param n
      * @param output 当前排列
      * @param res
-     * @param first
+     * @param start
      */
-    public void backtrack(int n, List<Integer> output, List<List<Integer>> res, int first) {
+    public void backtrack(int n, List<Integer> output, List<List<Integer>> res, int start) {
         // 所有数都填完了
-        if (first == n) {
+        if (start == n) {
             res.add(new ArrayList<>(output));
         }
-        for (int i = first; i < n; i++) {
+        for (int i = start; i < n; i++) {
             // 动态维护数组
-            Collections.swap(output, first, i);
+            Collections.swap(output, start, i);
             // 继续递归填下一个数
-            backtrack(n, output, res, first + 1);
+            backtrack(n, output, res, start + 1);
             // 撤销操作
-            Collections.swap(output, first, i);
+            Collections.swap(output, start, i);
         }
     }
 }

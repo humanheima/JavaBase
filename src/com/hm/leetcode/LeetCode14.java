@@ -56,39 +56,74 @@ class LeetCode14 {
 
 
     /**
-     * 使用这种方法
+     * 横向比较法，使用这种方法。比较字符串
+     *
      * @param strs
      * @return
      */
-    public String longestCommonPrefix2(String[] strs) {
-        // 边界情况：空数组返回空字符串
+    public String longestCommonPrefixGrok(String[] strs) {
+        // 边界条件：空数组返回空字符串
         if (strs == null || strs.length == 0) {
             return "";
         }
-        // 只有一个字符串时，直接返回该字符串
+        // 只有一个字符串，返回该字符串
         if (strs.length == 1) {
             return strs[0];
         }
 
-        // 以第一个字符串的长度为基准
-        int length = strs[0].length();
-        int count = strs.length;
+        // 以第一个字符串为初始前缀
+        String prefix = strs[0];
 
-        // 遍历每个字符位置
-        for (int i = 0; i < length; i++) {
-            char c = strs[0].charAt(i); // 取第一个字符串的当前字符
-            // 比较其他字符串的相同位置
-            for (int j = 1; j < count; j++) {
-                // 如果当前字符串已到末尾或字符不匹配，返回前缀
-                if (i == strs[j].length() || strs[j].charAt(i) != c) {
+        // 遍历后续字符串，逐步更新前缀
+        for (int i = 1; i < strs.length; i++) {
+            // 当前字符串为空，直接返回空
+            if (strs[i].isEmpty()) {
+                return "";
+            }
+            // 比较前缀与当前字符串，更新前缀
+            prefix = getCommonPrefix(prefix, strs[i]);
+            // 如果前缀已为空，直接返回
+            if (prefix.isEmpty()) {
+                return "";
+            }
+        }
+
+        return prefix;
+    }
+
+    // 辅助方法：找出两个字符串的公共前缀
+    private String getCommonPrefix(String s1, String s2) {
+        // 取较短字符串的长度作为比较上限
+        int len = Math.min(s1.length(), s2.length());
+        int i = 0;
+        // 逐字符比较，找到公共部分
+        while (i < len && s1.charAt(i) == s2.charAt(i)) {
+            i++;
+        }
+        // 返回公共前缀
+        return s1.substring(0, i);
+    }
+
+
+    /**
+     * 纵向比较法
+     * 逐字符比较所有字符串的同一位置，适合短字符串数组。
+     *
+     * @param strs
+     * @return
+     */
+    public String longestCommonPrefixVertical(String[] strs) {
+        if (strs == null || strs.length == 0) return "";
+        for (int i = 0; i < strs[0].length(); i++) {
+            char c = strs[0].charAt(i);
+            for (int j = 1; j < strs.length; j++) {
+                if (i >= strs[j].length() || strs[j].charAt(i) != c) {
                     return strs[0].substring(0, i);
                 }
             }
         }
-        // 如果全部匹配，返回第一个字符串
         return strs[0];
     }
-
 
     private void print(String[] strs) {
         for (String str : strs) {

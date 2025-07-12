@@ -21,8 +21,8 @@ package com.hm.leetcode;
  * 其实我们用到了动态规划的方法，找到了状态转移方程，用数学方程表达如下：
  * 参考根目录下的图片FromJUmpSteps.png
  * <p>
- * 参考链接：https://blog.csdn.net/xmc281141947/article/details/70738918
- *
+ * 参考链接：<a href="https://blog.csdn.net/xmc281141947/article/details/70738918">CSDN博客</a>
+ * <p>
  * {@link LeetCode70}
  */
 public class FrogJumpSteps {
@@ -75,6 +75,7 @@ public class FrogJumpSteps {
 
     /**
      * 动态规划的解法，Copilot推荐的解法，感觉更好理解
+     *
      * @param n
      * @return
      */

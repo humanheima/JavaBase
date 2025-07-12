@@ -1,7 +1,7 @@
 package com.hm.leetcode;
 /**
  * Created by p_dmweidu on 2025/3/30
- * Desc: 整数翻转，反转
+ * Desc: 整数翻转/反转
  */
 class LeetCode7 {
 

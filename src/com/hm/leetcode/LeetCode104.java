@@ -75,8 +75,8 @@ public class LeetCode104 {
         int depth = 0;
 
         while (!queue.isEmpty()) {
-            int levelSize = queue.size();
             depth++;
+            int levelSize = queue.size();
 
             for (int i = 0; i < levelSize; i++) {
                 TreeNode node = queue.poll();
