@@ -45,7 +45,7 @@ public class PrintABC {
     }
 
     public static void main(String[] args) {
-        int n = 5; // 打印 3 次 ABC
+        int n = 500; // 打印 3 次 ABC
         PrintABC printer = new PrintABC(n);
 
         // 创建三个线程

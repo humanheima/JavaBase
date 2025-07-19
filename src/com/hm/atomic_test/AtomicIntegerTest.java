@@ -15,7 +15,14 @@ public class AtomicIntegerTest {
     //private static int count = 0;
 
     public static void main(String[] args) {
-      /*  Thread[] threads = new Thread[threadCount];
+        test1();
+        //System.out.println("count=" + count);
+       // System.out.println(count.getAndDecrement());
+        //System.out.println(count.get());
+    }
+
+    private static void test1() {
+        Thread[] threads = new Thread[threadCount];
         for (int i = 0; i < threadCount; i++) {
             threads[i] = new Thread(new Counter());
         }
@@ -27,10 +34,7 @@ public class AtomicIntegerTest {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-         System.out.println("count=" + count.get());*/
-        //System.out.println("count=" + count);
-        System.out.println(count.getAndDecrement());
-        System.out.println(count.get());
+        System.out.println("count=" + count.get());
     }
 
     private static class Counter implements Runnable {

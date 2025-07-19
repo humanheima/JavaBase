@@ -1,5 +1,5 @@
 
-package com.hm.collection;
+package com.hm.base.interview.android;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -9,10 +9,10 @@ import java.util.Map;
  * @param <K>
  * @param <V>
  */
-public class LRUCache<K, V> extends LinkedHashMap<K, V> {
+public class LRUCacheUseLinkedHashMap<K, V> extends LinkedHashMap<K, V> {
     private final int capacity;
 
-    public LRUCache(int capacity) {
+    public LRUCacheUseLinkedHashMap(int capacity) {
         super(capacity, 0.75f, true);
         this.capacity = capacity;
     }
@@ -23,7 +23,7 @@ public class LRUCache<K, V> extends LinkedHashMap<K, V> {
     }
 
     public static void main(String[] args) {
-        LRUCache<String, Integer> cache = new LRUCache<>(3);
+        LRUCacheUseLinkedHashMap<String, Integer> cache = new LRUCacheUseLinkedHashMap<>(3);
         cache.put("A", 1);
         cache.put("B", 2);
         cache.put("C", 3);
