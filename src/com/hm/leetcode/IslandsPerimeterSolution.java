@@ -3,25 +3,27 @@ package com.hm.leetcode;
 /**
  * Created by p_dmweidu on 2025/4/11
  * Desc: 岛屿周长问题.md
+ * https://leetcode.cn/problems/island-perimeter/description/
  *
  */
 public class IslandsPerimeterSolution {
+
     public int islandPerimeter(int[][] grid) {
 
         int perimeter = 0;
-        int m = grid.length; // 行数
-        int n = grid[0].length; // 列数
+        int rows = grid.length; // 行数
+        int cols = grid[0].length; // 列数
 
         // 遍历每个格子
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
                 if (grid[i][j] == 1) { // 找到陆地格子
                     // 检查上边
                     if (i == 0 || grid[i - 1][j] == 0) {
                         perimeter++;
                     }
                     // 检查下边
-                    if (i == m - 1 || grid[i + 1][j] == 0) {
+                    if (i == rows - 1 || grid[i + 1][j] == 0) {
                         perimeter++;
                     }
                     // 检查左边
@@ -29,7 +31,7 @@ public class IslandsPerimeterSolution {
                         perimeter++;
                     }
                     // 检查右边
-                    if (j == n - 1 || grid[i][j + 1] == 0) {
+                    if (j == cols - 1 || grid[i][j + 1] == 0) {
                         perimeter++;
                     }
                 }

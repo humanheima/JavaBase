@@ -29,6 +29,7 @@ package com.hm.leetcode;
  * 3. 重复上面的步骤，直到倒数第2个字符。[n-2,n-1]。
  *
  * LeetCode5.md 使用中心扩展法
+ * https://leetcode.cn/problems/longest-palindromic-substring/
  */
 public class LeetCode5 {
 
@@ -65,6 +66,7 @@ public class LeetCode5 {
                  * 设回文长度为 len，中心为 i。
                  * 左侧扩展了 (len-1)/2 步，右侧也扩展了 (len-1)/2 步。
                  * 起始位置 = 中心位置 - 左侧步数。
+                 * "babad" 中的 "bab" ，长度为3，的中心位置 i = 1，start = 1 - (3-1)/2 = 0
                  */
                 start = i - (len - 1) / 2;  // 计算起始位置
             }

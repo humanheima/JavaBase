@@ -50,44 +50,28 @@ public class PalindromeNumberTest {
         System.out.println();
     }
 
-
-
-    /**
-     * 一个回文数，把数字转化成字符串的话，从中间分开，左边从现向后遍历，
-     * 右边从后向前遍历？
-     * <p>
-     * <p>
-     * 12321  2 12
-     * 123321 3 123 543
-     *
-     * @param x
-     * @return
-     */
     public static boolean isPalindrome(int x) {
+        // 负数不是回文数
         if (x < 0) {
             return false;
         }
-        if (x == 0) {
-            return true;
-        }
-        String numberStr = String.valueOf(x);
-        int length = numberStr.length();
-        if (length == 1) {
-            return true;
-        }
-        boolean result = true;
 
-        int middle = length / 2;
+        // 将整数转换为字符串
+        String s = String.valueOf(x);
 
-        for (int i = 0; i < middle; i++) {
-            char left = numberStr.charAt(i);
-            char right = numberStr.charAt(length - 1 - i);
-            if (left != right) {
-                result = false;
-                break;
+        // 双指针检查回文
+        int left = 0;
+        int right = s.length() - 1;
+
+        while (left < right) {
+            if (s.charAt(left) != s.charAt(right)) {
+                return false;
             }
+            left++;
+            right--;
         }
-        return result;
+
+        return true;
     }
 
     /**
