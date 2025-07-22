@@ -3,6 +3,7 @@ package com.hm.leetcode.code1;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by p_dmweidu on 2025/3/28
@@ -91,6 +92,33 @@ public class LeetCode3 {
             // 更新最大长度
             maxLength = Math.max(maxLength, right - left + 1);
         }
+
+        return maxLength;
+    }
+
+    public int lengthOfLongestSubString3(String input) {
+        if (input == null || input.isEmpty()) {
+            return 0;
+        }
+        int maxLength = 0;
+
+        Map<Character, Integer> map = new HashMap<>();
+
+        int left = 0;
+
+        for (int right = 0; right < input.length(); right++) {
+            char c = input.charAt(right);
+            if (map.containsKey(c)) {
+                //出现过，更新左边界
+                left = Math.max(left, map.get(c) + 1);
+            } else {
+                //没出现，放入
+                map.put(c, right);
+            }
+
+            maxLength = Math.max(maxLength, right - left + 1);
+        }
+
 
         return maxLength;
     }

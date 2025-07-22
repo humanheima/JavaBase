@@ -95,12 +95,12 @@ public class Solution {
 ### 测试用例
 ```java
 public static void main(String[] args) {
-    Solution solution = new Solution();
-    System.out.println(solution.myAtoi("42"));          // 输出: 42
-    System.out.println(solution.myAtoi("   -42"));     // 输出: -42
-    System.out.println(solution.myAtoi("4193 with"));  // 输出: 4193
-    System.out.println(solution.myAtoi("words 987"));  // 输出: 0
-    System.out.println(solution.myAtoi("91283472332")); // 输出: 2147483647
+    Solution rotatedArraySearch = new Solution();
+    System.out.println(rotatedArraySearch.myAtoi("42"));          // 输出: 42
+    System.out.println(rotatedArraySearch.myAtoi("   -42"));     // 输出: -42
+    System.out.println(rotatedArraySearch.myAtoi("4193 with"));  // 输出: 4193
+    System.out.println(rotatedArraySearch.myAtoi("words 987"));  // 输出: 0
+    System.out.println(rotatedArraySearch.myAtoi("91283472332")); // 输出: 2147483647
 }
 ```
 

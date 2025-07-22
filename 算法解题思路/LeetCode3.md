@@ -75,14 +75,14 @@ public class Solution {
 
     // 测试代码
     public static void main(String[] args) {
-        Solution solution = new Solution();
+        Solution rotatedArraySearch = new Solution();
         String s1 = "abcabcbb";
         String s2 = "bbbbb";
         String s3 = "pwwkew";
         
-        System.out.println(solution.lengthOfLongestSubstring(s1)); // 输出: 3
-        System.out.println(solution.lengthOfLongestSubstring(s2)); // 输出: 1
-        System.out.println(solution.lengthOfLongestSubstring(s3)); // 输出: 3
+        System.out.println(rotatedArraySearch.lengthOfLongestSubstring(s1)); // 输出: 3
+        System.out.println(rotatedArraySearch.lengthOfLongestSubstring(s2)); // 输出: 1
+        System.out.println(rotatedArraySearch.lengthOfLongestSubstring(s3)); // 输出: 3
     }
 }
 ```

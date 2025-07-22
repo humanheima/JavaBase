@@ -15,9 +15,9 @@ public class LeetCode2 {
     public static void main(String[] args) {
 
         LeetCode2 solution = new LeetCode2();
-        // 测试用例1: 普通情况 [2,4,3] + [5,6,4] = [7,0,8]
+        // 测试用例1: 普通情况 [2,4,3] + [5,6,4] = [3,0,9]
         ListNode l1 = createList(new int[]{2, 4, 3});
-        ListNode l2 = createList(new int[]{5, 6, 4});
+        ListNode l2 = createList(new int[]{1, 6, 5});
 
         ListNode result1 = solution.addTwoNumbers(l1, l2);
 

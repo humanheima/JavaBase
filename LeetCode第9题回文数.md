@@ -167,10 +167,10 @@ public class Solution {
 ### 测试用例
 ```java
 public static void main(String[] args) {
-    Solution solution = new Solution();
+    Solution rotatedArraySearch = new Solution();
     int[] tests = {121, -121, 10, 0, 12321};
     for (int test : tests) {
-        System.out.println("输入: " + test + " -> 输出: " + solution.isPalindrome(test));
+        System.out.println("输入: " + test + " -> 输出: " + rotatedArraySearch.isPalindrome(test));
     }
 }
 ```
