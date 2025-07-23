@@ -17,6 +17,8 @@ import java.util.Map;
  * * <p>
  * * 示例输入：String input = "Hello world!Hello, Android. Hello MiChat.";
  * * 示例输出：{hello=3, world=1, android=1, michat=1}
+ *
+ * 单词出现次数.md
  */
 public class WordFrequencyCounter {
 
@@ -32,6 +34,9 @@ public class WordFrequencyCounter {
         String input = "Hello world!He\nllo, And\rroid. Hello Mi\tChat.";
         Map<String, Integer> result = countWords(input);
         System.out.println(result);
+
+        Map<String, Integer> result2 = countWords2(input);
+        System.out.println(result2);
     }
 
     public static Map<String, Integer> countWords(String input) {
@@ -60,6 +65,100 @@ public class WordFrequencyCounter {
             if (!word.isEmpty()) {
                 wordFreq.put(word, wordFreq.getOrDefault(word, 0) + 1);
             }
+        }
+
+        return wordFreq;
+    }
+
+
+    /**
+     * 使用了正则表达式
+     *
+     * @param input
+     * @return
+     */
+    public static Map<String, Integer> countWords2(String input) {
+        // Handle null or empty input
+        if (input == null || input.trim().isEmpty()) {
+            return new HashMap<>();
+        }
+
+        // Initialize result map
+        Map<String, Integer> wordFreq = new LinkedHashMap<>();
+
+        // Convert to lowercase and prepare for manual cleaning
+        StringBuilder cleaned = new StringBuilder();
+        for (char c : input.toLowerCase().toCharArray()) {
+            // Keep only letters and spaces
+            if ((c >= 'a' && c <= 'z')) {
+                cleaned.append(c);
+            } else {
+                //标点符号和空格都替换为空格
+                cleaned.append(' ');
+            }
+        }
+
+        // Split by spaces and process words
+        String[] words = cleaned.toString().split("\\s+");
+
+        // Count frequency of each word
+        for (String word : words) {
+
+            if (wordFreq.containsKey(word)) {
+                int times = wordFreq.get(word);
+                wordFreq.put(word, times + 1);
+            } else {
+                wordFreq.put(word, 1);
+            }
+        }
+
+        return wordFreq;
+    }
+
+
+    /**
+     * todo 使用这种算法
+     * @param input
+     * @return
+     */
+    public Map<String, Integer> countWords3(String input) {
+        // 处理空输入或 null
+        if (input == null || input.trim().isEmpty()) {
+            return new HashMap<>();
+        }
+
+        // 初始化结果映射
+        Map<String, Integer> wordFreq = new HashMap<>();
+
+        // 转换为小写并清理标点符号
+        StringBuilder cleaned = new StringBuilder();
+        for (char c : input.toLowerCase().toCharArray()) {
+            if (c >= 'a' && c <= 'z') { // 仅保留小写字母
+                cleaned.append(c);
+            } else {
+                cleaned.append(' '); // 将标点替换为空格
+            }
+        }
+
+        // 手动按空格分隔单词并计数
+        StringBuilder currentWord = new StringBuilder();
+        for (char c : cleaned.toString().toCharArray()) {
+            if (c == ' ') {
+                // 单词结束，注意有可能多个空格连着，比如原始字符串是 "Hello! World" 是这种。
+                if (currentWord.length() > 0) {
+                    String word = currentWord.toString();
+                    wordFreq.put(word, wordFreq.getOrDefault(word, 0) + 1);
+                    currentWord.setLength(0); // 重置当前单词
+                }
+            } else {
+                currentWord.append(c); // 构建当前单词
+            }
+        }
+
+        // 处理最后一个单词
+        if (currentWord.length() > 0) {
+            String word = currentWord.toString();
+            wordFreq.put(word, wordFreq.getOrDefault(word, 0) + 1);
         }
 
         return wordFreq;
