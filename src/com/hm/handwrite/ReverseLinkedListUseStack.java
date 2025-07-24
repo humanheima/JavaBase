@@ -47,8 +47,7 @@ public class ReverseLinkedListUseStack {
         NodeUtil.printListNode(head);
 
         System.out.println("反转后的链表");
-        ListNode reverseHead = reverseListUseStack(head);
-        //ListNode reverseHead = reverseListUseStack2(head);
+        ListNode reverseHead = reverseListUseStack2(head);
         NodeUtil.printListNode(reverseHead);
 
     }
@@ -87,54 +86,6 @@ public class ReverseLinkedListUseStack {
         ListNode reverseHead = reverseKNodes(head, 3);
         NodeUtil.printListNode(reverseHead);
     }
-
-    /**
-     * 用栈来实现反转单链表
-     * <p>
-     * 开始 1,2,3
-     * <p>
-     * 1.遍历链表，将链表的节点放入栈中
-     * <p>
-     * 3,2,1
-     * <p>
-     * 2.从栈中取出节点，重新连接节点
-     *
-     * @param head
-     */
-    private static ListNode reverseListUseStack(ListNode head) {
-        if (head == null) {
-            return null;
-        }
-
-        Stack<ListNode> stack = new Stack<>();
-        ListNode cur = head;
-        //记录翻转后的头节点
-        ListNode reverseHead = null;
-        //用来从反转后的头节点向前遍历
-        ListNode previous = null;
-
-        while (cur != null) {
-            stack.push(cur);
-            cur = cur.next;
-        }
-        // 3 2 1
-        //取出一个元素，要把它的next置为null
-        while (!stack.isEmpty()) {
-            if (reverseHead == null) {
-                //最后一个元素next本来就是null，这里不需要再置为null
-                reverseHead = stack.pop();
-                previous = reverseHead;
-            } else {
-                ListNode temp = stack.pop();
-                temp.next = null;
-                previous.next = temp;
-                previous = temp;
-            }
-        }
-
-        return reverseHead;
-    }
-
 
     /**
      * 这种方法比较好

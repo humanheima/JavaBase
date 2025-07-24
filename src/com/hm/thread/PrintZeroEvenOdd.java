@@ -1,4 +1,4 @@
-package com.hm.base;
+package com.hm.thread;
 
 import java.util.concurrent.Semaphore;
 import java.util.function.IntConsumer;

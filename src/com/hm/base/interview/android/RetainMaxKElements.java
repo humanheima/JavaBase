@@ -1,5 +1,7 @@
 package com.hm.base.interview.android;
 
+import com.hm.write.RetainKElements;
+
 /**
  * 有序数组，最多保留K个重复元素.md
  */
@@ -22,6 +24,12 @@ public class RetainMaxKElements {
         int k1 = 2;
         int len1 = solution.removeDuplicates(nums1, k1);
         System.out.println("Length: " + len1);  // 输出 5
+
+        int len2 = new RetainKElements().test(nums1,k1);
+
+        System.out.println("Length: " + len2);
+
+
         for (int i = 0; i < len1; i++) {
             System.out.print(nums1[i] + " ");  // 输出 1 1 2 2 3
         }
