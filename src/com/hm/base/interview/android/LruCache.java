@@ -3,87 +3,95 @@ package com.hm.base.interview.android;
 import java.util.HashMap;
 
 /**
- * Created by p_dmweidu on 2025/7/19
- * Desc:
+ * Created by p_dmweidu on 2025/7/24
+ * Desc: 使用 HashMap 和 手写双向链表实现 LRU 缓存
  */
-public class LruCache {
-
-    // 节点类，用于双向链表
+public class LruCache<K, V> {
+    // Node class for doubly-linked list
     private class Node {
-        int key;
-        int value;
+        K key;
+        V value;
         Node prev;
         Node next;
+        String name;
         
-        Node(int key, int value) {
+        Node(K key, V value) {
             this.key = key;
             this.value = value;
         }
     }
     
-    private int capacity;
-    private HashMap<Integer, Node> map;
-    private Node head; // 虚拟头节点
-    private Node tail; // 虚拟尾节点
+    private final int capacity;
+    private final HashMap<K, Node> cache;
+    private final Node head; // Most recently used
+    private final Node tail; // Least recently used
     
     public LruCache(int capacity) {
+        if (capacity <= 0) {
+            throw new IllegalArgumentException("Capacity must be positive");
+        }
         this.capacity = capacity;
-        this.map = new HashMap<>();
-        this.head = new Node(0, 0);
-        this.tail = new Node(0, 0);
+        this.cache = new HashMap<>();
+        this.head = new Node(null, null); // Dummy head
+        head.name = "head";
+        this.tail = new Node(null, null); // Dummy tail
+        tail.name = "tail";
         head.next = tail;
         tail.prev = head;
     }
     
-    public int get(int key) {
-        Node node = map.get(key);
+    // Get value by key
+    public V get(K key) {
+        Node node = cache.get(key);
         if (node == null) {
-            return -1;
+            return null;
         }
-        // 将访问的节点移到头部
-        moveToHead(node);
+        moveToFront(node);
         return node.value;
     }
     
-    public void put(int key, int value) {
-        Node node = map.get(key);
+    // Put key-value pair
+    public void put(K key, V value) {
+        Node node = cache.get(key);
         if (node != null) {
-            // 更新已有节点
             node.value = value;
-            moveToHead(node);
+            moveToFront(node);
         } else {
-            // 创建新节点
             Node newNode = new Node(key, value);
-            map.put(key, newNode);
-            addToHead(newNode);
+            cache.put(key, newNode);
+            addToFront(newNode);
             
-            // 检查是否超过容量
-            if (map.size() > capacity) {
-                // 移除尾部节点（最久未使用的）
-                Node last = tail.prev;
-                removeNode(last);
-                map.remove(last.key);
+            if (cache.size() > capacity) {
+                Node lru = removeLast();
+                cache.remove(lru.key);
             }
         }
     }
     
-    // 将节点移到头部
-    private void moveToHead(Node node) {
+    // Move node to front (most recently used)
+    private void moveToFront(Node node) {
         removeNode(node);
-        addToHead(node);
+        addToFront(node);
     }
     
-    // 移除节点
+    // Add node to front
+    private void addToFront(Node node) {
+        node.next = head.next;
+        node.prev = head;
+        head.next.prev = node;
+        head.next = node;
+    }
+    
+    // Remove node from linked list
     private void removeNode(Node node) {
         node.prev.next = node.next;
         node.next.prev = node.prev;
     }
     
-    // 将节点添加到头部
-    private void addToHead(Node node) {
-        node.next = head.next;
-        node.prev = head;
-        head.next.prev = node;
-        head.next = node;
+    // Remove and return the least recently used node
+    private Node removeLast() {
+        Node lru = tail.prev;
+        removeNode(lru);
+        return lru;
     }
 }
