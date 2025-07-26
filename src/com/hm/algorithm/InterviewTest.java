@@ -1,5 +1,7 @@
 package com.hm.algorithm;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 
 /**
@@ -9,34 +11,28 @@ import java.util.Random;
  */
 public class InterviewTest {
 
+
     public static void main(String[] args) {
-        int[] array = new int[1000];
-        for (int i = 0; i < 1000; i++) {
-            array[i] = i;
-        }
-        select(array);
-    }
+        // 创建随机数生成器
+        Random random = new Random();
+        // 创建ArrayList存储随机数
+        ArrayList<Integer> numbers = new ArrayList<>();
 
-
-    private static void select(int[] array) {
-        int seed = array.length;
-        int lastIndex = array.length - 1;
-
-        for (int i = 10; i >= 0; i--) {
-            int nextIndex = new Random().nextInt(seed);
-            //System.out.println("nextIndex = " + nextIndex);
-            int temp = array[lastIndex];
-            array[lastIndex] = array[nextIndex];
-            array[nextIndex] = temp;
-            seed--;
-            lastIndex--;
+        // 生成10个不同的随机数
+        while (numbers.size() < 10) {
+            int num = random.nextInt(1001); // 生成0-1000的随机数
+            if (!numbers.contains(num)) { // 确保不重复
+                numbers.add(num);
+            }
         }
 
-        for (int i = array.length - 10; i < array.length; i++) {
+        // 排序
+        Collections.sort(numbers);
 
-            System.out.print(array[i] + " ");
+        // 打印结果
+        for (int num : numbers) {
+            System.out.println(num);
         }
-
     }
 
 }

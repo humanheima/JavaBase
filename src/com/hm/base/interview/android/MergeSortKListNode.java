@@ -5,6 +5,7 @@ import com.hm.algorithm.ListNode;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.PriorityQueue;
 
 /**
  * Created by p_dmweidu on 2025/4/11
@@ -112,6 +113,42 @@ public class MergeSortKListNode {
         }
 
         current.next = l1 != null ? l1 : l2;
+        return dummy.next;
+    }
+
+
+
+    public ListNode mergeKLists(ListNode[] lists) {
+        if (lists == null || lists.length == 0) {
+            return null;
+        }
+
+        // 创建最小堆，按节点值比较
+        PriorityQueue<ListNode> minHeap = new PriorityQueue<>((a, b) -> a.val - b.val);
+
+        // 将每个非空链表的头节点加入堆
+        for (ListNode node : lists) {
+            if (node != null) {
+                minHeap.offer(node);
+            }
+        }
+
+        // 哑节点简化链表操作
+        ListNode dummy = new ListNode(0);
+        ListNode current = dummy;
+
+        // 从堆中取出最小节点，加入结果
+        while (!minHeap.isEmpty()) {
+            ListNode node = minHeap.poll();
+            current.next = node;
+            current = current.next;
+
+            // 如果有下一个节点，加入堆
+            if (node.next != null) {
+                minHeap.offer(node.next);
+            }
+        }
+
         return dummy.next;
     }
 
