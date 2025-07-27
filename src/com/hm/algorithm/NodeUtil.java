@@ -1,5 +1,8 @@
 package com.hm.algorithm;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by dumingwei on 2024/4/6
  */
@@ -39,4 +42,16 @@ public class NodeUtil {
             cur = cur.next;
         }
     }
+
+    // 打印链表结果
+    private static void printResult(ListNode head) {
+        List<Integer> result = new ArrayList<>();
+        while (head != null) {
+            result.add(head.val);
+            head = head.next;
+        }
+        System.out.println("Result: " + result);
+        System.out.println();
+    }
+
 }

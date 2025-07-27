@@ -12,8 +12,8 @@ import java.util.Stack;
 public class ReverseLinkedListUseStack {
 
     public static void main(String[] args) {
-        test0();
-        //test1();
+        //test0();
+        test1();
     }
 
     private static void test0() {
@@ -80,11 +80,11 @@ public class ReverseLinkedListUseStack {
 //        head.next.next.next.next.next.next.next.next = new ListNode();
 //        head.next.next.next.next.next.next.next.next.val = 9;
 
-        NodeUtil.printListNode(head);
+        NodeUtil.printList(head);
 
         System.out.println("K节点反转后的链表");
-        ListNode reverseHead = reverseKNodes(head, 3);
-        NodeUtil.printListNode(reverseHead);
+        //ListNode reverseHead = reverseKNodes(head, 3);
+        //NodeUtil.printList(reverseHead);
     }
 
     /**
@@ -124,55 +124,5 @@ public class ReverseLinkedListUseStack {
         return dummy.next;
     }
 
-    /**
-     * 每K个节点反转链表
-     *
-     * @param head
-     * @param k
-     * @return 返回反转后的头节点
-     */
-    private static ListNode reverseKNodes(ListNode head, int k) {
-        if (head == null) {
-            return head;
-        }
-        if (k <= 1) {
-            return head;
-        }
-
-        Stack<ListNode> stack = new Stack<>();
-        //创建一个虚拟节点
-        ListNode dummy = new ListNode(0);
-        ListNode cur = dummy;
-
-        while (head != null) {
-            System.out.println("head:" + head);
-            int count = 0;
-            ListNode temp = head;
-            while (temp != null && count < k) {
-                stack.push(temp);
-                //注释1处，1轮结束后，temp指向的是第k+1个节点
-                temp = temp.next;
-                count++;
-            }
-
-            //注释2处，如果栈中的元素个数不等于k，说明剩下的节点不够k个，不需要反转。
-            if (count < k) {
-                cur.next = head;
-                break;
-            }
-            while (!stack.isEmpty()) {
-                //注释3处，这里是取出栈中的元素，连接到虚拟节点上。
-                cur.next = stack.pop();
-                cur = cur.next;
-            }
-
-            //注释4处，如果遍历到了最后，将最后一个节点的next置为null，temp是null
-            cur.next = temp;
-            head = temp;
-
-        }
-        return dummy.next;
-
-    }
 
 }
