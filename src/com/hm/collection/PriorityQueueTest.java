@@ -10,10 +10,11 @@ public class PriorityQueueTest {
     public static void main(String[] args) {
 
         PriorityQueue<Integer>queue=new PriorityQueue<>();
-        queue.offer(6);
-        queue.offer(-3);
-        queue.offer(20);
-        queue.offer(18);
+        queue.offer(2);
+        queue.offer(4);
+        queue.offer(3);
+        queue.offer(7);
+        queue.offer(5);
         System.out.println(queue);
         System.out.println(queue.poll());
         System.out.println(queue);
