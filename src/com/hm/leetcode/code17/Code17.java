@@ -23,7 +23,7 @@ public class Code17 {
         System.out.println(code17.letterCombinations(digits));
 
         System.out.println("-----------------");
-        System.out.println(code17.letterCombinations2(digits));
+        //System.out.println(code17.letterCombinations2(digits));
     }
 
     // 数字到字母的映射
