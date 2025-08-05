@@ -10,7 +10,8 @@ public class SelectSort {
     private static int[] array = new int[]{5, 3, 2, 4, 1};
 
     public static void main(String args[]) {
-        sort(array);
+       // sort(array);
+        sort2(array);
     }
 
     private static void sort(int[] arr) {
@@ -37,6 +38,27 @@ public class SelectSort {
             System.out.print(i + ",");
         }
     }
+
+
+    private static void sort2(int[] arr) {
+        int len = arr.length;
+        int min;
+        int temp;
+        for (int i = 0; i < len; i++) {
+            for (int j = i + 1; j < len; j++) {
+                if (arr[i] > arr[j]) {
+                    //这轮过后，min指向最小的数据的index
+                   temp = arr[i];
+                   arr[i] = arr[j];
+                   arr[j] = temp;
+                }
+            }
+        }
+        for (int i : array) {
+            System.out.print(i + ",");
+        }
+    }
+
 
 
   /*  private static void sort(int[] array) {

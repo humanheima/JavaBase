@@ -3,7 +3,7 @@ package com.hm.handwrite;
 /**
  * Created by dumingwei on 2020/3/25
  * <p>
- * Desc:手写快速排序
+ * Desc:手写快速排序，以后就用这种写法来写了。
  */
 public class FastSortHandWrite {
 

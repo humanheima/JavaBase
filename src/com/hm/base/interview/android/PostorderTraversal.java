@@ -38,8 +38,10 @@ public class PostorderTraversal {
         //System.out.println(solution.result);
 
 
+        solution.result.clear();
         //使用栈实现
         solution.postorderTraversal1(root);  // 输出: 6 4 5 2 3 1
+        System.out.println(solution.result);
     }
 
 
@@ -95,7 +97,8 @@ public class PostorderTraversal {
              * 比如 4 的右节点是 6，访问过了以后，下次就不访问了。不然会一直访问。
              */
             if (peekNode.right == null || peekNode.right == lastVisited) {
-                System.out.print(peekNode.val + " ");
+                //System.out.print(peekNode.val + " ");
+                result.add(peekNode.val);
                 lastVisited = stack.pop();
             }
             // 否则，转向右子树
