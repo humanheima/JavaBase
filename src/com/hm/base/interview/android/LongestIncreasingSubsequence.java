@@ -4,25 +4,26 @@ import java.util.Arrays;
 
 /**
  * 算法解题思路/最长递增子序列.md
+ * review 使用动态规划算法
  */
 public class LongestIncreasingSubsequence {
 
     // 测试代码
     public static void main(String[] args) {
 
-        int[] nums = {10, 9, 2, 5, 3, 7, 101, 18};
+        int[] nums = {10, 9, 2, 5, 3, 7, 101, 8};
 
         // 测试动态规划方法
         int resultDP = lengthOfLIS_DP(nums);
         System.out.println("DP Method: Length of LIS = " + resultDP); // 预期输出：4
 
-        int[] findLIS = findLIS(nums);
-        for (int findLI : findLIS) {
-            System.out.print(findLI + " ");
-        }
+//        int[] findLIS = findLIS(nums);
+//        for (int findLI : findLIS) {
+//            System.out.print(findLI + " ");
+//        }
 
-        System.out.println();
-        System.out.println(handWrite(nums));
+//        System.out.println();
+//        System.out.println(handWrite(nums));
         // 测试贪心+二分查找方法
         //int resultGreedy = lengthOfLIS_Greedy(nums);
         //System.out.println("Greedy Method: Length of LIS = " + resultGreedy); // 预期输出：4

@@ -1,4 +1,4 @@
-package com.hm.base.interview.android;
+package com.hm.base.interview.android.knapsack;
 
 /**
  * Created by p_dmweidu on 2025/7/8
@@ -26,7 +26,7 @@ public class Knapsack {
         int maxValue = knapsack2D(weights, values, capacity, n);
         System.out.println("最大价值（二维DP）: " + maxValue);
 
-        System.out.println("最大价值（一维DP）: " + knapsack1D(weights, values, capacity));
+        System.out.println("最大价值（一维DP）: " + knapsack1D2(weights, values, capacity));
 
     }
 
@@ -46,12 +46,12 @@ public class Knapsack {
         // 填充DP表
         for (int i = 1; i <= n; i++) {
             for (int j = 0; j <= capacity; j++) {
+                // 不能包含物品i-1
+                dp[i][j] = dp[i - 1][j];
+                // 放第 i 个物品（如果容量足够）
                 if (j >= weights[i - 1]) {
                     // 选择：包含或不包含物品i-1
                     dp[i][j] = Math.max(dp[i - 1][j], dp[i - 1][j - weights[i - 1]] + values[i - 1]);
-                } else {
-                    // 不能包含物品i-1
-                    dp[i][j] = dp[i - 1][j];
                 }
             }
         }
@@ -85,6 +85,22 @@ public class Knapsack {
                 dp[j] = Math.max(dp[j], dp[leftWeight] + value);
             }
         }
+        return dp[capacity];
+    }
+
+    // 一维动态规划实现（空间优化）
+    public static int knapsack1D2(int[] weights, int[] values, int capacity) {
+        int n = weights.length;
+        // dp[j] 表示容量 j 下的最大价值
+        int[] dp = new int[capacity + 1];
+
+        // 动态规划，从右到左更新
+        for (int i = 0; i < n; i++) {
+            for (int j = capacity; j >= weights[i]; j--) {
+                dp[j] = Math.max(dp[j], dp[j - weights[i]] + values[i]);
+            }
+        }
+
         return dp[capacity];
     }
 

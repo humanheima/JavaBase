@@ -16,20 +16,37 @@ import java.util.Map;
  * 3. 如果在遍历过程中 nums[i] + nums[j] == target 那么i和j就是我们要找的下标。
  * <p>
  * 链接：https://leetcode-cn.com/problems/two-sum/solution/liang-shu-zhi-he-by-leetcode-2/
+ * 基本能手写出来了，标记为 @Deprecated
  */
+@Deprecated()
 public class LeetCode1 {
 
     public static void main(String[] args) {
         int[] nums = {3, 2, 7, 11, 15};
         int target = 9;
 
-        int[] result = twoSum(nums, target);
+//        int[] result = twoSum(nums, target);
+//
+//        System.out.println(result[0]);
+//        System.out.println(result[1]);
+
+        test1();
+
+    }
+
+    private static void test1(){
+
+        int[] nums = {3, 2, 7, 11, 15};
+        int target = 9;
+        int[] result = twoSumHash(nums, target);
 
         System.out.println(result[0]);
         System.out.println(result[1]);
 
+        int result2[] = twoSum3(nums,target);
+        System.out.println(result2[0]);
+        System.out.println(result2[1]);
     }
-
     /**
      * 方法一：暴力枚举（Brute Force）
      * 思路
@@ -83,7 +100,7 @@ public class LeetCode1 {
      * @param target
      * @return
      */
-    public int[] twoSumHash(int[] nums, int target) {
+    public static int[] twoSumHash(int[] nums, int target) {
         Map<Integer, Integer> map = new HashMap<>();
         for (int i = 0; i < nums.length; i++) {
             int complement = target - nums[i];
@@ -94,6 +111,28 @@ public class LeetCode1 {
             map.put(nums[i], i);
         }
         throw new IllegalArgumentException("No two sum solution");
+    }
+
+    private static int[] twoSum3(int[] nums, int target) {
+        int[] result = {0, 0};
+        if (nums == null || nums.length < 2) {
+            return result;
+        }
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            int val = nums[i];
+            //剩余的值
+            int remainVal = target - val;
+            if (map.containsKey(remainVal)) {
+                result[0] = map.get(remainVal);
+                result[1] = i;
+                return result;
+            } else {
+                map.put(val, i);
+            }
+        }
+
+        return result;
     }
 
 
