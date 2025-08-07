@@ -63,6 +63,7 @@ public class FastSort {
                     j--;
                 }
                 if (i < j) {
+                    //把小的放到左边
                     a[i] = a[j];
                     i++;
                 }
@@ -70,10 +71,12 @@ public class FastSort {
                     i++;
                 }
                 if (i < j) {
+                    //把大的放到右边
                     a[j] = a[i];
                     j--;
                 }
             }
+            //基准放在合适的位置
             a[i] = pivot;
 
             //打印每次排序后的结果，存在重复排序的情况
