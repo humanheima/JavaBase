@@ -1,5 +1,7 @@
-package com.hm.leetcode;
+package com.hm.leetcode.code20;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.Stack;
 
 /**
@@ -21,7 +23,7 @@ public class LeetCode20 {
      */
     public boolean isValid(String s) {
         // 初始化栈
-        Stack<Character> stack = new Stack<>();
+        Deque<Character> stack = new ArrayDeque<>();
 
         // 遍历字符串的每个字符
         for (char c : s.toCharArray()) {
