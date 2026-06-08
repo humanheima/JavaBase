@@ -1,4 +1,4 @@
-package com.hm.leetcode;
+package com.hm.leetcode.code94;
 
 import com.hm.structure.TreeNode;
 
@@ -40,6 +40,10 @@ public class InorderTraversal {
         System.out.println("========= 下面使用非递归遍历 =========");
         List<Integer> result2 = traversal.inorderTraversal2(root);
         System.out.println(result2);
+
+        System.out.println("========= 下面使用 Morris 遍历（O(1) 空间）=========");
+        List<Integer> result3 = traversal.inorderTraversal3(root);
+        System.out.println(result3);
     }
 
 
@@ -95,6 +99,48 @@ public class InorderTraversal {
 
             // 处理右子树
             current = current.right;
+        }
+
+        return result;
+    }
+
+
+    /**
+     * Morris 中序遍历，空间复杂度 O(1)
+     * 核心：利用叶子节点的空闲 right 指针建立指向后继的“线索”，
+     * 遍历完左子树后顺着线索回到根，再拆除线索还原树结构。
+     *
+     * @param root
+     * @return
+     */
+    public List<Integer> inorderTraversal3(TreeNode root) {
+        List<Integer> result = new ArrayList<>();
+        TreeNode current = root;
+
+        while (current != null) {
+            if (current.left == null) {
+                // 没有左子树：直接访问当前节点，再转向右子树
+                result.add(current.val);
+                current = current.right;
+            } else {
+                // 找到当前节点左子树中的最右节点（中序前驱）
+                TreeNode predecessor = current.left;
+                while (predecessor.right != null && predecessor.right != current) {
+                    predecessor = predecessor.right;
+                }
+
+                if (predecessor.right == null) {
+                    // 第一次到达：建立线索，指回 current，然后进入左子树
+                    predecessor.right = current;
+                    current = current.left;
+                } else {
+                    // 第二次到达：线索已存在，说明左子树遍历完毕
+                    // 拆除线索，访问 current，再转向右子树
+                    predecessor.right = null;
+                    result.add(current.val);
+                    current = current.right;
+                }
+            }
         }
 
         return result;

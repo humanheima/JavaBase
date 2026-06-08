@@ -4,7 +4,7 @@ import java.util.concurrent.Semaphore;
 
 /**
  * Created by p_dmweidu on 2025/6/25
- * Desc:
+ * Desc: 使用信号量
  */
 public class PrintABC {
 

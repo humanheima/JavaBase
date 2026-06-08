@@ -33,6 +33,11 @@ class Code24 {
         ListNode l4 = new ListNode(1, new ListNode(2, new ListNode(3)));
         System.out.println("Test Case 4: [1,2,3]");
         printResult(solution.swapPairs(l4));
+
+        // 递归解法交叉验证：[1,2,3,4,5]
+        ListNode l5 = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4, new ListNode(5)))));
+        System.out.println("Test Case 5 (递归): [1,2,3,4,5]");
+        printResult(solution.swapPairsRecursive(l5));
     }
 
     // 打印链表结果
@@ -84,5 +89,24 @@ class Code24 {
             }
         }
         return dummy.next;
+    }
+
+    /**
+     * 解法二：递归
+     * 每次处理最前面两个结点 first、second，交换它们，
+     * 剩余部分递归交换后接到 first 之后。
+     * 时间 O(n)，空间 O(n)（递归栈）。
+     */
+    public ListNode swapPairsRecursive(ListNode head) {
+        // 不足两个结点，无需交换
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode first = head;
+        ListNode second = head.next;
+        // 交换后 second 成为新头，first 接到「剩余部分递归处理后的结果」
+        first.next = swapPairsRecursive(second.next);
+        second.next = first;
+        return second;
     }
 }

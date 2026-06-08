@@ -1,4 +1,4 @@
-package com.hm.leetcode;
+package com.hm.leetcode.code83;
 
 import com.hm.algorithm.ListNode;
 

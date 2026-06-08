@@ -77,23 +77,19 @@ public class LeetCode88 {
         // p 指向合并后 nums1 的末尾
         int p = m + n - 1;
 
-        // 当 nums1 和 nums2 都有元素时
+        // 当 nums1 和 nums2 都有元素时，从后往前取较大者放到 p
         while (p1 >= 0 && p2 >= 0) {
             if (nums1[p1] > nums2[p2]) {
-                nums1[p] = nums1[p1];
-                p1--;
+                nums1[p--] = nums1[p1--];
             } else {
-                nums1[p] = nums2[p2];
-                p2--;
+                nums1[p--] = nums2[p2--];
             }
-            p--;
         }
 
-        // 如果 nums2 还有剩余元素，复制到 nums1
+        // 若 nums2 还有剩余，复制到 nums1 头部
+        // （若是 nums1 有剩余则无需处理，它们本就在正确位置上）
         while (p2 >= 0) {
-            nums1[p] = nums2[p2];
-            p2--;
-            p--;
+            nums1[p--] = nums2[p2--];
         }
     }
 
