@@ -1,4 +1,4 @@
-package com.hm.leetcode;
+package com.hm.leetcode.code101;
 
 import com.hm.structure.TreeNode;
 

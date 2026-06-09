@@ -1,4 +1,4 @@
-package com.hm.base.interview.android;
+package com.hm.leetcode;
 
 import com.hm.structure.TreeNode;
 
@@ -14,7 +14,7 @@ import java.util.*;
  * 最后遍历右子树。
  * 用一句话概括：根 -> 左 -> 右。
  */
-public class PreorderTraversal {
+public class LeetCode144 {
 
     // 存储遍历结果
     private List<Integer> result = new ArrayList<>();
@@ -36,7 +36,7 @@ public class PreorderTraversal {
         root.left.right = new TreeNode(5);
         root.right.right = new TreeNode(6);
 
-        PreorderTraversal traversal = new PreorderTraversal();
+        LeetCode144 traversal = new LeetCode144();
         List<Integer> result = traversal.preorderTraversal(root);
         System.out.println(result); // 输出: [1, 2, 4, 5, 3, 6]
 
@@ -44,7 +44,6 @@ public class PreorderTraversal {
         List<Integer> result2 = traversal.preorderTraversal2(root);
         System.out.println(result2);
 
-        System.out.println(traversal.preorderTraversal3(root));
 
     }
 
@@ -104,41 +103,4 @@ public class PreorderTraversal {
         return result;
     }
 
-    // 使用队列实现前序遍历
-
-    /**
-     * 这个算法是有问题的。
-     * @param root
-     * @return
-     */
-    public List<Integer> preorderTraversal3(TreeNode root) {
-        List<Integer> result = new ArrayList<>();
-        if (root == null) {
-            return result;
-        }
-
-        // 创建队列
-        Queue<TreeNode> queue = new ArrayDeque<>();
-        // 根节点入队
-        queue.offer(root);
-
-        while (!queue.isEmpty()) {
-            // 取出队首节点
-            TreeNode node = queue.poll();
-            // 访问当前节点（前序遍历：先处理根）
-            result.add(node.val);
-
-            // 先将右子节点入队（后出队）
-            if (node.left != null) {
-                queue.offer(node.left);
-            }
-            // 再将左子节点入队（先出队，保证左 -> 右顺序）
-            if (node.right != null) {
-                queue.offer(node.right);
-            }
-        }
-
-        return result;
-
-    }
 }
