@@ -56,58 +56,6 @@ public class LeetCode160 {
 
     }
 
-    public ListNode getIntersectionNode2(ListNode headA, ListNode headB) {
-        if (headA == null || headB == null) {
-            return null;
-        }
-
-        int headALength = 1;
-        int headBLength = 1;
-
-        ListNode currA = headA;
-        ListNode currB = headB;
-
-        //找到尾节点
-        while (currA.next != null) {
-            headALength++;
-            currA = currA.next;
-        }
-
-        //找到尾节点
-        while (currB.next != null) {
-            headBLength++;
-            currB = currB.next;
-        }
-
-        //尾节点一样，说明相交
-        if (currA == currB) {
-            int diff;
-            currA = headA;
-            currB = headB;
-            if (headALength >= headBLength) {
-                //A 链表长，A 先走
-                diff = headALength - headBLength;
-                while (diff > 0 && currA.next != null) {
-                    currA = currA.next;
-                    diff--;
-                }
-            } else {
-                //B 链表长，B 先走
-                diff = headBLength - headALength;
-                while (diff > 0 && currB.next != null) {
-                    currB = currB.next;
-                    diff--;
-                }
-            }
-            while (currA != currB && currA.next != null && currB.next != null) {
-                currA = currA.next;
-                currB = currB.next;
-            }
-            return currA;
-        }
-        return null;
-    }
-
     /**
      * 使用HashSet的方式也挺好。
      *
@@ -143,10 +91,12 @@ public class LeetCode160 {
         if (headA == null || headB == null) {
             return null;
         }
-
         ListNode pA = headA;
         ListNode pB = headB;
 
+        /**
+         * 循环直到 pA == pB，返回结果（相交节点或 null）
+         */
         while (pA != pB) {
             pA = (pA == null) ? headB : pA.next;
             pB = (pB == null) ? headA : pB.next;

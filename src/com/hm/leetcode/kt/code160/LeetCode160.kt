@@ -1,7 +1,6 @@
 package com.hm.leetcode.kt.code160
 
 import com.hm.algorithm.ListNode
-import java.util.HashSet
 
 /**
  * Created by dumingwei on 2026/06/14.
@@ -28,11 +27,12 @@ class LeetCode160 {
         }
         temp = headB
         while (temp != null) {
-            if (temp in visited) {
+            if (visited.contains(temp)) {
                 return temp
             }
             temp = temp.next
         }
+
         return null
     }
 

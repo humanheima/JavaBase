@@ -32,8 +32,5 @@ public class DynamicClient {
          * 最终会调用被代理对象对应的方法。
          */
         purchasing.buy();
-
-        //用来生成动态代理对象的class文件
-        ProxyUtils.generateClassFile(xiaochilao.getClass(), "XiaochilaoProxy");
     }
 }
