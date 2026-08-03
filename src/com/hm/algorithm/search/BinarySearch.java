@@ -19,14 +19,14 @@ public class BinarySearch {
         System.out.println(result);
     }
 
-    private static int search(int arr[], int start, int end, int key) {
+    private static int search(int arr[], int left, int right, int key) {
         int mid;
-        while (start <= end) {
-            mid = start + (end - start) / 2;//直接平均可能会溢出，所以用此算法
+        while (left <= right) {
+            mid = left + (right - left) / 2;//直接平均可能会溢出，所以用此算法
             if (arr[mid] < key) {
-                start = mid + 1;
+                left = mid + 1;
             } else if (arr[mid] > key) {
-                end = mid - 1;
+                right = mid - 1;
             } else {
                 return mid;
             }
